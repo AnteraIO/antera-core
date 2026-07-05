@@ -98,7 +98,7 @@ export default function TeamPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            Our <span className="text-[#FA520F]">Team.</span>
+            Our <span className="text-[#FA520F]">Team</span>
           </motion.h1>
           <motion.p 
             className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
@@ -112,7 +112,6 @@ export default function TeamPage() {
 
         <div className="relative max-w-5xl mx-auto mb-24 md:mb-40">
           <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-          <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 border border-neutral-200 bg-white">
             {team.map((member, i) => (
@@ -154,8 +153,6 @@ export default function TeamPage() {
                 </div>
               </motion.div>
             ))}
-
-            <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
             <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
           </div>
         </div>
