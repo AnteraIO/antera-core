@@ -10,13 +10,14 @@ export const Hero = () => {
 
   return (
     <section className="relative min-h-screen w-full bg-black font-sans antialiased overflow-hidden">
-      {/* Background Image with Subtle Overlay */}
+      {/* Background Image with Sunset Gradient Overlay */}
       <div className="absolute inset-0 z-0">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroBackgroundUrl})` }}
         />
-        <div className="absolute inset-0 bg-black/60" />
+        {/* Sunset-inspired gradient overlay: dark -> orange-red -> cream-yellow */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-[#FA520F]/30 to-[#FCD34D]/20" />
       </div>
 
       {/* Main Content */}
