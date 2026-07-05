@@ -1,7 +1,7 @@
 'use client';
-import React from 'react';
-import { motion } from 'framer-motion';
-import { MapPin, Clock, Mail, Phone, Globe, ArrowRight } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+
 
 const GrainOverlay = () => (
   <div 
@@ -12,113 +12,245 @@ const GrainOverlay = () => (
   />
 );
 
+const PixelMapPinIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
+    <path d="M12 6a4 4 0 0 1 4 4c0 3-4 8-4 8s-4-5-4-8a4 4 0 0 1 4-4z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <circle cx="12" cy="10" r="1.5" fill="white"/>
+  </motion.svg>
+);
+
+const PixelClockIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
+    <circle cx="12" cy="12" r="5" stroke="white" strokeWidth="1.5"/>
+    <path d="M12 8v4l2.5 2.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </motion.svg>
+);
+
+const PixelGlobeIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
+    <circle cx="12" cy="12" r="5" stroke="white" strokeWidth="1.5"/>
+    <path d="M12 7v10M7 12h10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+    <ellipse cx="12" cy="12" rx="5" ry="2.5" stroke="white" strokeWidth="1.5"/>
+  </motion.svg>
+);
+
+const PixelMailIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#60A5FA" stroke="#3B82F6" strokeWidth="1"/>
+    <rect x="7" y="9" width="10" height="7" rx="0.5" stroke="white" strokeWidth="1.5"/>
+    <path d="M7 9l5 4 5-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </motion.svg>
+);
+
+const PixelPhoneIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#F59E0B" stroke="#B45309" strokeWidth="1"/>
+    <path d="M11 6a1 1 0 0 1 2 0 1 1 0 0 1-2 0z" fill="white"/>
+    <rect x="9" y="8" width="6" height="10" rx="1" stroke="white" strokeWidth="1.5"/>
+  </motion.svg>
+);
+
+const DiamondDecoration = ({ className = "" }: { className?: string }) => (
+  <motion.div 
+    className={`w-16 h-16 border border-neutral-200 rotate-45 ${className}`}
+    initial={{ opacity: 0, scale: 0 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
+  />
+);
+
+const ArrowLink = ({ text }: { text: string }) => (
+  <div className="mt-4 flex items-center gap-2 text-sm font-medium text-black group-hover:text-[#FA520F] transition-colors">
+    <span>{text}</span>
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+  </div>
+);
+
 export default function OfficePage() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+
   return (
-    <div className="relative pt-24 pb-20 bg-white min-h-screen text-black font-sans antialiased w-full overflow-hidden">
+    <div ref={containerRef} className="bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
       <GrainOverlay />
-      
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 relative z-10">
+      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
+
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         
-        <header className="mb-12 md:mb-20">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+        <div className="flex justify-center items-center gap-8 mb-12">
+          <PixelMapPinIcon />
+          <PixelClockIcon />
+          <PixelGlobeIcon />
+        </div>
+
+        <header className="mb-24 md:mb-40 text-center">
+          <motion.h1 
+            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.04em] leading-[0.9] uppercase"
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             Our <span className="text-[#FA520F]">Office</span>
           </motion.h1>
-          <motion.p
+          <motion.p 
+            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-base md:text-lg text-neutral-600 max-w-2xl font-mono mt-4"
           >
             Antera Group operational headquarters and engineering hub.
           </motion.p>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-          {/* Location Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="border border-black p-6 md:p-8 lg:p-10 bg-white shadow-[4px_4px_0px_0px_#000000] hover:shadow-[2px_2px_0px_0px_#000000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-75 flex flex-col justify-between"
-          >
-            <div>
-              <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-                <div className="w-10 h-10 md:w-12 md:h-12 border-2 border-black bg-black text-white flex items-center justify-center flex-shrink-0">
-                  <MapPin size={20} className="w-5 h-5 md:w-6 md:h-6" />
-                </div>
-                <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-tight">Location</h2>
-              </div>
+        <div className="relative max-w-5xl mx-auto">
+          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
+          <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
 
-              <div className="space-y-6">
-                <div>
-                  <p className="text-[10px] font-mono font-bold uppercase text-neutral-400 mb-1">City & Country</p>
-                  <p className="text-xl md:text-2xl font-bold uppercase">Dar es Salaam, Tanzania</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 md:mt-12 pt-6 md:pt-8 border-t-2 border-black/5">
-              <p className="font-mono text-xs md:text-sm text-neutral-500 leading-relaxed italic">
-                Our Dar es Salaam office serves as the primary research and development agency for Advanced Neural Technologies & Engineering.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Right Column */}
-          <div className="grid grid-cols-1 gap-6 md:gap-8">
-            {/* Operating Hours */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="border border-black p-6 md:p-8 bg-neutral-50 shadow-[4px_4px_0px_0px_#FA520F] hover:shadow-[2px_2px_0px_0px_#FA520F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-75"
+          <div className="grid grid-cols-1 md:grid-cols-3 border border-neutral-200 bg-white">
+            
+            <motion.div 
+              className="group md:col-span-2 border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0, duration: 0.7 }}
             >
-              <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-                <Clock className="text-[#FA520F] w-5 h-5 md:w-6 md:h-6" />
-                <h3 className="text-base md:text-lg font-bold uppercase">Operating Hours</h3>
+              <PixelMapPinIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Location</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
+                  Dar es Salaam, Tanzania
+                </p>
+                <p className="mt-4 text-sm text-neutral-500 leading-relaxed max-w-md">
+                  Our Dar es Salaam office serves as the primary research and development agency for Advanced Neural Technologies & Engineering.
+                </p>
+                <ArrowLink text="Get directions" />
               </div>
-              <div className="grid grid-cols-2 gap-4 font-mono text-xs md:text-sm">
-                <div>
-                  <p className="font-bold text-black">MON — FRI</p>
-                  <p className="text-neutral-500">08:00 - 18:00 EAT</p>
-                </div>
-                <div>
-                  <p className="font-bold text-black">SAT — SUN</p>
-                  <p className="text-neutral-500">Closed (Remote Only)</p>
+            </motion.div>
+
+            <motion.div 
+              className="group border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1, duration: 0.7 }}
+            >
+              <PixelClockIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Operating Hours</h3>
+                <div className="space-y-3">
+                  <div className="flex justify-between text-base md:text-lg text-neutral-500">
+                    <span>MON — FRI</span>
+                    <span className="font-medium text-black">08:00 - 18:00 EAT</span>
+                  </div>
+                  <div className="flex justify-between text-base md:text-lg text-neutral-500">
+                    <span>SAT — SUN</span>
+                    <span className="font-medium text-black">Closed (Remote Only)</span>
+                  </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Connect */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="border border-black p-6 md:p-8 bg-black text-white shadow-[4px_4px_0px_0px_#000000] hover:shadow-[2px_2px_0px_0px_#000000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-75"
+            <motion.div 
+              className="group border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.7 }}
             >
-              <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-                <Globe className="text-[#FA520F] w-5 h-5 md:w-6 md:h-6" />
-                <h3 className="text-base md:text-lg font-bold uppercase">Connect</h3>
-              </div>
-              <div className="space-y-3 md:space-y-4 font-mono text-xs md:text-sm">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-2 md:pb-3 gap-1 sm:gap-0">
-                  <span className="text-neutral-400 text-[10px] md:text-xs">EMAIL</span>
-                  <span className="font-bold text-xs md:text-sm break-all">INFO@ANTERA.CO.TZ</span>
-                </div>
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-2 md:pb-3 gap-1 sm:gap-0">
-                  <span className="text-neutral-400 text-[10px] md:text-xs">PHONE</span>
-                  <span className="font-bold text-xs md:text-sm">+255 760 984 921</span>
-                </div>
+              <PixelMailIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Email</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed font-mono">
+                  info@antera.co.tz
+                </p>
+                <ArrowLink text="Send email" />
               </div>
             </motion.div>
+
+            <motion.div 
+              className="group border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.7 }}
+            >
+              <PixelPhoneIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Phone</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed font-mono">
+                  +255 760 984 921
+                </p>
+                <ArrowLink text="Call now" />
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="group md:row-span-2 border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.7 }}
+            >
+              <PixelGlobeIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Connect</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  Follow our journey across digital platforms and stay updated with the latest from Antera Group.
+                </p>
+                <ArrowLink text="Visit website" />
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="group md:col-span-2 border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.7 }}
+            >
+              <PixelMapPinIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Visit Us</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
+                  Schedule a meeting with our team to discuss your next project or partnership opportunity.
+                </p>
+                <ArrowLink text="Book appointment" />
+              </div>
+            </motion.div>
+
+            <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
+            <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
+
           </div>
         </div>
-
       </div>
     </div>
   );
