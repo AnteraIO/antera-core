@@ -275,7 +275,6 @@ export const CompanyPage = () => {
         {/* Bento Grid — WIDER (max-w-5xl) */}
         <div className="relative max-w-5xl mx-auto mb-32 md:mb-40">
           <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-          <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
           
           <div className="grid grid-cols-1 md:grid-cols-3 border border-neutral-200 bg-white">
             
@@ -374,8 +373,6 @@ export const CompanyPage = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.6, duration: 0.7 }}
             />
-
-            <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
             <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
 
           </div>

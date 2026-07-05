@@ -409,7 +409,6 @@ export const CustomersPage = () => {
           <h2 className="text-3xl md:text-6xl lg:text-7xl font-normal tracking-[-0.03em] leading-[0.95] mb-16 text-center">Industries <span className="text-[#FA520F]">We Serve.</span></h2>
           <div className="relative max-w-5xl mx-auto">
             <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-            <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
             <div className="grid grid-cols-1 md:grid-cols-2 border border-neutral-200 bg-white">
               {industries.map((industry, i) => (
                 <motion.div key={industry.title} className={`group p-8 md:p-12 min-h-[300px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors ${i % 2 === 0 ? 'border-r border-b border-neutral-200' : 'border-b border-neutral-200'}`}
@@ -443,7 +442,6 @@ export const CustomersPage = () => {
                 </motion.div>
               ))}
             </div>
-            <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
             <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
           </div>
         </section>
