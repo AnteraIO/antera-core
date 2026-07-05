@@ -84,7 +84,6 @@ export const PartnersSection = () => {
 
         <div className="relative max-w-5xl mx-auto">
           <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-          <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
 
           <div className="border border-neutral-200 bg-white p-8 md:p-12 overflow-hidden">
             <motion.div
@@ -104,8 +103,6 @@ export const PartnersSection = () => {
               ))}
             </motion.div>
           </div>
-
-          <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
           <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
         </div>
       </div>
