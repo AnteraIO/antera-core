@@ -3,15 +3,6 @@ import React, { useState, useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 
-const GrainOverlay = () => (
-  <div 
-    className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03]"
-    style={{
-      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-    }}
-  />
-);
-
 const PixelAssessIcon = () => (
   <motion.svg 
     width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -282,7 +273,6 @@ export const OperationSection = () => {
 
   return (
     <section ref={containerRef} className="bg-[#FAFAF8] text-black font-sans antialiased w-full py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
-      <GrainOverlay />
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
@@ -387,7 +377,6 @@ export const DataScienceSection = () => {
 
   return (
     <section ref={containerRef} className="bg-[#FAFAF8] text-black font-sans antialiased w-full py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
-      <GrainOverlay />
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
@@ -491,7 +480,6 @@ export const WhySection = () => {
 
   return (
     <section ref={containerRef} className="bg-[#FAFAF8] text-black font-sans antialiased w-full py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
-      <GrainOverlay />
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
