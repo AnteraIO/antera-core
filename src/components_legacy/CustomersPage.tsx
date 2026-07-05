@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { StaticImageData } from 'next/image';
-import { Star, ShieldCheck, ArrowUpRight, ChevronRight, Quote, Landmark, Radio, ShoppingBag, HeartPulse } from 'lucide-react';
+import { Star, ShieldCheck, ArrowUpRight, ChevronRight, Quote } from 'lucide-react';
 
 import blacksand1 from '../assets/blacksand-1.png';
 import blacksand2 from '../assets/blacksand-2.png';
@@ -45,10 +45,7 @@ const CustomCursor = () => {
     <>
       <motion.div
         className="fixed top-0 left-0 w-8 h-8 rounded-full border-2 border-[#FA520F] pointer-events-none z-[9999] mix-blend-difference hidden md:block"
-        style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
-        }}
+        style={{ x: cursorXSpring, y: cursorYSpring }}
       />
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#FA520F] pointer-events-none z-[9999] hidden md:block"
@@ -101,10 +98,7 @@ const MagneticButton = ({ children, className = "" }: { children: React.ReactNod
     y.set((e.clientY - centerY) * 0.3);
   };
 
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+  const handleMouseLeave = () => { x.set(0); y.set(0); };
 
   return (
     <motion.div
@@ -206,10 +200,7 @@ const ImageGallery = ({ images, title }: { images: (string | StaticImageData)[];
           >
             <img src={(img as any).src || img} alt="" className="w-full h-full object-cover" />
             {activeIndex === i && (
-              <motion.div 
-                className="absolute inset-0 bg-[#FA520F]/20"
-                layoutId={`thumb-${title}`}
-              />
+              <motion.div className="absolute inset-0 bg-[#FA520F]/20" layoutId={`thumb-${title}`} />
             )}
           </motion.button>
         ))}
@@ -218,52 +209,28 @@ const ImageGallery = ({ images, title }: { images: (string | StaticImageData)[];
   );
 };
 
-const ClientShowcase = ({ 
-  client, 
-  images, 
-  description, 
-  index 
-}: { 
-  client: string; 
-  images: (string | StaticImageData)[];
-  description: string; 
-  index: number;
-}) => {
+const ClientShowcase = ({ client, images, description, index }: { client: string; images: (string | StaticImageData)[]; description: string; index: number; }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.8]);
-
   const isEven = index % 2 === 0;
 
   return (
-    <motion.div
-      ref={ref}
-      style={{ opacity, scale }}
-      className="mb-32 relative"
-    >
-      <motion.div 
-        className="absolute -top-20 left-0 text-[150px] font-black font-mono text-black/5 leading-none select-none pointer-events-none"
-        style={{ y }}
-      >
+    <motion.div ref={ref} style={{ opacity, scale }} className="mb-32 relative">
+      <motion.div className="absolute -top-20 left-0 text-[150px] font-black font-mono text-black/5 leading-none select-none pointer-events-none" style={{ y }}>
         0{index + 1}
       </motion.div>
 
       <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center ${isEven ? '' : 'lg:flex-row-reverse'}`}>
-        <motion.div 
-          className={`${isEven ? 'lg:order-1' : 'lg:order-2'}`}
+        <motion.div className={`${isEven ? 'lg:order-1' : 'lg:order-2'}`}
           initial={{ opacity: 0, x: isEven ? -50 : 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <motion.h2 
-            className="text-4xl md:text-6xl font-black font-mono uppercase tracking-tighter mb-6 leading-none"
+          <motion.h2 className="text-4xl md:text-6xl font-black font-mono uppercase tracking-tighter mb-6 leading-none"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -272,8 +239,7 @@ const ClientShowcase = ({
             <ScrambleText text={client} />
           </motion.h2>
 
-          <motion.p 
-            className="text-neutral-600 font-mono text-sm md:text-base leading-relaxed mb-8 max-w-lg"
+          <motion.p className="text-neutral-600 font-mono text-sm md:text-base leading-relaxed mb-8 max-w-lg"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -294,8 +260,7 @@ const ClientShowcase = ({
           </MagneticButton>
         </motion.div>
 
-        <motion.div 
-          className={`${isEven ? 'lg:order-2' : 'lg:order-1'}`}
+        <motion.div className={`${isEven ? 'lg:order-2' : 'lg:order-1'}`}
           initial={{ opacity: 0, x: isEven ? 50 : -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -304,17 +269,6 @@ const ClientShowcase = ({
           <ImageGallery images={images} title={client} />
         </motion.div>
       </div>
-
-      <motion.div 
-        className="mt-32 flex items-center gap-4"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-      >
-        <div className="flex-1 h-px bg-black/20" />
-        <div className="w-2 h-2 bg-[#FA520F] rotate-45" />
-        <div className="flex-1 h-px bg-black/20" />
-      </motion.div>
     </motion.div>
   );
 };
@@ -335,23 +289,9 @@ const ParticleBackground = () => {
         <motion.div
           key={p.id}
           className="absolute rounded-full bg-[#FA520F]/10"
-          style={{
-            width: p.size,
-            height: p.size,
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-          }}
-          animate={{
-            y: [0, -100, 0],
-            x: [0, 50, 0],
-            opacity: [0.2, 0.5, 0.2],
-          }}
-          transition={{
-            duration: p.duration,
-            repeat: Infinity,
-            delay: p.delay,
-            ease: "easeInOut",
-          }}
+          style={{ width: p.size, height: p.size, left: `${p.x}%`, top: `${p.y}%` }}
+          animate={{ y: [0, -100, 0], x: [0, 50, 0], opacity: [0.2, 0.5, 0.2] }}
+          transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "easeInOut" }}
         />
       ))}
     </div>
@@ -359,257 +299,203 @@ const ParticleBackground = () => {
 };
 
 const GrainOverlay = () => (
-  <div 
-    className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03]"
+  <div className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03]"
     style={{
       backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
     }}
   />
 );
 
+const PixelLandmarkIcon = () => (
+  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
+    <rect x="8" y="8" width="3" height="8" fill="white"/>
+    <rect x="13" y="8" width="3" height="8" fill="white"/>
+    <rect x="8" y="6" width="8" height="2" fill="white"/>
+  </motion.svg>
+);
+
+const PixelRadioIcon = () => (
+  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
+    <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="1.5"/>
+    <path d="M12 4v2M12 18v2M4 12h2M18 12h2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+  </motion.svg>
+);
+
+const PixelShoppingIcon = () => (
+  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
+    <path d="M8 8h8l-1 7H9L8 8z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M9 8V6a3 3 0 0 1 6 0v2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+    <circle cx="10" cy="16" r="1" fill="white"/>
+    <circle cx="14" cy="16" r="1" fill="white"/>
+  </motion.svg>
+);
+
+const PixelHeartPulseIcon = () => (
+  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#EF4444" stroke="#B91C1C" strokeWidth="1"/>
+    <path d="M6 12h3l2-4 3 8 2-4h2" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </motion.svg>
+);
+
+const DiamondDecoration = ({ className = "" }: { className?: string }) => (
+  <motion.div className={`w-16 h-16 border border-neutral-200 rotate-45 ${className}`}
+    initial={{ opacity: 0, scale: 0 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
+  />
+);
+
 export const CustomersPage = () => {
   const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
   const headerY = useTransform(scrollYProgress, [0, 0.1], [0, -100]);
   const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
 
   const clients = [
-    {
-      client: "Blacksand Adventures",
-      images: [blacksand1, blacksand2, blacksand3, blacksand4],
-      description: "A premium adventure tourism platform revolutionizing how travelers discover and book exclusive African safari experiences. Built with real-time availability, immersive 3D previews, and seamless payment integration."
-    },
-    {
-      client: "Travel Nest Africa",
-      images: [nest1, nest2, nest3, nest4, nest5, nest6],
-      description: "An all-in-one travel management ecosystem connecting local operators with global travelers. Features AI-powered itinerary generation, dynamic pricing, and a comprehensive vendor dashboard."
-    },
-    {
-      client: "Sekela POS",
-      images: [sekelaweb1, sekelaweb2, sekelaweb3],
-      description: "A next-generation point-of-sale system designed for African retail businesses. Features offline-first architecture, multi-currency support, inventory management, and real-time analytics dashboard."
-    },
-    {
-      client: "Nawwi Wellness",
-      images: [nawwi1, nawwi2, nawwi3, nawwi4, nawwi5, nawwi6],
-      description: "Luxury scent-led wellness from the heart of Tanzania. Handcrafted candles and immersive sensory experiences using premium coconut-soy wax and locally sourced essential oils. Sustainable, plastic-free packaging supporting local ethical agriculture in Tanzania."
-    }
+    { client: "Blacksand Adventures", images: [blacksand1, blacksand2, blacksand3, blacksand4], description: "A premium adventure tourism platform revolutionizing how travelers discover and book exclusive African safari experiences. Built with real-time availability, immersive 3D previews, and seamless payment integration." },
+    { client: "Travel Nest Africa", images: [nest1, nest2, nest3, nest4, nest5, nest6], description: "An all-in-one travel management ecosystem connecting local operators with global travelers. Features AI-powered itinerary generation, dynamic pricing, and a comprehensive vendor dashboard." },
+    { client: "Sekela POS", images: [sekelaweb1, sekelaweb2, sekelaweb3], description: "A next-generation point-of-sale system designed for African retail businesses. Features offline-first architecture, multi-currency support, inventory management, and real-time analytics dashboard." },
+    { client: "Nawwi Wellness", images: [nawwi1, nawwi2, nawwi3, nawwi4, nawwi5, nawwi6], description: "Luxury scent-led wellness from the heart of Tanzania. Handcrafted candles and immersive sensory experiences using premium coconut-soy wax and locally sourced essential oils. Sustainable, plastic-free packaging supporting local ethical agriculture in Tanzania." }
   ];
 
   const industries = [
-    {
-      title: "Finance & FinTech",
-      icon: Landmark,
-      challenges: ["Protecting sensitive data against breaches", "Managing real-time reporting and compliance", "High uptime requirements"],
-      outcomes: ["Improved risk management", "Faster accurate insights", "Operational cost savings"],
-    },
-    {
-      title: "Telecom & Tech",
-      icon: Radio,
-      challenges: ["Legacy infrastructure limiting agility", "Network monitoring complexity", "Operational insights at scale"],
-      outcomes: ["Faster deployment times", "Lower operational expense", "Better decision-making"],
-    },
-    {
-      title: "SMEs & Retail",
-      icon: ShoppingBag,
-      challenges: ["Limited budgets and resources", "Manual business processes", "Lack of data for decision-making"],
-      outcomes: ["Efficient operations", "Better customer engagement", "Actionable business insights"],
-    },
-    {
-      title: "Healthcare",
-      icon: HeartPulse,
-      challenges: ["Ensuring data privacy and security", "Fragmented reporting systems", "High uptime for critical systems"],
-      outcomes: ["Stronger data privacy posture", "Faster clinical decisions", "Streamlined admin processes"],
-    }
+    { title: "Finance & FinTech", icon: PixelLandmarkIcon, challenges: ["Protecting sensitive data against breaches", "Managing real-time reporting and compliance", "High uptime requirements"], outcomes: ["Improved risk management", "Faster accurate insights", "Operational cost savings"] },
+    { title: "Telecom & Tech", icon: PixelRadioIcon, challenges: ["Legacy infrastructure limiting agility", "Network monitoring complexity", "Operational insights at scale"], outcomes: ["Faster deployment times", "Lower operational expense", "Better decision-making"] },
+    { title: "SMEs & Retail", icon: PixelShoppingIcon, challenges: ["Limited budgets and resources", "Manual business processes", "Lack of data for decision-making"], outcomes: ["Efficient operations", "Better customer engagement", "Actionable business insights"] },
+    { title: "Healthcare", icon: PixelHeartPulseIcon, challenges: ["Ensuring data privacy and security", "Fragmented reporting systems", "High uptime for critical systems"], outcomes: ["Stronger data privacy posture", "Faster clinical decisions", "Streamlined admin processes"] }
   ];
 
   return (
-    <div ref={containerRef} className="relative bg-white min-h-screen text-black font-sans antialiased w-full overflow-hidden">
+    <div ref={containerRef} className="relative bg-[#FAFAF8] min-h-screen text-black font-sans antialiased w-full overflow-hidden selection:bg-[#FA520F] selection:text-white">
       <CustomCursor />
       <ParticleBackground />
       <GrainOverlay />
 
-      <motion.div 
-        className="fixed top-0 left-0 right-0 h-1 bg-[#FA520F] z-[9997] origin-left"
-        style={{ scaleX: scrollYProgress }}
-      />
+      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX: scrollYProgress }} />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <motion.div 
-          className="pt-32 pb-20 min-h-[80vh] flex flex-col justify-center"
-          style={{ y: headerY, opacity: headerOpacity }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <h1 className="text-5xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-[0.85] mb-8 font-mono">
-              <motion.span
-                className="block"
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              >
-                Trusted by
-              </motion.span>
-              <motion.span
-                className="block text-[#FA520F]"
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              >
-                Leaders.
-              </motion.span>
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
+        <motion.div className="pt-32 pb-20 min-h-[80vh] flex flex-col justify-center" style={{ y: headerY, opacity: headerOpacity }}>
+          <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}>
+            <h1 className="text-5xl md:text-8xl lg:text-9xl font-normal uppercase tracking-[-0.03em] leading-[0.85] mb-8">
+              <motion.span className="block" initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>Trusted by</motion.span>
+              <motion.span className="block text-[#FA520F]" initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>Leaders.</motion.span>
             </h1>
-            <motion.p 
-              className="text-neutral-600 font-mono text-sm md:text-base max-w-xl leading-relaxed mb-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-            >
-              Powering critical infrastructure for the region's most ambitious organizations. 
-              We don't just build software, we engineer digital transformation.
+            <motion.p className="text-neutral-500 text-base md:text-lg max-w-xl leading-relaxed mb-12" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
+              Powering critical infrastructure for the region's most ambitious organizations. We don't just build software, we engineer digital transformation.
             </motion.p>
           </motion.div>
         </motion.div>
 
         <section className="mb-48">
-          <h2 className="text-3xl md:text-6xl font-bold uppercase tracking-tighter mb-16 font-mono">
-            Industries <span className="text-[#FA520F]">We Serve.</span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-black border border-black">
-            {industries.map((industry) => (
-              <div key={industry.title} className="bg-white p-8 md:p-12 hover:bg-neutral-50 transition-colors">
-                <industry.icon className="w-10 h-10 text-[#FA520F] mb-8" />
-                <h3 className="text-2xl font-bold uppercase mb-6 font-mono">{industry.title}</h3>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                  <div>
-                    <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-4 font-mono">Top Challenges</h4>
-                    <ul className="space-y-2">
-                      {industry.challenges.map((c, i) => (
-                        <li key={i} className="text-sm font-mono text-neutral-600 leading-tight">• {c}</li>
-                      ))}
-                    </ul>
+          <div className="flex justify-center items-center gap-8 mb-12">
+            <PixelLandmarkIcon />
+            <PixelRadioIcon />
+            <PixelShoppingIcon />
+            <PixelHeartPulseIcon />
+          </div>
+          <h2 className="text-3xl md:text-6xl lg:text-7xl font-normal tracking-[-0.03em] leading-[0.95] mb-16 text-center">Industries <span className="text-[#FA520F]">We Serve.</span></h2>
+          <div className="relative max-w-5xl mx-auto">
+            <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
+            <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
+            <div className="grid grid-cols-1 md:grid-cols-2 border border-neutral-200 bg-white">
+              {industries.map((industry, i) => (
+                <motion.div key={industry.title} className={`group p-8 md:p-12 min-h-[300px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors ${i % 2 === 0 ? 'border-r border-b border-neutral-200' : 'border-b border-neutral-200'}`}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.7 }}
+                >
+                  <industry.icon />
+                  <div className="mt-auto">
+                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">{industry.title}</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-3 font-mono">Challenges</h4>
+                        <ul className="space-y-1.5">
+                          {industry.challenges.map((c, j) => (
+                            <li key={j} className="text-sm text-neutral-500 leading-relaxed">• {c}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-3 font-mono">Outcomes</h4>
+                        <ul className="space-y-1.5">
+                          {industry.outcomes.map((o, j) => (
+                            <li key={j} className="text-sm text-neutral-900 leading-relaxed font-medium">→ {o}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-4 font-mono">Business Outcomes</h4>
-                    <ul className="space-y-2">
-                      {industry.outcomes.map((o, i) => (
-                        <li key={i} className="text-sm font-mono text-neutral-900 leading-tight font-bold">→ {o}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
+            <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
+            <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
           </div>
         </section>
 
         <div className="mb-32">
-          <h2 className="text-3xl md:text-6xl font-bold uppercase tracking-tighter mb-16 font-mono">
-            The <span className="text-[#FA520F]">Companies</span> We Work With
-          </h2>
+          <h2 className="text-3xl md:text-6xl lg:text-7xl font-normal tracking-[-0.03em] leading-[0.95] mb-16 text-center">The <span className="text-[#FA520F]">Companies</span> We Work With</h2>
           {clients.map((client, index) => (
-            <ClientShowcase 
-              key={client.client}
-              client={client.client}
-              images={client.images}
-              description={client.description}
-              index={index}
-            />
+            <ClientShowcase key={client.client} client={client.client} images={client.images} description={client.description} index={index} />
           ))}
         </div>
 
-        <motion.div 
-          className="mb-32 p-8 md:p-16 bg-[#111113] border-4 border-black text-white flex flex-col md:flex-row items-stretch justify-between gap-8 relative shadow-[12px_12px_0px_0px_#000000] overflow-hidden"
+        <motion.div className="mb-32 p-8 md:p-16 bg-[#111113] border-4 border-black text-white flex flex-col md:flex-row items-stretch justify-between gap-8 relative shadow-[12px_12px_0px_0px_#000000] overflow-hidden"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
           <div className="absolute inset-0 opacity-5">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px)`
-            }} />
+            <div className="absolute inset-0" style={{ backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px)` }} />
           </div>
-
           <div className="flex-1 flex flex-col justify-center relative">
-            <motion.div 
-              className="flex gap-1 mb-8"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-            >
+            <motion.div className="flex gap-1 mb-8" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
               {[1, 2, 3, 4, 5].map(i => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.1, type: "spring" }}
-                >
+                <motion.div key={i} initial={{ opacity: 0, scale: 0 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 + i * 0.1, type: "spring" }}>
                   <Star className="w-5 h-5 fill-[#FA520F] text-[#FA520F]" />
                 </motion.div>
               ))}
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
-            >
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.5 }}>
               <Quote className="w-12 h-12 text-[#FA520F]/30 mb-4" />
             </motion.div>
-
-            <motion.blockquote 
-              className="text-xl md:text-2xl lg:text-3xl font-mono leading-relaxed mb-8 font-normal text-neutral-200"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
+            <motion.blockquote className="text-xl md:text-2xl lg:text-3xl font-normal leading-relaxed mb-8 text-neutral-200"
+              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.6 }}
             >
               "ANTERA transformed our data processing pipeline from days to minutes. Their technical depth is unparalleled in the market."
             </motion.blockquote>
-
-            <motion.div 
-              className="flex items-center gap-4"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.8 }}
-            >
-              <div className="w-12 h-12 bg-[#FA520F] border-2 border-white flex items-center justify-center font-mono font-black text-lg">
-                K
-              </div>
+            <motion.div className="flex items-center gap-4" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.8 }}>
+              <div className="w-12 h-12 bg-[#FA520F] border-2 border-white flex items-center justify-center font-mono font-black text-lg">K</div>
               <div>
-                <div className="font-mono text-sm font-bold text-white">Chief Technology Officer</div>
-                <div className="font-mono text-xs font-bold uppercase tracking-widest text-neutral-400">Kaziboksi.</div>
+                <div className="text-sm font-bold text-white">Chief Technology Officer</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-neutral-400">Kaziboksi.</div>
               </div>
             </motion.div>
           </div>
-
-          <motion.div 
-            className="w-full md:w-40 lg:w-48 border-4 border-black bg-[#FA520F] flex items-center justify-center shrink-0 shadow-[6px_6px_0px_0px_#000000] p-6 relative overflow-hidden"
+          <motion.div className="w-full md:w-40 lg:w-48 border-4 border-black bg-[#FA520F] flex items-center justify-center shrink-0 shadow-[6px_6px_0px_0px_#000000] p-6 relative overflow-hidden"
             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
             whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
             whileHover={{ rotate: 5, scale: 1.05 }}
           >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-0 opacity-10"
-            >
+            <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute inset-0 opacity-10">
               <div className="absolute inset-4 border-2 border-white rounded-full" />
               <div className="absolute inset-8 border-2 border-white rounded-full" />
             </motion.div>
@@ -617,36 +503,16 @@ export const CustomersPage = () => {
           </motion.div>
         </motion.div>
 
-        <motion.div 
-          className="text-center pb-32"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.h2 
-            className="text-4xl md:text-6xl font-black font-mono uppercase tracking-tighter mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
+        <motion.div className="text-center pb-32" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+          <motion.h2 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-[-0.03em] leading-[0.95] mb-6" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
             Ready to <span className="text-[#FA520F]">Transform?</span>
           </motion.h2>
-          <motion.p 
-            className="text-neutral-600 font-mono text-sm max-w-lg mx-auto mb-8"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-          >
+          <motion.p className="text-neutral-500 text-base max-w-lg mx-auto mb-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }}>
             Join the ranks of industry leaders who trust ANTERA to power their digital future.
           </motion.p>
           <MagneticButton>
-            <motion.button
-              className="group inline-flex items-center gap-3 bg-[#FA520F] text-white px-8 py-4 font-mono text-sm font-bold uppercase tracking-wider border-4 border-black shadow-[6px_6px_0px_0px_#000000] hover:shadow-[8px_8px_0px_0px_#000000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            <motion.button className="group inline-flex items-center gap-3 bg-[#FA520F] text-white px-8 py-4 text-sm font-medium border-4 border-black shadow-[6px_6px_0px_0px_#000000] hover:shadow-[8px_8px_0px_0px_#000000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
+              whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
             >
               Start Your Project
               <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
