@@ -6,17 +6,26 @@ export default function BlogCTA() {
   const { t } = useLanguage();
 
   return (
-    <section className="py-20 border-t-2 border-black bg-neutral-50">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 className="text-5xl font-black uppercase tracking-tighter mb-6 leading-none">
-            Stay Connected to the <span className="text-[#FA520F]">Future</span>
-          </h2>
-          <p className="text-lg text-neutral-600 font-mono max-w-md">
-            Our Blogs cover the intersection of Technology, AI, automation, and Tanzania and global digital infrastructure.
-          </p>
+    <section className="bg-[#FAFAF8] text-black py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+        <div className="relative max-w-5xl mx-auto border border-neutral-200 bg-white">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+            
+            <div className="p-8 md:p-12 lg:p-16 border-b lg:border-b-0 lg:border-r border-neutral-200 flex flex-col justify-center">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-[-0.03em] leading-[0.95] mb-6">
+                Stay Connected to the <span className="text-[#FA520F]">Future</span>
+              </h2>
+              <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
+                Our Blogs cover the intersection of Technology, AI, automation, and Tanzania and global digital infrastructure.
+              </p>
+            </div>
+
+            <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+              <NewsletterSignup />
+            </div>
+
+          </div>
         </div>
-        <NewsletterSignup />
       </div>
     </section>
   );
