@@ -10,49 +10,6 @@ export const FinalCTAAndFooter = () => {
 
   return (
     <div className="w-full bg-white text-black font-sans antialiased flex flex-col overflow-hidden">
-      
-      {/* SECTION 1: Massive Accent Callout Banner (Mistral-style) */}
-      <section className="relative mx-6 my-12 lg:mx-12 bg-[#FA520F] text-white pt-24 pb-20 px-6 lg:px-12 overflow-hidden">
-        {/* High-Fidelity CSS Grain Texture Layer */}
-        <div 
-          className="absolute inset-0 pointer-events-none opacity-[0.07] mix-blend-multiply"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`
-          }}
-        />
-
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-end justify-between gap-12"
-        >
-          {/* Left: Text Content */}
-          <div className="max-w-3xl">
-            <h2 className="text-4xl md:text-6xl font-normal tracking-tight leading-[1.1] max-w-2xl">
-              {t('hero.description')}
-            </h2>
-          </div>
-
-          {/* Right: Action Buttons */}
-          <div className="flex flex-row items-center gap-4 flex-shrink-0 mb-2">
-            <button className="group bg-white px-6 py-3 text-sm font-medium text-black hover:bg-neutral-100 transition-colors">
-              <span className="relative flex items-center gap-2">
-                {t('nav.start_building')}
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </span>
-            </button>
-
-            <a href="https://wa.me/255760984921" target="_blank" className="group bg-black px-6 py-3 text-sm font-medium text-white hover:bg-neutral-900 transition-colors">
-              <span className="relative flex items-center gap-2">
-                {t('nav.contact_sales')}
-                <ArrowRight className="w-4 h-4 opacity-60" />
-              </span>
-            </a>
-          </div>
-        </motion.div>
-      </section>
 
       {/* SECTION 2: Rigid Multi-Column Grid Links Footer */}
       <footer className="bg-white border-t border-black w-full">
