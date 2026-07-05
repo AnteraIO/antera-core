@@ -22,7 +22,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.start_building': 'Start building',
     'hero.title_part1': 'Grow Your Business.',
     'hero.title_part2': 'With Smart Technology.',
-    'hero.description': 'We implement practical AI solutions that reduce repetitive work while keeping systems secure and governed.',
+    'hero.description': 'We help organizations build tailored Systems, Webapps, Mobile Apps, Chatbots, and AI systems to solve the world’s hardest problems',
     'page.products.title': 'Products',
     'page.products.desc': 'Practical AI and automation tools for modern business.',
     'page.solutions.title': 'Solutions',
