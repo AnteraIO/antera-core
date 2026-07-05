@@ -3,7 +3,6 @@ import { LayoutDashboard, FileText, Users, Eye, TrendingUp } from 'lucide-react'
 import Link from 'next/link';
 
 async function getStats() {
-
   const { count: postsCount } = await supabaseAdmin
     .from('blog_posts')
     .select('*', { count: 'exact', head: true });
@@ -41,75 +40,89 @@ async function getStats() {
 export default async function AdminDashboard() {
   const stats = await getStats();
 
-  const StatCard = ({ title, value, icon: Icon, color, subtitle }: any) => (
-    <div className="bg-white border-2 border-black p-6 shadow-[4px_4px_0px_0px_#000000] relative overflow-hidden group">
-      <div className={`absolute right-0 top-0 w-16 h-16 ${color} opacity-10 translate-x-8 -translate-y-8 rotate-45 group-hover:rotate-12 transition-transform`} />
-      <div className="flex items-center justify-between mb-4">
-        <div className={`p-2 border border-black ${color} text-white`}>
-          <Icon size={20} />
-        </div>
-        <span className="text-2xl font-black font-mono tracking-tighter">{value}</span>
-      </div>
-      <p className="text-xs font-mono font-bold uppercase text-neutral-400">{title}</p>
-      {subtitle && (
-        <p className="text-[10px] font-mono text-neutral-400 mt-1">{subtitle}</p>
-      )}
-    </div>
-  );
-
   return (
-    <div className="pt-24 px-4 md:px-10 pb-10 bg-neutral-50 min-h-screen">
-      <div className="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-        <div>
-          <h1 className="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-1">Dashboard</h1>
-          <p className="text-sm font-mono text-neutral-500">Blog metrics overview.</p>
+    <div className="bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+        
+        <header className="mb-24 md:mb-40 text-center">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]">
+            Dashboard.
+          </h1>
+          <p className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6">
+            Blog metrics and content management overview.
+          </p>
+        </header>
+
+        <div className="relative max-w-5xl mx-auto mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 border border-neutral-200 bg-white">
+            
+            <div className="group p-8 md:p-12 min-h-[200px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors border-b lg:border-b-0 lg:border-r border-neutral-200">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-10 h-10 bg-[#3B82F6] flex items-center justify-center">
+                  <FileText size={20} className="text-white" />
+                </div>
+                <span className="text-3xl font-normal tracking-tight">{stats.postsCount}</span>
+              </div>
+              <div>
+                <p className="text-xs font-mono font-bold uppercase tracking-widest text-neutral-400">Total Posts</p>
+              </div>
+            </div>
+
+            <div className="group p-8 md:p-12 min-h-[200px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors border-b lg:border-b-0 lg:border-r border-neutral-200">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-10 h-10 bg-[#10B981] flex items-center justify-center">
+                  <Users size={20} className="text-white" />
+                </div>
+                <span className="text-3xl font-normal tracking-tight">{stats.subCount}</span>
+              </div>
+              <div>
+                <p className="text-xs font-mono font-bold uppercase tracking-widest text-neutral-400">Subscribers</p>
+              </div>
+            </div>
+
+            <div className="group p-8 md:p-12 min-h-[200px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors border-b md:border-b-0 lg:border-r border-neutral-200">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-10 h-10 bg-[#FA520F] flex items-center justify-center">
+                  <Eye size={20} className="text-white" />
+                </div>
+                <span className="text-3xl font-normal tracking-tight">{stats.totalViews}</span>
+              </div>
+              <div>
+                <p className="text-xs font-mono font-bold uppercase tracking-widest text-neutral-400">Total Views</p>
+              </div>
+            </div>
+
+            <div className="group p-8 md:p-12 min-h-[200px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-10 h-10 bg-[#8B5CF6] flex items-center justify-center">
+                  <TrendingUp size={20} className="text-white" />
+                </div>
+                <span className="text-3xl font-normal tracking-tight">{stats.engagementRate}%</span>
+              </div>
+              <div>
+                <p className="text-xs font-mono font-bold uppercase tracking-widest text-neutral-400">Engagement Rate</p>
+                <p className="text-[10px] font-mono text-neutral-400 mt-1">{stats.publishedCount} published / {stats.postsCount} total</p>
+              </div>
+            </div>
+
+          </div>
         </div>
-        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 w-full md:w-auto">
-          <Link href="/admin/posts" className="bg-white text-black px-4 py-3 font-bold border-2 border-black shadow-[4px_4px_0px_0px_#000000] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all uppercase text-[10px] md:text-sm text-center">
+
+        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Link href="/admin/posts" className="block p-6 border border-neutral-200 bg-white text-center hover:bg-neutral-50/50 transition-colors text-sm font-medium">
             Manage Posts
           </Link>
-          <Link href="/admin/subscribers" className="bg-white text-black px-4 py-3 font-bold border-2 border-black shadow-[4px_4px_0px_0px_#000000] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all uppercase text-[10px] md:text-sm text-center">
+          <Link href="/admin/subscribers" className="block p-6 border border-neutral-200 bg-white text-center hover:bg-neutral-50/50 transition-colors text-sm font-medium">
             Subscribers
           </Link>
-          <Link href="/admin/broadcast" className="bg-white text-black px-4 py-3 font-bold border-2 border-black shadow-[4px_4px_0px_0px_#000000] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all uppercase text-[10px] md:text-sm text-center">
+          <Link href="/admin/broadcast" className="block p-6 border border-neutral-200 bg-white text-center hover:bg-neutral-50/50 transition-colors text-sm font-medium">
             Broadcast
           </Link>
-          <Link href="/admin/posts/new" className="bg-[#FA520F] text-white px-4 py-3 font-bold border-2 border-black shadow-[4px_4px_0px_0px_#000000] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all uppercase text-[10px] md:text-sm text-center">
+          <Link href="/admin/posts/new" className="block p-6 border border-neutral-200 bg-[#FA520F] text-white text-center hover:bg-black transition-colors text-sm font-medium">
             New Post
           </Link>
         </div>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        <StatCard 
-          title="Total Posts"
-          value={stats.postsCount} 
-          icon={FileText} 
-          color="bg-blue-500" 
-        />
-        <StatCard 
-          title="Subscribers"
-          value={stats.subCount} 
-          icon={Users} 
-          color="bg-green-500" 
-        />
-        <StatCard 
-          title="Total Views"
-          value={stats.totalViews} 
-          icon={Eye} 
-          color="bg-orange-500" 
-        />
-        <StatCard 
-          title="Engagement Rate"
-          value={`${stats.engagementRate}%`} 
-          icon={TrendingUp} 
-          color="bg-purple-500"
-          subtitle={`${stats.publishedCount} published / ${stats.postsCount} total`}
-        />
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Quick Actions or Recent Posts will go here */}
       </div>
     </div>
   );

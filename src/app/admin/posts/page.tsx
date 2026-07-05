@@ -6,7 +6,6 @@ import DeletePostButton from '@/components/admin/DeletePostButton';
 export const dynamic = 'force-dynamic';
 
 async function getPosts() {
-  // Fetch all blog posts with selected fields, ordered by creation date (newest first)
   const { data } = await supabaseAdmin
     .from('blog_posts')
     .select('id, title, status, created_at, views, slug')
@@ -15,68 +14,70 @@ async function getPosts() {
 }
 
 export default async function AdminPostsList() {
-  // Load all posts from database
   const posts = await getPosts();
 
   return (
-    // Main container with top padding to prevent navbar overlap
-    <div className="pt-24 px-4 md:px-10 pb-10 bg-neutral-50 min-h-screen">
-      {/* Header section with title and create button */}
-      <div className="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-        <div>
-            <h1 className="text-3xl md:text-4xl font-black uppercase tracking-tighter">Manage Posts</h1>
-            <p className="text-xs font-mono text-neutral-500 mt-1">Total {posts.length} posts found.</p>
-        </div>
-        <Link href="/admin/posts/new" className="w-full md:w-auto text-center bg-black text-white px-6 py-3 font-bold border-2 border-black shadow-[4px_4px_0px_0px_#FA520F] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all uppercase text-sm">
-            Create New
-        </Link>
-      </div>
+    <div className="bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+        
+        <header className="mb-24 md:mb-40 text-center">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]">
+            Manage <span className="text-[#FA520F]">Posts.</span>
+          </h1>
+          <p className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6">
+            {posts.length} posts found.
+          </p>
+        </header>
 
-      {/* Table container with retro box-shadow styling */}
-      <div className="bg-white border-2 border-black overflow-x-auto shadow-[8px_8px_0px_0px_#000000]">
-        <table className="w-full text-left border-collapse min-w-[700px]">
-            {/* Table header with column labels */}
-            <thead>
-                <tr className="bg-neutral-100 border-b-2 border-black text-[10px] font-mono font-bold uppercase tracking-wider">
-                    <th className="p-4">Post Title</th>
-                    <th className="p-4">Status</th>
-                    <th className="p-4">Views</th>
-                    <th className="p-4">Date</th>
-                    <th className="p-4 text-right">Actions</th>
-                </tr>
-            </thead>
-            {/* Table body with post data rows */}
-            <tbody className="divide-y divide-neutral-200">
-                {posts.map((post) => (
-                    <tr key={post.id} className="hover:bg-neutral-50 transition-colors">
-                        {/* Post title */}
-                        <td className="p-4 font-bold uppercase text-sm">{post.title}</td>
-                        {/* Status badge with color coding */}
-                        <td className="p-4">
-                            <span className={`text-[10px] font-mono font-bold uppercase px-2 py-1 border ${post.status === 'published' ? 'bg-green-100 text-green-700 border-green-200' : 'bg-yellow-100 text-yellow-700 border-yellow-200'}`}>
-                                {post.status}
-                            </span>
-                        </td>
-                        {/* View count */}
-                        <td className="p-4 font-mono text-sm">{post.views || 0}</td>
-                        {/* Formatted creation date */}
-                        <td className="p-4 font-mono text-xs text-neutral-400">{new Date(post.created_at).toLocaleDateString()}</td>
-                        {/* Action buttons: View, Edit, Delete */}
-                        <td className="p-4 text-right">
-                            <div className="flex justify-end gap-2">
-                                <Link href={`/blog/${post.slug}`} target="_blank" className="p-2 border border-black hover:bg-neutral-100">
-                                    <ExternalLink size={16} />
-                                </Link>
-                                <Link href={`/admin/posts/edit/${post.id}`} className="p-2 border border-black hover:bg-blue-100 text-blue-600">
-                                    <Edit2 size={16} />
-                                </Link>
-                                <DeletePostButton postId={post.id} />
-                            </div>
-                        </td>
+        <div className="relative max-w-5xl mx-auto">
+          <div className="border border-neutral-200 bg-white overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse min-w-[700px]">
+                <thead>
+                  <tr className="border-b border-neutral-200 text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-400">
+                    <th className="p-6">Post Title</th>
+                    <th className="p-6">Status</th>
+                    <th className="p-6">Views</th>
+                    <th className="p-6">Date</th>
+                    <th className="p-6 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-neutral-200">
+                  {posts.map((post) => (
+                    <tr key={post.id} className="hover:bg-neutral-50/50 transition-colors">
+                      <td className="p-6 font-medium text-sm">{post.title}</td>
+                      <td className="p-6">
+                        <span className={`text-[10px] font-mono font-bold uppercase px-2 py-1 border ${post.status === 'published' ? 'bg-[#FAFAF8] text-black border-neutral-200' : 'bg-neutral-100 text-neutral-500 border-neutral-200'}`}>
+                          {post.status}
+                        </span>
+                      </td>
+                      <td className="p-6 font-mono text-sm">{post.views || 0}</td>
+                      <td className="p-6 font-mono text-xs text-neutral-400">{new Date(post.created_at).toLocaleDateString()}</td>
+                      <td className="p-6 text-right">
+                        <div className="flex justify-end gap-2">
+                          <Link href={`/blog/${post.slug}`} target="_blank" className="p-2 border border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-colors">
+                            <ExternalLink size={14} />
+                          </Link>
+                          <Link href={`/admin/posts/edit/${post.id}`} className="p-2 border border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-colors">
+                            <Edit2 size={14} />
+                          </Link>
+                          <DeletePostButton postId={post.id} />
+                        </div>
+                      </td>
                     </tr>
-                ))}
-            </tbody>
-        </table>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="mt-8 flex justify-end">
+            <Link href="/admin/posts/new" className="inline-block bg-black text-white px-8 py-4 text-sm font-medium hover:bg-[#FA520F] transition-colors">
+              Create New
+            </Link>
+          </div>
+        </div>
+
       </div>
     </div>
   );
