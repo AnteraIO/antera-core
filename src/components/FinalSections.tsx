@@ -306,7 +306,6 @@ export const OperationSection = () => {
 
         <div className="relative max-w-5xl mx-auto">
           <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-          <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-neutral-200 bg-white">
             {steps.map((step, index) => {
@@ -348,8 +347,6 @@ export const OperationSection = () => {
                 </motion.div>
               )
             })}
-
-            <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
             <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
           </div>
         </div>
@@ -409,7 +406,6 @@ export const DataScienceSection = () => {
 
         <div className="relative max-w-5xl mx-auto">
           <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-          <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-neutral-200 bg-white">
             {services.map((service, index) => {
@@ -451,8 +447,6 @@ export const DataScienceSection = () => {
                 </motion.div>
               )
             })}
-
-            <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
             <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
           </div>
         </div>
@@ -512,7 +506,6 @@ export const WhySection = () => {
 
         <div className="relative max-w-5xl mx-auto">
           <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-          <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-neutral-200 bg-white">
             {reasons.map((reason, index) => {
@@ -554,8 +547,6 @@ export const WhySection = () => {
                 </motion.div>
               )
             })}
-
-            <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
             <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
           </div>
         </div>

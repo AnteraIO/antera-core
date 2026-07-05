@@ -223,7 +223,6 @@ export const CommunicationSection = () => {
 
         <div className="relative max-w-5xl mx-auto">
           <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-          <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
 
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-neutral-200 bg-white"
@@ -239,8 +238,6 @@ export const CommunicationSection = () => {
                 </div>
               </motion.a>
             ))}
-
-            <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
             <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
           </motion.div>
         </div>
@@ -279,7 +276,6 @@ export const ApplicationSection = () => {
 
         <div className="relative max-w-5xl mx-auto">
           <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-          <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
 
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
             className="grid grid-cols-1 lg:grid-cols-2 border border-neutral-200 bg-white"
@@ -305,8 +301,6 @@ export const ApplicationSection = () => {
                 <img src={(webCommandImage as any).src || webCommandImage} alt="Web Command Dashboard" className="w-full h-auto object-cover" />
               </motion.div>
             </motion.div>
-
-            <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
             <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
           </motion.div>
         </div>
@@ -355,7 +349,6 @@ export const DataIntelligenceSection = () => {
 
         <div className="relative max-w-5xl mx-auto">
           <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-          <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
 
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-neutral-200 bg-white"
@@ -373,8 +366,6 @@ export const DataIntelligenceSection = () => {
                 </motion.div>
               </motion.div>
             ))}
-
-            <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
             <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
           </motion.div>
         </div>
