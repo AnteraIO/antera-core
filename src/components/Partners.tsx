@@ -1,6 +1,6 @@
 'use client';
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { StaticImageData } from 'next/image';
 
 import awsLogo from '../assets/aws.png';
@@ -13,6 +13,35 @@ import kaziboksiLogo from '../assets/kaziboksi.jpg';
 import sekelaPosLogo from '../assets/sekela-pos.png';
 import brevoLogo from '../assets/Brevo.png';
 
+const GrainOverlay = () => (
+  <div 
+    className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03]"
+    style={{
+      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+    }}
+  />
+);
+
+const PixelPartnerIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
+    <path d="M12 7l4 4-4 4-4-4 4-4z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </motion.svg>
+);
+
+const DiamondDecoration = ({ className = "" }: { className?: string }) => (
+  <motion.div 
+    className={`w-16 h-16 border border-neutral-200 rotate-45 ${className}`}
+    initial={{ opacity: 0, scale: 0 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
+  />
+);
 
 const partners = [
   { name: 'Digital Ocean', logo: digitalOceanLogo },
@@ -27,41 +56,68 @@ const partners = [
 ];
 
 export const PartnersSection = () => {
-
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
   const tripledPartners = [...partners, ...partners, ...partners];
 
   return (
-    <section className="bg-white border-b border-black py-12 overflow-hidden">
-      <div className="container mx-auto px-4 mb-8">
-      </div>
+    <section ref={containerRef} className="bg-[#FAFAF8] text-black font-sans antialiased w-full overflow-hidden selection:bg-[#FA520F] selection:text-white">
+      <GrainOverlay />
+      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
-      <div className="overflow-hidden">
-        <motion.div
-          className="flex gap-12"
-          animate={{
-            x: [0, -1920],
-          }}
-          transition={{
-            duration: 20,
-            ease: "linear",
-            repeat: Infinity,
-            repeatType: "loop",
-          }}
-          style={{ width: "max-content" }}
-        >
-          {tripledPartners.map((partner, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-center flex-shrink-0"
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32">
+        <div className="flex justify-center items-center gap-8 mb-12">
+          <PixelPartnerIcon />
+        </div>
+
+        <header className="mb-24 md:mb-40 text-center">
+          <motion.h1 
+            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Our <span className="text-[#FA520F]">Partners.</span>
+          </motion.h1>
+          <motion.p 
+            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
+            Trusted by leading technology providers and innovative businesses across the region.
+          </motion.p>
+        </header>
+
+        <div className="relative max-w-5xl mx-auto">
+          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
+          <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
+
+          <div className="border border-neutral-200 bg-white p-8 md:p-12 overflow-hidden">
+            <motion.div
+              className="flex gap-16 md:gap-24"
+              animate={{ x: [0, -1920] }}
+              transition={{ duration: 20, ease: "linear", repeat: Infinity, repeatType: "loop" }}
+              style={{ width: "max-content" }}
             >
-              <img
-                src={(partner.logo as any).src || partner.logo}
-                alt={partner.name}
-                className="h-8 md:h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
-              />
-            </div>
-          ))}
-        </motion.div>
+              {tripledPartners.map((partner, index) => (
+                <div key={index} className="flex items-center justify-center flex-shrink-0">
+                  <img
+                    src={(partner.logo as any).src || partner.logo}
+                    alt={partner.name}
+                    className="h-8 md:h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
+                  />
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
+          <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
+        </div>
       </div>
     </section>
   );
