@@ -1,19 +1,67 @@
 'use client';
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import Image from 'next/image';
 import { Share2, User } from 'lucide-react';
-// Import images directly
 import shadrackovskyImage from '@/assets/shadrackovsky.jpeg';
 import anteraLogoImage from '@/assets/antera-logo.jpeg';
 
+const GrainOverlay = () => (
+  <div 
+    className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03]"
+    style={{
+      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+    }}
+  />
+);
+
+const PixelUserIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
+    <circle cx="12" cy="9" r="3" stroke="white" strokeWidth="1.5"/>
+    <path d="M7 17a5 5 0 0 1 10 0" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+  </motion.svg>
+);
+
+const PixelShareIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
+    <circle cx="8" cy="12" r="2" fill="white"/>
+    <circle cx="16" cy="8" r="2" fill="white"/>
+    <circle cx="16" cy="16" r="2" fill="white"/>
+    <path d="M10 11l4-2M10 13l4 2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+  </motion.svg>
+);
+
+const DiamondDecoration = ({ className = "" }: { className?: string }) => (
+  <motion.div 
+    className={`w-16 h-16 border border-neutral-200 rotate-45 ${className}`}
+    initial={{ opacity: 0, scale: 0 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
+  />
+);
+
 export default function TeamPage() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+
   const team = [
     {
       name: 'Shadrackovsky',
       role: 'CEO & Founder',
       bio: 'Leading the agency in building the next generation of neural technologies and enterprise infrastructure.',
-      image: shadrackovskyImage, // Use imported image
+      image: shadrackovskyImage,
       socials: {
         twitter: 'https://twitter.com/shadrackovsky',
         github: 'https://github.com/shadrackovsky'
@@ -23,7 +71,7 @@ export default function TeamPage() {
       name: 'Josia O Mosses',
       role: 'Co-Founder',
       bio: 'Directing strategic partnerships and core architectural development across Antera\'s global service layers.',
-      image: anteraLogoImage, // Use imported image
+      image: anteraLogoImage,
       socials: {
         linkedin: 'https://linkedin.com/',
         github: 'https://github.com/'
@@ -32,81 +80,103 @@ export default function TeamPage() {
   ];
 
   return (
-    <div className="pt-32 pb-20 px-6 max-w-7xl mx-auto min-h-screen bg-white text-black font-sans antialiased">
-      <header className="mb-20 text-center max-w-3xl mx-auto">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-[0.8] mb-8"
-        >
-          Our <span className="text-[#FA520F]">Collective</span>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="text-xl text-neutral-600 font-mono"
-        >
-          A team of engineers, researchers, and architects dedicated to digital independence.
-        </motion.p>
-      </header>
+    <div ref={containerRef} className="bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+      <GrainOverlay />
+      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-        {team.map((member, i) => (
-          <motion.div
-            key={member.name}
-            initial={{ opacity: 0, y: 30 }}
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+        
+        <div className="flex justify-center items-center gap-8 mb-12">
+          <PixelUserIcon />
+          <PixelShareIcon />
+        </div>
+
+        <header className="mb-24 md:mb-40 text-center">
+          <motion.h1 
+            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.2 + 0.2 }}
-            className="group relative border-4 border-black p-8 bg-white shadow-[12px_12px_0px_0px_#000000] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="flex flex-col items-center">
-              <div className="relative w-48 h-48 border-4 border-black mb-8 overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Add sizes prop
-                />
-                <div className="absolute inset-0 border-t-2 border-l-2 border-white/20 pointer-events-none" />
-              </div>
+            Our <span className="text-[#FA520F]">Team.</span>
+          </motion.h1>
+          <motion.p 
+            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
+            A team of engineers, researchers, and architects dedicated to digital independence.
+          </motion.p>
+        </header>
 
-              <div className="text-center">
-                <p className="text-[10px] font-mono font-black uppercase tracking-widest text-[#FA520F] mb-2">{member.role}</p>
-                <h2 className="text-4xl font-black uppercase tracking-tighter mb-4">{member.name}</h2>
-                <p className="text-neutral-600 font-mono text-sm leading-relaxed mb-8 max-w-sm">
-                  {member.bio}
-                </p>
+        <div className="relative max-w-5xl mx-auto mb-24 md:mb-40">
+          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
+          <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
 
-                <div className="flex justify-center gap-4">
-                  <a href="#" className="p-3 border-2 border-black hover:bg-[#FA520F] hover:text-white transition-colors shadow-[4px_4px_0px_0px_#000000] active:translate-x-1 active:translate-y-1 active:shadow-none">
-                    <User size={18} />
-                  </a>
-                  <a href="#" className="p-3 border-2 border-black hover:bg-[#FA520F] hover:text-white transition-colors shadow-[4px_4px_0px_0px_#000000] active:translate-x-1 active:translate-y-1 active:shadow-none">
-                    <Share2 size={18} />
-                  </a>
+          <div className="grid grid-cols-1 md:grid-cols-2 border border-neutral-200 bg-white">
+            {team.map((member, i) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.7 }}
+                className={`group p-8 md:p-12 min-h-[500px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors ${i === 0 ? 'border-b md:border-b-0 md:border-r border-neutral-200' : ''}`}
+              >
+                <div className="flex flex-col items-center">
+                  <div className="relative w-32 h-32 mb-8 overflow-hidden border border-neutral-200 grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+
+                  <div className="text-center">
+                    <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#FA520F] mb-2">{member.role}</p>
+                    <h2 className="text-3xl md:text-4xl font-medium tracking-tight mb-4">{member.name}</h2>
+                    <p className="text-base text-neutral-500 leading-relaxed mb-8 max-w-sm">
+                      {member.bio}
+                    </p>
+
+                    <div className="flex justify-center gap-4">
+                      <a href="#" className="p-3 border border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-colors">
+                        <User size={18} />
+                      </a>
+                      <a href="#" className="p-3 border border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-colors">
+                        <Share2 size={18} />
+                      </a>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+              </motion.div>
+            ))}
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="mt-32 border-4 border-dashed border-neutral-200 p-20 text-center"
-      >
-        <h3 className="text-3xl font-black uppercase mb-4 tracking-tight">Joining the team</h3>
-        <p className="font-mono text-neutral-400 mb-8 max-w-xl mx-auto italic">
-          We are always looking for exceptional engineers and researchers to help us scale digital infrastructure.
-        </p>
-        <a href="mailto:info@antera.co.tz" className="inline-block bg-black text-white px-10 py-4 font-bold uppercase tracking-widest text-sm shadow-[8px_8px_0px_0px_#FA520F] hover:translate-x-2 hover:translate-y-2 hover:shadow-none transition-all">
-          Join Us
-        </a>
-      </motion.div>
+            <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
+            <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
+          </div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 0.7 }}
+          className="max-w-5xl mx-auto border border-neutral-200 bg-white p-8 md:p-16 text-center"
+        >
+          <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-4">Joining the team</h3>
+          <p className="text-base text-neutral-500 leading-relaxed mb-8 max-w-xl mx-auto">
+            We are always looking for exceptional engineers and researchers to help us scale digital infrastructure.
+          </p>
+          <a href="mailto:info@antera.co.tz" className="inline-block bg-black text-white px-10 py-4 text-sm font-medium hover:bg-[#FA520F] transition-colors">
+            Join Us
+          </a>
+        </motion.div>
+
+      </div>
     </div>
   );
 }
