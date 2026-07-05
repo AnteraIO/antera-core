@@ -9,14 +9,10 @@ export const FinalCTAAndFooter = () => {
   const { language, setLanguage, t } = useLanguage();
 
   return (
-    <div className="w-full bg-white text-black font-sans antialiased border-t border-black flex flex-col overflow-hidden">
+    <div className="w-full bg-white text-black font-sans antialiased flex flex-col overflow-hidden">
       
-      {/* SECTION 1: Massive Accent Callout Banner (Rebuilt as a Tetris Brick UI container) */}
-      <section className="relative mx-6 my-12 lg:mx-12 border-4 border-black bg-[#FA520F] text-white pt-24 pb-20 px-6 lg:px-12 shadow-[8px_8px_0px_0px_#000000] overflow-hidden">
-        {/* Tetris 3D Brick Highlights for the whole banner */}
-        <span className="absolute inset-0 border-t-4 border-l-4 border-white/30 pointer-events-none" />
-        <span className="absolute inset-0 border-b-4 border-r-4 border-black/30 pointer-events-none" />
-
+      {/* SECTION 1: Massive Accent Callout Banner (Mistral-style) */}
+      <section className="relative mx-6 my-12 lg:mx-12 bg-[#FA520F] text-white pt-24 pb-20 px-6 lg:px-12 overflow-hidden">
         {/* High-Fidelity CSS Grain Texture Layer */}
         <div 
           className="absolute inset-0 pointer-events-none opacity-[0.07] mix-blend-multiply"
@@ -41,21 +37,14 @@ export const FinalCTAAndFooter = () => {
 
           {/* Right: Action Buttons */}
           <div className="flex flex-row items-center gap-4 flex-shrink-0 mb-2">
-            <button className="group relative border-4 border-black bg-white px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-black shadow-[4px_4px_0px_0px_#000000] transition-all duration-75 active:translate-x-[4px] active:translate-y-[4px] active:shadow-none">
-              <span className="absolute inset-0 border-t-2 border-l-2 border-black/10 pointer-events-none" />
-              <span className="absolute inset-0 border-b-2 border-r-2 border-black/20 pointer-events-none" />
-              
+            <button className="group bg-white px-6 py-3 text-sm font-medium text-black hover:bg-neutral-100 transition-colors">
               <span className="relative flex items-center gap-2">
                 {t('nav.start_building')}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </span>
             </button>
 
-
-            <a href="https://wa.me/255760984921" target="_blank" className="group relative border-4 border-black bg-black px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-[4px_4px_0px_0px_#000000] transition-all duration-75 active:translate-x-[4px] active:translate-y-[4px] active:shadow-none hover:bg-neutral-900">
-              <span className="absolute inset-0 border-t-2 border-l-2 border-white/20 pointer-events-none" />
-              <span className="absolute inset-0 border-b-2 border-r-2 border-black/40 pointer-events-none" />
-              
+            <a href="https://wa.me/255760984921" target="_blank" className="group bg-black px-6 py-3 text-sm font-medium text-white hover:bg-neutral-900 transition-colors">
               <span className="relative flex items-center gap-2">
                 {t('nav.contact_sales')}
                 <ArrowRight className="w-4 h-4 opacity-60" />
@@ -66,7 +55,7 @@ export const FinalCTAAndFooter = () => {
       </section>
 
       {/* SECTION 2: Rigid Multi-Column Grid Links Footer */}
-      <footer className="bg-white border-b border-black w-full">
+      <footer className="bg-white border-t border-black w-full">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-stretch divide-y sm:divide-y-0 sm:divide-x divide-black">
           
           {/* Column 1: Identity / Branding */}
@@ -74,7 +63,7 @@ export const FinalCTAAndFooter = () => {
             <div>
               <div className="flex items-center gap-2.5 mb-6">
                 <img src="/antera-logo.jpeg" alt="Antera Logo" className="h-6 w-6 object-contain filter grayscale" />
-                <span className="text-lg font-bold tracking-tight uppercase text-black">Antera</span>
+                <span className="text-lg font-bold tracking-tight uppercase text-black">Antera Group</span>
               </div>
               <p className="text-black/50 text-xs leading-relaxed max-w-xs font-normal">
                 We use smart technology and AI to help businesses grow and work better at any scale.
@@ -125,8 +114,7 @@ export const FinalCTAAndFooter = () => {
                 <Phone className="w-3.5 h-3.5 text-black/40 group-hover:text-[#FA520F] transition-colors" />
                 <span className="text-xs font-mono select-all group-hover:text-black transition-colors">+255 760 984 921</span>
               </li>
-
-               <li className="flex items-center gap-3 text-black/60 group">
+              <li className="flex items-center gap-3 text-black/60 group">
                 <Phone className="w-3.5 h-3.5 text-black/40 group-hover:text-[#FA520F] transition-colors" />
                 <span className="text-xs font-mono select-all group-hover:text-black transition-colors">+255 774 174 921</span>
               </li>
@@ -145,60 +133,55 @@ export const FinalCTAAndFooter = () => {
         {/* Left Aligned Clean Social List */}
         <div className="flex items-center gap-5 text-black/80">
           <a href="#" className="hover:text-[#FA520F] transition-colors">
-            <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
               <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
             </svg>
           </a>
           <a href="#" className="hover:text-[#FA520F] transition-colors">
-            <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
             </svg>
           </a>
           <a href="#" className="hover:text-[#FA520F] transition-colors">
-            <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
               <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
             </svg>
           </a>
           <a href="#" className="hover:text-[#FA520F] transition-colors">
-            <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+            </svg>
+          </a>
+          <a href="#" className="hover:text-[#FA520F] transition-colors">
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.073 1.621.084.29.117.598.117.9 0 2.813-2.798 5.132-6.14 5.132-3.282 0-5.964-2.247-5.964-5.02 0-.366.039-.724.112-1.07-.662-.307-1.125-.97-1.125-1.754 0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182c.06-.283.302-.482.597-.482.07 0 .14.012.205.035l2.412.613a1.25 1.25 0 0 1 1.25 1.25z"/>
             </svg>
           </a>
         </div>
 
-        {/* Right Aligned Platform Store Badges (Updated to Tetris UI Button Style) */}
-        <div className="flex items-center gap-4">
-          <div className="text-[10px] font-mono text-neutral-400 mr-1 hidden sm:block font-bold tracking-wider">DOWNLOAD ANTERA</div>
-          
-          {/* Tetris App Store Button */}
-          <a href="#" className="group relative h-11 border-4 border-black bg-black text-white px-4 flex items-center select-none shadow-[3px_3px_0px_0px_#000000] transition-all duration-75 active:translate-x-[3px] active:translate-y-[3px] active:shadow-none">
-            <span className="absolute inset-0 border-t-2 border-l-2 border-white/20 pointer-events-none" />
-            <span className="absolute inset-0 border-b-2 border-r-2 border-black/40 pointer-events-none" />
-            
-            <span className="relative flex items-center gap-2">
-              <svg className="h-4 w-auto" viewBox="0 0 119 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.24 17.27c-.03 2.22 1.81 3.29 1.91 3.34-.02.05-.3 1.02-.98 2.02-.59.86-1.2 1.71-2.16 1.73-.94.02-1.25-.56-2.33-.56-1.07 0-1.42.54-2.32.58-.91.03-1.61-.8-2.2-1.67-1.21-1.76-2.14-4.96-.89-7.13.62-1.07 1.72-1.76 2.92-1.77.91-.02 1.76.61 2.32.61.56 0 1.6-.75 2.69-.64.46.02 1.75.18 2.57 1.39-.06.04-1.53.9-1.52 2.67zM13.31 13.54c.46-.57.78-1.35.69-2.15-.68.03-1.51.45-2 1.03-.43.49-.8 1.28-.7 2.07.76.06 1.55-.38 2.01-.95z" fill="currentColor"/>
+        {/* Right: App Download Badges */}
+        <div className="flex items-center gap-3">
+          <a href="#" className="block">
+            <div className="bg-black text-white px-3 py-1.5 rounded-md flex items-center gap-2 hover:bg-neutral-800 transition-colors">
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.21-1.98 1.07-3.11-1.05.05-2.31.71-3.06 1.55-.68.78-1.28 2.03-1.12 3.14 1.19.09 2.41-.6 3.11-1.58"/>
               </svg>
-              <span className="text-[9px] font-mono font-bold tracking-widest">APP STORE</span>
-            </span>
+              <div className="leading-none">
+                <div className="text-[7px] opacity-80">Download on the</div>
+                <div className="text-xs font-semibold">App Store</div>
+              </div>
+            </div>
           </a>
-
-          {/* Tetris Google Play Store Button */}
-          <a href="#" className="group relative h-11 border-4 border-black bg-black text-white px-4 flex items-center select-none shadow-[3px_3px_0px_0px_#000000] transition-all duration-75 active:translate-x-[3px] active:translate-y-[3px] active:shadow-none">
-            <span className="absolute inset-0 border-t-2 border-l-2 border-white/20 pointer-events-none" />
-            <span className="absolute inset-0 border-b-2 border-r-2 border-black/40 pointer-events-none" />
-            
-            <span className="relative flex items-center gap-2">
-              <svg className="h-4 w-auto" viewBox="0 0 135 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g transform="scale(0.32) translate(0, 4)">
-                  <path d="M12.9 6.2c-2.4.7-4.1 2.9-4.1 5.7v92.2c0 2.8 1.7 5 4.1 5.7l50.4-50.4L12.9 6.2z" fill="#00F0FF"/>
-                  <path d="M82.8 52.8L63.3 33.3 12.9 6.2c-.4-.2-.8-.3-1.2-.3-.8 0-1.6.4-2.1 1.1l53.8 53.8 19.4-18z" fill="#00FF75"/>
-                  <path d="M63.3 80.7l19.5-19.5 6.9-4c2.1-1.2 3.3-3.4 3.3-5.8s-1.2-4.6-3.3-5.8l-6.9-4-19.5 19.5 19.5 19.6z" fill="#FFC800"/>
-                  <path d="M82.8 61.2l-19.5 19.5-50.4 50.4c.5.7 1.3 1.1 2.1 1.1.4 0 .8-.1 1.2-.3l50.4-27.1 16.2-43.6z" fill="#FF3B30"/>
-                </g>
+          <a href="#" className="block">
+            <div className="bg-black text-white px-3 py-1.5 rounded-md flex items-center gap-2 hover:bg-neutral-800 transition-colors">
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
               </svg>
-              <span className="text-[9px] font-mono font-bold tracking-widest">GOOGLE PLAY</span>
-            </span>
+              <div className="leading-none">
+                <div className="text-[7px] opacity-80">GET IT ON</div>
+                <div className="text-xs font-semibold">Google Play</div>
+              </div>
+            </div>
           </a>
         </div>
       </div>
@@ -224,7 +207,7 @@ export const FinalCTAAndFooter = () => {
       </div>
 
       {/* SECTION 5: Absolute Bottom Meta Bar */}
-      <div className="bg-white border-t border-black/10 py-6 px-6 lg:px-8 w-full">
+      <div className="bg-white py-6 px-6 lg:px-8 w-full border-t border-black/10">
         <div className="max-w-7xl mx-auto flex flex-row items-center justify-between text-[10px] font-mono text-black/40 font-bold tracking-wider">
           
           <div>
@@ -232,8 +215,6 @@ export const FinalCTAAndFooter = () => {
           </div>
 
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-[#FA520F] transition-colors uppercase">Privacy</a>
-            <a href="#" className="hover:text-[#FA520F] transition-colors uppercase">Terms</a>
             <div className="flex items-center gap-4">
               {['en', 'sw', 'pl'].map(lang => (
                 <button
