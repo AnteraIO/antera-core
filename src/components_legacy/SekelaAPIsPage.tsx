@@ -1,8 +1,7 @@
 'use client';
-import React, { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
-import { MessageSquare, Phone, ArrowRight, Bot, Sprout, CloudRain } from 'lucide-react';
 
 const GrainOverlay = () => (
   <div 
@@ -10,6 +9,102 @@ const GrainOverlay = () => (
     style={{
       backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
     }}
+  />
+);
+
+// Pixel-style decorative icons — LARGER (56x56) with animation
+const PixelCodeIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#F59E0B" stroke="#B45309" strokeWidth="1"/>
+    <path d="M9 9l-3 3 3 3M15 9l3 3-3 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </motion.svg>
+);
+
+const PixelGearIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
+    <circle cx="12" cy="12" r="3" stroke="white" strokeWidth="1.5"/>
+    <path d="M12 6v2M12 16v2M6 12h2M16 12h2M8.05 8.05l1.41 1.41M14.54 14.54l1.41 1.41M8.05 15.95l1.41-1.41M14.54 9.46l1.41-1.41" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+  </motion.svg>
+);
+
+const PixelChartIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
+    <rect x="8" y="12" width="3" height="5" fill="white"/>
+    <rect x="13" y="8" width="3" height="9" fill="white"/>
+  </motion.svg>
+);
+
+const PixelSmsIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
+    <rect x="7" y="8" width="10" height="8" rx="1" stroke="white" strokeWidth="1.5"/>
+    <path d="M9 12h6M9 14h4" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+  </motion.svg>
+);
+
+const PixelPhoneIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
+    <rect x="9" y="6" width="6" height="12" rx="2" stroke="white" strokeWidth="1.5"/>
+    <path d="M12 16h.01" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+  </motion.svg>
+);
+
+const PixelBotIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#60A5FA" stroke="#3B82F6" strokeWidth="1"/>
+    <rect x="8" y="9" width="8" height="6" rx="1" stroke="white" strokeWidth="1.5"/>
+    <circle cx="10" cy="12" r="1" fill="white"/>
+    <circle cx="14" cy="12" r="1" fill="white"/>
+    <path d="M12 6v3M9 6h6" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+  </motion.svg>
+);
+
+const PixelSproutIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
+    <path d="M7 20h4m-2-4v4m0-4c0-2 1-3 3-4s3-3 3-5-2-3-3-3-3 1-3 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M15 8c1 0 2-1 2-2s-1-2-2-2-2 1-2 2" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </motion.svg>
+);
+
+const DiamondDecoration = ({ className = "" }: { className?: string }) => (
+  <motion.div 
+    className={`w-16 h-16 border border-neutral-200 rotate-45 ${className}`}
+    initial={{ opacity: 0, scale: 0 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
   />
 );
 
@@ -24,31 +119,8 @@ export const SekelaAPIsPage = () => {
 
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
-  const apis = [
-    {
-      title: 'SMS Gateway',
-      desc: 'Reliable SMS delivery for alerts, notifications, and customer engagement.',
-      icon: MessageSquare
-    },
-    {
-      title: 'USSD MENU',
-      desc: 'Build interactive menus that work on any mobile phone, even without internet.',
-      icon: Phone
-    },
-    {
-      title: 'ChatBot APIs',
-      desc: 'Automate customer support and internal workflows with intelligent chat interfaces.',
-      icon: Bot
-    },
-    {
-      title: 'Shamba API',
-      desc: 'Plug-and-play alerts for farmers: weather updates, crop advice, and farming insights.',
-      icon: Sprout
-    },
-  ];
-
   return (
-    <div ref={containerRef} className="relative pt-24 pb-20 bg-white min-h-screen text-black font-sans antialiased w-full overflow-hidden">
+    <div ref={containerRef} className="relative pt-24 pb-20 bg-[#FAFAF8] min-h-screen text-black font-sans antialiased w-full overflow-hidden">
       <GrainOverlay />
       
       <motion.div 
@@ -56,21 +128,29 @@ export const SekelaAPIsPage = () => {
         style={{ scaleX }}
       />
 
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 relative z-10">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
         
-        <header className="mb-12 md:mb-32">
+        {/* Floating pixel icons */}
+        <div className="flex justify-center items-center gap-8 mb-12">
+          <PixelCodeIcon />
+          <PixelGearIcon />
+          <PixelChartIcon />
+        </div>
+
+        {/* Header — LARGER */}
+        <header className="mb-24 md:mb-40 text-center">
           <motion.h1 
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.04em] leading-[0.9] uppercase"
-            initial={{ opacity: 0, y: 30 }}
+            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            Sekela <span className="text-[#FA520F]">APIs.</span>
+            Do it all with Sekela.
           </motion.h1>
           
           <motion.p 
-            className="text-base md:text-lg max-w-3xl leading-relaxed text-neutral-600 font-mono mt-4"
-            initial={{ opacity: 0, y: 15 }}
+            className="text-base md:text-lg max-w-3xl leading-relaxed text-neutral-500 mx-auto mt-8"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
@@ -78,37 +158,109 @@ export const SekelaAPIsPage = () => {
           </motion.p>
         </header>
 
-        {/* APIs Grid - Mobile responsive */}
-        <div className="grid grid-cols-1 md:grid-cols-2 border-t border-black">
-          {apis.map((api, i) => (
+        {/* Bento Grid — WIDER with pixel icons */}
+        <div className="relative max-w-5xl mx-auto">
+          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
+          <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 border border-neutral-200 bg-white">
+            
+            {/* Card 1 - Large (2x1) */}
             <motion.div 
-              key={api.title} 
-              className={`group border-b border-black p-6 md:p-8 lg:p-12 min-h-[240px] md:min-h-[320px] lg:min-h-[400px] flex flex-col justify-between hover:bg-neutral-50 transition-colors ${i % 2 === 0 ? 'md:border-r' : ''}`}
-              initial={{ opacity: 0, y: 20 }}
+              className="group md:col-span-2 border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
+              transition={{ delay: 0, duration: 0.7 }}
             >
-              <div className="flex justify-between items-start mb-6 md:mb-0">
-                <span className="font-mono text-xs md:text-sm tracking-widest uppercase">0{i + 1}</span>
-                <ArrowRight className="w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 group-hover:rotate-45 transition-transform duration-300" />
-              </div>
-              
-              <div>
-                <div className="flex items-center gap-3 mb-3 md:mb-6">
-                  <api.icon className="w-4 h-4 md:w-5 md:h-5 text-neutral-400 flex-shrink-0 group-hover:text-[#FA520F] transition-colors" />
-                  <h3 className="text-xl md:text-2xl lg:text-4xl font-bold uppercase tracking-tight">{api.title}</h3>
-                </div>
-                <p className="max-w-md text-sm md:text-base lg:text-lg leading-relaxed text-neutral-600 font-mono">
-                  {api.desc}
+              <PixelSmsIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">SMS Gateway</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
+                  Reliable SMS delivery for alerts, notifications, and customer engagement.
                 </p>
-                <button className="mt-4 md:mt-6 flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-black group-hover:text-[#FA520F] transition-colors">
+                <button className="mt-6 flex items-center gap-2 text-sm font-medium text-black group-hover:text-[#FA520F] transition-colors">
                   <span>View Documentation</span>
-                  <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
                 </button>
               </div>
             </motion.div>
-          ))}
+
+            {/* Card 2 - Small (1x1) */}
+            <motion.div 
+              className="group border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1, duration: 0.7 }}
+            >
+              <PixelPhoneIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">USSD MENU</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  Build interactive menus that work on any mobile phone, even without internet.
+                </p>
+                <button className="mt-6 flex items-center gap-2 text-sm font-medium text-black group-hover:text-[#FA520F] transition-colors">
+                  <span>View Documentation</span>
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Card 3 */}
+            <motion.div 
+              className="group border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.7 }}
+            >
+              <PixelBotIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">ChatBot APIs</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  Automate customer support and internal workflows with intelligent chat interfaces.
+                </p>
+                <button className="mt-6 flex items-center gap-2 text-sm font-medium text-black group-hover:text-[#FA520F] transition-colors">
+                  <span>View Documentation</span>
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Card 4 - Large (2x1) */}
+            <motion.div 
+              className="group md:col-span-2 border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.7 }}
+            >
+              <PixelSproutIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Shamba API</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
+                  Plug-and-play alerts for farmers: weather updates, crop advice, and farming insights.
+                </p>
+                <button className="mt-6 flex items-center gap-2 text-sm font-medium text-black group-hover:text-[#FA520F] transition-colors">
+                  <span>View Documentation</span>
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </button>
+              </div>
+            </motion.div>
+
+            <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
+            <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
+
+          </div>
         </div>
 
       </div>

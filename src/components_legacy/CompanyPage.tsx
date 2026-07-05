@@ -1,8 +1,8 @@
 'use client';
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { Target, Users, Globe, ArrowRight, Shield, Zap, Search, Settings, Play } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { Play } from 'lucide-react';
 
 import anteraVideo from '../assets/company-video.mp4';
 
@@ -12,6 +12,183 @@ const GrainOverlay = () => (
     style={{
       backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
     }}
+  />
+);
+
+// Pixel-style decorative icons — LARGER (56x56)
+const PixelCodeIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#F59E0B" stroke="#B45309" strokeWidth="1"/>
+    <path d="M9 9l-3 3 3 3M15 9l3 3-3 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </motion.svg>
+);
+
+const PixelGearIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
+    <circle cx="12" cy="12" r="3" stroke="white" strokeWidth="1.5"/>
+    <path d="M12 6v2M12 16v2M6 12h2M16 12h2M8.05 8.05l1.41 1.41M14.54 14.54l1.41 1.41M8.05 15.95l1.41-1.41M14.54 9.46l1.41-1.41" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+  </motion.svg>
+);
+
+const PixelChartIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
+    <rect x="8" y="12" width="3" height="5" fill="white"/>
+    <rect x="13" y="8" width="3" height="9" fill="white"/>
+  </motion.svg>
+);
+
+const PixelSearchIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
+    <circle cx="11" cy="11" r="4" stroke="white" strokeWidth="1.5"/>
+    <path d="M15 15l3 3" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+  </motion.svg>
+);
+
+const PixelDesignIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
+    <circle cx="12" cy="12" r="3" stroke="white" strokeWidth="1.5"/>
+    <path d="M12 8V6M12 18v-2M8 12H6M18 12h-2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+  </motion.svg>
+);
+
+const PixelZapIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#60A5FA" stroke="#3B82F6" strokeWidth="1"/>
+    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </motion.svg>
+);
+
+const PixelShieldIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </motion.svg>
+);
+
+const PixelLockIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
+    <rect x="9" y="11" width="6" height="7" rx="1" stroke="white" strokeWidth="1.5"/>
+    <path d="M10 11V9a2 2 0 0 1 4 0v2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+  </motion.svg>
+);
+
+const PixelTargetIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
+    <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="1.5"/>
+    <circle cx="12" cy="12" r="2" fill="white"/>
+  </motion.svg>
+);
+
+const PixelEyeIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#60A5FA" stroke="#3B82F6" strokeWidth="1"/>
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="white" strokeWidth="1.5"/>
+    <circle cx="12" cy="12" r="3" stroke="white" strokeWidth="1.5"/>
+  </motion.svg>
+);
+
+const PixelBookIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#F59E0B" stroke="#B45309" strokeWidth="1"/>
+    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="white" strokeWidth="1.5"/>
+    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="white" strokeWidth="1.5"/>
+  </motion.svg>
+);
+
+const PixelCheckIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
+    <path d="M9 12l2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </motion.svg>
+);
+
+const PixelGlobeIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
+    <circle cx="12" cy="12" r="5" stroke="white" strokeWidth="1.5"/>
+    <path d="M12 7v10M7 12h10" stroke="white" strokeWidth="1.5"/>
+  </motion.svg>
+);
+
+const PixelUsersIcon = () => (
+  <motion.svg 
+    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" fill="#60A5FA" stroke="#3B82F6" strokeWidth="1"/>
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="white" strokeWidth="1.5"/>
+    <circle cx="9" cy="7" r="4" stroke="white" strokeWidth="1.5"/>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="white" strokeWidth="1.5"/>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="white" strokeWidth="1.5"/>
+  </motion.svg>
+);
+
+const DiamondDecoration = ({ className = "" }: { className?: string }) => (
+  <motion.div 
+    className={`w-16 h-16 border border-neutral-200 rotate-45 ${className}`}
+    initial={{ opacity: 0, scale: 0 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
   />
 );
 
@@ -31,68 +208,45 @@ export const CompanyPage = () => {
     }
   };
 
-  const principles = [
-    {
-      title: 'Our Mission',
-      desc: 'To enable organizations across Africa to compete and grow in a digital-first world by adopting secure, scalable, and intelligent technology solutions.',
-      icon: Target
-    },
-    {
-      title: 'African Market Reach',
-      desc: 'Delivering practical technology solutions tailored to the unique needs and growth of African businesses.',
-      icon: Globe
-    },
-    {
-      title: 'Our Expertise',
-      desc: 'Built by engineers with hands-on experience delivering cloud, AI, data, and cybersecurity solutions across diverse environments.',
-      icon: Users
-    },
-  ];
-
-  const howWeWork = [
-    { title: 'Assess', desc: 'Understand business goals, systems, and risks.', icon: Search },
-    { title: 'Design', desc: 'Create secure, scalable, and practical architectures.', icon: Settings },
-    { title: 'Deliver', desc: 'Implement solutions in clear phases and milestones.', icon: Zap },
-    { title: 'Optimize', desc: 'Measure impact and continuously improve.', icon: Shield },
-  ];
-
-  const values = [
-    'Security-first thinking',
-    'Practical, outcome-driven solutions',
-    'Transparency and accountability',
-    'Continuous learning and improvement'
-  ];
-
   return (
-    <div ref={containerRef} className="bg-white min-h-screen text-black font-sans antialiased selection:bg-[#FA520F] selection:text-white">
+    <div ref={containerRef} className="bg-[#FAFAF8] min-h-screen text-black font-sans antialiased selection:bg-[#FA520F] selection:text-white">
       <GrainOverlay />
       
       <motion.div 
-        className="fixed top-0 left-0 right-0 h-[2px] bg-[#FA520F] z-[100] origin-left"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left"
         style={{ scaleX }}
       />
 
-      <main className="max-w-7xl mx-auto px-6 py-24 md:py-32">
-        <section className="mb-32">
-          <div className="max-w-4xl">
-            <h1 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-12 font-mono">
-              Our <span className="text-[#FA520F]">Mission.</span>
-            </h1>
-            <p className="text-xl md:text-3xl text-neutral-900 leading-relaxed font-mono">
-              Our mission is to enable organizations across Africa to compete and grow in a digital-first world by adopting secure, scalable, and intelligent technology solutions that deliver real business value.
-            </p>
-          </div>
+      <main className="max-w-[1400px] mx-auto px-6 py-24 md:py-32">
+        
+        {/* Floating pixel icons with animation */}
+        <div className="flex justify-center items-center gap-8 mb-12">
+          <PixelCodeIcon />
+          <PixelGearIcon />
+          <PixelChartIcon />
+        </div>
+
+        {/* Centered heading — LARGER */}
+        <section className="mb-24 md:mb-40 text-center">
+          <motion.h1 
+            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Do it all with Antera.
+          </motion.h1>
         </section>
 
-        {/* Video Section with Play Button */}
+        {/* Video Section — FULL WIDTH */}
         <motion.div 
-          className="mb-32 -mx-6 md:mx-0"
-          initial={{ opacity: 0, y: 30 }}
+          className="mb-24 md:mb-40"
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="relative aspect-video w-full overflow-hidden rounded-2xl border-4 border-black shadow-[12px_12px_0px_0px_#FA520F] bg-black">
+          <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-black">
             <video
               ref={videoRef}
               src={anteraVideo}
@@ -104,67 +258,326 @@ export const CompanyPage = () => {
             {!isPlaying && (
               <button
                 onClick={handlePlay}
-                className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition-colors group"
+                className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
               >
-                <div className="w-20 h-20 rounded-full bg-[#FA520F] flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                  <Play className="w-10 h-10 text-white ml-1" />
-                </div>
+                <motion.div 
+                  className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center"
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Play className="w-8 h-8 text-black ml-1" fill="currentColor" />
+                </motion.div>
               </button>
             )}
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-black border border-black mb-32">
-          {principles.map((item) => (
-            <div key={item.title} className="bg-white p-8 group hover:bg-neutral-50 transition-colors">
-              <item.icon className="w-6 h-6 text-black mb-8 group-hover:text-[#FA520F] transition-colors" />
-              <h3 className="text-sm font-bold uppercase tracking-widest mb-4 font-mono">{item.title}</h3>
-              <p className="text-xs text-neutral-600 leading-relaxed font-mono">{item.desc}</p>
-            </div>
-          ))}
+        {/* Bento Grid — WIDER (max-w-5xl) */}
+        <div className="relative max-w-5xl mx-auto mb-32 md:mb-40">
+          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
+          <div className="absolute -top-3 right-0 w-2 h-2 bg-black hidden md:block" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 border border-neutral-200 bg-white">
+            
+            <motion.div 
+              className="group md:col-span-2 border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0, duration: 0.7 }}
+            >
+              <PixelCodeIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Our Mission</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
+                  To enable organizations across Africa to compete and grow in a digital-first world.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="group border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1, duration: 0.7 }}
+            >
+              <PixelGlobeIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">African Reach</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  Delivering practical technology solutions tailored to African businesses.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="hidden md:block border-b border-r border-neutral-200 bg-[#F5F5F0] min-h-[360px] md:min-h-[420px]"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.7 }}
+            />
+
+            <motion.div 
+              className="group border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.7 }}
+            >
+              <PixelUsersIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Our Expertise</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  Built by engineers with hands-on experience in cloud, AI, and cybersecurity.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="group md:row-span-2 border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.7 }}
+            >
+              <PixelChartIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Applied AI</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  End-to-end AI solutions for enterprise transformation.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="group border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.7 }}
+            >
+              <PixelGearIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Frontier Models</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  State-of-the-art ML models trained for African languages and contexts.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="hidden md:block border-b border-neutral-200 bg-[#F5F5F0] min-h-[360px] md:min-h-[420px]"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6, duration: 0.7 }}
+            />
+
+            <div className="absolute -bottom-3 left-0 w-2 h-2 bg-black hidden md:block" />
+            <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
+
+          </div>
         </div>
 
-        <section className="mb-32">
-          <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-16 font-mono">
-            How We <span className="text-[#FA520F]">Work.</span>
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {howWeWork.map((item, index) => (
-              <div key={item.title} className="relative p-8 border-4 border-black bg-white shadow-[8px_8px_0px_0px_#000000]">
-                <span className="absolute -top-4 -left-4 w-10 h-10 bg-black text-white flex items-center justify-center font-mono font-bold">
-                  0{index + 1}
-                </span>
-                <h3 className="text-lg font-bold uppercase mb-4 mt-2 font-mono">{item.title}</h3>
-                <p className="text-sm text-neutral-600 font-mono">{item.desc}</p>
-              </div>
-            ))}
+        {/* How We Work — WIDER bento */}
+        <div className="relative max-w-5xl mx-auto mb-32 md:mb-40">
+          <div className="text-center mb-16">
+            <motion.h2 
+              className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              How We Work.
+            </motion.h2>
           </div>
-        </section>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 border border-neutral-200 bg-white">
+            
+            <motion.div 
+              className="group md:col-span-2 border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0, duration: 0.7 }}
+            >
+              <PixelSearchIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Assess</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
+                  Understand business goals, systems, and risks before any work begins.
+                </p>
+              </div>
+            </motion.div>
 
-        <section className="mb-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter mb-8 font-mono">
-                Our <span className="text-[#FA520F]">Values.</span>
-              </h2>
-              <div className="space-y-4">
-                {values.map((value, i) => (
-                  <div key={i} className="flex items-center gap-4 group">
-                    <div className="w-2 h-2 bg-[#FA520F] group-hover:scale-150 transition-transform" />
-                    <p className="text-lg font-mono text-neutral-800">{value}</p>
-                  </div>
-                ))}
+            <motion.div 
+              className="group border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1, duration: 0.7 }}
+            >
+              <PixelDesignIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Design</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  Create secure, scalable, and practical architectures.
+                </p>
               </div>
-            </div>
-            <div className="p-12 bg-neutral-900 text-white border-4 border-black shadow-[12px_12px_0px_0px_#FA520F]">
-              <h3 className="text-2xl font-bold uppercase mb-6 font-mono">Our Expertise</h3>
-              <p className="text-neutral-400 font-mono leading-relaxed">
-                Our team combines strong technical skills with a practical understanding of business operations and risk. We have hands-on experience delivering cloud, AI, data, and cybersecurity solutions across diverse environments.
-              </p>
-            </div>
+            </motion.div>
+
+            <motion.div 
+              className="group border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.7 }}
+            >
+              <PixelZapIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Deliver</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  Implement solutions in clear phases and milestones.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="group md:col-span-2 border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.7 }}
+            >
+              <PixelShieldIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Optimize</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
+                  Measure impact and continuously improve performance.
+                </p>
+              </div>
+            </motion.div>
+
           </div>
-        </section>
+        </div>
+
+        {/* Values + Expertise — WIDER bento */}
+        <div className="relative max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 border border-neutral-200 bg-white">
+            
+            <motion.div 
+              className="group md:col-span-2 border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0, duration: 0.7 }}
+            >
+              <PixelLockIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Security-first</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
+                  Every solution starts with protecting your data and systems.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="group border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1, duration: 0.7 }}
+            >
+              <PixelTargetIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Outcome-driven</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  Practical solutions that deliver real business results.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="group border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.7 }}
+            >
+              <PixelEyeIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Transparency</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  Clear communication and accountability at every step.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="group border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.7 }}
+            >
+              <PixelBookIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Continuous learning</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  Always improving and staying ahead of technology trends.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="group md:row-span-2 border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.7 }}
+            >
+              <PixelCheckIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Our Expertise</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  Our team combines strong technical skills with practical business understanding across cloud, AI, data, and cybersecurity.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="hidden md:block border-b border-neutral-200 bg-[#F5F5F0] min-h-[360px] md:min-h-[420px]"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.7 }}
+            />
+
+            <motion.div 
+              className="group md:col-span-2 border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6, duration: 0.7 }}
+            >
+              <PixelShieldIcon />
+              <div className="mt-auto">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Accountability</h3>
+                <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
+                  We take ownership of outcomes and stand by our work.
+                </p>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+
       </main>
     </div>
   );
 };
+
+export default CompanyPage;
