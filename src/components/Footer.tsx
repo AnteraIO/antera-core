@@ -53,6 +53,34 @@ const DiamondDecoration = ({ className = "" }: { className?: string }) => (
   />
 );
 
+const InstagramIcon = () => (
+  <motion.svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+    whileHover={{ scale: 1.1 }} transition={{ type: "spring", stiffness: 300 }}
+  >
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+  </motion.svg>
+);
+
+const TwitterIcon = () => (
+  <motion.svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+    whileHover={{ scale: 1.1 }} transition={{ type: "spring", stiffness: 300 }}
+  >
+    <path d="M22 4s-1 2.18-4.5 2.25c1.13.63 1.83 1.63 2.25 2.75-1.13-.63-2.38-1-3.63-1.25C14.88 10.38 12.25 12.63 12.25 16c0 .88.13 1.75.38 2.5-4.13-.13-7.75-2.13-10-5 0 0-1.25 2.13 1.25 5-.88-.13-1.63-.38-2.25-.75 0 2.25 1.5 4.13 3.5 4.5-.38.13-.88.13-1.25.13-.25 0-.63 0-.88-.13.63 1.88 2.38 3.25 4.38 3.25-1.5 1.13-3.38 1.88-5.38 1.88-.38 0-.75 0-1.13-.13 2 1.25 4.38 2 6.88 2 8.25 0 12.75-6.88 12.75-12.75 0-.13 0-.38 0-.5 1-.63 1.75-1.5 2.38-2.5z"></path>
+  </motion.svg>
+);
+
+const LinkedinIcon = () => (
+  <motion.svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+    whileHover={{ scale: 1.1 }} transition={{ type: "spring", stiffness: 300 }}
+  >
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+    <rect x="2" y="9" width="4" height="12"></rect>
+    <circle cx="4" cy="4" r="2"></circle>
+  </motion.svg>
+);
+
 export const FinalCTAAndFooter = () => {
   const { language, setLanguage, t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -122,24 +150,39 @@ export const FinalCTAAndFooter = () => {
             </div>
 
             <div className="group p-8 md:p-12 min-h-[280px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-6 font-mono">Contact</h3>
-              <ul className="space-y-4">
-                <li className="flex items-center gap-3 text-neutral-500 group/link">
-                  <span className="text-sm font-mono group-hover/link:text-black transition-colors">info@antera.co.tz</span>
-                </li>
-                <li className="flex items-center gap-3 text-neutral-500 group/link">
-                  <PixelPhoneIcon />
-                  <span className="text-sm font-mono group-hover/link:text-black transition-colors">+255 760 984 921</span>
-                </li>
-                <li className="flex items-center gap-3 text-neutral-500 group/link">
-                  <PixelPhoneIcon />
-                  <span className="text-sm font-mono group-hover/link:text-black transition-colors">+255 774 174 921</span>
-                </li>
-                <a href="https://wa.me/255760984921" target="_blank" className="flex items-center gap-3 text-neutral-500 group/link cursor-pointer">
-                  <PixelWhatsappIcon />
-                  <span className="text-sm font-mono group-hover/link:text-black transition-colors">WhatsApp Support</span>
-                </a>
-              </ul>
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-6 font-mono">Contact</h3>
+                <ul className="space-y-4">
+                  <li className="flex items-center gap-3 text-neutral-500 group/link">
+                    <span className="text-sm font-mono group-hover/link:text-black transition-colors">info@antera.co.tz</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-neutral-500 group/link">
+                    <PixelPhoneIcon />
+                    <span className="text-sm font-mono group-hover/link:text-black transition-colors">+255 760 984 921</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-neutral-500 group/link">
+                    <PixelPhoneIcon />
+                    <span className="text-sm font-mono group-hover/link:text-black transition-colors">+255 774 174 921</span>
+                  </li>
+                  <a href="https://wa.me/255760984921" target="_blank" className="flex items-center gap-3 text-neutral-500 group/link cursor-pointer">
+                    <PixelWhatsappIcon />
+                    <span className="text-sm font-mono group-hover/link:text-black transition-colors">WhatsApp Support</span>
+                  </a>
+                </ul>
+              </div>
+              <div className="mt-8 pt-8 border-t border-neutral-100">
+                <div className="flex items-center gap-4 text-neutral-400">
+                  <a href="https://instagram.com/antera_tz" target="_blank" rel="noopener noreferrer" className="hover:text-[#FA520F] transition-colors">
+                    <InstagramIcon />
+                  </a>
+                  <a href="https://twitter.com/antera_tz" target="_blank" rel="noopener noreferrer" className="hover:text-[#FA520F] transition-colors">
+                    <TwitterIcon />
+                  </a>
+                  <a href="https://linkedin.com/company/antera_tz" target="_blank" rel="noopener noreferrer" className="hover:text-[#FA520F] transition-colors">
+                    <LinkedinIcon />
+                  </a>
+                </div>
+              </div>
             </div>
             <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
           </div>
