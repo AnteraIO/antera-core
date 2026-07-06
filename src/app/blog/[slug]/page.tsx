@@ -103,8 +103,35 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   const readingTime = Math.ceil(displayContent.split(/\s+/).length / 200);
   const shareUrl = `https://www.antera.co.tz/blog/${slug}`;
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    image: post.featured_image,
+    datePublished: post.created_at,
+    dateModified: post.updated_at || post.created_at,
+    author: {
+      '@type': 'Organization',
+      name: 'Antera Team',
+      logo: 'https://antera.co.tz/antera-logo.jpeg',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ANTERA',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://antera.co.tz/antera-logo.jpeg',
+      },
+    },
+    description: post.excerpt,
+  };
+
   return (
     <article className="bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         <ViewCounter postId={post.id} />
         

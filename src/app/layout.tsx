@@ -87,11 +87,35 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'ANTERA',
+    alternateName: 'Advanced Neural Technologies & Engineering Research Agency',
+    url: 'https://antera.co.tz',
+    logo: 'https://antera.co.tz/antera-logo.jpeg',
+    sameAs: [
+      'https://twitter.com/antera_tz',
+      'https://instagram.com/antera_tz',
+      'https://linkedin.com/company/antera_tz',
+    ],
+    description: 'Advanced Neural Technologies & Engineering Research Agency (ANTERA) provides AI, automation, and digital infrastructure solutions.',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'TZ',
+      addressLocality: 'Dar es Salaam',
+    },
+  };
+
   return (
     <html lang="en">
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <LanguageProvider>
           <div className="min-h-screen bg-white text-[#1F1F1F] selection:bg-[#FA520F]/30">
             <Navbar />
