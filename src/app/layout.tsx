@@ -23,11 +23,63 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "ANTERA",
-  description: "Advanced Neural Technologies & Engineering Research Agency",
+  title: {
+    default: "ANTERA | Advanced Neural Technologies & Engineering Research Agency",
+    template: "%s | ANTERA"
+  },
+  description: "ANTERA (Advanced Neural Technologies & Engineering Research Agency) provides cutting-edge AI, automation, and digital infrastructure solutions in Tanzania and across Africa.",
+  keywords: ["ANTERA", "AI Tanzania", "Neural Technologies", "Engineering Research", "Digital Transformation Africa", "Software Engineering Tanzania", "Antera Group", "Antera Tanzania"],
+  authors: [{ name: "Antera Team" }],
+  creator: "Antera Group",
+  publisher: "Antera Group",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://antera.co.tz'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'ANTERA | Advanced Neural Technologies & Engineering Research Agency',
+    description: 'Cutting-edge AI, automation, and digital infrastructure solutions.',
+    url: 'https://antera.co.tz',
+    siteName: 'ANTERA',
+    images: [
+      {
+        url: '/antera-logo.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'ANTERA Logo',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ANTERA | AI & Engineering Research',
+    description: 'Advanced Neural Technologies & Engineering Research Agency',
+    images: ['/antera-logo.jpeg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: "/antera-logo.jpeg",
+    shortcut: "/antera-logo.jpeg",
+    apple: "/antera-logo.jpeg",
   },
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({

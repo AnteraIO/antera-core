@@ -2,8 +2,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 import BlogCTA from '@/components/BlogCTA';
+import { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: 'Blog & Engineering Articles',
+  description: 'Explore the latest updates, products, and engineering articles from the Antera Team.',
+};
 
 async function getPosts() {
   const { data } = await supabase
