@@ -29,3 +29,8 @@ build/
 
 #env
 .env
+
+
+#schema
+*.sql
+schema/
