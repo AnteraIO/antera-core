@@ -38,8 +38,25 @@ A research-led, academic, and intellectually elite approach that claims the uniq
 
 ---
 
-## 3. Implementation Steps
-1. **Selection:** Choose a direction (Growth-focused vs. Research-focused).
+## 3. The "Ultra-Unique" Geological Strategy
+Targeting an identity of "Global Elite Research" using rare geological phenomena found exclusively in Tanzania.
+
+| Name | Geological Origin | The Brand Identity |
+| :--- | :--- | :--- |
+| **Craton** | The Tanzania Craton (3bn+ years old) | Absolute stability. The bedrock of the tech ecosystem. |
+| **Natro** | Natrocarbonatite (Unique "cool" lava) | One-of-a-kind globally. Specialized and fluid. |
+| **Lengai** | Ol Doinyo Lengai (Mountain of God) | Peak performance. Pinnacle of regional research. |
+| **Aswa** | The Aswa Shear Zone | Intersection and precision. Where things evolve. |
+| **Tephra** | Ash layers that preserved Laetoli | Data layers and foundational evidence. |
+
+### Visual Identity Advice:
+- **Craton:** Heavy, stone-like geometric logos.
+- **Natro:** Obsidian black and dull orange/red glows (matching the actual lava).
+
+---
+
+## 4. Implementation Steps
+1. **Selection:** Choose a direction (Growth vs. Academic Research vs. Geological Elite).
 2. **Availability:** Verify `.tz` and global domain availability for the top choice.
 3. **Trademark:** Perform a local BRELA search for the chosen name.
 4. **Transition:** Update the brand identity (Logo, Colors) while preserving the high-contrast aesthetic.
