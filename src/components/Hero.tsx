@@ -1,20 +1,24 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import heroImage from '../assets/hero.jpg';
 
 export const Hero = () => {
   const { t } = useLanguage();
-  const heroBackgroundUrl = new URL('../assets/hero.jpg', import.meta.url).href;
 
   return (
     <section className="relative min-h-screen w-full bg-black font-sans antialiased overflow-hidden">
       {/* Background Image with Sunset Gradient Overlay */}
       <div className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroBackgroundUrl})` }}
+        <Image
+          src={heroImage}
+          alt="Hero Background"
+          fill
+          priority
+          className="object-cover object-center"
         />
         {/* Sunset-inspired gradient overlay: dark -> orange-red -> cream-yellow */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-[#FA520F]/30 to-[#FCD34D]/20" />

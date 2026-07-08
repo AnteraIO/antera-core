@@ -6,6 +6,7 @@ import DeletePostButton from '@/components/admin/DeletePostButton';
 export const dynamic = 'force-dynamic';
 
 async function getPosts() {
+  if (!supabaseAdmin) return [];
   const { data } = await supabaseAdmin
     .from('blog_posts')
     .select('id, title, status, created_at, views, slug')
@@ -43,7 +44,7 @@ export default async function AdminPostsList() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-neutral-200">
-                  {posts.map((post) => (
+                  {posts.map((post: any) => (
                     <tr key={post.id} className="hover:bg-neutral-50/50 transition-colors">
                       <td className="p-6 font-medium text-sm">{post.title}</td>
                       <td className="p-6">

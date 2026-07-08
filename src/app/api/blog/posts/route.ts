@@ -3,13 +3,19 @@ import { NextResponse } from 'next/server';
 import { postSchema } from '@/lib/validations';
 
 
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+const supabaseAdmin = (supabaseUrl && supabaseServiceRoleKey)
+  ? createClient(supabaseUrl, supabaseServiceRoleKey)
+  : null;
 
 export async function GET(request: Request) {
   try {
+    if (!supabaseAdmin) {
+      return NextResponse.json({ error: 'Supabase client not initialized' }, { status: 500 });
+    }
+
     const { searchParams } = new URL(request.url);
     const status = searchParams.get('status');
     const limit = parseInt(searchParams.get('limit') || '10');
@@ -39,6 +45,10 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    if (!supabaseAdmin) {
+      return NextResponse.json({ error: 'Supabase client not initialized' }, { status: 500 });
+    }
+
     const body = await request.json();
 
     const validation = postSchema.safeParse(body);

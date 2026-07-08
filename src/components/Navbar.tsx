@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Menu, X, ChevronDown, ArrowRight, Globe } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useLanguage } from '../context/LanguageContext'
 
@@ -96,7 +97,7 @@ export const Navbar = () => {
           <div className="flex items-stretch">
             <Link href="/" className="flex items-center gap-3 px-6 border-r border-neutral-200 hover:bg-neutral-50 transition-colors flex-shrink-0 relative">
               <span className="absolute inset-0 border-t border-l border-neutral-50 pointer-events-none" />
-              <img src="/antera-logo.jpeg" alt="ANTERA Logo" className="h-6 w-6 object-contain" />
+              <Image src="/antera-logo.jpeg" alt="ANTERA Logo" width={24} height={24} className="h-6 w-6 object-contain" />
               <span className="font-black text-black tracking-tighter">ANTERA</span>
             </Link>
 

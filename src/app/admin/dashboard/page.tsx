@@ -3,6 +3,16 @@ import { LayoutDashboard, FileText, Users, Eye, TrendingUp } from 'lucide-react'
 import Link from 'next/link';
 
 async function getStats() {
+  if (!supabaseAdmin) {
+    return {
+      postsCount: 0,
+      publishedCount: 0,
+      subCount: 0,
+      totalViews: 0,
+      engagementRate: 0
+    };
+  }
+
   const { count: postsCount } = await supabaseAdmin
     .from('blog_posts')
     .select('*', { count: 'exact', head: true });
@@ -20,7 +30,7 @@ async function getStats() {
     .from('blog_posts')
     .select('views');
   
-  const totalViews = viewsData?.reduce((acc, curr) => acc + (curr.views || 0), 0) || 0;
+  const totalViews = viewsData?.reduce((acc: number, curr: any) => acc + (curr.views || 0), 0) || 0;
 
   const totalPostsCount = postsCount || 0;
   const currentPublishedCount = publishedCount || 0;

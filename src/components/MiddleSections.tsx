@@ -1,7 +1,7 @@
 'use client';
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { StaticImageData } from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import mobileAppImage from '../assets/mobile-app.png';
 import webCommandImage from '../assets/web-command.png';
@@ -287,7 +287,7 @@ export const ApplicationSection = () => {
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed">Secure, scalable digital platforms that support growth and improve user experience across all devices.</p>
               </div>
               <motion.div whileHover={{ y: -6, scale: 1.02 }} transition={{ duration: 0.5 }} className="mt-8 border border-black/10 overflow-hidden">
-                <img src={(mobileAppImage as any).src || mobileAppImage} alt="Mobile App Interface" className="w-full h-auto object-cover" />
+                <Image src={mobileAppImage} alt="Mobile App Interface" className="w-full h-auto object-cover" />
               </motion.div>
             </motion.div>
 
@@ -298,7 +298,7 @@ export const ApplicationSection = () => {
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed">Improve brand credibility and digital presence with integrated business systems and secure development practices.</p>
               </div>
               <motion.div whileHover={{ y: -6, scale: 1.02 }} transition={{ duration: 0.5 }} className="mt-8 border border-black/10 overflow-hidden">
-                <img src={(webCommandImage as any).src || webCommandImage} alt="Web Command Dashboard" className="w-full h-auto object-cover" />
+                <Image src={webCommandImage} alt="Web Command Dashboard" className="w-full h-auto object-cover" />
               </motion.div>
             </motion.div>
             <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
@@ -362,7 +362,7 @@ export const DataIntelligenceSection = () => {
                   <h3 className="text-xl md:text-2xl font-medium tracking-tight mt-8 mb-3">{feature.title}</h3>
                 </div>
                 <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.4 }} className="mt-4 border border-black/5 overflow-hidden">
-                  <img src={(feature.image as any).src || feature.image} alt={feature.title} className="w-full h-auto object-cover" />
+                  <Image src={feature.image} alt={feature.title} className="w-full h-auto object-cover" />
                 </motion.div>
               </motion.div>
             ))}

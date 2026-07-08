@@ -4,7 +4,7 @@ import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { Navbar } from "@/components/Navbar";
 import { FinalCTAAndFooter } from "@/components/Footer";
-import ChatAgent from "@/components/ChatAgent";
+import ChatAgentClient from "@/components/ChatAgentClient";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -121,7 +121,7 @@ export default function RootLayout({
             <Navbar />
             <main>{children}</main>
             <FinalCTAAndFooter />
-            <ChatAgent />
+            <ChatAgentClient />
           </div>
         </LanguageProvider>
       </body>
