@@ -69,7 +69,7 @@ export const PartnersSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            Our <span className="text-[#FA520F]">Partners.</span>
+            Engineered <span className="text-[#FA520F]">With</span>
           </motion.h1>
           <motion.p 
             className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
@@ -78,7 +78,7 @@ export const PartnersSection = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            Trusted by leading technology providers and innovative businesses across the region.
+          Leveraging world-class infrastructure to deliver scalable, high-performance solutions.
           </motion.p>
         </header>
 
