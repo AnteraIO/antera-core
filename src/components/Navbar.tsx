@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react'
-import { Menu, X, ChevronDown, ArrowRight, Globe, Layers, Building2, Code, BriefcaseBusiness, Shield, Zap, Database, Terminal, Cpu, MessageSquare, Users, Target, TrendingUp } from 'lucide-react'
+import { Menu, X, ChevronDown, ArrowRight, Globe, Layers, Building2, Code, BriefcaseBusiness,Lock,Star, Database, MessageSquare, Users, Target, TrendingUp, Network } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -79,7 +79,7 @@ export const Navbar = () => {
       rightTitle: t('dropdown.solutions.cat_title'),
       rightItems: [
         { name: t('dropdown.solutions.cat1'), href: '/solutions', icon: Globe },
-        { name: t('dropdown.solutions.cat2'), href: '/solutions', icon: Shield },
+        { name: t('dropdown.solutions.cat2'), href: '/solutions', icon: Lock },
         { name: t('dropdown.solutions.cat3'), href: '/solutions', icon: TrendingUp },
         { name: t('dropdown.solutions.cat4'), href: '/solutions', icon: BriefcaseBusiness },
       ]
@@ -96,7 +96,6 @@ export const Navbar = () => {
       rightItems: [
         { name: t('dropdown.sekela.cat1'), href: '/sekela-apis', icon: Database },
         { name: t('dropdown.sekela.cat2'), href: '/sekela-apis', icon: MessageSquare },
-        { name: t('dropdown.sekela.cat3'), href: '/sekela-apis', icon: Zap },
       ]
     },
     'Developers': {
@@ -110,7 +109,7 @@ export const Navbar = () => {
       rightTitle: t('dropdown.developers.cat_title'),
       rightItems: [
         { name: t('dropdown.developers.cat1'), href: '/developers', icon: Code },
-        { name: t('dropdown.developers.cat2'), href: '/developers', icon: Terminal },
+        { name: t('dropdown.developers.cat2'), href: '/developers', icon: Network },
         { name: t('dropdown.developers.cat3'), href: '/developers', icon: Database },
         { name: t('dropdown.developers.cat4'), href: '/developers', icon: Layers },
       ]
@@ -134,7 +133,7 @@ export const Navbar = () => {
       rightTitle: t('dropdown.company.cat_title'),
       rightItems: [
         { name: t('dropdown.company.cat1'), href: '/company', icon: Target },
-        { name: t('dropdown.company.cat2'), href: '/company', icon: Shield },
+        { name: t('dropdown.company.cat2'), href: '/company', icon:  Star},
         { name: t('dropdown.company.cat3'), href: '/company', icon: Users },
       ]
     }
