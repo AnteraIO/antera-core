@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react'
-import { Menu, X, ChevronDown, ArrowRight, Globe, Layers, Building2, Code, BriefcaseBusiness } from 'lucide-react'
+import { Menu, X, ChevronDown, ArrowRight, Globe, Layers, Building2, Code, BriefcaseBusiness, Shield, Zap, Database, Terminal, Cpu, MessageSquare, Users, Target, TrendingUp } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -44,14 +44,110 @@ export const Navbar = () => {
     { name: t('nav.solutions'), href: '/solutions', icon: BriefcaseBusiness},
   ]
 
+  const dropdownConfigs: Record<string, {
+    leftTitle: string
+    leftItems: { title: string; desc: string; href: string }[]
+    bottomLinkText: string
+    bottomLinkHref: string
+    rightTitle: string
+    rightItems: { name: string; href: string; icon: React.ComponentType<{ className?: string }> }[]
+  }> = {
+    'Products': {
+      leftTitle: t('dropdown.products.featured_title'),
+      leftItems: [
+        { title: t('dropdown.products.title1'), desc: t('dropdown.products.desc1'), href: '/sekela-apis' },
+        { title: t('dropdown.products.title2'), desc: t('dropdown.products.desc2'), href: '/products' },
+      ],
+      bottomLinkText: t('dropdown.products.read_all'),
+      bottomLinkHref: '/products',
+      rightTitle: t('dropdown.products.cat_title'),
+      rightItems: [
+        { name: t('dropdown.products.cat1'), href: '/products', icon: Code },
+        { name: t('dropdown.products.cat2'), href: '/products', icon: Layers },
+        { name: t('dropdown.products.cat3'), href: '/products', icon: Globe },
+        { name: t('dropdown.products.cat4'), href: '/products', icon: Building2 },
+      ]
+    },
+    'Solutions': {
+      leftTitle: t('dropdown.solutions.featured_title'),
+      leftItems: [
+        { title: t('dropdown.solutions.title1'), desc: t('dropdown.solutions.desc1'), href: '/solutions' },
+        { title: t('dropdown.solutions.title2'), desc: t('dropdown.solutions.desc2'), href: '/solutions' },
+      ],
+      bottomLinkText: t('dropdown.solutions.read_all'),
+      bottomLinkHref: '/solutions',
+      rightTitle: t('dropdown.solutions.cat_title'),
+      rightItems: [
+        { name: t('dropdown.solutions.cat1'), href: '/solutions', icon: Globe },
+        { name: t('dropdown.solutions.cat2'), href: '/solutions', icon: Shield },
+        { name: t('dropdown.solutions.cat3'), href: '/solutions', icon: TrendingUp },
+        { name: t('dropdown.solutions.cat4'), href: '/solutions', icon: BriefcaseBusiness },
+      ]
+    },
+    'Sekela APIS': {
+      leftTitle: t('dropdown.sekela.featured_title'),
+      leftItems: [
+        { title: t('dropdown.sekela.title1'), desc: t('dropdown.sekela.desc1'), href: '/sekela-apis' },
+        { title: t('dropdown.sekela.title2'), desc: t('dropdown.sekela.desc2'), href: '/sekela-apis' },
+      ],
+      bottomLinkText: t('dropdown.sekela.read_all'),
+      bottomLinkHref: '/sekela-apis',
+      rightTitle: t('dropdown.sekela.cat_title'),
+      rightItems: [
+        { name: t('dropdown.sekela.cat1'), href: '/sekela-apis', icon: Database },
+        { name: t('dropdown.sekela.cat2'), href: '/sekela-apis', icon: MessageSquare },
+        { name: t('dropdown.sekela.cat3'), href: '/sekela-apis', icon: Zap },
+      ]
+    },
+    'Developers': {
+      leftTitle: t('dropdown.developers.featured_title'),
+      leftItems: [
+        { title: t('dropdown.developers.title1'), desc: t('dropdown.developers.desc1'), href: '/developers' },
+        { title: t('dropdown.developers.title2'), desc: t('dropdown.developers.desc2'), href: '/developers' },
+      ],
+      bottomLinkText: t('dropdown.developers.read_all'),
+      bottomLinkHref: '/developers',
+      rightTitle: t('dropdown.developers.cat_title'),
+      rightItems: [
+        { name: t('dropdown.developers.cat1'), href: '/developers', icon: Code },
+        { name: t('dropdown.developers.cat2'), href: '/developers', icon: Terminal },
+        { name: t('dropdown.developers.cat3'), href: '/developers', icon: Database },
+        { name: t('dropdown.developers.cat4'), href: '/developers', icon: Layers },
+      ]
+    },
+    'Blog': {
+      leftTitle: t('blog.latest_briefings'),
+      leftItems: blogLatestPosts.map(p => ({ title: p.title, desc: '', href: p.href })),
+      bottomLinkText: t('blog.read_all'),
+      bottomLinkHref: '/blog',
+      rightTitle: 'Categories',
+      rightItems: blogCategories.map(c => ({ name: c.name, href: c.href, icon: c.icon }))
+    },
+    'Company': {
+      leftTitle: t('dropdown.company.featured_title'),
+      leftItems: [
+        { title: t('dropdown.company.title1'), desc: t('dropdown.company.desc1'), href: '/company' },
+        { title: t('dropdown.company.title2'), desc: t('dropdown.company.desc2'), href: '/company' },
+      ],
+      bottomLinkText: t('dropdown.company.read_all'),
+      bottomLinkHref: '/company',
+      rightTitle: t('dropdown.company.cat_title'),
+      rightItems: [
+        { name: t('dropdown.company.cat1'), href: '/company', icon: Target },
+        { name: t('dropdown.company.cat2'), href: '/company', icon: Shield },
+        { name: t('dropdown.company.cat3'), href: '/company', icon: Users },
+      ]
+    }
+  }
+
   const navLinks = [
-    { name: t('nav.products'), href: '/products' },
-    { name: t('nav.solutions'), href: '/solutions' },
-    { name: t('nav.sekela'), href: '/sekela-apis' },
-    { name: t('nav.developers'), href: '/developers' },
-    { name: t('nav.blog'), href: '/blog', isDropdown: true },
+    { name: t('nav.products'), href: '/products', isDropdown: true, key: 'Products' },
+    { name: t('nav.solutions'), href: '/solutions', isDropdown: true, key: 'Solutions' },
+    { name: t('nav.sekela'), href: '/sekela-apis', isDropdown: true, key: 'Sekela APIS' },
+    { name: t('nav.developers'), href: '/developers', isDropdown: true, key: 'Developers' },
+    { name: t('nav.blog'), href: '/blog', isDropdown: true, key: 'Blog', alignRight: true },
     { name: t('nav.customers'), href: '/customers' },
-    { name: t('nav.company'), href: '/company' },
+    { name: t('nav.company'), href: '/company', isDropdown: true, key: 'Company', alignRight: true },
   ]
 
   return (
@@ -74,57 +170,66 @@ export const Navbar = () => {
                 link.isDropdown ? (
                   <div
                     key={link.name}
-                    onMouseEnter={() => setActiveMenu('Blog')}
+                    onMouseEnter={() => setActiveMenu(link.key)}
                     className="relative flex items-stretch border-r border-neutral-200"
                   >
                     <Link
                       href={link.href}
                       className={`px-5 transition-colors flex items-center gap-1.5 ${
-                        activeMenu === 'Blog' || pathname === link.href ? 'bg-neutral-50 text-black' : 'text-black hover:bg-neutral-50'
+                        activeMenu === link.key || pathname === link.href ? 'bg-neutral-50 text-black' : 'text-black hover:bg-neutral-50'
                       }`}
                     >
                       <span>{link.name}</span>
-                      <ChevronDown className={`w-3 h-3 stroke-[2.5px] transition-transform duration-150 ${activeMenu === 'Blog' ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-3 h-3 stroke-[2.5px] transition-transform duration-150 ${activeMenu === link.key ? 'rotate-180' : ''}`} />
                     </Link>
 
                     <AnimatePresence>
-                      {activeMenu === 'Blog' && (
+                      {activeMenu === link.key && (
                         <motion.div
                           initial={{ opacity: 0, y: 5 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 5 }}
                           transition={{ duration: 0.12 }}
-                          className="absolute top-14 left-[-1px] bg-white border-x border-b border-neutral-200 z-50 flex w-[680px] text-left cursor-default"
+                          className={`absolute top-14 bg-white border-x border-b border-neutral-200 z-50 flex w-[680px] text-left cursor-default ${
+                            link.alignRight ? 'right-[-1px] left-auto' : 'left-[-1px] right-auto'
+                          }`}
                           onClick={(e) => e.stopPropagation()}
                         >
                           <div className="w-7/12 border-r border-neutral-200 flex flex-col bg-white">
                             <div className="px-6 py-3 text-[10px] uppercase font-bold tracking-wider text-neutral-400 bg-neutral-50 border-b border-neutral-200">
-                              {t('blog.latest_briefings')}
+                              {dropdownConfigs[link.key].leftTitle}
                             </div>
                             <div className="flex flex-col divide-y divide-neutral-100">
-                              {blogLatestPosts.map((post, i) => (
+                              {dropdownConfigs[link.key].leftItems.map((post, i) => (
                                 <Link
                                   key={i} 
                                   href={post.href}
-                                  className="px-6 py-4 flex items-center justify-between text-black hover:bg-neutral-50 font-bold transition-colors group"
+                                  className="px-6 py-4 flex flex-col justify-center text-black hover:bg-neutral-50 font-bold transition-colors group"
                                 >
-                                  <span className="truncate pr-4">{post.title}</span>
-                                  <ArrowRight className="w-4 h-4 stroke-[2.5px] text-neutral-300 group-hover:text-[#FA520F] transition-colors shrink-0" />
+                                  <div className="flex items-center justify-between">
+                                    <span className="truncate pr-4">{post.title}</span>
+                                    <ArrowRight className="w-4 h-4 stroke-[2.5px] text-neutral-300 group-hover:text-[#FA520F] transition-colors shrink-0" />
+                                  </div>
+                                  {post.desc && (
+                                    <p className="text-[10px] text-neutral-400 font-normal lowercase normal-case tracking-normal mt-1 leading-normal">
+                                      {post.desc}
+                                    </p>
+                                  )}
                                 </Link>
                               ))}
                             </div>
-                            <Link href="/blog" className="px-6 py-4 mt-auto border-t border-neutral-200 bg-neutral-50 text-xs font-bold text-[#FA520F] flex items-center gap-1.5 hover:bg-black hover:text-white transition-colors">
-                              <span>{t('blog.read_all')}</span>
+                            <Link href={dropdownConfigs[link.key].bottomLinkHref} className="px-6 py-4 mt-auto border-t border-neutral-200 bg-neutral-50 text-xs font-bold text-[#FA520F] flex items-center gap-1.5 hover:bg-black hover:text-white transition-colors">
+                              <span>{dropdownConfigs[link.key].bottomLinkText}</span>
                               <ArrowRight className="w-3.5 h-3.5 stroke-[2.5px]" />
                             </Link>
                           </div>
 
                           <div className="w-5/12 bg-neutral-50 flex flex-col">
                             <div className="px-6 py-3 text-[10px] uppercase font-bold tracking-wider text-neutral-400 bg-neutral-50 border-b border-neutral-200">
-                              Categories
+                              {dropdownConfigs[link.key].rightTitle}
                             </div>
                             <div className="p-6 flex flex-col gap-4 font-bold text-black">
-                              {blogCategories.map((category, i) => {
+                              {dropdownConfigs[link.key].rightItems.map((category, i) => {
                                 const Icon = category.icon
                                 return (
                                   <Link
@@ -147,6 +252,7 @@ export const Navbar = () => {
                   <Link
                     key={link.name}
                     href={link.href}
+                    onMouseEnter={() => setActiveMenu(null)}
                     className={`px-5 border-r border-neutral-200 transition-colors flex items-center ${
                       pathname === link.href ? 'bg-neutral-100 text-black' : 'text-black hover:bg-neutral-50'
                     }`}
