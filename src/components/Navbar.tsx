@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react'
-import { Menu, X, ChevronDown, ArrowRight, Globe } from 'lucide-react'
+import { Menu, X, ChevronDown, ArrowRight, Globe, Layers, Building2, Code, BriefcaseBusiness } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -15,40 +15,8 @@ interface BlogLink {
 interface CategoryItem {
   name: string
   href: string
-  icon: React.ComponentType
+  icon: React.ComponentType<{ className?: string }>
 }
-
-const PixelLayersIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="0.5"/>
-    <path d="M12 6l7 4-7 4-7-4 7-4z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M5 13l7 4 7-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
-
-const PixelBuildingIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="0.5"/>
-    <rect x="8" y="8" width="3" height="8" fill="white"/>
-    <rect x="13" y="8" width="3" height="8" fill="white"/>
-    <rect x="8" y="6" width="8" height="2" fill="white"/>
-  </svg>
-);
-
-const PixelTerminalIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="0.5"/>
-    <path d="M8 9l3 3-3 3M13 15h3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
-
-const PixelBriefcaseIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#F59E0B" stroke="#B45309" strokeWidth="0.5"/>
-    <rect x="7" y="10" width="10" height="6" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <path d="M9 10V8a3 3 0 0 1 6 0v2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </svg>
-);
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -70,10 +38,10 @@ export const Navbar = () => {
   ]
 
   const blogCategories: CategoryItem[] = [
-    { name: t('nav.products'), href: '/products', icon: PixelLayersIcon },
-    { name: t('nav.company'), href: '/company', icon: PixelBuildingIcon },
-    { name: t('nav.developers'), href: '/developers', icon: PixelTerminalIcon },
-    { name: t('nav.solutions'), href: '/solutions', icon: PixelBriefcaseIcon },
+    { name: t('nav.products'), href: '/products', icon: Layers },
+    { name: t('nav.company'), href: '/company', icon: Building2 },
+    { name: t('nav.developers'), href: '/developers', icon: Code },
+    { name: t('nav.solutions'), href: '/solutions', icon: BriefcaseBusiness},
   ]
 
   const navLinks = [
@@ -156,18 +124,19 @@ export const Navbar = () => {
                               Categories
                             </div>
                             <div className="p-6 flex flex-col gap-4 font-bold text-black">
-                              {blogCategories.map((category, i) => (
-                                <Link
-                                  key={i} 
-                                  href={category.href}
-                                  className="hover:text-[#FA520F] flex items-center gap-3 transition-colors group"
-                                >
-                                  <div className="w-8 h-8 border border-neutral-200 bg-white flex items-center justify-center shadow-[1px_1px_0px_0px_rgba(0,0,0,0.05)] group-hover:bg-[#FA520F] group-hover:text-white transition-colors duration-75 shrink-0">
-                                    <category.icon />
-                                  </div>
-                                  <span>{category.name}</span>
-                                </Link>
-                              ))}
+                              {blogCategories.map((category, i) => {
+                                const Icon = category.icon
+                                return (
+                                  <Link
+                                    key={i} 
+                                    href={category.href}
+                                    className="hover:text-[#FA520F] flex items-center gap-3 transition-colors group"
+                                  >
+                                    <Icon className="w-4 h-4 text-neutral-600 group-hover:text-[#FA520F] transition-colors shrink-0" />
+                                    <span>{category.name}</span>
+                                  </Link>
+                                )
+                              })}
                             </div>
                           </div>
                         </motion.div>
