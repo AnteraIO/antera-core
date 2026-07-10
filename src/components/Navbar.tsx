@@ -302,10 +302,10 @@ export const Navbar = () => {
               </AnimatePresence>
             </div>
 
-            <button className="px-6 flex items-center gap-2 border-l border-neutral-200 text-black hover:bg-neutral-50 transition-colors">
+            <Link href="/developers" className="px-6 flex items-center gap-2 border-l border-neutral-200 text-black hover:bg-neutral-50 transition-colors">
               <span>{t('nav.start_building')}</span>
               <ChevronDown className="w-3 h-3 stroke-[2.5px] opacity-60" />
-            </button>
+            </Link>
             
             <Link href="https://wa.me/255760984921" target="_blank" className="px-6 bg-[#FA520F] text-white font-bold flex items-center justify-center hover:bg-black border-l border-neutral-200 transition-colors gap-2 relative group">
               <span className="absolute inset-0 border-t border-l border-white/10 pointer-events-none group-hover:border-white/5" />
@@ -359,9 +359,9 @@ export const Navbar = () => {
             </div>
             
             <div className="mt-auto bg-neutral-50 flex flex-col divide-y-2 divide-neutral-200 border-t border-neutral-200">
-              <button className="p-4 font-bold text-center text-black hover:bg-neutral-100 transition-colors">
+              <Link href="/developers" className="p-4 font-bold text-center text-black hover:bg-neutral-100 transition-colors">
                 {t('nav.start_building')}
-              </button>
+              </Link>
               <Link 
                 href="https://wa.me/255760984921"
                 target="_blank"
