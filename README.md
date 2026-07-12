@@ -1,4 +1,4 @@
-
+<!-- 
 <p align="center">
     <a href="https://github.com/Antera-Ltd/antera-core"><img src="https://img.shields.io/badge/status-active-brightgreen.svg"></a>
     <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js-16-000000.svg"></a>
@@ -84,4 +84,4 @@ npm run build
 ```
 
 > **Warning:** This software, Antera Core is protected under Apache 2.0 License. Violation of terms (including removing copyright notices or patent retaliation) will result in legal action. Read [LICENSE](LICENSE).
----
+--- -->
