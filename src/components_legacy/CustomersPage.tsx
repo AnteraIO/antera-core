@@ -250,7 +250,7 @@ const ClientShowcase = ({ client, images, description, index }: { client: string
 
           <MagneticButton>
             <motion.button
-              className="group flex items-center gap-3 bg-black text-white px-6 py-3 font-mono text-sm font-bold uppercase tracking-wider border-2 border-black hover:bg-[#FA520F] transition-colors"
+              className="group inline-flex items-center gap-2 px-6 py-3 text-sm font-medium border-2 border-black hover:bg-black hover:text-white transition-all"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -361,8 +361,6 @@ export const CustomersPage = () => {
   const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
-  const headerY = useTransform(scrollYProgress, [0, 0.1], [0, -100]);
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
 
   const clients = [
     { client: "Blacksand Adventures", images: [blacksand1, blacksand2, blacksand3, blacksand4], description: "A premium adventure tourism platform revolutionizing how travelers discover and book exclusive African safari experiences. Built with real-time availability, immersive 3D previews, and seamless payment integration." },
@@ -387,19 +385,7 @@ export const CustomersPage = () => {
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX: scrollYProgress }} />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
-        <motion.div className="pt-32 pb-20 min-h-[80vh] flex flex-col justify-center" style={{ y: headerY, opacity: headerOpacity }}>
-          <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}>
-            <h1 className="text-5xl md:text-8xl lg:text-9xl font-normal uppercase tracking-[-0.03em] leading-[0.85] mb-8">
-              <motion.span className="block" initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>Trusted by</motion.span>
-              <motion.span className="block text-[#FA520F]" initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>Leaders.</motion.span>
-            </h1>
-            <motion.p className="text-neutral-500 text-base md:text-lg max-w-xl leading-relaxed mb-12" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
-              Powering critical infrastructure for the region's most ambitious organizations. We don't just build software, we engineer digital transformation.
-            </motion.p>
-          </motion.div>
-        </motion.div>
-
-        <section className="mb-48">
+        <section className="mb-48 pt-32">
           <div className="flex justify-center items-center gap-8 mb-12">
             <PixelLandmarkIcon />
             <PixelRadioIcon />
@@ -453,54 +439,6 @@ export const CustomersPage = () => {
           ))}
         </div>
 
-        <motion.div className="mb-32 p-8 md:p-16 bg-[#111113] border-4 border-black text-white flex flex-col md:flex-row items-stretch justify-between gap-8 relative shadow-[12px_12px_0px_0px_#000000] overflow-hidden"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute inset-0" style={{ backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px)` }} />
-          </div>
-          <div className="flex-1 flex flex-col justify-center relative">
-            <motion.div className="flex gap-1 mb-8" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
-              {[1, 2, 3, 4, 5].map(i => (
-                <motion.div key={i} initial={{ opacity: 0, scale: 0 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 + i * 0.1, type: "spring" }}>
-                  <Star className="w-5 h-5 fill-[#FA520F] text-[#FA520F]" />
-                </motion.div>
-              ))}
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.5 }}>
-              <Quote className="w-12 h-12 text-[#FA520F]/30 mb-4" />
-            </motion.div>
-            <motion.blockquote className="text-xl md:text-2xl lg:text-3xl font-normal leading-relaxed mb-8 text-neutral-200"
-              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.6 }}
-            >
-              "ANTERA transformed our data processing pipeline from days to minutes. Their technical depth is unparalleled in the market."
-            </motion.blockquote>
-            <motion.div className="flex items-center gap-4" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.8 }}>
-              <div className="w-12 h-12 bg-[#FA520F] border-2 border-white flex items-center justify-center font-mono font-black text-lg">K</div>
-              <div>
-                <div className="text-sm font-bold text-white">Chief Technology Officer</div>
-                <div className="text-xs font-bold uppercase tracking-widest text-neutral-400">Kaziboksi.</div>
-              </div>
-            </motion.div>
-          </div>
-          <motion.div className="w-full md:w-40 lg:w-48 border-4 border-black bg-[#FA520F] flex items-center justify-center shrink-0 shadow-[6px_6px_0px_0px_#000000] p-6 relative overflow-hidden"
-            initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
-            whileHover={{ rotate: 5, scale: 1.05 }}
-          >
-            <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute inset-0 opacity-10">
-              <div className="absolute inset-4 border-2 border-white rounded-full" />
-              <div className="absolute inset-8 border-2 border-white rounded-full" />
-            </motion.div>
-            <ShieldCheck className="w-16 h-16 md:w-20 md:h-20 text-white stroke-[2.5px] relative z-10" />
-          </motion.div>
-        </motion.div>
-
         <motion.div className="text-center pb-32" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
           <motion.h2 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-[-0.03em] leading-[0.95] mb-6" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
             Ready to <span className="text-[#FA520F]">Transform?</span>
@@ -509,11 +447,13 @@ export const CustomersPage = () => {
             Join the ranks of industry leaders who trust ANTERA to power their digital future.
           </motion.p>
           <MagneticButton>
-            <motion.button className="group inline-flex items-center gap-3 bg-[#FA520F] text-white px-8 py-4 text-sm font-medium border-4 border-black shadow-[6px_6px_0px_0px_#000000] hover:shadow-[8px_8px_0px_0px_#000000] hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all"
-              whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+            <motion.button 
+              className="group inline-flex items-center gap-2 px-6 py-3 text-sm font-medium border-2 border-black hover:bg-black hover:text-white transition-all"
+              whileHover={{ scale: 1.02 }} 
+              whileTap={{ scale: 0.98 }}
             >
               Start Your Project
-              <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </motion.button>
           </MagneticButton>
         </motion.div>
