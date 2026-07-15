@@ -173,6 +173,9 @@ export const FinalCTAAndFooter = () => {
                   <li className="flex items-center gap-3 text-neutral-500 group/link">
                     <span className="text-sm font-mono group-hover/link:text-black transition-colors">info@antera.co.tz</span>
                   </li>
+                    <li className="flex items-center gap-3 text-neutral-500 group/link">
+                    <span className="text-sm font-mono group-hover/link:text-black transition-colors">+255 625 534 921</span>
+                  </li>
                   <li className="flex items-center gap-3 text-neutral-500 group/link">
                     <span className="text-sm font-mono group-hover/link:text-black transition-colors">+255 760 984 921</span>
                   </li>
