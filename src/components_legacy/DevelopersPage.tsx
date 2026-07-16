@@ -86,13 +86,19 @@ const DiamondDecoration = ({ className = "" }: { className?: string }) => (
   />
 );
 
-const ArrowLink = ({ text }: { text: string }) => (
-  <div className="mt-4 flex items-center gap-2 text-sm font-medium text-black group-hover:text-[#FA520F] transition-colors">
+
+const ArrowLink = ({ text, href }: { text: string; href?: string }) => (
+  <a 
+    href={href || "#"} 
+    className="mt-4 flex items-center gap-2 text-sm font-medium text-black group-hover:text-[#FA520F] transition-colors"
+    target={href?.startsWith('http') ? "_blank" : undefined}
+    rel={href?.startsWith('http') ? "noopener noreferrer" : undefined}
+  >
     <span>{text}</span>
     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M5 12h14M12 5l7 7-7 7"/>
     </svg>
-  </div>
+  </a>
 );
 
 export const DevelopersPage = () => {
@@ -202,7 +208,10 @@ export const DevelopersPage = () => {
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
                   Pre-built React components, design tokens, and accessibility guidelines.
                 </p>
-                <ArrowLink text="Explore docs" />
+                <ArrowLink 
+                  text="Explore docs" 
+                  href="https://aibruno.vercel.app/" 
+                />
               </div>
             </motion.div>
 
