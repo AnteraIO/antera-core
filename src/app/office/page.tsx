@@ -83,14 +83,41 @@ const DiamondDecoration = ({ className = "" }: { className?: string }) => (
   />
 );
 
-const ArrowLink = ({ text }: { text: string }) => (
-  <div className="mt-4 flex items-center gap-2 text-sm font-medium text-black group-hover:text-[#FA520F] transition-colors">
-    <span>{text}</span>
-    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M5 12h14M12 5l7 7-7 7"/>
-    </svg>
-  </div>
-);
+
+const ArrowLink = ({ 
+  text, 
+  href, 
+  isEmail = false, 
+  isPhone = false 
+}: { 
+  text: string; 
+  href?: string; 
+  isEmail?: boolean;
+  isPhone?: boolean;
+}) => {
+  let linkHref = href || "#";
+  
+  // Handle special link types
+  if (isEmail && href) {
+    linkHref = `mailto:${href}`;
+  } else if (isPhone && href) {
+    linkHref = `tel:${href}`;
+  }
+  
+  return (
+    <a 
+      href={linkHref}
+      className="mt-4 flex items-center gap-2 text-sm font-medium text-black group-hover:text-[#FA520F] transition-colors"
+      target={href?.startsWith('http') ? "_blank" : undefined}
+      rel={href?.startsWith('http') ? "noopener noreferrer" : undefined}
+    >
+      <span>{text}</span>
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  );
+};
 
 export default function OfficePage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -147,10 +174,10 @@ export default function OfficePage() {
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
                   Dar es Salaam, Tanzania
                 </p>
-                <p className="mt-4 text-sm text-neutral-500 leading-relaxed max-w-md">
-                  Our Dar es Salaam office serves as the primary research and development agency for Advanced Neural Technologies & Engineering.
-                </p>
-                <ArrowLink text="Get directions" />
+                <ArrowLink 
+                  text="Get directions" 
+                  href="https://maps.google.com/maps?q=Dar+es+Salaam,+Tanzania"
+                />
               </div>
             </motion.div>
 
@@ -166,11 +193,11 @@ export default function OfficePage() {
                 <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Operating Hours</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between text-base md:text-lg text-neutral-500">
-                    <span>MON — FRI</span>
+                    <span>MON to FRI</span>
                     <span className="font-medium text-black">08:00 - 18:00 EAT</span>
                   </div>
                   <div className="flex justify-between text-base md:text-lg text-neutral-500">
-                    <span>SAT — SUN</span>
+                    <span>SAT to SUN</span>
                     <span className="font-medium text-black">Closed (Remote Only)</span>
                   </div>
                 </div>
@@ -190,7 +217,11 @@ export default function OfficePage() {
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed font-mono">
                   info@antera.co.tz
                 </p>
-                <ArrowLink text="Send email" />
+                <ArrowLink 
+                  text="Send email" 
+                  href="info@antera.co.tz"
+                  isEmail={true}
+                />
               </div>
             </motion.div>
 
@@ -207,7 +238,11 @@ export default function OfficePage() {
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed font-mono">
                   +255 760 984 921
                 </p>
-                <ArrowLink text="Call now" />
+                <ArrowLink 
+                  text="Call now" 
+                  href="+255760984921"
+                  isPhone={true}
+                />
               </div>
             </motion.div>
 
@@ -224,7 +259,10 @@ export default function OfficePage() {
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
                   Follow our journey across digital platforms and stay updated with the latest from Antera Group.
                 </p>
-                <ArrowLink text="Visit website" />
+                <ArrowLink 
+                  text="Visit website" 
+                  href="https://antera.co.tz"
+                />
               </div>
             </motion.div>
 
@@ -241,7 +279,10 @@ export default function OfficePage() {
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
                   Schedule a meeting with our team to discuss your next project or partnership opportunity.
                 </p>
-                <ArrowLink text="Book appointment" />
+                <ArrowLink 
+                  text="Book appointment" 
+                  href="https://calendly.com/antera-group/meeting"
+                />
               </div>
             </motion.div>
             <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
