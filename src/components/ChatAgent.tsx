@@ -201,23 +201,24 @@ const Bubble = ({ msg, isLast, isStreaming }: { msg: Msg; isLast: boolean; isStr
     >
       {!isUser && <Avatar size={28} />}
       <div className={cn('flex flex-col gap-0.5', isUser ? 'items-end' : 'items-start', 'flex-1', isUser ? 'max-w-[85%]' : 'max-w-[85%]')}>
-        <div
-          className="px-4 py-2.5 text-[13.5px] leading-[1.55] shadow-sm w-full"
-          style={
-            isUser
-              ? {
-                  background: '#FA520F',
-                  color: 'white',
-                  borderRadius: '20px 20px 5px 20px',
-                }
-              : {
-                  background: 'transparent',
-                  color: '#1a1108',
-                  borderRadius: '20px 20px 20px 5px',
-                  padding: '4px 4px 4px 0',
-                }
-          }
-        >
+     <div
+  className="px-4 py-2.5 text-[13.5px] leading-[1.55] shadow-sm w-full"
+  style={
+    isUser
+      ? {
+          background: '#FA520F',
+          color: 'white',
+          borderRadius: '18px',
+          border: '1px solid rgba(255,255,255,0.15)',
+        }
+      : {
+          background: 'transparent',
+          color: '#1a1108',
+          borderRadius: '20px 20px 20px 5px',
+          padding: '4px 4px 4px 0',
+        }
+  }
+>
           <div className="w-full">
             {isUser ? (
               <div className="whitespace-pre-wrap break-words">{displayText}</div>
