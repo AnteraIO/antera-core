@@ -25,39 +25,6 @@ import nawwi4 from '../assets/nawwi-4.png';
 import nawwi5 from '../assets/nawwi-5.png';
 import nawwi6 from '../assets/nawwi-6.png';
 
-const CustomCursor = () => {
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-  const springConfig = { damping: 25, stiffness: 700 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
-
-  useEffect(() => {
-    const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX - 16);
-      cursorY.set(e.clientY - 16);
-    };
-    window.addEventListener('mousemove', moveCursor);
-    return () => window.removeEventListener('mousemove', moveCursor);
-  }, []);
-
-  return (
-    <>
-      <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border-2 border-[#FA520F] pointer-events-none z-[9999] mix-blend-difference hidden md:block"
-        style={{ x: cursorXSpring, y: cursorYSpring }}
-      />
-      <motion.div
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#FA520F] pointer-events-none z-[9999] hidden md:block"
-        style={{
-          x: useSpring(cursorX, { damping: 30, stiffness: 500 }),
-          y: useSpring(cursorY, { damping: 30, stiffness: 500 }),
-        }}
-      />
-    </>
-  );
-};
-
 const ScrambleText = ({ text, className = "" }: { text: string; className?: string }) => {
   const [displayText, setDisplayText] = useState(text);
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
@@ -370,15 +337,14 @@ export const CustomersPage = () => {
   ];
 
   const industries = [
-    { title: "Finance & FinTech", icon: PixelLandmarkIcon, challenges: ["Protecting sensitive data against breaches", "Managing real-time reporting and compliance", "High uptime requirements"], outcomes: ["Improved risk management", "Faster accurate insights", "Operational cost savings"] },
-    { title: "Telecom & Tech", icon: PixelRadioIcon, challenges: ["Legacy infrastructure limiting agility", "Network monitoring complexity", "Operational insights at scale"], outcomes: ["Faster deployment times", "Lower operational expense", "Better decision-making"] },
-    { title: "SMEs & Retail", icon: PixelShoppingIcon, challenges: ["Limited budgets and resources", "Manual business processes", "Lack of data for decision-making"], outcomes: ["Efficient operations", "Better customer engagement", "Actionable business insights"] },
-    { title: "Healthcare", icon: PixelHeartPulseIcon, challenges: ["Ensuring data privacy and security", "Fragmented reporting systems", "High uptime for critical systems"], outcomes: ["Stronger data privacy posture", "Faster clinical decisions", "Streamlined admin processes"] }
+    { title: "Finance & FinTech", icon: PixelLandmarkIcon },
+    { title: "Telecom & Tech", icon: PixelRadioIcon },
+    { title: "SMEs & Retail", icon: PixelShoppingIcon },
+    { title: "Healthcare", icon: PixelHeartPulseIcon }
   ];
 
   return (
     <div ref={containerRef} className="relative bg-[#FAFAF8] min-h-screen text-black font-sans antialiased w-full overflow-hidden selection:bg-[#FA520F] selection:text-white">
-      <CustomCursor />
       <ParticleBackground />
       <GrainOverlay />
 
@@ -391,7 +357,7 @@ export const CustomersPage = () => {
             <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
             <div className="grid grid-cols-1 md:grid-cols-2 border border-neutral-200 bg-white">
               {industries.map((industry, i) => (
-                <motion.div key={industry.title} className={`group p-8 md:p-12 min-h-[300px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors ${i % 2 === 0 ? 'border-r border-b border-neutral-200' : 'border-b border-neutral-200'}`}
+                <motion.div key={industry.title} className={`group p-8 md:p-12 min-h-[200px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors ${i % 2 === 0 ? 'border-r border-b border-neutral-200' : 'border-b border-neutral-200'}`}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -400,24 +366,6 @@ export const CustomersPage = () => {
                   <industry.icon />
                   <div className="mt-auto">
                     <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">{industry.title}</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-3 font-mono">Challenges</h4>
-                        <ul className="space-y-1.5">
-                          {industry.challenges.map((c, j) => (
-                            <li key={j} className="text-sm text-neutral-500 leading-relaxed">• {c}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-3 font-mono">Outcomes</h4>
-                        <ul className="space-y-1.5">
-                          {industry.outcomes.map((o, j) => (
-                            <li key={j} className="text-sm text-neutral-900 leading-relaxed font-medium">→ {o}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
                   </div>
                 </motion.div>
               ))}
