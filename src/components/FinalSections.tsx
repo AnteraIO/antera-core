@@ -276,12 +276,6 @@ export const OperationSection = () => {
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-        <div className="flex justify-center items-center gap-8 mb-12">
-          <PixelAssessIcon />
-          <PixelDesignIcon />
-          <PixelDeliverIcon />
-          <PixelOptimizeIcon />
-        </div>
 
         <header className="mb-24 md:mb-40 text-center">
           <motion.h1 
@@ -377,11 +371,6 @@ export const DataScienceSection = () => {
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-        <div className="flex justify-center items-center gap-8 mb-12">
-          <PixelCloudIcon />
-          <PixelDevOpsIcon />
-          <PixelSecurityIcon />
-        </div>
 
         <header className="mb-24 md:mb-40 text-center">
           <motion.h1 
@@ -477,11 +466,6 @@ export const WhySection = () => {
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-        <div className="flex justify-center items-center gap-8 mb-12">
-          <PixelEnterpriseIcon />
-          <PixelEmbeddedIcon />
-          <PixelAfricanIcon />
-        </div>
 
         <header className="mb-24 md:mb-40 text-center">
           <motion.h1 

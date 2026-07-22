@@ -256,10 +256,6 @@ export const ApplicationSection = () => {
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32">
-        <div className="flex justify-center items-center gap-8 mb-12">
-          <PixelMobileIcon />
-          <PixelWebIcon />
-        </div>
 
         <header className="mb-24 md:mb-40 text-center">
           <motion.h1 className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
@@ -328,11 +324,6 @@ export const DataIntelligenceSection = () => {
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32">
-        <div className="flex justify-center items-center gap-8 mb-12">
-          <PixelDashboardIcon />
-          <PixelAnalyticsIcon />
-          <PixelPipelineIcon />
-        </div>
 
         <header className="mb-24 md:mb-40 text-center">
           <motion.h1 className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"

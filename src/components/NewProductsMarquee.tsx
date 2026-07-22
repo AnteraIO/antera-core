@@ -82,12 +82,6 @@ export const NewProductsMarquee = () => {
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 relative z-10">
         <div>
-          <div className="flex items-center gap-2 mb-3">
-            <PixelRocketIcon />
-            <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#FA520F]">
-              Next-Gen Release Preview
-            </span>
-          </div>
           <h2 className="text-4xl md:text-6xl font-normal text-black tracking-tight leading-none">
             New Products <span className="text-[#FA520F] font-serif italic">Soon</span>
           </h2>
@@ -125,8 +119,8 @@ export const NewProductsMarquee = () => {
                   <div className="flex justify-between items-start mb-4">
                     <span className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 border ${
                       item.product === 'Kava'
-                        ? 'text-blue-600 border-blue-200 bg-blue-50/50'
-                        : 'text-[#FA520F] border-orange-200 bg-orange-50/50'
+                        ? 'text-[#FA520F]'
+                        : 'text-[#FA520F]'
                     }`}>
                       {item.badge}
                     </span>

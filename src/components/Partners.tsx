@@ -57,9 +57,6 @@ export const PartnersSection = () => {
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32">
-        <div className="flex justify-center items-center gap-8 mb-12">
-          <PixelPartnerIcon />
-        </div>
 
         <header className="mb-24 md:mb-40 text-center">
           <motion.h1 
