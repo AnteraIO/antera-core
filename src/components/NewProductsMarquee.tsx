@@ -2,6 +2,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, ShoppingBag, Award, ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
+import marqueeBg from '../assets/marquee.png';
 
 const PixelRocketIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-[#FA520F]">
@@ -75,8 +77,19 @@ export const NewProductsMarquee = () => {
 
   return (
     <section className="relative w-full bg-[#FAFAF8] py-16 overflow-hidden border-y border-neutral-200">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={marqueeBg}
+          alt="Marquee background"
+          fill
+          className="object-cover opacity-10" // Adjust opacity as needed
+          priority={false}
+        />
+      </div>
+      
       {/* Background grid pattern matching Partners & MainSections */}
-      <div className="absolute inset-0 opacity-40 pointer-events-none">
+      <div className="absolute inset-0 opacity-40 pointer-events-none z-[1]">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e5e5_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e5_1px,transparent_1px)] bg-[size:32px_32px]" />
       </div>
 
@@ -92,7 +105,7 @@ export const NewProductsMarquee = () => {
       </div>
 
       {/* Marquee Track Container */}
-      <div className="relative w-full overflow-hidden py-4 select-none">
+      <div className="relative w-full overflow-hidden py-4 select-none z-10">
         {/* Soft fading overlays for a premium cinematic effect using light-to-transparent gradients */}
         <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-[#FAFAF8] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-[#FAFAF8] to-transparent z-10 pointer-events-none" />
@@ -113,7 +126,7 @@ export const NewProductsMarquee = () => {
             return (
               <div
                 key={index}
-                className="w-[280px] md:w-[350px] shrink-0 bg-white border border-neutral-200 p-6 rounded-none flex flex-col justify-between hover:bg-neutral-50/50 hover:border-[#FA520F]/50 transition-all duration-300 group shadow-sm"
+                className="w-[280px] md:w-[350px] shrink-0 bg-white/90 backdrop-blur-sm border border-neutral-200 p-6 rounded-none flex flex-col justify-between hover:bg-white/95 hover:border-[#FA520F]/50 transition-all duration-300 group shadow-sm"
               >
                 <div>
                   <div className="flex justify-between items-start mb-4">
