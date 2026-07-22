@@ -74,13 +74,13 @@ export const NewProductsMarquee = () => {
   const duplicatedItems = [...marqueeItems, ...marqueeItems, ...marqueeItems];
 
   return (
-    <section className="relative w-full bg-black py-16 overflow-hidden border-y border-neutral-800">
-      {/* Background patterns */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+    <section className="relative w-full bg-[#FAFAF8] py-16 overflow-hidden border-y border-neutral-200">
+      {/* Background grid pattern matching Partners & MainSections */}
+      <div className="absolute inset-0 opacity-40 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e5e5_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e5_1px,transparent_1px)] bg-[size:32px_32px]" />
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 relative z-10">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 relative z-10">
         <div>
           <div className="flex items-center gap-2 mb-3">
             <PixelRocketIcon />
@@ -88,20 +88,20 @@ export const NewProductsMarquee = () => {
               Next-Gen Release Preview
             </span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-normal text-white tracking-tight leading-none">
+          <h2 className="text-4xl md:text-6xl font-normal text-black tracking-tight leading-none">
             New Products <span className="text-[#FA520F] font-serif italic">Soon</span>
           </h2>
         </div>
-        <p className="text-sm md:text-base text-neutral-400 max-w-md font-light leading-relaxed">
+        <p className="text-sm md:text-base text-neutral-500 max-w-md font-light leading-relaxed">
           We are building the future of business operations and career development in East Africa. Explore our upcoming platforms.
         </p>
       </div>
 
       {/* Marquee Track Container */}
       <div className="relative w-full overflow-hidden py-4 select-none">
-        {/* Soft fading overlays for a premium cinematic effect */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+        {/* Soft fading overlays for a premium cinematic effect using light-to-transparent gradients */}
+        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-[#FAFAF8] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-[#FAFAF8] to-transparent z-10 pointer-events-none" />
 
         <motion.div
           className="flex gap-6 w-max"
@@ -112,43 +112,43 @@ export const NewProductsMarquee = () => {
             repeat: Infinity,
             repeatType: 'loop',
           }}
-          whileHover={{ transition: { duration: 60 } }} // Optional slowing down on hover
+          whileHover={{ transition: { duration: 60 } }}
         >
           {duplicatedItems.map((item, index) => {
             const Icon = item.icon;
             return (
               <div
                 key={index}
-                className="w-[280px] md:w-[350px] shrink-0 bg-neutral-900/50 border border-neutral-800 p-6 rounded-none flex flex-col justify-between hover:border-[#FA520F]/40 transition-all duration-300 group"
+                className="w-[280px] md:w-[350px] shrink-0 bg-white border border-neutral-200 p-6 rounded-none flex flex-col justify-between hover:bg-neutral-50/50 hover:border-[#FA520F]/50 transition-all duration-300 group shadow-sm"
               >
                 <div>
                   <div className="flex justify-between items-start mb-4">
                     <span className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 border ${
                       item.product === 'Kava'
-                        ? 'text-blue-400 border-blue-900/50 bg-blue-950/20'
-                        : 'text-[#FA520F] border-orange-950/50 bg-orange-950/20'
+                        ? 'text-blue-600 border-blue-200 bg-blue-50/50'
+                        : 'text-[#FA520F] border-orange-200 bg-orange-50/50'
                     }`}>
                       {item.badge}
                     </span>
-                    <span className="text-neutral-500 font-mono text-[11px]">
+                    <span className="text-neutral-400 font-mono text-[11px] font-medium">
                       {item.product}
                     </span>
                   </div>
 
-                  <h4 className="text-lg md:text-xl font-normal text-white tracking-tight mb-2 group-hover:text-[#FA520F] transition-colors duration-200">
+                  <h4 className="text-lg md:text-xl font-normal text-black tracking-tight mb-2 group-hover:text-[#FA520F] transition-colors duration-200">
                     {item.title}
                   </h4>
 
-                  <p className="text-xs md:text-sm text-neutral-400 font-light leading-relaxed">
+                  <p className="text-xs md:text-sm text-neutral-500 font-light leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-neutral-800/60 flex justify-between items-center">
-                  <span className="text-xs font-medium text-neutral-500 group-hover:text-neutral-300 transition-colors duration-200">
+                <div className="mt-6 pt-4 border-t border-neutral-100 flex justify-between items-center">
+                  <span className="text-xs font-medium text-neutral-400 group-hover:text-black transition-colors duration-200">
                     {item.highlight}
                   </span>
-                  <ArrowUpRight className="w-4 h-4 text-neutral-600 group-hover:text-[#FA520F] transition-colors duration-200" />
+                  <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-[#FA520F] transition-colors duration-200" />
                 </div>
               </div>
             );
