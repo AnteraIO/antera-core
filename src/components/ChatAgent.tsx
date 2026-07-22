@@ -510,7 +510,7 @@ const ChatAgent = () => {
                   >
                     <Avatar size={64} />
                     <div className="text-center space-y-1.5">
-                      <p className="font-bold text-[17px]" style={{ color: '#000000' }}>Hello, I'm Antera ChatBot 🤖</p>
+                      <p className="font-bold text-[17px]" style={{ color: '#000000' }}>Hello, I'm Antera Chat Agent 🤖</p>
                       <p className="text-[12.5px] leading-relaxed max-w-[280px] mx-auto" style={{ color: 'rgba(0,0,0,0.45)' }}>
                         I'm your AI partner for system building and intelligent automation, web & app development, and infrastructure.
                       </p>
