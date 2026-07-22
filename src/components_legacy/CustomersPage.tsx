@@ -365,7 +365,7 @@ export const CustomersPage = () => {
   const clients = [
     { client: "Blacksand Adventures", images: [blacksand1, blacksand2, blacksand3, blacksand4], description: "A premium adventure tourism platform revolutionizing how travelers discover and book exclusive African safari experiences. Built with real-time availability, immersive 3D previews, and seamless payment integration." },
     { client: "Travel Nest Africa", images: [nest1, nest2, nest3, nest4, nest5, nest6], description: "An all-in-one travel management ecosystem connecting local operators with global travelers. Features AI-powered itinerary generation, dynamic pricing, and a comprehensive vendor dashboard." },
-    { client: "Sekela POS", images: [sekelaweb1, sekelaweb2, sekelaweb3], description: "A next-generation point-of-sale system designed for African retail businesses. Features offline-first architecture, multi-currency support, inventory management, and real-time analytics dashboard." },
+    { client: "Sekela POS", images: [sekelaweb1, sekelaweb2, sekelaweb3], description: "A next-generation point-of-sale system designed for African retail businesses. Inventory management, and real-time analytics dashboard." },
     { client: "Nawwi Wellness", images: [nawwi1, nawwi2, nawwi3, nawwi4, nawwi5, nawwi6], description: "Luxury scent-led wellness from the heart of Tanzania. Handcrafted candles and immersive sensory experiences using premium coconut-soy wax and locally sourced essential oils. Sustainable, plastic-free packaging supporting local ethical agriculture in Tanzania." }
   ];
 
@@ -386,12 +386,6 @@ export const CustomersPage = () => {
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
         <section className="mb-48 pt-32">
-          <div className="flex justify-center items-center gap-8 mb-12">
-            <PixelLandmarkIcon />
-            <PixelRadioIcon />
-            <PixelShoppingIcon />
-            <PixelHeartPulseIcon />
-          </div>
           <h2 className="text-3xl md:text-6xl lg:text-7xl font-normal tracking-[-0.03em] leading-[0.95] mb-16 text-center">Industries <span className="text-[#FA520F]">We Serve.</span></h2>
           <div className="relative max-w-5xl mx-auto">
             <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
