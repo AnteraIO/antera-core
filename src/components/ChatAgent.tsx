@@ -263,12 +263,12 @@ const Bubble = ({ msg, isLast, isStreaming }: { msg: Msg; isLast: boolean; isStr
 };
 
 const quickPrompts = [
-  { emoji: '🤖', label: 'AI Solutions' },
-  { emoji: '💻', label: 'Web & App Dev' },
-  { emoji: '⚙️', label: 'Custom Infrastructure' },
-  { emoji: '🚀', label: 'How we operate' },
-  { emoji: '📊', label: 'Data pipelines' },
-  { emoji: '🔒', label: 'Security & compliance' },
+  { emoji: '🤖', label: 'How can AI help me?' },
+  { emoji: '💻', label: 'Can you build my website?' },
+  { emoji: '⚙️', label: 'How do you modernize tech?' },
+  { emoji: '🛡️', label: 'How do you keep my business secure?' },
+  { emoji: '📊', label: 'How do you turn data into insights?' },
+  { emoji: '💰', label: 'What does it cost?' },
 ];
 
 const ChatAgent = () => {
@@ -510,9 +510,9 @@ const ChatAgent = () => {
                   >
                     <Avatar size={64} />
                     <div className="text-center space-y-1.5">
-                      <p className="font-bold text-[17px]" style={{ color: '#000000' }}>Hello, I'm Antera 🤖</p>
+                      <p className="font-bold text-[17px]" style={{ color: '#000000' }}>Hello, I'm Antera ChatBot 🤖</p>
                       <p className="text-[12.5px] leading-relaxed max-w-[280px] mx-auto" style={{ color: 'rgba(0,0,0,0.45)' }}>
-                        Your AI partner for intelligent automation, web & app development, and infrastructure.
+                        I'm your AI partner for system building and intelligent automation, web & app development, and infrastructure.
                       </p>
                     </div>
 
@@ -544,7 +544,7 @@ const ChatAgent = () => {
                           padding: '4px 4px 4px 0',
                         }}
                       >
-                        What can I help you build or optimise today? 🚀
+                        Karibu Sana! What can I help you with today? 🚀
                       </div>
                     </motion.div>
 
