@@ -166,9 +166,9 @@ export default function TeamPage() {
         >
           <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-4">Joining the team</h3>
           <p className="text-base text-neutral-500 leading-relaxed mb-8 max-w-xl mx-auto">
-            We are always looking for exceptional engineers and researchers to help us scale digital infrastructure.
+            We are always looking for exceptional geeks, engineers and researchers to help us scale digital infrastructure. Email Us your CV and a brief note about why you want to join the team. We will get back to you if we have a suitable role.
           </p>
-          <a href="mailto:info@antera.co.tz" className="inline-block bg-black text-white px-10 py-4 text-sm font-medium hover:bg-[#FA520F] transition-colors">
+          <a href="mailto:sheldoncodesdaily@gmail.com" className="inline-block bg-black text-white px-10 py-4 text-sm font-medium hover:bg-[#FA520F] transition-colors">
             Join Us
           </a>
         </motion.div>
