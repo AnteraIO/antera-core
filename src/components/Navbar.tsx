@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react'
-import { Menu, X, ChevronDown, ArrowRight, Globe, Layers, Building2, Code, BriefcaseBusiness,Lock,Star, Database, MessageSquare, Users, Target, TrendingUp, Network, Brain, LineChart, Phone, Mail, Share2, Smartphone, Terminal } from 'lucide-react'
+import { Menu, X, ChevronDown, ArrowRight, Globe, Layers, Building2, Code, BriefcaseBusiness,Lock,Star, Database, MessageSquare, Users, Target, TrendingUp, Network, Brain, LineChart, Phone, Mail, Share2, Smartphone,MonitorCog } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -151,9 +151,9 @@ export const Navbar = () => {
 
   const marqueeTextItems = [
     { text: "AI Solutions & Intelligent Systems for Tanzanian & African Markets", badge: "AI & AUTOMATION", icon: Brain },
-    { text: "Enterprise Web, Mobile & Digital Platform Development", badge: "APP DEV", icon: Terminal },
-    { text: "Modern Data Science & Secure Local LLM Implementations", badge: "DATA SCIENCE", icon: LineChart },
-    { text: "Sekela POS, Kava AI Career Assistant & Swahiba Integrations", badge: "OUR PLATFORMS", icon: Smartphone },
+    { text: "Enterprise Webs, Mobile Apps, Organization Sites & Digital Platform Development", badge: "DEVELOPMENT", icon: MonitorCog },
+    { text: "Modern Data Science & Secure Local LLM Implementations", badge: "BUSINESS INTELLIGENCE", icon: LineChart },
+    { text: "Sekela POS, Kava AI Career Assistant & AI Bruno", badge: "OUR PLATFORMS", icon: Smartphone },
     { text: "Call us: +255 625 534 921 | +255 760 984 921 | +255 774 174 921", badge: "CALL US", icon: Phone },
     { text: "info@antera.co.tz", badge: "EMAIL", icon: Mail },
     { text: "Follow @antera_tz on Instagram, X, and LinkedIn", badge: "SOCIALS", icon: Share2 }
