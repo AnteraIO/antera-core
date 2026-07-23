@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react'
-import { Menu, X, ChevronDown, ArrowRight, Globe, Layers, Building2, Code, BriefcaseBusiness,Lock,Star, Database, MessageSquare, Users, Target, TrendingUp, Network } from 'lucide-react'
+import { Menu, X, ChevronDown, ArrowRight, Globe, Layers, Building2, Code, BriefcaseBusiness,Lock,Star, Database, MessageSquare, Users, Target, TrendingUp, Network, Cpu, Phone, Mail, Share2, Smartphone } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -150,13 +150,13 @@ export const Navbar = () => {
   ]
 
   const marqueeTextItems = [
-    { text: "AI Solutions & Intelligent Systems for Tanzanian & African Markets", badge: "AI & AUTOMATION" },
-    { text: "Enterprise Web, Mobile & Digital Platform Development", badge: "APP DEV" },
-    { text: "Modern Data Science & Secure Local LLM Implementations", badge: "DATA SCIENCE" },
-    { text: "Sekela POS, Kava AI Career Assistant & Swahiba Integrations", badge: "OUR PLATFORMS" },
-    { text: "Call us: +255 625 534 921 | +255 760 984 921 | +255 774 174 921", badge: "CALL US" },
-    { text: "info@antera.co.tz", badge: "EMAIL" },
-    { text: "Follow @antera_tz on Instagram, X, and LinkedIn", badge: "SOCIALS" }
+    { text: "AI Solutions & Intelligent Systems for Tanzanian & African Markets", badge: "AI & AUTOMATION", icon: Cpu },
+    { text: "Enterprise Web, Mobile & Digital Platform Development", badge: "APP DEV", icon: Code },
+    { text: "Modern Data Science & Secure Local LLM Implementations", badge: "DATA SCIENCE", icon: Database },
+    { text: "Sekela POS, Kava AI Career Assistant & Swahiba Integrations", badge: "OUR PLATFORMS", icon: Smartphone },
+    { text: "Call us: +255 625 534 921 | +255 760 984 921 | +255 774 174 921", badge: "CALL US", icon: Phone },
+    { text: "info@antera.co.tz", badge: "EMAIL", icon: Mail },
+    { text: "Follow @antera_tz on Instagram, X, and LinkedIn", badge: "SOCIALS", icon: Share2 }
   ];
 
   // Repeat items for infinite horizontal marquee scroll
@@ -174,15 +174,19 @@ export const Navbar = () => {
           <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#1F1F1F] to-transparent z-10 pointer-events-none" />
 
           <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused] cursor-pointer py-1">
-            {repeatedMarquee.map((item, index) => (
-              <div key={index} className="flex items-center gap-2 mx-6 text-[10px] tracking-normal font-medium text-neutral-300 normal-case">
-                <span className="bg-[#FA520F] text-white text-[8px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-none flex-shrink-0">
-                  {item.badge}
-                </span>
-                <span>{item.text}</span>
-                <span className="text-neutral-600 font-mono ml-4 select-none">✦</span>
-              </div>
-            ))}
+            {repeatedMarquee.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <div key={index} className="flex items-center gap-2 mx-6 text-[10px] tracking-normal font-medium text-neutral-300 normal-case">
+                  <span className="bg-[#FA520F] text-white text-[8px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-none flex-shrink-0">
+                    {item.badge}
+                  </span>
+                  {Icon && <Icon className="w-3.5 h-3.5 text-[#FA520F] shrink-0" />}
+                  <span>{item.text}</span>
+                  <span className="text-neutral-600 font-mono ml-4 select-none">✦</span>
+                </div>
+              );
+            })}
           </div>
         </div>
 

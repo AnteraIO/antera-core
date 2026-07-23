@@ -42,7 +42,7 @@ export default {
         'grid-size': '40px 40px',
       },
       animation: {
-        marquee: 'marquee 30s linear infinite',
+        marquee: 'marquee 50s linear infinite',
       },
       keyframes: {
         marquee: {
