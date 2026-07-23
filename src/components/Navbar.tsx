@@ -150,11 +150,13 @@ export const Navbar = () => {
   ]
 
   const marqueeTextItems = [
-    { text: "Sekela POS — Cloud-Native POS for MSMEs in East Africa", badge: "COMING SOON" },
-    { text: "Kava — AI Resume Builder & Career Assistant with FitCheck Me & Shunu Coach", badge: "LAUNCHING SOON" },
-    { text: "Sekela APIs — High-throughput SMS, USSD, and Chatbot Integration", badge: "ACTIVE" },
-    { text: "Custom Enterprise AI & Digital Platforms Development", badge: "SERVICES" },
-    { text: "Scale your business with automated systems & secure local models", badge: "MISSION" }
+    { text: "AI Solutions & Intelligent Systems for Tanzanian & African Markets", badge: "AI & AUTOMATION" },
+    { text: "Enterprise Web, Mobile & Digital Platform Development", badge: "APP DEV" },
+    { text: "Modern Data Science & Secure Local LLM Implementations", badge: "DATA SCIENCE" },
+    { text: "Sekela POS, Kava AI Career Assistant & Swahiba Integrations", badge: "OUR PLATFORMS" },
+    { text: "Call us: +255 625 534 921 | +255 760 984 921 | +255 774 174 921", badge: "CALL US" },
+    { text: "info@antera.co.tz", badge: "EMAIL" },
+    { text: "Follow @antera_tz on Instagram, X, and LinkedIn", badge: "SOCIALS" }
   ];
 
   // Repeat items for infinite horizontal marquee scroll
