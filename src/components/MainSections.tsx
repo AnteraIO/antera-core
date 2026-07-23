@@ -1,6 +1,12 @@
 'use client';
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
+import Image from 'next/image';
+import banner1 from '../assets/banner-1.png';
+import banner2 from '../assets/banner-2.png';
+import banner3 from '../assets/banner-3.png';
+import banner4 from '../assets/banner-4.png';
+import banner5 from '../assets/banner-5.png';
 
 const PixelShieldIcon = () => (
   <motion.svg 
@@ -102,14 +108,25 @@ export const TrustSection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 border border-neutral-200 bg-white">
             <motion.div 
-              className="group border-b md:border-b-0 md:border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              className="group relative border-b md:border-b-0 md:border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0, duration: 0.7 }}
             >
-
-              <div className="mt-auto">
+              {/* Background Image */}
+              <div className="absolute inset-0 z-0 opacity-20">
+                <Image
+                  src={banner1}
+                  alt="Security preparedness"
+                  fill
+                  className="object-cover"
+                  priority={false}
+                />
+              </div>
+              
+              {/* Content */}
+              <div className="relative z-10 mt-auto">
                 <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">We're Always Prepared</h3>
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
                   Be ready for any security issue with faster response times and clear recovery plans.
@@ -118,13 +135,25 @@ export const TrustSection = () => {
             </motion.div>
 
             <motion.div 
-              className="group border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              className="group relative border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1, duration: 0.7 }}
             >
-              <div className="mt-auto">
+              {/* Background Image */}
+              <div className="absolute inset-0 z-0 opacity-20">
+                <Image
+                  src={banner2}
+                  alt="Secure access"
+                  fill
+                  className="object-cover"
+                  priority={false}
+                />
+              </div>
+              
+              {/* Content */}
+              <div className="relative z-10 mt-auto">
                 <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Secure Access</h3>
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
                   Protect your data with strong identity management and protected endpoints.
@@ -149,11 +178,6 @@ export const ServicesSection = () => {
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32">
-        <div className="flex justify-center items-center gap-8 mb-12">
-          <PixelChatbotIcon />
-          <PixelWorkflowIcon />
-          <PixelCopilotIcon />
-        </div>
 
         <header className="mb-24 md:mb-40 text-center">
           <motion.h1 
@@ -181,50 +205,89 @@ export const ServicesSection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 border border-neutral-200 bg-white">
             <motion.div 
-              className="group border-b md:border-b-0 md:border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              className="group relative border-b md:border-b-0 md:border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0, duration: 0.7 }}
             >
-              <PixelChatbotIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">AI Chatbots</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
-                  Automate customer and internal support to improve response times and staff productivity.
-                </p>
+              {/* Background Image */}
+              <div className="absolute inset-0 z-0 opacity-20">
+                <Image
+                  src={banner3}
+                  alt="AI Chatbots"
+                  fill
+                  className="object-cover"
+                  priority={false}
+                />
+              </div>
+              
+              {/* Content */}
+              <div className="relative z-10">
+                <div className="mt-auto">
+                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">AI Chatbots</h3>
+                  <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                    Automate customer and internal support to improve response times and staff productivity.
+                  </p>
+                </div>
               </div>
             </motion.div>
 
             <motion.div 
-              className="group border-b md:border-b-0 md:border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              className="group relative border-b md:border-b-0 md:border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1, duration: 0.7 }}
             >
-              <PixelWorkflowIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Workflow Automation</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
-                  Eliminate manual and repetitive tasks with practical AI solutions that scale your operations.
-                </p>
+              {/* Background Image */}
+              <div className="absolute inset-0 z-0 opacity-20">
+                <Image
+                  src={banner4}
+                  alt="Workflow Automation"
+                  fill
+                  className="object-cover"
+                  priority={false}
+                />
+              </div>
+              
+              {/* Content */}
+              <div className="relative z-10">
+                <div className="mt-auto">
+                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Workflow Automation</h3>
+                  <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                    Eliminate manual and repetitive tasks with practical AI solutions that scale your operations.
+                  </p>
+                </div>
               </div>
             </motion.div>
 
             <motion.div 
-              className="group border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
+              className="group relative border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.7 }}
             >
-              <PixelCopilotIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Secure AI Copilots</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
-                  Turn your documents into insights while keeping your systems secure and governed.
-                </p>
+              {/* Background Image */}
+              <div className="absolute inset-0 z-0 opacity-20">
+                <Image
+                  src={banner5}
+                  alt="Secure AI Copilots"
+                  fill
+                  className="object-cover"
+                  priority={false}
+                />
+              </div>
+              
+              {/* Content */}
+              <div className="relative z-10">
+                <div className="mt-auto">
+                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Secure AI Copilots</h3>
+                  <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                    Turn your documents into insights while keeping your systems secure and governed.
+                  </p>
+                </div>
               </div>
             </motion.div>
             <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />

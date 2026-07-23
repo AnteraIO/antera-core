@@ -1,27 +1,49 @@
 'use client';
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import heroImage from '../assets/hero.jpg';
+import hero1 from '../assets/hero-1.jpg';
+import hero2 from '../assets/hero-2.jpg';
+import hero3 from '../assets/hero-3.jpg';
 
 export const Hero = () => {
   const { t } = useLanguage();
+  const [currentImage, setCurrentImage] = useState(0);
+  const heroImages = [hero1, hero2, hero3];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % heroImages.length);
+    }, 15000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="relative min-h-screen w-full bg-black font-sans antialiased overflow-hidden">
-      {/* Background Image with Sunset Gradient Overlay */}
+      {/* Background Images with Crossfade */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src={heroImage}
-          alt="Hero Background"
-          fill
-          priority
-          className="object-cover object-center"
-        />
-        {/* Sunset-inspired gradient overlay: dark -> orange-red -> cream-yellow */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-[#FA520F]/30 to-[#FCD34D]/20" />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentImage}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={heroImages[currentImage]}
+              alt={`Hero Background ${currentImage + 1}`}
+              fill
+              priority
+              className="object-cover object-center"
+            />
+          </motion.div>
+        </AnimatePresence>
+        {/* Sunset gradient overlay: dark -> orange-red -> cream-yellow */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-[#FA520F]/30 to-[#FCD34D]/20 z-[1]" />
       </div>
 
       {/* Main Content */}
@@ -49,7 +71,7 @@ export const Hero = () => {
 
             <button className="group relative border-4 border-black bg-[#FA520F] px-6 py-3 font-mono text-sm font-bold uppercase tracking-wider text-white shadow-[4px_4px_0px_0px_#000000] transition-all duration-75 active:translate-x-[4px] active:translate-y-[4px] active:shadow-none">
 
-              <span className="absolute inset-0 border-t-2 border-l-2 border-white/40 pointer-events-none" /> */}
+              <span className="absolute inset-0 border-t-2 border-l-2 border-white/40 pointer-events-none" />
               {/* Bottom/Right inner shadow */}
               {/* <span className="absolute inset-0 border-b-2 border-r-2 border-black/40 pointer-events-none" />
 
