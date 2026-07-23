@@ -149,13 +149,42 @@ export const Navbar = () => {
     { name: t('nav.company'), href: '/company', isDropdown: true, key: 'Company', alignRight: true },
   ]
 
+  const marqueeTextItems = [
+    { text: "Sekela POS — Cloud-Native POS for MSMEs in East Africa", badge: "COMING SOON" },
+    { text: "Kava — AI Resume Builder & Career Assistant with FitCheck Me & Shunu Coach", badge: "LAUNCHING SOON" },
+    { text: "Sekela APIs — High-throughput SMS, USSD, and Chatbot Integration", badge: "ACTIVE" },
+    { text: "Custom Enterprise AI & Digital Platforms Development", badge: "SERVICES" },
+    { text: "Scale your business with automated systems & secure local models", badge: "MISSION" }
+  ];
+
+  // Repeat items for infinite horizontal marquee scroll
+  const repeatedMarquee = [...marqueeTextItems, ...marqueeTextItems, ...marqueeTextItems, ...marqueeTextItems];
+
   return (
     <>
       <nav 
-        className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-neutral-200 text-xs font-mono font-bold antialiased uppercase tracking-wider h-14"
+        className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-neutral-200 text-xs font-mono font-bold antialiased uppercase tracking-wider h-20 flex flex-col"
         onMouseLeave={() => setActiveMenu(null)}
       >
-        <div className="mx-auto flex items-stretch justify-between h-full">
+        {/* Top Marquee */}
+        <div className="w-full bg-[#1F1F1F] text-white h-6 overflow-hidden flex items-center relative border-b border-neutral-800 z-50">
+          <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#1F1F1F] to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#1F1F1F] to-transparent z-10 pointer-events-none" />
+
+          <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused] cursor-pointer py-1">
+            {repeatedMarquee.map((item, index) => (
+              <div key={index} className="flex items-center gap-2 mx-6 text-[10px] tracking-normal font-medium text-neutral-300 normal-case">
+                <span className="bg-[#FA520F] text-white text-[8px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-none flex-shrink-0">
+                  {item.badge}
+                </span>
+                <span>{item.text}</span>
+                <span className="text-neutral-600 font-mono ml-4 select-none">✦</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mx-auto flex items-stretch justify-between h-[56px] w-full">
           
           <div className="flex items-stretch">
             <Link href="/" className="flex items-center gap-3 px-6 border-r border-neutral-200 hover:bg-neutral-50 transition-colors flex-shrink-0 relative">
@@ -189,7 +218,7 @@ export const Navbar = () => {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 5 }}
                           transition={{ duration: 0.12 }}
-                          className={`absolute top-14 bg-white border-x border-b border-neutral-200 z-50 flex w-[680px] text-left cursor-default ${
+                          className={`absolute top-[56px] bg-white border-x border-b border-neutral-200 z-50 flex w-[680px] text-left cursor-default ${
                             link.alignRight ? 'right-[-1px] left-auto' : 'left-[-1px] right-auto'
                           }`}
                           onClick={(e) => e.stopPropagation()}
@@ -279,7 +308,7 @@ export const Navbar = () => {
                     initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 4 }}
-                    className="absolute right-0 top-[56px] bg-white border border-neutral-200 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.05)] w-24 flex flex-col divide-y divide-neutral-100"
+                    className="absolute right-0 top-[56px] bg-white border border-neutral-200 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.05)] z-50 w-24 flex flex-col divide-y divide-neutral-100"
                   >
                     {languages.map((lang) => (
                       <button
@@ -329,7 +358,7 @@ export const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.1 }}
-            className="fixed inset-0 top-14 bg-white z-40 lg:hidden flex flex-col divide-y-4 divide-neutral-200 border-t border-neutral-200 overflow-y-auto font-mono font-bold text-xs uppercase tracking-wider"
+            className="fixed inset-0 top-20 bg-white z-40 lg:hidden flex flex-col divide-y-4 divide-neutral-200 border-t border-neutral-200 overflow-y-auto font-mono font-bold text-xs uppercase tracking-wider"
           >
             <div className="flex flex-col divide-y-2 divide-neutral-100 text-black">
               {navLinks.map((link) => (
