@@ -1,7 +1,8 @@
 'use client';
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-
+import Image from 'next/image';
+import officeBg from '@/assets/hero-2.jpg';
 
 const GrainOverlay = () => (
   <div 
@@ -125,17 +126,27 @@ export default function OfficePage() {
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
   return (
-    <div ref={containerRef} className="bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+    <div ref={containerRef} className="relative bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0 opacity-10">
+        <Image
+          src={officeBg}
+          alt="Office background"
+          fill
+          className="object-cover"
+          priority={false}
+        />
+      </div>
+      
+      {/* Background grid pattern */}
+      <div className="absolute inset-0 opacity-40 pointer-events-none z-[1]">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e5e5_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e5_1px,transparent_1px)] bg-[size:32px_32px]" />
+      </div>
+
       <GrainOverlay />
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-        
-        <div className="flex justify-center items-center gap-8 mb-12">
-          <PixelMapPinIcon />
-          <PixelClockIcon />
-          <PixelGlobeIcon />
-        </div>
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12">
 
         <header className="mb-24 md:mb-40 text-center">
           <motion.h1 
@@ -159,7 +170,7 @@ export default function OfficePage() {
         <div className="relative max-w-5xl mx-auto">
           <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 border border-neutral-200 bg-white">
+          <div className="grid grid-cols-1 md:grid-cols-3 border border-neutral-200 bg-white/90 backdrop-blur-sm">
             
             <motion.div 
               className="group md:col-span-2 border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
