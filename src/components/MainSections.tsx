@@ -84,7 +84,7 @@ export const TrustSection = () => {
 
         <header className="mb-24 md:mb-40 text-center">
           <motion.h1 
-            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
+            className="text-7xl md:text-9xl lg:text-[10rem] font-normal tracking-[-0.03em] leading-[0.95]"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -93,7 +93,7 @@ export const TrustSection = () => {
             Reduce Risk.<br/><span className="text-[#FA520F]">Strengthen Security.</span>
           </motion.h1>
           <motion.p 
-            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
+            className="text-lg md:text-xl lg:text-2xl max-w-3xl leading-relaxed text-[#1F1F1F] mx-auto mt-8 font-medium"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -127,8 +127,8 @@ export const TrustSection = () => {
               
               {/* Content */}
               <div className="relative z-10 mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">We're Always Prepared</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-3">We're Always Prepared</h3>
+                <p className="text-base md:text-lg text-[#1F1F1F] font-medium leading-relaxed">
                   Be ready for any security issue with faster response times and clear recovery plans.
                 </p>
               </div>
@@ -154,8 +154,8 @@ export const TrustSection = () => {
               
               {/* Content */}
               <div className="relative z-10 mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Secure Access</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-3">Secure Access</h3>
+                <p className="text-base md:text-lg text-[#1F1F1F] font-medium leading-relaxed">
                   Protect your data with strong identity management and protected endpoints.
                 </p>
               </div>
@@ -181,7 +181,7 @@ export const ServicesSection = () => {
 
         <header className="mb-24 md:mb-40 text-center">
           <motion.h1 
-            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
+            className="text-7xl md:text-9xl lg:text-[10rem] font-normal tracking-[-0.03em] leading-[0.95]"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -190,7 +190,7 @@ export const ServicesSection = () => {
             Automate smarter.<br/><span className="text-[#FA520F]">Scale faster.</span>
           </motion.h1>
           <motion.p 
-            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
+            className="text-lg md:text-xl lg:text-2xl max-w-3xl leading-relaxed text-[#1F1F1F] mx-auto mt-8 font-medium"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -225,8 +225,8 @@ export const ServicesSection = () => {
               {/* Content */}
               <div className="relative z-10">
                 <div className="mt-auto">
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">AI Chatbots</h3>
-                  <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-3">AI Chatbots</h3>
+                  <p className="text-base md:text-lg text-[#1F1F1F] font-medium leading-relaxed">
                     Automate customer and internal support to improve response times and staff productivity.
                   </p>
                 </div>
@@ -254,8 +254,8 @@ export const ServicesSection = () => {
               {/* Content */}
               <div className="relative z-10">
                 <div className="mt-auto">
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Workflow Automation</h3>
-                  <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-3">Workflow Automation</h3>
+                  <p className="text-base md:text-lg text-[#1F1F1F] font-medium leading-relaxed">
                     Eliminate manual and repetitive tasks with practical AI solutions that scale your operations.
                   </p>
                 </div>
@@ -283,8 +283,8 @@ export const ServicesSection = () => {
               {/* Content */}
               <div className="relative z-10">
                 <div className="mt-auto">
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Secure AI Copilots</h3>
-                  <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
+                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-3">Secure AI Copilots</h3>
+                  <p className="text-base md:text-lg text-[#1F1F1F] font-medium leading-relaxed">
                     Turn your documents into insights while keeping your systems secure and governed.
                   </p>
                 </div>

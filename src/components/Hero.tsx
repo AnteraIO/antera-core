@@ -123,7 +123,7 @@ export const Hero = () => {
 
           {/* Animated description with larger text */}
           <motion.p 
-            className="mb-12 max-w-2xl text-xl md:text-2xl leading-relaxed text-white/80 font-light"
+            className="mb-12 max-w-2xl text-xl md:text-2xl leading-relaxed text-white font-medium"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}

@@ -202,7 +202,7 @@ const Bubble = ({ msg, isLast, isStreaming }: { msg: Msg; isLast: boolean; isStr
       {!isUser && <Avatar size={28} />}
       <div className={cn('flex flex-col gap-0.5', isUser ? 'items-end' : 'items-start', 'flex-1', isUser ? 'max-w-[85%]' : 'max-w-[85%]')}>
      <div
-  className="px-4 py-2.5 text-[13.5px] leading-[1.55] shadow-sm w-full"
+  className="px-4 py-2.5 text-[14.5px] font-medium leading-[1.55] shadow-sm w-full"
   style={
     isUser
       ? {
@@ -213,7 +213,7 @@ const Bubble = ({ msg, isLast, isStreaming }: { msg: Msg; isLast: boolean; isStr
         }
       : {
           background: 'transparent',
-          color: '#1a1108',
+          color: '#000000',
           borderRadius: '20px 20px 20px 5px',
           padding: '4px 4px 4px 0',
         }
@@ -537,10 +537,10 @@ const ChatAgent = () => {
                     >
                       <Avatar size={28} />
                       <div
-                        className="px-4 py-2.5 text-[13.5px] leading-relaxed flex-1"
+                        className="px-4 py-2.5 text-[14.5px] font-medium leading-relaxed flex-1"
                         style={{
                           background: 'transparent',
-                          color: '#1a1108',
+                          color: '#000000',
                           padding: '4px 4px 4px 0',
                         }}
                       >
@@ -658,7 +658,7 @@ const ChatAgent = () => {
                     onChange={e => setInput(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && !e.shiftKey && handleSend()}
                     placeholder="Message Antera..."
-                    className="flex-1 bg-transparent text-[13.5px] outline-none"
+                    className="flex-1 bg-transparent text-[14.5px] font-semibold outline-none"
                     style={{ color: '#000000' }}
                     disabled={isLoading}
                   />

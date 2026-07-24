@@ -117,12 +117,12 @@ export const FinalCTAAndFooter = () => {
         </div> */}
 
         <header className="mb-24 md:mb-40 text-center">
-          <motion.h1 className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95] text-black"
+          <motion.h1 className="text-7xl md:text-9xl lg:text-[10rem] font-normal tracking-[-0.03em] leading-[0.95] text-black"
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             Get in <span className="text-[#FA520F]">Touch.</span>
           </motion.h1>
-          <motion.p className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
+          <motion.p className="text-lg md:text-xl lg:text-2xl max-w-3xl leading-relaxed text-[#1F1F1F] mx-auto mt-8 font-medium"
             initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}
           >
             Ready to transform your business? Reach out and let's build something extraordinary together.
@@ -136,15 +136,15 @@ export const FinalCTAAndFooter = () => {
             
             <div className="group p-8 md:p-12 min-h-[280px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors border-b md:border-b-0 lg:border-r border-neutral-200">
               <div className="flex items-center gap-3 mb-6">
-                <span className="text-lg font-medium tracking-tight text-black">Antera Group Software</span>
+                <span className="text-lg font-semibold tracking-tight text-black">Antera Group Software</span>
               </div>
-              <p className="text-sm text-neutral-500 leading-relaxed">
+              <p className="text-sm text-[#1F1F1F] font-medium leading-relaxed">
                 We use smart technology and AI to help businesses grow and work better at any scale.
               </p>
             </div>
 
             <div className="group p-8 md:p-12 min-h-[280px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors border-b md:border-b-0 lg:border-r border-neutral-200">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-6 font-mono">{t('nav.products')}</h3>
+              <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6 font-mono">{t('nav.products')}</h3>
               <ul className="space-y-3">
                 <FooterLink href="https://aibruno.vercel.app/">AI Bruno</FooterLink>
                 <FooterLink href="https://swahiba.vercel.app/">Swahiba</FooterLink>
@@ -156,7 +156,7 @@ export const FinalCTAAndFooter = () => {
             </div>
 
             <div className="group p-8 md:p-12 min-h-[280px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors border-b md:border-b-0 lg:border-r border-neutral-200">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-6 font-mono">{t('nav.company')}</h3>
+              <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6 font-mono">{t('nav.company')}</h3>
               <ul className="space-y-3">
                 <FooterLink href="/company">About Us</FooterLink>
                 <FooterLink href="/team">Team</FooterLink>
@@ -170,21 +170,21 @@ export const FinalCTAAndFooter = () => {
 
             <div className="group p-8 md:p-12 min-h-[280px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors">
               <div>
-                <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-6 font-mono">Contact</h3>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6 font-mono">Contact</h3>
                 <ul className="space-y-4">
-                  <li className="flex items-center gap-3 text-neutral-500 group/link">
+                  <li className="flex items-center gap-3 text-[#1F1F1F] group/link font-medium">
                     <span className="text-sm font-mono group-hover/link:text-black transition-colors">info@antera.co.tz</span>
                   </li>
-                    <li className="flex items-center gap-3 text-neutral-500 group/link">
+                    <li className="flex items-center gap-3 text-[#1F1F1F] group/link font-medium">
                     <span className="text-sm font-mono group-hover/link:text-black transition-colors">+255 625 534 921</span>
                   </li>
-                  <li className="flex items-center gap-3 text-neutral-500 group/link">
+                  <li className="flex items-center gap-3 text-[#1F1F1F] group/link font-medium">
                     <span className="text-sm font-mono group-hover/link:text-black transition-colors">+255 760 984 921</span>
                   </li>
-                  <li className="flex items-center gap-3 text-neutral-500 group/link">
+                  <li className="flex items-center gap-3 text-[#1F1F1F] group/link font-medium">
                     <span className="text-sm font-mono group-hover/link:text-black transition-colors">+255 774 174 921</span>
                   </li>
-                  <a href="https://wa.me/255760984921" target="_blank" className="flex items-center gap-3 text-neutral-500 group/link cursor-pointer">
+                  <a href="https://wa.me/255760984921" target="_blank" className="flex items-center gap-3 text-[#1F1F1F] group/link cursor-pointer font-medium">
                     <span className="text-sm font-mono group-hover/link:text-black transition-colors">WhatsApp Support</span>
                   </a>
                 </ul>
@@ -243,7 +243,7 @@ export const FinalCTAAndFooter = () => {
 
 const FooterLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
   <li>
-    <Link href={href} className="text-sm font-medium text-neutral-500 hover:text-[#FA520F] transition-colors block">
+    <Link href={href} className="text-sm font-semibold text-[#1F1F1F] hover:text-[#FA520F] transition-colors block">
       {children}
     </Link>
   </li>

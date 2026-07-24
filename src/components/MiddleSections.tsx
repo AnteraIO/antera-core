@@ -204,12 +204,12 @@ export const CommunicationSection = () => {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32">
 
         <header className="mb-24 md:mb-40 text-center">
-          <motion.h1 className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
+          <motion.h1 className="text-7xl md:text-9xl lg:text-[10rem] font-normal tracking-[-0.03em] leading-[0.95]"
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             Automate <span className="text-neutral-400 block">Work.</span>
           </motion.h1>
-          <motion.p className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
+          <motion.p className="text-lg md:text-xl lg:text-2xl max-w-3xl leading-relaxed text-[#1F1F1F] mx-auto mt-8 font-medium"
             initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}
           >
             Connect with your customers and automate workflows. We help you solve manual and repetitive tasks while improving response times and staff productivity.
@@ -228,7 +228,7 @@ export const CommunicationSection = () => {
               >
                 <channel.icon />
                 <div className="mt-auto flex items-center justify-between gap-4">
-                  <h3 className="text-xl md:text-2xl font-medium tracking-tight text-black">{channel.name}</h3>
+                  <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-black">{channel.name}</h3>
                   <ArrowRight className="w-5 h-5 text-black transform -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300" />
                 </div>
               </motion.a>
@@ -253,12 +253,12 @@ export const ApplicationSection = () => {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32">
 
         <header className="mb-24 md:mb-40 text-center">
-          <motion.h1 className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
+          <motion.h1 className="text-7xl md:text-9xl lg:text-[10rem] font-normal tracking-[-0.03em] leading-[0.95]"
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             Digital <span className="text-neutral-400 block">Platforms.</span>
           </motion.h1>
-          <motion.p className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
+          <motion.p className="text-lg md:text-xl lg:text-2xl max-w-3xl leading-relaxed text-[#1F1F1F] mx-auto mt-8 font-medium"
             initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}
           >
             We design and develop modern websites and applications that are secure, reliable, and aligned with real business needs.
@@ -274,8 +274,8 @@ export const ApplicationSection = () => {
             <motion.div variants={itemVariants} className="group p-8 md:p-12 min-h-[500px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors border-b lg:border-b-0 lg:border-r border-neutral-200">
               <div>
                 <PixelMobileIcon />
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mt-8 mb-3">Web & Mobile Applications</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">Secure, scalable digital platforms that support growth and improve user experience across all devices.</p>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mt-8 mb-3">Web & Mobile Applications</h3>
+                <p className="text-base md:text-lg text-[#1F1F1F] font-medium leading-relaxed">Secure, scalable digital platforms that support growth and improve user experience across all devices.</p>
               </div>
               <motion.div whileHover={{ y: -6, scale: 1.02 }} transition={{ duration: 0.5 }} className="mt-8 border border-black/10 overflow-hidden">
                 <Image src={mobileAppImage} alt="Mobile App Interface" className="w-full h-auto object-cover" />
@@ -285,8 +285,8 @@ export const ApplicationSection = () => {
             <motion.div variants={itemVariants} className="group p-8 md:p-12 min-h-[500px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors">
               <div>
                 <PixelWebIcon />
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mt-8 mb-3">Corporate Digital Portals</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">Improve brand credibility and digital presence with integrated business systems and secure development practices.</p>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mt-8 mb-3">Corporate Digital Portals</h3>
+                <p className="text-base md:text-lg text-[#1F1F1F] font-medium leading-relaxed">Improve brand credibility and digital presence with integrated business systems and secure development practices.</p>
               </div>
               <motion.div whileHover={{ y: -6, scale: 1.02 }} transition={{ duration: 0.5 }} className="mt-8 border border-black/10 overflow-hidden">
                 <Image src={webCommandImage} alt="Web Command Dashboard" className="w-full h-auto object-cover" />
@@ -321,12 +321,12 @@ export const DataIntelligenceSection = () => {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32">
 
         <header className="mb-24 md:mb-40 text-center">
-          <motion.h1 className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
+          <motion.h1 className="text-7xl md:text-9xl lg:text-[10rem] font-normal tracking-[-0.03em] leading-[0.95]"
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             Data into <span className="text-neutral-400 block">Decisions.</span>
           </motion.h1>
-          <motion.p className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
+          <motion.p className="text-lg md:text-xl lg:text-2xl max-w-3xl leading-relaxed text-[#1F1F1F] mx-auto mt-8 font-medium"
             initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}
           >
             We build data systems leadership can trust, from clean pipelines to executive dashboards. Turn data into actionable insights for smarter decision making.
@@ -345,7 +345,7 @@ export const DataIntelligenceSection = () => {
               >
                 <div>
                   <feature.icon />
-                  <h3 className="text-xl md:text-2xl font-medium tracking-tight mt-8 mb-3">{feature.title}</h3>
+                  <h3 className="text-xl md:text-2xl font-semibold tracking-tight mt-8 mb-3">{feature.title}</h3>
                 </div>
                 <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.4 }} className="mt-4 border border-black/5 overflow-hidden">
                   <Image src={feature.image} alt={feature.title} className="w-full h-auto object-cover" />
