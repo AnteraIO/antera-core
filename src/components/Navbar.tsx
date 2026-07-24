@@ -168,15 +168,15 @@ export const Navbar = () => {
         onMouseLeave={() => setActiveMenu(null)}
       >
         {/* Top Marquee */}
-        <div className="w-full bg-[#1F1F1F] text-white h-6 overflow-hidden flex items-center relative border-b border-neutral-800 z-50 font-inter navbar-marquee-container">
+        <div className="w-full bg-[#1F1F1F] text-white h-6 overflow-hidden flex items-center relative border-b border-neutral-800 z-50">
           <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#1F1F1F] to-transparent z-10 pointer-events-none" />
           <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#1F1F1F] to-transparent z-10 pointer-events-none" />
 
-          <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused] cursor-pointer py-1 font-inter">
+          <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused] cursor-pointer py-1">
             {repeatedMarquee.map((item, index) => {
               const Icon = item.icon;
               return (
-                <div key={index} className="flex items-center gap-2 mx-6 text-[10px] tracking-normal font-medium text-neutral-300 normal-case font-inter">
+                <div key={index} className="flex items-center gap-2 mx-6 text-[10px] tracking-normal font-medium text-neutral-300 normal-case">
                   <span className="bg-[#FA520F] text-white text-[8px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-none flex-shrink-0">
                     {item.badge}
                   </span>
