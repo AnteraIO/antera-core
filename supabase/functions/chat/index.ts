@@ -178,7 +178,7 @@ serve(async (req) => {
         'Authorization': `Bearer ${DEEPSEEK_API_KEY}`
       },
       body: JSON.stringify({
-        model: 'deepseek-chat',
+        model: 'deepseek-v4-flash',
         messages: formattedMessages,
         temperature: temperature,
         max_tokens: maxTokens,
@@ -203,7 +203,7 @@ serve(async (req) => {
       JSON.stringify({ 
         text,
         metadata: {
-          model: "deepseek-chat",
+          model: "deepseek-v4-flash",
           timestamp: new Date().toISOString(),
         }
       }),
