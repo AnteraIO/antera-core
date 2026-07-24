@@ -11,6 +11,11 @@
     font-feature-settings: "ss01", "ss02", "cv01", "cv11";
     font-family: var(--font-williwaw), var(--font-inter), sans-serif;
   }
+
+  /* Force the custom font globally on the entire site except the Navbar Marquee container and its contents */
+  body *:not(.navbar-marquee-container):not(.navbar-marquee-container *) {
+    font-family: var(--font-williwaw), var(--font-inter), sans-serif !important;
+  }
 }
 
 @layer components {
