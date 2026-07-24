@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Instrument_Serif } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { Navbar } from "@/components/Navbar";
@@ -20,6 +21,13 @@ const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
   weight: "400",
   subsets: ["latin"],
+});
+
+// Williwaw Book font - path from src/app to root public folder
+const williwaw = localFont({
+  src: "../../public/fonts/Williwaw-Book.otf",
+  variable: "--font-williwaw",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -110,7 +118,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} ${williwaw.variable} antialiased`}
       >
         <script
           type="application/ld+json"
