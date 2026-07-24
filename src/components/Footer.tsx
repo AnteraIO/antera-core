@@ -221,7 +221,7 @@ export const FinalCTAAndFooter = () => {
         <div className="max-w-[1400px] mx-auto flex flex-row items-center justify-between text-[10px] font-mono text-neutral-400 font-bold tracking-wider">
           <div>Antera Group Software© {new Date().getFullYear()}</div>
           <div className="flex items-center gap-4">
-            {['en', 'sw', 'pl'].map(lang => (
+            {['en', 'sw'].map(lang => (
               <button
                 key={lang}
                 onClick={() => setLanguage(lang as any)}

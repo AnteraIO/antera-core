@@ -25,10 +25,9 @@ export const Navbar = () => {
   const { language, setLanguage, t } = useLanguage()
   const pathname = usePathname()
 
-  const languages: { code: 'en' | 'sw' | 'pl'; name: string }[] = [
+  const languages: { code: 'en' | 'sw'; name: string }[] = [
     { code: 'en', name: 'EN' },
-    { code: 'sw', name: 'SW' },
-    { code: 'pl', name: 'PL' }
+    { code: 'sw', name: 'SW' }
   ]
 
   const blogLatestPosts: BlogLink[] = [
