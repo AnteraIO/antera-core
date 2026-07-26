@@ -128,7 +128,7 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            We help organizations build tailored Systems, Webapps, Mobile Apps, Chatbots, and AI systems to solve the world's hardest problems.
+            We build tailored systems, webapps, mobile apps, chatbots, and AI for Tanzanian SMEs, solopreneurs, and NGOs, connecting agents, tools, and data so small teams can solve niche problems faster, protect digital sovereignty, and expand their footprint.
           </motion.p>
         </div>
       </div>
