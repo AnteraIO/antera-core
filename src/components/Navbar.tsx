@@ -149,9 +149,9 @@ export const Navbar = () => {
   ]
 
   const marqueeTextItems = [
-    { text: "AI Solutions & Intelligent Systems for Tanzanian & African Markets", badge: "AI & AUTOMATION", icon: Brain },
-    { text: "Enterprise Webs, Mobile Apps, Organization Sites & Digital Platform Development", badge: "DEVELOPMENT", icon: MonitorCog },
-    { text: "Modern Data Science & Secure Local LLM Implementations", badge: "BUSINESS INTELLIGENCE", icon: LineChart },
+    { text: "AI Solutions & Intelligent Systems for Tanzanian and African Markets", badge: "AI & AUTOMATION", icon: Brain },
+    { text: "Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development", badge: "DEVELOPMENT", icon: MonitorCog },
+    { text: "Modern Data Science and Model Implementations", badge: "BUSINESS INTELLIGENCE", icon: LineChart },
     { text: "Sekela POS, Kava AI Career Assistant", badge: "OUR PLATFORMS", icon: Smartphone },
     { text: "Call us: +255 625 534 921 | +255 760 984 921 | +255 774 174 921", badge: "CALL US", icon: Phone },
     { text: "info@antera.co.tz", badge: "EMAIL", icon: Mail },
