@@ -154,7 +154,7 @@ export const TrustSection = () => {
               
               {/* Content */}
               <div className="relative z-10 mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-3">Secure Access</h3>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-3">Data Ownership</h3>
                 <p className="text-base md:text-lg text-[#1F1F1F] font-medium leading-relaxed">
                   Protect your data with strong identity management and protected endpoints.
                 </p>
