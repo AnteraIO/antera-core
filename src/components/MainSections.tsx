@@ -256,7 +256,7 @@ export const ServicesSection = () => {
                 <div className="mt-auto">
                   <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-3">Workflow Automation</h3>
                   <p className="text-base md:text-lg text-[#1F1F1F] font-medium leading-relaxed">
-                    Eliminate manual and repetitive tasks with practical AI solutions that scale your operations.
+                    Eliminate manual and repetitive tasks with practical AI solutions that expand your business.
                   </p>
                 </div>
               </div>
