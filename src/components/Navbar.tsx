@@ -149,7 +149,7 @@ export const Navbar = () => {
   ]
 
   const marqueeTextItems = [
-    { text: "AI Solutions & Intelligent Systems for Tanzanian and African Markets", badge: "AI & AUTOMATION", icon: Brain },
+    { text: "AI Solutions and Intelligent Systems for Tanzanian and African Markets", badge: "AI & AUTOMATION", icon: Brain },
     { text: "Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development", badge: "DEVELOPMENT", icon: MonitorCog },
     { text: "Modern Data Science and Model Implementations", badge: "BUSINESS INTELLIGENCE", icon: LineChart },
     { text: "Sekela POS, Kava AI Career Assistant", badge: "OUR PLATFORMS", icon: Smartphone },
