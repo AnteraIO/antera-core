@@ -3,6 +3,7 @@
 > [!IMPORTANT]
 We build tailored systems, webapps, mobile apps, chatbots, and AI for Tanzanian SMEs, solopreneurs, and NGOs, connecting agents, tools, and data so small teams can solve niche problems faster, protect digital sovereignty, and expand their footprint.
 
+Copyright © 2026 Antera. All rights reserved.
 
 <!-- 
 <p align="center">
