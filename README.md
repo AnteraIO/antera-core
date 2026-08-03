@@ -1,3 +1,9 @@
+# Grow Your Business With Smart Technology.
+
+> [!IMPORTANT]
+We build tailored systems, webapps, mobile apps, chatbots, and AI for Tanzanian SMEs, solopreneurs, and NGOs, connecting agents, tools, and data so small teams can solve niche problems faster, protect digital sovereignty, and expand their footprint.
+
+
 <!-- 
 <p align="center">
     <a href="https://github.com/Antera-Ltd/antera-core"><img src="https://img.shields.io/badge/status-active-brightgreen.svg"></a>
