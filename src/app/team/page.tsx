@@ -70,7 +70,7 @@ export default function TeamPage() {
     },
     {
       name: 'Josia O Mosses',
-      role: 'Co-Founder',
+      role: 'Team',
       bio: 'Directing strategic partnerships and core architectural development across Antera\'s global service layers.',
       image: anteraLogoImage,
       socials: {
@@ -123,7 +123,9 @@ export default function TeamPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            A team of engineers, researchers, and architects dedicated to digital independence.
+            We're a team of passionate innovators building cutting-edge AI solutions that help organizations streamline their operations and boost productivity. 
+            Our mission is to create software that not only solves today's problems but anticipates tomorrow's challenges.
+            We believe in the power of AI technology to transform how society operates. Our goal is to build intuitive, scalable solutions that grow with our customers and adapt to their evolving needs.
           </motion.p>
         </header>
 
