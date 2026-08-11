@@ -74,9 +74,9 @@ const marqueeItems = [
   {
     product: 'Kava',
     badge: 'FITCHECK ME',
-    title: 'Shunu AI Coach',
+    title: 'Kenja AI Coach',
     desc: 'Context-aware career assistant supporting English & Swahili with personalized job matches.',
-    highlight: 'FitCheck Me & Shunu AI',
+    highlight: 'FitCheck Me & Kenja AI',
     icon: MessageCircle,
   },
   {
