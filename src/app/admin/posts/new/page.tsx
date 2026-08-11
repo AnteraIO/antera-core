@@ -3,7 +3,7 @@ import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import RichTextEditor from '@/components/admin/RichTextEditor';
-import { Wand2, Save, Send } from 'lucide-react';
+import { Wand2, Save, Send, Edit3 } from 'lucide-react';
 import { postSchema } from '@/lib/validations';
 
 const GrainOverlay = () => (
@@ -16,23 +16,25 @@ const GrainOverlay = () => (
 );
 
 const PixelEditIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
+  <motion.div
+    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <path d="M8 16l3-8 3 8H8z" fill="white"/>
-    <path d="M10 14h4" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <Edit3 className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelWandIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
+  <motion.div
+    className="w-14 h-14 bg-[#8B5CF6] border border-[#7C3AED] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#8B5CF6" stroke="#7C3AED" strokeWidth="1"/>
-    <path d="M12 6v4M10 8h4" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-    <path d="M8 12l8 8M16 12l-8 8" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <Wand2 className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const DiamondDecoration = ({ className = "" }: { className?: string }) => (

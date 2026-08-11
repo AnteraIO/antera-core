@@ -2,6 +2,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { Code, Settings, BarChart2, MessageSquare, Phone, Bot, Sprout } from 'lucide-react';
 
 const GrainOverlay = () => (
   <div 
@@ -12,90 +13,81 @@ const GrainOverlay = () => (
   />
 );
 
-// Pixel-style decorative icons — LARGER (56x56) with animation
 const PixelCodeIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#F59E0B] border border-[#B45309] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#F59E0B" stroke="#B45309" strokeWidth="1"/>
-    <path d="M9 9l-3 3 3 3M15 9l3 3-3 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+    <Code className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelGearIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <circle cx="12" cy="12" r="3" stroke="white" strokeWidth="1.5"/>
-    <path d="M12 6v2M12 16v2M6 12h2M16 12h2M8.05 8.05l1.41 1.41M14.54 14.54l1.41 1.41M8.05 15.95l1.41-1.41M14.54 9.46l1.41-1.41" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <Settings className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelChartIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <rect x="8" y="12" width="3" height="5" fill="white"/>
-    <rect x="13" y="8" width="3" height="9" fill="white"/>
-  </motion.svg>
+    <BarChart2 className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelSmsIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <rect x="7" y="8" width="10" height="8" rx="1" stroke="white" strokeWidth="1.5"/>
-    <path d="M9 12h6M9 14h4" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <MessageSquare className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelPhoneIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <rect x="9" y="6" width="6" height="12" rx="2" stroke="white" strokeWidth="1.5"/>
-    <path d="M12 16h.01" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-  </motion.svg>
+    <Phone className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelBotIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#60A5FA] border border-[#3B82F6] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#60A5FA" stroke="#3B82F6" strokeWidth="1"/>
-    <rect x="8" y="9" width="8" height="6" rx="1" stroke="white" strokeWidth="1.5"/>
-    <circle cx="10" cy="12" r="1" fill="white"/>
-    <circle cx="14" cy="12" r="1" fill="white"/>
-    <path d="M12 6v3M9 6h6" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <Bot className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelSproutIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
-    <path d="M7 20h4m-2-4v4m0-4c0-2 1-3 3-4s3-3 3-5-2-3-3-3-3 1-3 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M15 8c1 0 2-1 2-2s-1-2-2-2-2 1-2 2" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+    <Sprout className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const DiamondDecoration = ({ className = "" }: { className?: string }) => (

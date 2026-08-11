@@ -2,6 +2,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { Database, LineChart, Brain } from 'lucide-react';
 
 const GrainOverlay = () => (
   <div 
@@ -13,39 +14,36 @@ const GrainOverlay = () => (
 );
 
 const PixelDataIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <ellipse cx="12" cy="7" rx="5" ry="2" stroke="white" strokeWidth="1.5"/>
-    <path d="M7 7v5c0 1.1 2.24 2 5 2s5-.9 5-2V7" stroke="white" strokeWidth="1.5"/>
-    <path d="M7 12v5c0 1.1 2.24 2 5 2s5-.9 5-2v-5" stroke="white" strokeWidth="1.5"/>
-  </motion.svg>
+    <Database className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelAnalyticsIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <path d="M6 16l4-6 3 2 5-8" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+    <LineChart className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelBrainIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
-    <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+    <Brain className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const DiamondDecoration = ({ className = "" }: { className?: string }) => (

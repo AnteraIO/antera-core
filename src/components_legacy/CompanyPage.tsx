@@ -2,7 +2,7 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
-import { Play } from 'lucide-react';
+import { Play, Code, Settings, BarChart2, Search, Layout, Zap, Shield, Lock, Target, Eye, BookOpen, Check, Globe, Users } from 'lucide-react';
 
 import anteraVideo from '../assets/company-video.mp4';
 
@@ -17,169 +17,157 @@ const GrainOverlay = () => (
 
 // Pixel-style decorative icons — LARGER (56x56)
 const PixelCodeIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#F59E0B] border border-[#B45309] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#F59E0B" stroke="#B45309" strokeWidth="1"/>
-    <path d="M9 9l-3 3 3 3M15 9l3 3-3 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+    <Code className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelGearIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <circle cx="12" cy="12" r="3" stroke="white" strokeWidth="1.5"/>
-    <path d="M12 6v2M12 16v2M6 12h2M16 12h2M8.05 8.05l1.41 1.41M14.54 14.54l1.41 1.41M8.05 15.95l1.41-1.41M14.54 9.46l1.41-1.41" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <Settings className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelChartIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <rect x="8" y="12" width="3" height="5" fill="white"/>
-    <rect x="13" y="8" width="3" height="9" fill="white"/>
-  </motion.svg>
+    <BarChart2 className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelSearchIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <circle cx="11" cy="11" r="4" stroke="white" strokeWidth="1.5"/>
-    <path d="M15 15l3 3" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <Search className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelDesignIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <circle cx="12" cy="12" r="3" stroke="white" strokeWidth="1.5"/>
-    <path d="M12 8V6M12 18v-2M8 12H6M18 12h-2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <Layout className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelZapIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#60A5FA] border border-[#3B82F6] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#60A5FA" stroke="#3B82F6" strokeWidth="1"/>
-    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+    <Zap className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelShieldIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+    <Shield className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelLockIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <rect x="9" y="11" width="6" height="7" rx="1" stroke="white" strokeWidth="1.5"/>
-    <path d="M10 11V9a2 2 0 0 1 4 0v2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <Lock className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelTargetIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="1.5"/>
-    <circle cx="12" cy="12" r="2" fill="white"/>
-  </motion.svg>
+    <Target className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelEyeIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#60A5FA] border border-[#3B82F6] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#60A5FA" stroke="#3B82F6" strokeWidth="1"/>
-    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="white" strokeWidth="1.5"/>
-    <circle cx="12" cy="12" r="3" stroke="white" strokeWidth="1.5"/>
-  </motion.svg>
+    <Eye className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelBookIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#F59E0B] border border-[#B45309] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#F59E0B" stroke="#B45309" strokeWidth="1"/>
-    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="white" strokeWidth="1.5"/>
-    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="white" strokeWidth="1.5"/>
-  </motion.svg>
+    <BookOpen className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelCheckIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
-    <path d="M9 12l2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+    <Check className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelGlobeIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <circle cx="12" cy="12" r="5" stroke="white" strokeWidth="1.5"/>
-    <path d="M12 7v10M7 12h10" stroke="white" strokeWidth="1.5"/>
-  </motion.svg>
+    <Globe className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelUsersIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#60A5FA] border border-[#3B82F6] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#60A5FA" stroke="#3B82F6" strokeWidth="1"/>
-    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="white" strokeWidth="1.5"/>
-    <circle cx="9" cy="7" r="4" stroke="white" strokeWidth="1.5"/>
-    <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="white" strokeWidth="1.5"/>
-    <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="white" strokeWidth="1.5"/>
-  </motion.svg>
+    <Users className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const DiamondDecoration = ({ className = "" }: { className?: string }) => (

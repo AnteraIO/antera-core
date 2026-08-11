@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { StaticImageData } from 'next/image';
-import { Star, ShieldCheck, ArrowUpRight, ChevronRight, Quote } from 'lucide-react';
+import { Star, ShieldCheck, ArrowUpRight, ChevronRight, Quote, Landmark, Radio, ShoppingBag, HeartPulse } from 'lucide-react';
 
 import blacksand1 from '../assets/blacksand-1.png';
 import blacksand2 from '../assets/blacksand-2.png';
@@ -274,45 +274,47 @@ const GrainOverlay = () => (
 );
 
 const PixelLandmarkIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
+  <motion.div
+    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <rect x="8" y="8" width="3" height="8" fill="white"/>
-    <rect x="13" y="8" width="3" height="8" fill="white"/>
-    <rect x="8" y="6" width="8" height="2" fill="white"/>
-  </motion.svg>
+    <Landmark className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelRadioIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
+  <motion.div
+    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="1.5"/>
-    <path d="M12 4v2M12 18v2M4 12h2M18 12h2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <Radio className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelShoppingIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
+  <motion.div
+    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
-    <path d="M8 8h8l-1 7H9L8 8z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M9 8V6a3 3 0 0 1 6 0v2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-    <circle cx="10" cy="16" r="1" fill="white"/>
-    <circle cx="14" cy="16" r="1" fill="white"/>
-  </motion.svg>
+    <ShoppingBag className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelHeartPulseIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
+  <motion.div
+    className="w-14 h-14 bg-[#EF4444] border border-[#B91C1C] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#EF4444" stroke="#B91C1C" strokeWidth="1"/>
-    <path d="M6 12h3l2-4 3 8 2-4h2" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+    <HeartPulse className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const DiamondDecoration = ({ className = "" }: { className?: string }) => (

@@ -17,29 +17,25 @@ const GrainOverlay = () => (
 );
 
 const PixelUserIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <circle cx="12" cy="9" r="3" stroke="white" strokeWidth="1.5"/>
-    <path d="M7 17a5 5 0 0 1 10 0" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <User className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelShareIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <circle cx="8" cy="12" r="2" fill="white"/>
-    <circle cx="16" cy="8" r="2" fill="white"/>
-    <circle cx="16" cy="16" r="2" fill="white"/>
-    <path d="M10 11l4-2M10 13l4 2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <Share2 className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const DiamondDecoration = ({ className = "" }: { className?: string }) => (

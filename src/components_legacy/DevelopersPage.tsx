@@ -3,77 +3,72 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { Terminal, Cpu, Database, Layout, Code, Webhook } from 'lucide-react';
 
 const PixelTerminalIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <path d="M8 9l3 3-3 3M13 15h3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+    <Terminal className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelCpuIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <rect x="8" y="8" width="8" height="8" rx="1" stroke="white" strokeWidth="1.5"/>
-    <path d="M8 12h-2M18 12h-2M12 8V6M12 18v-2M8 8l-1-1M17 17l-1-1M16 8l1-1M8 16l-1 1" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <Cpu className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelDatabaseIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#60A5FA] border border-[#3B82F6] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#60A5FA" stroke="#3B82F6" strokeWidth="1"/>
-    <ellipse cx="12" cy="7" rx="5" ry="2" stroke="white" strokeWidth="1.5"/>
-    <path d="M7 7v5c0 1.1 2.24 2 5 2s5-.9 5-2V7" stroke="white" strokeWidth="1.5"/>
-    <path d="M7 12v5c0 1.1 2.24 2 5 2s5-.9 5-2v-5" stroke="white" strokeWidth="1.5"/>
-  </motion.svg>
+    <Database className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelLayoutIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
-    <rect x="7" y="7" width="10" height="4" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <rect x="7" y="13" width="4" height="4" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <rect x="13" y="13" width="4" height="4" rx="0.5" stroke="white" strokeWidth="1.5"/>
-  </motion.svg>
+    <Layout className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelCodeIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#F59E0B] border border-[#B45309] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#F59E0B" stroke="#B45309" strokeWidth="1"/>
-    <path d="M9 9l-3 3 3 3M15 9l3 3-3 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+    <Code className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelWebhookIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#8B5CF6] border border-[#7C3AED] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#8B5CF6" stroke="#7C3AED" strokeWidth="1"/>
-    <path d="M12 6v12M6 12h12" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-    <circle cx="12" cy="12" r="3" stroke="white" strokeWidth="1.5"/>
-  </motion.svg>
+    <Webhook className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const DiamondDecoration = ({ className = "" }: { className?: string }) => (

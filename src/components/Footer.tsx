@@ -1,49 +1,54 @@
 'use client';
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Mail, Phone, MessageCircle, Cpu } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 import footerImage from '../assets/footer.png';
 
 const PixelMailIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
+  <motion.div
+    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <rect x="7" y="9" width="10" height="7" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <path d="M7 9l5 4 5-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+    <Mail className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelPhoneIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
+  <motion.div
+    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <rect x="9" y="7" width="6" height="10" rx="1" stroke="white" strokeWidth="1.5"/>
-    <path d="M11 17h2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <Phone className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelWhatsappIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
+  <motion.div
+    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
+    whileHover={{ scale: 1.1, rotate: 5 }}
+    transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
-    <path d="M12 6a5 5 0 0 1 5 5c0 2.5-2 5-5 5a4.5 4.5 0 0 1-2-.5l-2 .5.5-2A4.5 4.5 0 0 1 7 11a5 5 0 0 1 5-5z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M10 11h4M10 13h2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <MessageCircle className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelLogoIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
+  <motion.div
+    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
+    whileHover={{ scale: 1.1, rotate: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <path d="M8 8h3v8H8V8zm5 0h3v5h-3V8z" fill="white"/>
-  </motion.svg>
+    <Cpu className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const DiamondDecoration = ({ className = "" }: { className?: string }) => (

@@ -2,6 +2,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import Image from 'next/image';
+import { ShieldCheck, MessageSquare, Workflow, Sparkles } from 'lucide-react';
 import banner1 from '../assets/banner-1.png';
 import banner2 from '../assets/banner-2.png';
 import banner3 from '../assets/banner-3.png';
@@ -9,56 +10,47 @@ import banner4 from '../assets/banner-4.png';
 import banner5 from '../assets/banner-5.png';
 
 const PixelShieldIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <path d="M12 3s-7 3-7 9c0 3.5 3 7 7 7s7-3.5 7-7c0-6-7-9-7-9z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M9 12l2 2 4-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+    <ShieldCheck className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelChatbotIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <rect x="7" y="8" width="10" height="6" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <circle cx="10" cy="11" r="1" fill="white"/>
-    <circle cx="14" cy="11" r="1" fill="white"/>
-    <path d="M9 17v1a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <MessageSquare className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelWorkflowIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
-    <rect x="6" y="7" width="4" height="3" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <rect x="14" y="7" width="4" height="3" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <rect x="6" y="14" width="4" height="3" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <rect x="14" y="14" width="4" height="3" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <path d="M10 8.5h4M8 15.5h8M12 10v4" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+    <Workflow className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const PixelCopilotIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+  <motion.div
+    className="w-14 h-14 bg-[#F59E0B] border border-[#B45309] flex items-center justify-center text-white relative shadow-sm"
+    style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#F59E0B" stroke="#B45309" strokeWidth="1"/>
-    <path d="M12 7v6M9 10h6" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-    <rect x="7" y="14" width="10" height="3" rx="0.5" stroke="white" strokeWidth="1.5"/>
-  </motion.svg>
+    <Sparkles className="w-7 h-7 stroke-[2]" />
+  </motion.div>
 );
 
 const DiamondDecoration = ({ className = "" }: { className?: string }) => (
