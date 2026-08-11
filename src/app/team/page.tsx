@@ -18,23 +18,23 @@ const GrainOverlay = () => (
 
 const PixelUserIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <User className="w-7 h-7 stroke-[2]" />
+    <User className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelShareIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Share2 className="w-7 h-7 stroke-[2]" />
+    <Share2 className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 

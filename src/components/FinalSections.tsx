@@ -27,221 +27,221 @@ import {
 
 const PixelAssessIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Search className="w-7 h-7 stroke-[2]" />
+    <Search className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelDesignIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Layout className="w-7 h-7 stroke-[2]" />
+    <Layout className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelDeliverIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#F59E0B] border border-[#B45309] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <CheckCircle className="w-7 h-7 stroke-[2]" />
+    <CheckCircle className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelOptimizeIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <TrendingUp className="w-7 h-7 stroke-[2]" />
+    <TrendingUp className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelCloudIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Cloud className="w-7 h-7 stroke-[2]" />
+    <Cloud className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelDevOpsIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Cpu className="w-7 h-7 stroke-[2]" />
+    <Cpu className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelCostIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#F59E0B] border border-[#B45309] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Coins className="w-7 h-7 stroke-[2]" />
+    <Coins className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelSecurityIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#EF4444] border border-[#B91C1C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Shield className="w-7 h-7 stroke-[2]" />
+    <Shield className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelIdentityIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#8B5CF6] border border-[#7C3AED] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <UserCheck className="w-7 h-7 stroke-[2]" />
+    <UserCheck className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelPlatformIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Laptop className="w-7 h-7 stroke-[2]" />
+    <Laptop className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelIntegrationIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#06B6D4] border border-[#0891B2] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Shuffle className="w-7 h-7 stroke-[2]" />
+    <Shuffle className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelSupportIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#64748B] border border-[#475569] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <LifeBuoy className="w-7 h-7 stroke-[2]" />
+    <LifeBuoy className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelEnterpriseIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Building className="w-7 h-7 stroke-[2]" />
+    <Building className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelEmbeddedIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <ShieldCheck className="w-7 h-7 stroke-[2]" />
+    <ShieldCheck className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelAfricanIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#F59E0B] border border-[#B45309] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Globe className="w-7 h-7 stroke-[2]" />
+    <Globe className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelDocIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <FileText className="w-7 h-7 stroke-[2]" />
+    <FileText className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelOutcomeIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#EF4444] border border-[#B91C1C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Target className="w-7 h-7 stroke-[2]" />
+    <Target className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelTransparencyIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#8B5CF6] border border-[#7C3AED] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Eye className="w-7 h-7 stroke-[2]" />
+    <Eye className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelLearningIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#06B6D4] border border-[#0891B2] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <GraduationCap className="w-7 h-7 stroke-[2]" />
+    <GraduationCap className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelScalableIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#64748B] border border-[#475569] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Maximize2 className="w-7 h-7 stroke-[2]" />
+    <Maximize2 className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 

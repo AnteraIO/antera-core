@@ -7,67 +7,67 @@ import { Terminal, Cpu, Database, Layout, Code, Webhook } from 'lucide-react';
 
 const PixelTerminalIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Terminal className="w-7 h-7 stroke-[2]" />
+    <Terminal className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelCpuIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Cpu className="w-7 h-7 stroke-[2]" />
+    <Cpu className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelDatabaseIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#60A5FA] border border-[#3B82F6] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Database className="w-7 h-7 stroke-[2]" />
+    <Database className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelLayoutIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Layout className="w-7 h-7 stroke-[2]" />
+    <Layout className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelCodeIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#F59E0B] border border-[#B45309] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Code className="w-7 h-7 stroke-[2]" />
+    <Code className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelWebhookIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#8B5CF6] border border-[#7C3AED] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Webhook className="w-7 h-7 stroke-[2]" />
+    <Webhook className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 

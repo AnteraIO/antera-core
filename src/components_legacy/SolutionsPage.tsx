@@ -17,100 +17,100 @@ const GrainOverlay = () => (
 
 const PixelCodeIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#F59E0B] border border-[#B45309] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Code className="w-7 h-7 stroke-[2]" />
+    <Code className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelGearIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Settings className="w-7 h-7 stroke-[2]" />
+    <Settings className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelChartIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <BarChart2 className="w-7 h-7 stroke-[2]" />
+    <BarChart2 className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelLaptopIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Laptop className="w-7 h-7 stroke-[2]" />
+    <Laptop className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelWrenchIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Wrench className="w-7 h-7 stroke-[2]" />
+    <Wrench className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelShieldIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#60A5FA] border border-[#3B82F6] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Shield className="w-7 h-7 stroke-[2]" />
+    <Shield className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelLayoutIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#60A5FA] border border-[#3B82F6] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Layout className="w-7 h-7 stroke-[2]" />
+    <Layout className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelBarChartIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#F59E0B] border border-[#B45309] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <BarChart2 className="w-7 h-7 stroke-[2]" />
+    <BarChart2 className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelBotIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Bot className="w-7 h-7 stroke-[2]" />
+    <Bot className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 

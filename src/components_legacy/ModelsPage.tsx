@@ -15,34 +15,34 @@ const GrainOverlay = () => (
 
 const PixelDataIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Database className="w-7 h-7 stroke-[2]" />
+    <Database className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelAnalyticsIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <LineChart className="w-7 h-7 stroke-[2]" />
+    <LineChart className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelBrainIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Brain className="w-7 h-7 stroke-[2]" />
+    <Brain className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 

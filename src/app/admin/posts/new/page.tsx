@@ -17,23 +17,23 @@ const GrainOverlay = () => (
 
 const PixelEditIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Edit3 className="w-7 h-7 stroke-[2]" />
+    <Edit3 className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelWandIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#8B5CF6] border border-[#7C3AED] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Wand2 className="w-7 h-7 stroke-[2]" />
+    <Wand2 className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 

@@ -17,56 +17,56 @@ import { MapPin, Clock, Globe, Mail, Phone } from 'lucide-react';
 
 const PixelMapPinIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <MapPin className="w-7 h-7 stroke-[2]" />
+    <MapPin className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelClockIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Clock className="w-7 h-7 stroke-[2]" />
+    <Clock className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelGlobeIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Globe className="w-7 h-7 stroke-[2]" />
+    <Globe className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelMailIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#60A5FA] border border-[#3B82F6] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Mail className="w-7 h-7 stroke-[2]" />
+    <Mail className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelPhoneIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#F59E0B] border border-[#B45309] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Phone className="w-7 h-7 stroke-[2]" />
+    <Phone className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 

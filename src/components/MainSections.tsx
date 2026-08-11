@@ -11,45 +11,45 @@ import banner5 from '../assets/banner-5.png';
 
 const PixelShieldIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <ShieldCheck className="w-7 h-7 stroke-[2]" />
+    <ShieldCheck className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelChatbotIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <MessageSquare className="w-7 h-7 stroke-[2]" />
+    <MessageSquare className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelWorkflowIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Workflow className="w-7 h-7 stroke-[2]" />
+    <Workflow className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelCopilotIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#F59E0B] border border-[#B45309] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Sparkles className="w-7 h-7 stroke-[2]" />
+    <Sparkles className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 

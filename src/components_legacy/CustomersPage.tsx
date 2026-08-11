@@ -275,45 +275,45 @@ const GrainOverlay = () => (
 
 const PixelLandmarkIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Landmark className="w-7 h-7 stroke-[2]" />
+    <Landmark className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelRadioIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#3B82F6] border border-[#1D4ED8] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Radio className="w-7 h-7 stroke-[2]" />
+    <Radio className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelShoppingIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#10B981] border border-[#059669] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <ShoppingBag className="w-7 h-7 stroke-[2]" />
+    <ShoppingBag className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
 const PixelHeartPulseIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#EF4444] border border-[#B91C1C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: -5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <HeartPulse className="w-7 h-7 stroke-[2]" />
+    <HeartPulse className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 

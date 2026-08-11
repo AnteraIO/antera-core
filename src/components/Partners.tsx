@@ -17,12 +17,12 @@ import { Handshake } from 'lucide-react';
 
 const PixelPartnerIcon = () => (
   <motion.div
-    className="w-14 h-14 bg-[#FA520F] border border-[#C2410C] flex items-center justify-center text-white relative shadow-sm"
+    className="w-14 h-14 bg-white border border-neutral-200 flex items-center justify-center text-black relative shadow-sm"
     style={{ borderRadius: '4px' }}
     whileHover={{ scale: 1.1, rotate: 5 }}
     transition={{ type: "spring", stiffness: 300 }}
   >
-    <Handshake className="w-7 h-7 stroke-[2]" />
+    <Handshake className="w-7 h-7 stroke-[1.5]" />
   </motion.div>
 );
 
