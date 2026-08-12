@@ -85,14 +85,24 @@ export const PartnersSection = () => {
         </div>
 
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-[#EAEAEA] text-black p-8 md:p-10 flex items-center justify-between group cursor-pointer hover:bg-[#E0E0E0] transition-colors duration-200">
+          <a
+            href="https://wa.me/255760984921"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#EAEAEA] text-black p-8 md:p-10 flex items-center justify-between group cursor-pointer hover:bg-[#E0E0E0] transition-colors duration-200"
+          >
             <h3 className="text-3xl md:text-4xl font-normal tracking-tight">Request a Demo</h3>
             <ArrowUpRight className="w-8 h-8 text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
-          </div>
-          <div className="bg-[#1A1A1A] text-white p-8 md:p-10 flex items-center justify-between group cursor-pointer hover:bg-black transition-colors duration-200">
+          </a>
+          <a
+            href="https://wa.me/255760984921"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#1A1A1A] text-white p-8 md:p-10 flex items-center justify-between group cursor-pointer hover:bg-black transition-colors duration-200"
+          >
             <h3 className="text-3xl md:text-4xl font-normal tracking-tight">Start Building</h3>
             <ArrowUpRight className="w-8 h-8 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
-          </div>
+          </a>
         </div>
       </div>
     </section>
