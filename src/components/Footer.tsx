@@ -136,7 +136,7 @@ export const FinalCTAAndFooter = () => {
             
             <div className="group p-8 md:p-12 min-h-[280px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors border-b md:border-b-0 lg:border-r border-neutral-200">
               <div className="flex items-center gap-3 mb-6">
-                <span className="text-lg font-semibold tracking-tight text-black">Antera Group Software</span>
+                <span className="text-lg font-semibold tracking-tight text-black">Antera Software</span>
               </div>
               <p className="text-sm text-[#1F1F1F] font-medium leading-relaxed">
                 We use smart technology and AI to help businesses grow and work better at any scale.
@@ -218,7 +218,7 @@ export const FinalCTAAndFooter = () => {
 
       <div className="relative z-10 bg-[#FAFAF8] py-6 px-6 lg:px-8 w-full border-t border-neutral-200">
         <div className="max-w-[1400px] mx-auto flex flex-row items-center justify-between text-[10px] font-mono text-neutral-400 font-bold tracking-wider">
-          <div>Antera Group Software© {new Date().getFullYear()}</div>
+          <div>Antera © {new Date().getFullYear()}</div>
           <div className="flex items-center gap-4">
             {['en', 'sw'].map(lang => (
               <button
