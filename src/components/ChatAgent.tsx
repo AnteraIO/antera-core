@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Mic, ChevronDown, Wifi, Battery, Signal } from 'lucide-react';
+import { Send, Mic, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getAnteraResponseStream } from '@/lib/deepseek';
 import Image from 'next/image';
@@ -11,49 +11,28 @@ type Msg = { role: 'user' | 'model'; text: string; time: string };
 
 const getTime = () => new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-// Clean markdown - removes ALL markdown formatting while preserving table structure
 const cleanMarkdown = (text: string): string => {
   if (!text) return text;
 
   let cleaned = text
-    // Remove bold/italic markers but keep content
     .replace(/\*\*(.*?)\*\*/g, '$1')
     .replace(/\*(.*?)\*/g, '$1')
     .replace(/__(.*?)__/g, '$1')
     .replace(/_(.*?)_/g, '$1')
-    
-    // Remove code markers
     .replace(/`(.*?)`/g, '$1')
-    
-    // Remove link formatting but keep text
     .replace(/\[(.*?)\]\(.*?\)/g, '$1')
-    
-    // Remove image syntax
     .replace(/!\[.*?\]\(.*?\)/g, '')
-    
-    // Remove header markers (#, ##, etc)
     .replace(/^#{1,6}\s+/gm, '')
-    
-    // Remove horizontal rules (---, ***, ___) 
     .replace(/^[-*_]{3,}\s*$/gm, '')
-    
-    // Remove blockquote markers
     .replace(/^>\s*/gm, '')
-    
-    // Remove em dashes and en dashes
     .replace(/[—–]/g, '-')
-    
-    // Clean up multiple spaces
     .replace(/\s{2,}/g, ' ')
-    
-    // Clean up multiple newlines
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
   return cleaned;
 };
 
-// Typing dots (Antera orange)
 const TypingDots = () => (
   <div className="flex items-center gap-[5px] px-1 py-0.5">
     {[0, 1, 2].map(i => (
@@ -68,7 +47,6 @@ const TypingDots = () => (
   </div>
 );
 
-// Avatar with rotating ring
 const Avatar = ({ size = 36 }: { size?: number }) => (
   <div className="relative shrink-0" style={{ width: size, height: size }}>
     <motion.div
@@ -92,9 +70,7 @@ const Avatar = ({ size = 36 }: { size?: number }) => (
   </div>
 );
 
-// Table renderer component
 const TableRenderer = ({ text }: { text: string }) => {
-  // Check if text contains a table
   if (!text.includes('|') || !text.includes('-')) {
     return <div className="whitespace-pre-wrap break-words">{text}</div>;
   }
@@ -109,30 +85,20 @@ const TableRenderer = ({ text }: { text: string }) => {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
     
-    // Check if this is a table row
     if (line.includes('|')) {
       const cells = line.split('|').filter(cell => cell.trim() !== '');
-      
-      // Check if this is a separator row
       const isSeparator = cells.every(cell => cell.trim().match(/^[-:]+$/));
       
-      if (isSeparator) {
-        // This is a separator row, skip it
-        continue;
-      }
+      if (isSeparator) continue;
       
       if (!currentTable) {
-        // Start a new table
         currentHeaders = cells.map(c => c.trim());
         currentTable = { headers: currentHeaders, rows: [] };
       } else {
-        // Add row to current table
         currentRows.push(cells.map(c => c.trim()));
       }
     } else {
-      // Not a table row
       if (currentTable && currentRows.length > 0) {
-        // Save the current table
         currentTable.rows = currentRows;
         tables.push(currentTable);
         currentTable = null;
@@ -145,7 +111,6 @@ const TableRenderer = ({ text }: { text: string }) => {
     }
   }
 
-  // Don't forget the last table
   if (currentTable && currentRows.length > 0) {
     currentTable.rows = currentRows;
     tables.push(currentTable);
@@ -187,7 +152,6 @@ const TableRenderer = ({ text }: { text: string }) => {
   );
 };
 
-// Message bubble
 const Bubble = ({ msg, isLast, isStreaming }: { msg: Msg; isLast: boolean; isStreaming?: boolean }) => {
   const isUser = msg.role === 'user';
   const displayText = !isUser ? cleanMarkdown(msg.text) : msg.text;
@@ -201,24 +165,24 @@ const Bubble = ({ msg, isLast, isStreaming }: { msg: Msg; isLast: boolean; isStr
     >
       {!isUser && <Avatar size={28} />}
       <div className={cn('flex flex-col gap-0.5', isUser ? 'items-end' : 'items-start', 'flex-1', isUser ? 'max-w-[85%]' : 'max-w-[85%]')}>
-     <div
-  className="px-4 py-2.5 text-[14.5px] font-medium leading-[1.55] shadow-sm w-full"
-  style={
-    isUser
-      ? {
-          background: '#FA520F',
-          color: 'white',
-          borderRadius: '18px',
-          border: '1px solid rgba(255,255,255,0.15)',
-        }
-      : {
-          background: 'transparent',
-          color: '#000000',
-          borderRadius: '20px 20px 20px 5px',
-          padding: '4px 4px 4px 0',
-        }
-  }
->
+        <div
+          className="px-4 py-2.5 text-[14.5px] font-medium leading-[1.55] shadow-sm w-full"
+          style={
+            isUser
+              ? {
+                  background: '#FA520F',
+                  color: 'white',
+                  borderRadius: '18px',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                }
+              : {
+                  background: 'transparent',
+                  color: '#000000',
+                  borderRadius: '20px 20px 20px 5px',
+                  padding: '4px 4px 4px 0',
+                }
+          }
+        >
           <div className="w-full">
             {isUser ? (
               <div className="whitespace-pre-wrap break-words">{displayText}</div>
@@ -238,14 +202,13 @@ const Bubble = ({ msg, isLast, isStreaming }: { msg: Msg; isLast: boolean; isStr
           </div>
         </div>
         <div className="flex items-center gap-1 px-1">
-          <span className="text-[10px]" style={{ color: 'rgba(0,0,0,0.3)' }}>{msg.time}</span>
+          <span className="text-[10px] text-gray-400">{msg.time}</span>
           {isUser && isLast && (
             <motion.span
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="text-[10px]"
-              style={{ color: '#FA520F' }}
+              className="text-[10px] text-[#FA520F]"
             >✓✓</motion.span>
           )}
         </div>
@@ -277,16 +240,8 @@ const ChatAgent = () => {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [streamingText, setStreamingText] = useState('');
-  const [clockTime, setClockTime] = useState('');
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const tick = () => setClockTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-    tick();
-    const t = setInterval(tick, 30000);
-    return () => clearInterval(t);
-  }, []);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
@@ -315,14 +270,12 @@ const ChatAgent = () => {
 
       let fullResponse = '';
       
-      // Use streaming function with onChunk callback
       await getAnteraResponseStream(apiHistoryPayload, (chunk: string) => {
         fullResponse += chunk;
         setStreamingText(fullResponse);
         scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
       });
 
-      // When streaming is complete, save the final message
       if (fullResponse) {
         const cleanedResponse = cleanMarkdown(fullResponse);
         setMessages(prev => [...prev, { 
@@ -350,7 +303,6 @@ const ChatAgent = () => {
 
   return (
     <>
-      {/* FAB (Antera style) */}
       <AnimatePresence>
         {!isOpen && (
           <motion.button
@@ -358,31 +310,19 @@ const ChatAgent = () => {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 w-14 h-14 md:w-16 md:h-16 rounded-full shadow-2xl flex items-center justify-center"
-            style={{ background: '#000000' }}
+            className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex items-center gap-2 bg-black text-white px-4 py-3 rounded-full shadow-xl hover:bg-[#1A1A1A] transition-all"
           >
-            <motion.div
-              className="absolute inset-0 rounded-full"
-              style={{ background: '#FA520F' }}
-              animate={{ scale: [1, 1.35, 1], opacity: [0.5, 0, 0.5] }}
-              transition={{ repeat: Infinity, duration: 2.8, ease: 'easeInOut' }}
-            />
-            <span className="relative text-xl md:text-2xl">
-              <Image src="/antera-logo.jpeg" alt="Antera" width={28} height={28} className="rounded-full" />
-            </span>
-            <div className="absolute -top-0.5 -right-0.5 w-3 h-3 md:w-4 md:h-4 bg-[#FA520F] rounded-full border-2 border-white" />
+            <span className="text-sm font-medium">Chat with Antera</span>
           </motion.button>
         )}
       </AnimatePresence>
 
-      {/* Chat window */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop for mobile */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -393,28 +333,24 @@ const ChatAgent = () => {
 
             <motion.div
               key="chat"
-              initial={{ opacity: 0, scale: 0.85, y: 60 }}
+              initial={{ opacity: 0, scale: 0.85, y: 40 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.85, y: 60 }}
+              exit={{ opacity: 0, scale: 0.85, y: 40 }}
               transition={{ type: 'spring', damping: 26, stiffness: 300 }}
               className="chat-window fixed bottom-0 left-0 right-0 md:bottom-8 md:right-8 md:left-auto z-50 flex flex-col overflow-hidden mx-auto"
               style={{
                 width: '100%',
                 maxWidth: '100%',
-                height: '90vh',
-                maxHeight: '90vh',
-                borderTopLeftRadius: 32,
-                borderTopRightRadius: 32,
-                borderBottomLeftRadius: 0,
-                borderBottomRightRadius: 0,
-                border: 'none',
-                boxShadow: '0 -10px 40px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.06) inset',
-                background: 'rgba(255,255,255,0.55)',
-                backdropFilter: 'blur(40px)',
-                WebkitBackdropFilter: 'blur(40px)',
+                height: '85vh',
+                maxHeight: '85vh',
+                borderRadius: '24px 24px 0 0',
+                boxShadow: '0 -20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.08) inset',
+                background: 'rgba(255,255,255,0.7)',
+                backdropFilter: 'blur(30px)',
+                WebkitBackdropFilter: 'blur(30px)',
+                border: '1px solid rgba(255,255,255,0.3)',
               }}
             >
-              {/* Desktop phone shape */}
               <style>{`
                 @media (min-width: 768px) {
                   .chat-window {
@@ -438,50 +374,17 @@ const ChatAgent = () => {
                 }
               `}</style>
 
-              {/* Glass background blobs */}
               <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ borderRadius: 'inherit', zIndex: 0 }}>
-                <div className="absolute -top-8 -left-8 w-48 h-48 rounded-full opacity-15" style={{ background: '#FA520F', filter: 'blur(40px)' }} />
-                <div className="absolute -bottom-8 -right-8 w-56 h-56 rounded-full opacity-10" style={{ background: '#000000', filter: 'blur(50px)' }} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full opacity-5" style={{ background: '#FA520F', filter: 'blur(60px)' }} />
+                <div className="absolute -top-10 -left-10 w-48 h-48 rounded-full opacity-15" style={{ background: '#FA520F', filter: 'blur(50px)' }} />
+                <div className="absolute -bottom-10 -right-10 w-56 h-56 rounded-full opacity-10" style={{ background: '#000000', filter: 'blur(60px)' }} />
               </div>
 
-              {/* Drag handle (mobile) */}
-              <div className="flex justify-center pt-2 pb-1 md:hidden relative z-10">
-                <div className="w-12 h-1.5 rounded-full bg-gray-400/50" />
+              <div className="flex justify-center pt-3 pb-1 md:hidden relative z-10">
+                <div className="w-12 h-1.5 rounded-full bg-gray-400/40" />
               </div>
 
-              {/* Dynamic Island / Notch */}
-              <div className="relative z-10 flex justify-center pt-3 pb-1 shrink-0">
-                <motion.div
-                  className="flex items-center justify-between px-4"
-                  style={{
-                    width: 126,
-                    height: 34,
-                    background: '#000000',
-                    borderRadius: 20,
-                  }}
-                  whileHover={{ width: 180 }}
-                  transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
-                >
-                  <div className="w-2 h-2 rounded-full bg-white/20" />
-                  <motion.div
-                    className="w-1.5 h-1.5 rounded-full bg-[#FA520F]"
-                    animate={{ opacity: [1, 0.3, 1] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                  />
-                </motion.div>
-              </div>
-
-              {/* Status Bar */}
-              <div className="relative z-10 flex items-center justify-between px-7 py-1 shrink-0">
-                <span className="text-black text-[12px] font-bold tracking-tight">{clockTime}</span>
-                <div className="flex items-center gap-1.5">
-                  <Signal size={12} style={{ color: '#000000' }} />
-                  <Wifi size={12} style={{ color: '#000000' }} />
-                  <Battery size={14} style={{ color: '#000000' }} />
-                </div>
-              </div>
-
+              {/* NO DYNAMIC ISLAND. PURE GLASS TOP. */}
+              
               {/* Messages area */}
               <div
                 ref={scrollRef}
@@ -494,13 +397,12 @@ const ChatAgent = () => {
                     whileTap={{ scale: 0.9 }}
                     onClick={() => setIsOpen(false)}
                     className="w-8 h-8 rounded-full flex items-center justify-center transition-all"
-                    style={{ background: 'rgba(0,0,0,0.07)' }}
+                    style={{ background: 'rgba(0,0,0,0.06)' }}
                   >
                     <ChevronDown size={16} style={{ color: '#000000' }} />
                   </motion.button>
                 </div>
 
-                {/* Welcome state */}
                 {messages.length === 0 && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -516,19 +418,12 @@ const ChatAgent = () => {
                       </p>
                     </div>
 
-                    {/* Date pill */}
                     <div
-                      className="px-4 py-1.5 text-[10px] tracking-widest uppercase"
-                      style={{
-                        background: 'rgba(0,0,0,0.06)',
-                        borderRadius: 20,
-                        color: 'rgba(0,0,0,0.35)',
-                      }}
+                      className="px-4 py-1.5 text-[10px] tracking-widest uppercase bg-gray-100/60 rounded-full text-gray-400"
                     >
                       Today
                     </div>
 
-                    {/* Assistant opening bubble */}
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -548,7 +443,6 @@ const ChatAgent = () => {
                       </div>
                     </motion.div>
 
-                    {/* Quick prompts grid */}
                     <div className="grid grid-cols-2 gap-2 w-full">
                       {quickPrompts.map((q, i) => (
                         <motion.button
@@ -578,24 +472,20 @@ const ChatAgent = () => {
                   </motion.div>
                 )}
 
-                {/* Date pill when messages exist */}
                 {messages.length > 0 && (
                   <div className="flex justify-center">
                     <div
-                      className="px-4 py-1.5 text-[10px] tracking-widest uppercase"
-                      style={{ background: 'rgba(0,0,0,0.06)', borderRadius: 20, color: 'rgba(0,0,0,0.35)' }}
+                      className="px-4 py-1.5 text-[10px] tracking-widest uppercase bg-gray-100/60 rounded-full text-gray-400"
                     >
                       Today
                     </div>
                   </div>
                 )}
 
-                {/* Render all messages */}
                 {messages.map((msg, idx) => (
                   <Bubble key={idx} msg={msg} isLast={idx === messages.length - 1} />
                 ))}
 
-                {/* Streaming message */}
                 {isLoading && streamingText && (
                   <Bubble 
                     msg={{ 
@@ -608,7 +498,6 @@ const ChatAgent = () => {
                   />
                 )}
 
-                {/* Loading dots (shown before streaming starts) */}
                 {isLoading && !streamingText && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
@@ -623,7 +512,6 @@ const ChatAgent = () => {
                 )}
               </div>
 
-              {/* Input area with home bar */}
               <div
                 className="relative z-10 px-4 pt-3 shrink-0"
                 style={{
@@ -694,7 +582,6 @@ const ChatAgent = () => {
                   </AnimatePresence>
                 </div>
 
-                {/* Home bar indicator */}
                 <div className="flex justify-center mt-3 mb-1">
                   <div
                     className="w-28 h-[5px] rounded-full"

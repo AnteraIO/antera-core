@@ -74,17 +74,6 @@ const PixelPhoneIcon = () => (
   </motion.svg>
 );
 
-const DiamondDecoration = ({ className = "" }: { className?: string }) => (
-  <motion.div 
-    className={`w-16 h-16 border border-neutral-200 rotate-45 ${className}`}
-    initial={{ opacity: 0, scale: 0 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-  />
-);
-
-
 const ArrowLink = ({ 
   text, 
   href, 
@@ -98,17 +87,13 @@ const ArrowLink = ({
 }) => {
   let linkHref = href || "#";
   
-  // Handle special link types
-  if (isEmail && href) {
-    linkHref = `mailto:${href}`;
-  } else if (isPhone && href) {
-    linkHref = `tel:${href}`;
-  }
+  if (isEmail && href) linkHref = `mailto:${href}`;
+  else if (isPhone && href) linkHref = `tel:${href}`;
   
   return (
     <a 
       href={linkHref}
-      className="mt-4 flex items-center gap-2 text-sm font-medium text-black group-hover:text-[#FA520F] transition-colors"
+      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-black group-hover:text-[#FA520F] transition-colors"
       target={href?.startsWith('http') ? "_blank" : undefined}
       rel={href?.startsWith('http') ? "noopener noreferrer" : undefined}
     >
@@ -126,9 +111,9 @@ export default function OfficePage() {
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
   return (
-    <div ref={containerRef} className="relative bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white overflow-hidden">
+    <div ref={containerRef} className="relative bg-white text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 z-0 opacity-10">
+      <div className="absolute inset-0 z-0 opacity-5">
         <Image
           src={officeBg}
           alt="Office background"
@@ -137,168 +122,158 @@ export default function OfficePage() {
           priority={false}
         />
       </div>
-      
-      {/* Background grid pattern */}
-      <div className="absolute inset-0 opacity-40 pointer-events-none z-[1]">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e5e5_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e5_1px,transparent_1px)] bg-[size:32px_32px]" />
-      </div>
 
       <GrainOverlay />
-      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
+      <motion.div className="fixed top-0 left-0 right-0 h-[1px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
 
-        <header className="mb-24 md:mb-40 text-center">
+        <header className="mb-16">
           <motion.h1 
-            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
-            initial={{ opacity: 0, y: 40 }}
+            className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1]"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             Our <span className="text-[#FA520F]">Office</span>
           </motion.h1>
           <motion.p 
-            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
-            initial={{ opacity: 0, y: 15 }}
+            className="text-lg max-w-xl leading-relaxed text-neutral-600 mt-3"
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            transition={{ delay: 0.15, duration: 0.6 }}
           >
             Antera Group operational headquarters and engineering hub.
           </motion.p>
         </header>
 
-        <div className="relative max-w-5xl mx-auto">
-          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <motion.div 
+            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0, duration: 0.7 }}
+          >
+            <PixelMapPinIcon />
+            <div className="mt-auto">
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Location</h3>
+              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed max-w-md">
+                Dar es Salaam, Tanzania
+              </p>
+              <ArrowLink 
+                text="Get directions" 
+                href="https://maps.google.com/maps?q=Dar+es+Salaam,+Tanzania"
+              />
+            </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 border border-neutral-200 bg-white/90 backdrop-blur-sm">
-            
-            <motion.div 
-              className="group md:col-span-2 border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0, duration: 0.7 }}
-            >
-              <PixelMapPinIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Location</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
-                  Dar es Salaam, Tanzania
-                </p>
-                <ArrowLink 
-                  text="Get directions" 
-                  href="https://maps.google.com/maps?q=Dar+es+Salaam,+Tanzania"
-                />
-              </div>
-            </motion.div>
-
-            <motion.div 
-              className="group border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1, duration: 0.7 }}
-            >
-              <PixelClockIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Operating Hours</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between text-base md:text-lg text-neutral-500">
-                    <span>MON to FRI</span>
-                    <span className="font-medium text-black">08:00 - 18:00 EAT</span>
-                  </div>
-                  <div className="flex justify-between text-base md:text-lg text-neutral-500">
-                    <span>SAT to SUN</span>
-                    <span className="font-medium text-black">Closed (Remote Only)</span>
-                  </div>
+          <motion.div 
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1, duration: 0.7 }}
+          >
+            <PixelClockIcon />
+            <div className="mt-auto">
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Operating Hours</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between text-base md:text-lg text-neutral-600 font-light">
+                  <span>MON to FRI</span>
+                  <span className="font-medium text-black">08:00 - 18:00 EAT</span>
+                </div>
+                <div className="flex justify-between text-base md:text-lg text-neutral-600 font-light">
+                  <span>SAT to SUN</span>
+                  <span className="font-medium text-black">Closed (Remote Only)</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
+          </motion.div>
 
-            <motion.div 
-              className="group border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.7 }}
-            >
-              <PixelMailIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Email</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed font-mono">
-                  info@antera.co.tz
-                </p>
-                <ArrowLink 
-                  text="Send email" 
-                  href="info@antera.co.tz"
-                  isEmail={true}
-                />
-              </div>
-            </motion.div>
+          <motion.div 
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+          >
+            <PixelMailIcon />
+            <div className="mt-auto">
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Email</h3>
+              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
+                info@antera.co.tz
+              </p>
+              <ArrowLink 
+                text="Send email" 
+                href="info@antera.co.tz"
+                isEmail={true}
+              />
+            </div>
+          </motion.div>
 
-            <motion.div 
-              className="group border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-            >
-              <PixelPhoneIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Phone</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed font-mono">
-                  +255 760 984 921
-                </p>
-                <ArrowLink 
-                  text="Call now" 
-                  href="+255760984921"
-                  isPhone={true}
-                />
-              </div>
-            </motion.div>
+          <motion.div 
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.7 }}
+          >
+            <PixelPhoneIcon />
+            <div className="mt-auto">
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Phone</h3>
+              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
+                +255 760 984 921
+              </p>
+              <ArrowLink 
+                text="Call now" 
+                href="+255760984921"
+                isPhone={true}
+              />
+            </div>
+          </motion.div>
 
-            <motion.div 
-              className="group md:row-span-2 border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.7 }}
-            >
-              <PixelGlobeIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Connect</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
-                  Follow our journey across digital platforms and stay updated with the latest from Antera Group.
-                </p>
-                <ArrowLink 
-                  text="Visit website" 
-                  href="https://antera.co.tz"
-                />
-              </div>
-            </motion.div>
+          <motion.div 
+            className="md:row-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.7 }}
+          >
+            <PixelGlobeIcon />
+            <div className="mt-auto">
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Connect</h3>
+              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
+                Follow our journey across digital platforms and stay updated with the latest from Antera Group.
+              </p>
+              <ArrowLink 
+                text="Visit website" 
+                href="https://antera.co.tz"
+              />
+            </div>
+          </motion.div>
 
-            <motion.div 
-              className="group md:col-span-2 border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.7 }}
-            >
-              <PixelMapPinIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Visit Us</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
-                  Schedule a meeting with our team to discuss your next project or partnership opportunity.
-                </p>
-                <ArrowLink 
-                  text="Book appointment" 
-                  href="https://calendly.com/antera-group/meeting"
-                />
-              </div>
-            </motion.div>
-            <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
+          <motion.div 
+            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5, duration: 0.7 }}
+          >
+            <PixelMapPinIcon />
+            <div className="mt-auto">
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Visit Us</h3>
+              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed max-w-md">
+                Schedule a meeting with our team to discuss your next project or partnership opportunity.
+              </p>
+              <ArrowLink 
+                text="Book appointment" 
+                href="https://calendly.com/antera-group/meeting"
+              />
+            </div>
+          </motion.div>
 
-          </div>
         </div>
       </div>
     </div>
