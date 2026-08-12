@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X, Globe, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
@@ -30,10 +30,39 @@ export const Navbar = () => {
     { name: t('nav.company'), href: '/company' },
   ];
 
-  const blogLatestPosts = [
+  const [blogLatestPosts, setBlogLatestPosts] = useState<Array<{ title: string; href: string; desc: string }>>([
     { title: 'Antera Group Office', href: '/office', desc: 'Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development' },
     { title: 'Introducing Search Toolkit', href: '/blog', desc: 'Modern Data Science and Model Implementations for Tanzanian Markets' },
-  ];
+  ]);
+
+  useEffect(() => {
+    async function fetchLatestPosts() {
+      try {
+        const res = await fetch('/api/blog/posts?status=published&limit=2');
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            const mapped = data.map((post: any) => ({
+              title: post.title,
+              href: `/blog/${post.slug}`,
+              desc: post.excerpt || post.description || 'Read our latest update and technical deep-dive on this topic.'
+            }));
+            if (mapped.length === 1) {
+              setBlogLatestPosts([
+                mapped[0],
+                { title: 'Introducing Search Toolkit', href: '/blog', desc: 'Modern Data Science and Model Implementations for Tanzanian Markets' }
+              ]);
+            } else {
+              setBlogLatestPosts(mapped);
+            }
+          }
+        }
+      } catch (err) {
+        console.error('Failed to fetch latest posts for navbar:', err);
+      }
+    }
+    fetchLatestPosts();
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 font-sans">
