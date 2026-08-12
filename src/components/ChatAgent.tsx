@@ -315,7 +315,7 @@ const ChatAgent = () => {
             onClick={() => setIsOpen(true)}
             className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex items-center gap-2 bg-black text-white px-4 py-3 rounded-full shadow-xl hover:bg-[#1A1A1A] transition-all"
           >
-            <span className="text-sm font-medium">Chat with Antera</span>
+            <span className="text-sm font-medium">Chat with Bruno</span>
           </motion.button>
         )}
       </AnimatePresence>
@@ -412,9 +412,9 @@ const ChatAgent = () => {
                   >
                     <Avatar size={64} />
                     <div className="text-center space-y-1.5">
-                      <p className="font-bold text-[17px]" style={{ color: '#000000' }}>Hello, I'm Antera Chat Agent 🤖</p>
+                      <p className="font-bold text-[17px]" style={{ color: '#000000' }}>Hello, I'm Bruno. 🤖</p>
                       <p className="text-[12.5px] leading-relaxed max-w-[280px] mx-auto" style={{ color: 'rgba(0,0,0,0.45)' }}>
-                        I'm your AI partner for system building and intelligent automation, web & app development, and infrastructure.
+                        I'm your AI intelligent assistant for Antera. I can help you. Ask me anything!
                       </p>
                     </div>
 
@@ -545,7 +545,7 @@ const ChatAgent = () => {
                     value={input}
                     onChange={e => setInput(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && !e.shiftKey && handleSend()}
-                    placeholder="Message Antera..."
+                    placeholder="Message Bruno..."
                     className="flex-1 bg-transparent text-[14.5px] font-semibold outline-none"
                     style={{ color: '#000000' }}
                     disabled={isLoading}

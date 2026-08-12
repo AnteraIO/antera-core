@@ -1,34 +1,50 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
+
 import hero1 from '../assets/hero-1.jpg';
 import hero2 from '../assets/hero-2.jpg';
 import hero3 from '../assets/hero-3.jpg';
+import hero4 from '../assets/hero-4.jpg';
+import hero5 from '../assets/hero-5.jpg';
+import hero6 from '../assets/hero-6.jpg';
+import hero7 from '../assets/hero-7.jpg';
+import hero8 from '../assets/hero-8.jpg';
+import hero9 from '../assets/hero-9.jpg';
+import hero10 from '../assets/hero-10.jpg';
+import hero11 from '../assets/hero-11.jpg';
+import hero12 from '../assets/hero-12.jpg';
 
 export const Hero = () => {
   const { t } = useLanguage();
   const [currentImage, setCurrentImage] = useState(0);
-  const heroImages = [hero1, hero2, hero3];
+  
+  const heroImages = [
+    hero1, hero2, hero3, hero4, hero5, hero6, 
+    hero7, hero8, hero9, hero10, hero11, hero12
+  ];
+
+  const totalImages = heroImages.length;
 
   const nextSlide = () => {
-    setCurrentImage((prev) => (prev + 1) % heroImages.length);
+    setCurrentImage((prev) => (prev + 1) % totalImages);
   };
 
   const prevSlide = () => {
-    setCurrentImage((prev) => (prev - 1 + heroImages.length) % heroImages.length);
+    setCurrentImage((prev) => (prev - 1 + totalImages) % totalImages);
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % heroImages.length);
-    }, 15000);
+      setCurrentImage((prev) => (prev + 1) % totalImages);
+    }, 8000);
     return () => clearInterval(interval);
-  }, []);
+  }, []); 
 
   return (
-    <section className="relative min-h-screen w-full bg-[#fafafa] flex flex-col">
+    <section className="relative min-h-screen w-full bg-[#fafafa] flex flex-col pt-16 md:pt-20 lg:pt-24">
       
       <main className="flex-grow flex items-center justify-center px-4 md:px-8 py-6 md:py-10 bg-[#fafafa]">
         <div className="relative w-full max-w-[1400px] h-[70vh] md:h-[80vh] rounded-2xl overflow-hidden bg-black shadow-sm">
@@ -65,7 +81,7 @@ export const Hero = () => {
             </h1>
             
             <p className="mt-4 text-sm md:text-base font-normal text-gray-200 leading-relaxed max-w-lg">
-              We build tailored systems, webapps, mobile apps, chatbots, and AI for Tanzanian SMEs, solopreneurs, and NGOs, connecting agents, tools, and data so small teams can solve niche problems faster, protect digital sovereignty, and expand their footprint.
+              We Build Tailored Systems, Webapps, Mobile Apps, Portals, Chatbots, Data Analytics, Data Dashboards and AI for Tanzanian SMEs, solopreneurs, and NGOs, connecting agents, tools, and data so small teams can solve niche problems faster, protect digital sovereignty, and expand their footprint.
             </p>
           </motion.div>
 
@@ -86,6 +102,21 @@ export const Hero = () => {
               <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
             </svg>
           </button>
+
+          {/* Dots indicator */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+            {heroImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImage(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  currentImage === index 
+                    ? 'bg-white w-6' 
+                    : 'bg-white/50 hover:bg-white/80'
+                }`}
+              />
+            ))}
+          </div>
 
         </div>
       </main>
