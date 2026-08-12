@@ -248,16 +248,6 @@ const PixelScalableIcon = () => (
   </motion.svg>
 );
 
-const DiamondDecoration = ({ className = "" }: { className?: string }) => (
-  <motion.div 
-    className={`w-16 h-16 border border-neutral-200 rotate-45 ${className}`}
-    initial={{ opacity: 0, scale: 0 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-  />
-);
-
 export const OperationSection = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -272,77 +262,63 @@ export const OperationSection = () => {
   ];
 
   return (
-    <section ref={containerRef} className="bg-[#FAFAF8] text-black font-sans antialiased w-full py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
-      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
+    <section ref={containerRef} className="bg-white text-black font-sans w-full py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+      <motion.div className="fixed top-0 left-0 right-0 h-[1px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-
-        <header className="mb-24 md:mb-40 text-center">
+      <div className="w-full px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
+        <header className="mb-16">
           <motion.h1 
-            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
-            initial={{ opacity: 0, y: 40 }}
+            className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1]"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            How we operate.
+            How we operate to serve you.
           </motion.h1>
           <motion.p 
-            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
-            initial={{ opacity: 0, y: 15 }}
+            className="text-lg max-w-xl leading-relaxed text-neutral-600 mt-3"
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            transition={{ delay: 0.15, duration: 0.6 }}
           >
-            Work with world-class engineers to enable transformation that drives impact.
+            Work with Tanzanian top software and hardware engineers to enable transformation that drives impact.
           </motion.p>
         </header>
 
-        <div className="relative max-w-5xl mx-auto">
-          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {steps.map((step, index) => {
+            const isActive = activeIndex === index;
+            return (
+              <motion.div
+                key={step.id}
+                onMouseEnter={() => setActiveIndex(index)}
+                className={`group bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between cursor-default`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.7 }}
+              >
+                <step.icon />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-neutral-200 bg-white">
-            {steps.map((step, index) => {
-              const isActive = activeIndex === index;
-              return (
-                <motion.div
-                  key={step.id}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  className={`group relative flex flex-col justify-between p-8 md:p-12 min-h-[360px] md:min-h-[420px] border-b md:border-b-0 lg:border-r border-neutral-200 last:border-r-0 hover:bg-neutral-50/50 transition-colors cursor-default`}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.7 }}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeTopBorderOp"
-                      className="absolute top-0 left-0 right-0 h-[3px] bg-[#FA520F]"
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
-                  )}
-
-                  <step.icon />
-
-                  <div className="mt-auto">
-                    <h3 className="text-2xl md:text-3xl font-medium tracking-tight text-black mb-3">
-                      {step.name}
-                    </h3>
-                    <motion.div
-                      initial={false}
-                      animate={{ height: isActive ? 'auto' : 0, opacity: isActive ? 1 : 0, marginTop: isActive ? 12 : 0 }}
-                      className="overflow-hidden"
-                    >
-                      <p className="text-base text-neutral-500 leading-relaxed">
-                        {step.desc}
-                      </p>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              )
-            })}
-            <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
-          </div>
+                <div className="mt-auto">
+                  <h3 className={`text-2xl md:text-3xl font-normal tracking-tight mb-3 transition-colors duration-200 ${isActive ? 'text-[#FA520F]' : 'text-black'}`}>
+                    {step.name}
+                  </h3>
+                  <motion.div
+                    initial={false}
+                    animate={{ height: isActive ? 'auto' : 0, opacity: isActive ? 1 : 0, marginTop: isActive ? 12 : 0 }}
+                    className="overflow-hidden"
+                  >
+                    <p className="text-base text-neutral-600 leading-relaxed">
+                      {step.desc}
+                    </p>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>
@@ -367,77 +343,63 @@ export const DataScienceSection = () => {
   ];
 
   return (
-    <section ref={containerRef} className="bg-[#FAFAF8] text-black font-sans antialiased w-full py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
-      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
+    <section ref={containerRef} className="bg-white text-black font-sans w-full py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+      <motion.div className="fixed top-0 left-0 right-0 h-[1px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-
-        <header className="mb-24 md:mb-40 text-center">
+      <div className="w-full px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
+        <header className="mb-16">
           <motion.h1 
-            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
-            initial={{ opacity: 0, y: 40 }}
+            className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1]"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            Infrastructure & Operations.
+            Infrastructure and Operations.
           </motion.h1>
           <motion.p 
-            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
-            initial={{ opacity: 0, y: 15 }}
+            className="text-lg max-w-xl leading-relaxed text-neutral-600 mt-3"
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            transition={{ delay: 0.15, duration: 0.6 }}
           >
             Modern infrastructure designed for reliability, uncompromised security, and strict cost control.
           </motion.p>
         </header>
 
-        <div className="relative max-w-5xl mx-auto">
-          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {services.map((service, index) => {
+            const isActive = activeIndex === index;
+            return (
+              <motion.div
+                key={index}
+                onMouseEnter={() => setActiveIndex(index)}
+                className={`group bg-[#F5F5F5] p-8 md:p-12 min-h-[300px] flex flex-col justify-between cursor-default`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05, duration: 0.7 }}
+              >
+                <service.icon />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-neutral-200 bg-white">
-            {services.map((service, index) => {
-              const isActive = activeIndex === index;
-              return (
-                <motion.div
-                  key={index}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  className={`group relative flex flex-col justify-between p-8 md:p-12 min-h-[300px] border-b border-r border-neutral-200 hover:bg-neutral-50/50 transition-colors cursor-default`}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05, duration: 0.7 }}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeTopBorderData"
-                      className="absolute top-0 left-0 right-0 h-[3px] bg-[#FA520F]"
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
-                  )}
-
-                  <service.icon />
-
-                  <div className="mt-auto">
-                    <h3 className="text-xl md:text-2xl font-medium tracking-tight text-black mb-3">
-                      {service.title}
-                    </h3>
-                    <motion.div
-                      initial={false}
-                      animate={{ height: isActive ? 'auto' : 0, opacity: isActive ? 1 : 0, marginTop: isActive ? 12 : 0 }}
-                      className="overflow-hidden"
-                    >
-                      <p className="text-base text-neutral-500 leading-relaxed">
-                        {service.desc}
-                      </p>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              )
-            })}
-            <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
-          </div>
+                <div className="mt-auto">
+                  <h3 className={`text-xl md:text-2xl font-normal tracking-tight mb-3 transition-colors duration-200 ${isActive ? 'text-[#FA520F]' : 'text-black'}`}>
+                    {service.title}
+                  </h3>
+                  <motion.div
+                    initial={false}
+                    animate={{ height: isActive ? 'auto' : 0, opacity: isActive ? 1 : 0, marginTop: isActive ? 12 : 0 }}
+                    className="overflow-hidden"
+                  >
+                    <p className="text-base text-neutral-600 leading-relaxed">
+                      {service.desc}
+                    </p>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>
@@ -462,77 +424,63 @@ export const WhySection = () => {
   ];
 
   return (
-    <section ref={containerRef} className="bg-[#FAFAF8] text-black font-sans antialiased w-full py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
-      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
+    <section ref={containerRef} className="bg-white text-black font-sans w-full py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+      <motion.div className="fixed top-0 left-0 right-0 h-[1px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-
-        <header className="mb-24 md:mb-40 text-center">
+      <div className="w-full px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
+        <header className="mb-16">
           <motion.h1 
-            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
-            initial={{ opacity: 0, y: 40 }}
+            className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1]"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            What makes us different.
+            What makes us different from Others.
           </motion.h1>
           <motion.p 
-            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
-            initial={{ opacity: 0, y: 15 }}
+            className="text-lg max-w-xl leading-relaxed text-neutral-600 mt-3"
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            transition={{ delay: 0.15, duration: 0.6 }}
           >
             Partner with a team that prioritizes engineering excellence and clear business outcomes.
           </motion.p>
         </header>
 
-        <div className="relative max-w-5xl mx-auto">
-          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {reasons.map((reason, index) => {
+            const isActive = activeIndex === index;
+            return (
+              <motion.div
+                key={index}
+                onMouseEnter={() => setActiveIndex(index)}
+                className={`group bg-[#F5F5F5] p-8 md:p-12 min-h-[300px] flex flex-col justify-between cursor-default`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05, duration: 0.7 }}
+              >
+                <reason.icon />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-neutral-200 bg-white">
-            {reasons.map((reason, index) => {
-              const isActive = activeIndex === index;
-              return (
-                <motion.div
-                  key={index}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  className={`group relative flex flex-col justify-between p-8 md:p-12 min-h-[300px] border-b border-r border-neutral-200 hover:bg-neutral-50/50 transition-colors cursor-default`}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05, duration: 0.7 }}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeTopBorderWhy"
-                      className="absolute top-0 left-0 right-0 h-[3px] bg-[#FA520F]"
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
-                  )}
-
-                  <reason.icon />
-
-                  <div className="mt-auto">
-                    <h3 className="text-xl md:text-2xl font-medium tracking-tight text-black mb-3">
-                      {reason.title}
-                    </h3>
-                    <motion.div
-                      initial={false}
-                      animate={{ height: isActive ? 'auto' : 0, opacity: isActive ? 1 : 0, marginTop: isActive ? 12 : 0 }}
-                      className="overflow-hidden"
-                    >
-                      <p className="text-base text-neutral-500 leading-relaxed">
-                        {reason.desc}
-                      </p>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              )
-            })}
-            <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
-          </div>
+                <div className="mt-auto">
+                  <h3 className={`text-xl md:text-2xl font-normal tracking-tight mb-3 transition-colors duration-200 ${isActive ? 'text-[#FA520F]' : 'text-black'}`}>
+                    {reason.title}
+                  </h3>
+                  <motion.div
+                    initial={false}
+                    animate={{ height: isActive ? 'auto' : 0, opacity: isActive ? 1 : 0, marginTop: isActive ? 12 : 0 }}
+                    className="overflow-hidden"
+                  >
+                    <p className="text-base text-neutral-600 leading-relaxed">
+                      {reason.desc}
+                    </p>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>
