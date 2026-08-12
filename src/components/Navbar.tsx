@@ -102,7 +102,7 @@ export const Navbar = () => {
               priority
             />
           </div>
-          <span className="text-xl font-semibold tracking-tight">Antera</span>
+          <span className="text-xl font-semibold tracking-tight">Antera Software</span>
         </Link>
 
         {/* Action Buttons */}
@@ -206,11 +206,6 @@ export const Navbar = () => {
               
               {/* Column 1: Navigation */}
               <div className="lg:col-span-3">
-                <div className="border-b border-zinc-700 pb-3 mb-6">
-                  <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
-                    Navigation
-                  </span>
-                </div>
                 <ul className="flex flex-col gap-5 text-[22px] font-light">
                   {navLinks.map((link) => (
                     <li key={link.name}>
