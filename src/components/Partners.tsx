@@ -30,27 +30,27 @@ export const PartnersSection = () => {
   const tripledPartners = [...partners, ...partners, ...partners];
 
   return (
-    <section ref={containerRef} className="bg-[#0B0B0B] text-white antialiased w-full overflow-hidden border-b border-neutral-900 selection:bg-[#FA520F] selection:text-white">
+    <section ref={containerRef} className="bg-[#fffaeb] text-[#1F1F1F] antialiased w-full overflow-hidden border-b border-[#1F1F1F]/10 selection:bg-[#FA520F] selection:text-[#fffaeb]">
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-[#FA520F] z-[100] origin-left" style={{ scaleX }} />
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-24 md:py-32">
         <header className="mb-24 text-left max-w-4xl">
           <div className="text-[10px] font-mono tracking-[0.25em] uppercase text-[#FA520F] mb-4">Infrastructure Partners</div>
-          <h2 className="text-4xl md:text-6xl font-light tracking-tight text-white mb-6 leading-none">
+          <h2 className="text-3xl md:text-5xl font-light tracking-tight text-[#1F1F1F] mb-6 leading-none">
             Engineered with World-Class Systems.
           </h2>
-          <p className="text-sm md:text-base leading-relaxed text-neutral-400 font-mono tracking-wider font-light max-w-2xl">
+          <p className="text-sm md:text-base leading-relaxed text-neutral-600 font-mono tracking-wider font-light max-w-2xl">
             Leveraging secure cloud infrastructure nodes and low-latency CDNs to ensure maximum availability, resilience, and operational safety.
           </p>
         </header>
 
         {/* Minimal Marquee frame with stark border */}
-        <div className="border border-neutral-800 bg-black p-8 md:p-12 overflow-hidden shadow-sm relative">
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+        <div className="border border-[#1F1F1F]/10 bg-white p-8 md:p-12 overflow-hidden shadow-sm relative">
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
           <motion.div
-            className="flex gap-16 md:gap-24"
+            className="flex gap-16 md:gap-24 animate-carousel"
             animate={{ x: [0, -1920] }}
             transition={{ duration: 25, ease: "linear", repeat: Infinity, repeatType: "loop" }}
             style={{ width: "max-content" }}
@@ -60,7 +60,7 @@ export const PartnersSection = () => {
                 <Image
                   src={partner.logo}
                   alt={partner.name}
-                  className="h-8 md:h-10 w-auto object-contain grayscale opacity-30 hover:opacity-100 transition-opacity duration-300"
+                  className="h-8 md:h-10 w-auto object-contain grayscale opacity-45 hover:opacity-100 transition-opacity duration-300"
                 />
               </div>
             ))}

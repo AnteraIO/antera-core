@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import hero1 from '../assets/hero-1.jpg';
 import hero2 from '../assets/hero-2.jpg';
@@ -13,103 +12,125 @@ export const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const heroImages = [hero1, hero2, hero3];
 
+  // Rotate background images every 15 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % heroImages.length);
-    }, 12000);
+    }, 15000);
     return () => clearInterval(interval);
   }, []);
 
+  // Split headline into individual words for staggered animation
+  const titleWords = "Grow Your Business. With Smart Technology.".split(" ");
+
   return (
-    <section className="relative min-h-screen w-full bg-black overflow-hidden flex items-center pt-14">
-      {/* Background Slideshow with extreme high contrast */}
-      <div className="absolute inset-0 z-0 select-none">
+    <section className="relative min-h-screen w-full bg-black overflow-hidden">
+      {/* Background image slideshow with crossfade */}
+      <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImage}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.45 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 2.0, ease: "easeInOut" }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
             className="absolute inset-0"
           >
             <Image
               src={heroImages[currentImage]}
-              alt={`ANTERA Systems Background`}
+              alt={`Hero Background ${currentImage + 1}`}
               fill
               priority
-              className="object-cover object-center scale-102 filter brightness-[0.7]"
+              className="object-cover object-center"
             />
           </motion.div>
         </AnimatePresence>
-
-        {/* Deep tech gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-[1]" />
-        <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-black/50 to-transparent z-[1]" />
-
-        {/* Stark 1px grid lines for blueprint look */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] z-[2]" />
+        {/* Warm sunset gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-[#FA520F]/30 to-[#FCD34D]/20 z-[1]" />
       </div>
 
-      {/* Corporate Technical Details */}
-      <div className="absolute top-24 left-12 z-20 hidden xl:flex flex-col gap-1 text-[8px] font-mono text-neutral-600 tracking-[0.2em] uppercase pointer-events-none select-none">
-        <div>SYS.ID: ANTERA_CORE_v15</div>
-        <div>REGION: DAR_ES_SALAAM_TZ</div>
-        <div>COORDINATES: 6.7924° S, 39.2083° E</div>
+      {/* Decorative corner ornaments - top left */}
+      <div className="absolute top-0 left-0 z-20 w-24 h-24 md:w-32 md:h-32 pointer-events-none">
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <path d="M2 2 L30 2 L30 6 L6 6 L6 30 L2 30 Z" fill="none" stroke="white" strokeWidth="1.5" opacity="0.3" />
+          <path d="M10 10 L25 10 L25 14 L14 14 L14 25 L10 25 Z" fill="none" stroke="white" strokeWidth="1" opacity="0.2" />
+          <circle cx="8" cy="8" r="1.5" fill="white" opacity="0.25" />
+        </svg>
       </div>
 
-      <div className="absolute top-24 right-12 z-20 hidden xl:flex flex-col items-end gap-1 text-[8px] font-mono text-neutral-600 tracking-[0.2em] uppercase pointer-events-none select-none">
-        <div>ORBITAL_STATUS: ACTIVE</div>
-        <div>INTEGRITY_CHECK: PASS</div>
-        <div>Sovereignty secured</div>
+      {/* Decorative corner ornaments - top right */}
+      <div className="absolute top-0 right-0 z-20 w-24 h-24 md:w-32 md:h-32 pointer-events-none">
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <path d="M98 2 L70 2 L70 6 L94 6 L94 30 L98 30 Z" fill="none" stroke="white" strokeWidth="1.5" opacity="0.3" />
+          <path d="M90 10 L75 10 L75 14 L86 14 L86 25 L90 25 Z" fill="none" stroke="white" strokeWidth="1" opacity="0.2" />
+          <circle cx="92" cy="8" r="1.5" fill="white" opacity="0.25" />
+        </svg>
       </div>
 
-      {/* Main Content Area */}
-      <div className="relative z-30 mx-auto w-full max-w-[1440px] px-6 md:px-12 py-24 flex flex-col justify-center">
+      {/* Decorative corner ornaments - bottom left */}
+      <div className="absolute bottom-0 left-0 z-20 w-24 h-24 md:w-32 md:h-32 pointer-events-none">
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <path d="M2 98 L30 98 L30 94 L6 94 L6 70 L2 70 Z" fill="none" stroke="white" strokeWidth="1.5" opacity="0.3" />
+          <path d="M10 90 L25 90 L25 86 L14 86 L14 75 L10 75 Z" fill="none" stroke="white" strokeWidth="1" opacity="0.2" />
+          <circle cx="8" cy="92" r="1.5" fill="white" opacity="0.25" />
+        </svg>
+      </div>
+
+      {/* Decorative corner ornaments - bottom right */}
+      <div className="absolute bottom-0 right-0 z-20 w-24 h-24 md:w-32 md:h-32 pointer-events-none">
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <path d="M98 98 L70 98 L70 94 L94 94 L94 70 L98 70 Z" fill="none" stroke="white" strokeWidth="1.5" opacity="0.3" />
+          <path d="M90 90 L75 90 L75 86 L86 86 L86 75 L90 75 Z" fill="none" stroke="white" strokeWidth="1" opacity="0.2" />
+          <circle cx="92" cy="92" r="1.5" fill="white" opacity="0.25" />
+        </svg>
+      </div>
+
+      {/* Decorative edge lines */}
+      <div className="absolute top-8 left-12 right-12 z-20 h-px pointer-events-none">
+        <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      </div>
+      <div className="absolute bottom-8 left-12 right-12 z-20 h-px pointer-events-none">
+        <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      </div>
+      <div className="absolute top-12 left-8 bottom-12 z-20 w-px pointer-events-none">
+        <div className="w-full h-full bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+      </div>
+      <div className="absolute top-12 right-8 bottom-12 z-20 w-px pointer-events-none">
+        <div className="w-full h-full bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+      </div>
+
+      {/* Main content */}
+      <div className="relative z-30 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 py-20 lg:px-8">
         <div className="max-w-4xl">
-          {/* Subtle minimal tag */}
-          <div className="inline-flex items-center gap-2 mb-8 select-none">
-            <span className="w-1 h-1 bg-[#FA520F]" />
-            <span className="text-[9px] font-mono tracking-[0.3em] uppercase text-[#FA520F]">
-              Foundational Software for Africa
-            </span>
-          </div>
-
-          {/* Large Stark Palantir-style Title */}
-          <h1 className="text-4xl md:text-7xl lg:text-8xl font-extralight tracking-[-0.03em] text-white leading-[1.05] mb-8 font-sans">
-            Build tailored systems.<br />
-            <span className="text-neutral-400 font-extralight">Secure your operations.</span>
+          {/* Animated headline with larger text sizes */}
+          <h1 className="mb-4 text-7xl md:text-8xl lg:text-9xl font-medium leading-[1.08] tracking-tight text-white">
+            {titleWords.map((word, index) => (
+              <motion.span
+                key={index}
+                initial={{ opacity: 0, y: 60 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: index * 0.15,
+                  duration: 0.8,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
+                className="inline-block mr-3"
+              >
+                {word}
+              </motion.span>
+            ))}
           </h1>
 
-          {/* Stark Description */}
-          <p className="max-w-2xl text-sm md:text-base leading-relaxed text-neutral-400 font-mono tracking-wider font-light mb-12">
-            We build custom systems, digital platforms, and Applied AI solutions for Tanzanian SMEs, NGOs, and high-growth startups, connecting critical data models and pipelines securely so small groups solve niche operations faster.
-          </p>
-
-          {/* Palantir Stark Action buttons */}
-          <div className="flex flex-wrap gap-6 font-mono text-[9px] tracking-[0.2em] uppercase">
-            <a
-              href="https://wa.me/255760984921"
-              target="_blank"
-              className="bg-[#FA520F] text-white px-8 py-3.5 hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-2"
-            >
-              <span>Contact Sales</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </a>
-            <a
-              href="/solutions"
-              className="bg-transparent text-white border border-neutral-800 hover:border-white px-8 py-3.5 transition-all duration-300 flex items-center justify-center"
-            >
-              <span>Explore Ecosystem</span>
-            </a>
-          </div>
+          {/* Animated description with larger text */}
+          <motion.p
+            className="mb-12 max-w-2xl text-xl md:text-2xl leading-relaxed text-white font-medium"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            We build tailored systems, webapps, mobile apps, chatbots, and AI for Tanzanian SMEs, solopreneurs, and NGOs, connecting agents, tools, and data so small teams can solve niche problems faster, protect digital sovereignty, and expand their footprint.
+          </motion.p>
         </div>
-      </div>
-
-      {/* Tiny minimal scroll indicator at bottom */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 pointer-events-none select-none opacity-40">
-        <span className="text-[7px] font-mono tracking-[0.3em] uppercase text-neutral-400">Scroll</span>
-        <div className="w-px h-8 bg-gradient-to-b from-neutral-400 to-transparent" />
       </div>
     </section>
   );
