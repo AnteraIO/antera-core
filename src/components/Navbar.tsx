@@ -272,14 +272,7 @@ export const Navbar = () => {
                 <p className="text-[15px] text-zinc-300 leading-relaxed mb-6">
                   Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development for the modern African market.
                 </p>
-                <Link 
-                  href="/developers" 
-                  onClick={() => setIsOpen(false)}
-                  className="text-sm font-medium hover:text-[#FA520F] transition-colors inline-block mb-12 flex items-center gap-2"
-                >
-                  <ArrowRight className="w-4 h-4" /> Learn more about Developers Toolkit
-                </Link>
-
+            
                 <div className="border-b border-zinc-700 pb-3 mb-6">
                   <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
                     Contact & Socials
