@@ -4,7 +4,6 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
-// Pixel-style decorative icons — LARGER (56x56) with animation
 const PixelCodeIcon = () => (
   <motion.svg 
     width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -76,158 +75,143 @@ const PixelBrainIcon = () => (
   </motion.svg>
 );
 
-const DiamondDecoration = ({ className = "" }: { className?: string }) => (
-  <motion.div 
-    className={`w-16 h-16 border border-neutral-200 rotate-45 ${className}`}
-    initial={{ opacity: 0, scale: 0 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-  />
-);
-
 export const ProductsPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+  };
+
   return (
-    <div ref={containerRef} className="bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
-      {/* Progress Line */}
-      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
+    <div ref={containerRef} className="bg-white text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+      <motion.div className="fixed top-0 left-0 right-0 h-[1px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-        
-        {/* Floating pixel icons */}
-        <div className="flex justify-center items-center gap-8 mb-12">
-          <PixelCodeIcon />
-          <PixelGearIcon />
-          <PixelChartIcon />
-        </div>
+      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
 
-        {/* Header — LARGER */}
-        <header className="mb-24 md:mb-40 text-center">
+        {/* Header — Left Aligned */}
+        <header className="mb-16">
           <motion.h1 
-            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
-            initial={{ opacity: 0, y: 40 }}
+            className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1]"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             Do it all with Antera.
           </motion.h1>
+          <motion.p 
+            className="text-lg max-w-xl leading-relaxed text-neutral-600 mt-3"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.6 }}
+          >
+            High-throughput communication endpoints, infrastructure auditing, and applied AI solutions for the African market.
+          </motion.p>
         </header>
 
-        {/* Bento Grid — WIDER with pixel icons */}
-        <div className="relative max-w-5xl mx-auto">
-          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 border border-neutral-200 bg-white">
-            
-            {/* Card 1 - Large (2x1) */}
-            <motion.div 
-              className="group md:col-span-2 border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0, duration: 0.7 }}
-            >
-              <PixelCodeIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Sekela APIs</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
-                  High-throughput communication endpoints for SMS, USSD, and voice automation.
-                </p>
-              </div>
-            </motion.div>
+        {/* Bento Grid — Full width, flat cards, gap-4 */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4"
+        >
+          {/* Card 1 - Large (2x1) */}
+          <motion.div 
+            variants={itemVariants}
+            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+          >
+            <PixelCodeIcon />
+            <div className="mt-auto">
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Sekela APIs</h3>
+              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed max-w-md">
+                High-throughput communication endpoints for SMS, USSD, and voice automation.
+              </p>
+            </div>
+          </motion.div>
 
-            {/* Card 2 - Small (1x1) */}
-            <motion.div 
-              className="group border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1, duration: 0.7 }}
-            >
-              <PixelGearIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Infrastructure Audit</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
-                  Systematic mapping and security auditing of distributed digital assets.
-                </p>
-              </div>
-            </motion.div>
+          {/* Card 2 - Small (1x1) */}
+          <motion.div 
+            variants={itemVariants}
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+          >
+            <PixelGearIcon />
+            <div className="mt-auto">
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Infrastructure Audit</h3>
+              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
+                Systematic mapping and security auditing of distributed digital assets.
+              </p>
+            </div>
+          </motion.div>
 
-            {/* Card 3 */}
-            <motion.div 
-              className="group border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.7 }}
-            >
-              <PixelCloudIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Cloud Orchestration</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
-                  Auto-scaling deployments optimized for latency across the African continent.
-                </p>
-              </div>
-            </motion.div>
+          {/* Card 3 */}
+          <motion.div 
+            variants={itemVariants}
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+          >
+            <PixelCloudIcon />
+            <div className="mt-auto">
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Cloud Orchestration</h3>
+              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
+                Auto-scaling deployments optimized for latency across the African continent.
+              </p>
+            </div>
+          </motion.div>
 
-            {/* Card 4 */}
-            <motion.div 
-              className="group border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-            >
-              <PixelBoxIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Custom SDKs</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
-                  Tailored integration kits for rapid deployment in mobile and web environments.
-                </p>
-              </div>
-            </motion.div>
+          {/* Card 4 */}
+          <motion.div 
+            variants={itemVariants}
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+          >
+            <PixelBoxIcon />
+            <div className="mt-auto">
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Custom SDKs</h3>
+              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
+                Tailored integration kits for rapid deployment in mobile and web environments.
+              </p>
+            </div>
+          </motion.div>
 
-            {/* Card 5 - Tall card (1x2) */}
-            <motion.div 
-              className="group md:row-span-2 border-b border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.7 }}
-            >
-              <PixelChartIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Applied AI Services</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
-                  End-to-end AI solutions for enterprise transformation.
-                </p>
-              </div>
-            </motion.div>
+          {/* Card 5 - Tall (1x2) */}
+          <motion.div 
+            variants={itemVariants}
+            className="md:row-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+          >
+            <PixelChartIcon />
+            <div className="mt-auto">
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Applied AI Services</h3>
+              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
+                End-to-end AI solutions for enterprise transformation.
+              </p>
+            </div>
+          </motion.div>
 
-            {/* Card 6 - Large (2x1) */}
-            <motion.div 
-              className="group md:col-span-2 border-b border-r border-neutral-200 p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.7 }}
-            >
-              <PixelBrainIcon />
-              <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Frontier Models</h3>
-                <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
-                  State-of-the-art machine learning models trained for African languages and contexts.
-                </p>
-              </div>
-            </motion.div>
-            <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
+          {/* Card 6 - Large (2x1) */}
+          <motion.div 
+            variants={itemVariants}
+            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+          >
+            <PixelBrainIcon />
+            <div className="mt-auto">
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Frontier Models</h3>
+              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed max-w-md">
+                State-of-the-art machine learning models trained for African languages and contexts.
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
 
-          </div>
-        </div>
       </div>
     </div>
   );

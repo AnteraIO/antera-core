@@ -315,15 +315,6 @@ const PixelHeartPulseIcon = () => (
   </motion.svg>
 );
 
-const DiamondDecoration = ({ className = "" }: { className?: string }) => (
-  <motion.div className={`w-16 h-16 border border-neutral-200 rotate-45 ${className}`}
-    initial={{ opacity: 0, scale: 0 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-  />
-);
-
 export const CustomersPage = () => {
   const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -344,61 +335,40 @@ export const CustomersPage = () => {
   ];
 
   return (
-    <div ref={containerRef} className="relative bg-[#FAFAF8] min-h-screen text-black font-sans antialiased w-full overflow-hidden selection:bg-[#FA520F] selection:text-white">
+    <div ref={containerRef} className="relative bg-white min-h-screen text-black font-sans antialiased w-full overflow-hidden selection:bg-[#FA520F] selection:text-white">
       <ParticleBackground />
       <GrainOverlay />
 
-      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX: scrollYProgress }} />
+      <motion.div className="fixed top-0 left-0 right-0 h-[1px] bg-black z-[100] origin-left" style={{ scaleX: scrollYProgress }} />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
-        <section className="mb-48 pt-32">
-          <h2 className="text-3xl md:text-6xl lg:text-7xl font-normal tracking-[-0.03em] leading-[0.95] mb-16 text-center">Industries <span className="text-[#FA520F]">We Serve.</span></h2>
-          <div className="relative max-w-5xl mx-auto">
-            <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-            <div className="grid grid-cols-1 md:grid-cols-2 border border-neutral-200 bg-white">
-              {industries.map((industry, i) => (
-                <motion.div key={industry.title} className={`group p-8 md:p-12 min-h-[200px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors ${i % 2 === 0 ? 'border-r border-b border-neutral-200' : 'border-b border-neutral-200'}`}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.7 }}
-                >
-                  <industry.icon />
-                  <div className="mt-auto">
-                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">{industry.title}</h3>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-            <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
+      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 relative z-10">
+        <section className="mb-32 pt-32">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1] mb-12 text-left">Industries We Serve.</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {industries.map((industry, i) => (
+              <motion.div key={industry.title} className="bg-[#F5F5F5] p-8 md:p-12 min-h-[200px] flex flex-col justify-between"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.7 }}
+              >
+                <industry.icon />
+                <div className="mt-auto">
+                  <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">{industry.title}</h3>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </section>
 
         <div className="mb-32">
-          <h2 className="text-3xl md:text-6xl lg:text-7xl font-normal tracking-[-0.03em] leading-[0.95] mb-16 text-center">The <span className="text-[#FA520F]">Companies</span> We Work With</h2>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1] mb-16 text-left">The Companies We Work With</h2>
           {clients.map((client, index) => (
             <ClientShowcase key={client.client} client={client.client} images={client.images} description={client.description} index={index} />
           ))}
         </div>
 
-        <motion.div className="text-center pb-32" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-          <motion.h2 className="text-4xl md:text-6xl lg:text-7xl font-normal tracking-[-0.03em] leading-[0.95] mb-6" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-            Ready to <span className="text-[#FA520F]">Transform?</span>
-          </motion.h2>
-          <motion.p className="text-neutral-500 text-base max-w-lg mx-auto mb-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }}>
-            Join the ranks of industry leaders who trust ANTERA to power their digital future.
-          </motion.p>
-          <MagneticButton>
-            <motion.button 
-              className="group inline-flex items-center gap-2 px-6 py-3 text-sm font-medium border-2 border-black hover:bg-black hover:text-white transition-all"
-              whileHover={{ scale: 1.02 }} 
-              whileTap={{ scale: 0.98 }}
-            >
-              Start Your Project
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </motion.button>
-          </MagneticButton>
-        </motion.div>
+   
       </div>
     </div>
   );
