@@ -24,8 +24,6 @@ export const Navbar = () => {
   const navLinks = [
     { name: t('nav.products'), href: '/products' },
     { name: t('nav.solutions'), href: '/solutions' },
-    { name: t('nav.sekela'), href: '/sekela-apis' },
-    { name: t('nav.developers'), href: '/developers' },
     { name: t('nav.blog'), href: '/blog' },
     { name: t('nav.customers'), href: '/customers' },
     { name: t('nav.company'), href: '/company' },
@@ -33,7 +31,7 @@ export const Navbar = () => {
 
   const blogLatestPosts = [
     { title: 'Antera Group Office', href: '/office', desc: 'Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development' },
-    { title: 'Introducing Search Toolkit', href: '/developers', desc: 'Modern Data Science and Model Implementations for Tanzanian Markets' },
+    { title: 'Introducing Search Toolkit', href: '/blog', desc: 'Modern Data Science and Model Implementations for Tanzanian Markets' },
   ];
 
   return (
@@ -63,15 +61,24 @@ export const Navbar = () => {
             : 'bg-white text-black border-neutral-200'
         }`}
       >
-        {/* Logo - Image Removed, Text Only */}
+        {/* Logo - Image integrated next to text branding */}
         <Link href="/" className="flex items-center gap-3 flex-shrink-0 z-50">
+          <div className="relative w-8 h-8 rounded-full overflow-hidden border border-neutral-200">
+            <Image
+              src="/antera-logo.jpeg"
+              alt="Antera Logo"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
           <span className="text-xl font-semibold tracking-tight">Antera</span>
         </Link>
 
         {/* Action Buttons */}
         <div className="flex items-center gap-4 z-50">
           <Link 
-            href="/developers"
+            href="/solutions"
             className={`hidden lg:flex px-6 py-2 text-sm font-medium border transition-colors ${
               isOpen 
                 ? 'border-zinc-600 hover:bg-zinc-800 text-white' 
@@ -243,13 +250,13 @@ export const Navbar = () => {
                     View All Products <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>
-                <Link href="/sekela-apis" onClick={() => setIsOpen(false)} className="w-1/2 pr-4 group cursor-pointer block">
+                <Link href="/solutions" onClick={() => setIsOpen(false)} className="w-1/2 pr-4 group cursor-pointer block">
                   <div className="flex flex-col gap-3">
                     <span className="text-[10px] font-bold text-zinc-400 tracking-widest uppercase">
-                      Sekela POS & Kava AI
+                      AI Solutions
                     </span>
                     <h3 className="text-lg font-medium leading-snug group-hover:text-[#FA520F] transition-colors">
-                      Sekela POS and Kava AI Career Assistant
+                      Enterprise AI & Digital Transformation
                     </h3>
                   </div>
                 </Link>
@@ -287,13 +294,50 @@ export const Navbar = () => {
                     <span className="text-zinc-500">Phone:</span>
                     <a href="tel:+255760984921" className="hover:text-white transition-colors">+255 760 984 921</a>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-zinc-500">Socials:</span>
-                    <a href="#" className="hover:text-white transition-colors">Instagram</a>
-                    <span className="text-zinc-600">/</span>
-                    <a href="#" className="hover:text-white transition-colors">X</a>
-                    <span className="text-zinc-600">/</span>
-                    <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
+                  <li className="flex flex-col gap-2">
+                    <span className="text-zinc-500">Follow us:</span>
+                    <div className="flex gap-4 text-sm">
+                      <a 
+                        href="https://instagram.com/antera_tz" 
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                        className="hover:text-white transition-colors"
+                      >
+                        Instagram
+                      </a>
+                      <a 
+                        href="https://twitter.com/antera_tz" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-white transition-colors"
+                      >
+                        X
+                      </a>
+                      <a 
+                        href="https://linkedin.com/company/antera_tz" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-white transition-colors"
+                      >
+                        LinkedIn
+                      </a>
+                      <a 
+                        href="https://youtube.com/@antera_tz" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-white transition-colors"
+                      >
+                        YouTube
+                      </a>
+                      <a 
+                        href="https://facebook.com/antera_tz" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-white transition-colors"
+                      >
+                        Facebook
+                      </a>
+                    </div>
                   </li>
                 </ul>
               </div>
