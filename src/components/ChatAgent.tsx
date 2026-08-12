@@ -2,10 +2,9 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Mic, ChevronDown, Wifi, Battery, Signal } from 'lucide-react';
+import { Send, ChevronDown, Terminal, RefreshCw } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getAnteraResponseStream } from '@/lib/deepseek';
-import Image from 'next/image';
 
 type Msg = { role: 'user' | 'model'; text: string; time: string };
 
@@ -16,85 +15,39 @@ const cleanMarkdown = (text: string): string => {
   if (!text) return text;
 
   let cleaned = text
-    // Remove bold/italic markers but keep content
     .replace(/\*\*(.*?)\*\*/g, '$1')
     .replace(/\*(.*?)\*/g, '$1')
     .replace(/__(.*?)__/g, '$1')
     .replace(/_(.*?)_/g, '$1')
-    
-    // Remove code markers
     .replace(/`(.*?)`/g, '$1')
-    
-    // Remove link formatting but keep text
     .replace(/\[(.*?)\]\(.*?\)/g, '$1')
-    
-    // Remove image syntax
     .replace(/!\[.*?\]\(.*?\)/g, '')
-    
-    // Remove header markers (#, ##, etc)
     .replace(/^#{1,6}\s+/gm, '')
-    
-    // Remove horizontal rules (---, ***, ___) 
     .replace(/^[-*_]{3,}\s*$/gm, '')
-    
-    // Remove blockquote markers
     .replace(/^>\s*/gm, '')
-    
-    // Remove em dashes and en dashes
     .replace(/[—–]/g, '-')
-    
-    // Clean up multiple spaces
     .replace(/\s{2,}/g, ' ')
-    
-    // Clean up multiple newlines
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
   return cleaned;
 };
 
-// Typing dots (Antera orange)
+// Console Loading cursor
 const TypingDots = () => (
-  <div className="flex items-center gap-[5px] px-1 py-0.5">
-    {[0, 1, 2].map(i => (
-      <motion.div
-        key={i}
-        className="w-[7px] h-[7px] rounded-full"
-        style={{ background: '#FA520F' }}
-        animate={{ y: [0, -5, 0], opacity: [0.4, 1, 0.4] }}
-        transition={{ repeat: Infinity, duration: 0.9, delay: i * 0.15, ease: 'easeInOut' }}
-      />
-    ))}
-  </div>
-);
-
-// Avatar with rotating ring
-const Avatar = ({ size = 36 }: { size?: number }) => (
-  <div className="relative shrink-0" style={{ width: size, height: size }}>
-    <motion.div
-      className="absolute inset-0 rounded-full"
-      style={{ background: 'conic-gradient(from 0deg, #000000 0%, rgba(250,82,15,0.5) 50%, #000000 100%)' }}
-      animate={{ rotate: 360 }}
-      transition={{ repeat: Infinity, duration: 4, ease: 'linear' }}
-    />
-    <div
-      className="absolute inset-[2px] rounded-full flex items-center justify-center overflow-hidden"
-      style={{ background: '#000000', backdropFilter: 'blur(8px)' }}
+  <div className="flex items-center gap-[4px] px-1 py-0.5 text-neutral-400 font-mono text-[10px]">
+    <span>FETCHING RESPONSE DATA</span>
+    <motion.span
+      animate={{ opacity: [1, 0, 1] }}
+      transition={{ repeat: Infinity, duration: 1.0, ease: 'steps(2)' }}
     >
-      <Image
-        src="/antera-logo.jpeg"
-        alt="Antera AI"
-        width={size - 6}
-        height={size - 6}
-        className="object-cover rounded-full"
-      />
-    </div>
+      ...
+    </motion.span>
   </div>
 );
 
 // Table renderer component
 const TableRenderer = ({ text }: { text: string }) => {
-  // Check if text contains a table
   if (!text.includes('|') || !text.includes('-')) {
     return <div className="whitespace-pre-wrap break-words">{text}</div>;
   }
@@ -109,30 +62,22 @@ const TableRenderer = ({ text }: { text: string }) => {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
     
-    // Check if this is a table row
     if (line.includes('|')) {
       const cells = line.split('|').filter(cell => cell.trim() !== '');
-      
-      // Check if this is a separator row
       const isSeparator = cells.every(cell => cell.trim().match(/^[-:]+$/));
       
       if (isSeparator) {
-        // This is a separator row, skip it
         continue;
       }
       
       if (!currentTable) {
-        // Start a new table
         currentHeaders = cells.map(c => c.trim());
         currentTable = { headers: currentHeaders, rows: [] };
       } else {
-        // Add row to current table
         currentRows.push(cells.map(c => c.trim()));
       }
     } else {
-      // Not a table row
       if (currentTable && currentRows.length > 0) {
-        // Save the current table
         currentTable.rows = currentRows;
         tables.push(currentTable);
         currentTable = null;
@@ -145,7 +90,6 @@ const TableRenderer = ({ text }: { text: string }) => {
     }
   }
 
-  // Don't forget the last table
   if (currentTable && currentRows.length > 0) {
     currentTable.rows = currentRows;
     tables.push(currentTable);
@@ -158,22 +102,22 @@ const TableRenderer = ({ text }: { text: string }) => {
       )}
       
       {tables.map((table, idx) => (
-        <div key={idx} className="my-3 overflow-x-auto">
-          <table className="min-w-full border-collapse border border-gray-300">
+        <div key={idx} className="my-3 overflow-x-auto border border-neutral-800">
+          <table className="min-w-full border-collapse">
             <thead>
-              <tr className="bg-gray-100">
+              <tr className="bg-neutral-900 border-b border-neutral-800">
                 {table.headers.map((header: string, hIdx: number) => (
-                  <th key={hIdx} className="border border-gray-300 px-4 py-2 text-left text-sm font-semibold">
+                  <th key={hIdx} className="px-4 py-2 text-left text-[9px] font-mono font-semibold tracking-wider text-neutral-400">
                     {header}
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-neutral-900 bg-black">
               {table.rows.map((row: string[], rIdx: number) => (
-                <tr key={rIdx} className={rIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <tr key={rIdx}>
                   {row.map((cell: string, cIdx: number) => (
-                    <td key={cIdx} className="border border-gray-300 px-4 py-2 text-sm">
+                    <td key={cIdx} className="px-4 py-2 text-[10px] font-mono text-neutral-300">
                       {cell}
                     </td>
                   ))}
@@ -194,81 +138,48 @@ const Bubble = ({ msg, isLast, isStreaming }: { msg: Msg; isLast: boolean; isStr
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.38, ease: [0.23, 1, 0.32, 1] }}
-      className={cn('flex items-end gap-2', isUser ? 'justify-end' : 'justify-start')}
+      initial={{ opacity: 0, y: 4 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="flex flex-col gap-1 border-b border-neutral-900 pb-4"
     >
-      {!isUser && <Avatar size={28} />}
-      <div className={cn('flex flex-col gap-0.5', isUser ? 'items-end' : 'items-start', 'flex-1', isUser ? 'max-w-[85%]' : 'max-w-[85%]')}>
-     <div
-  className="px-4 py-2.5 text-[14.5px] font-medium leading-[1.55] shadow-sm w-full"
-  style={
-    isUser
-      ? {
-          background: '#FA520F',
-          color: 'white',
-          borderRadius: '18px',
-          border: '1px solid rgba(255,255,255,0.15)',
-        }
-      : {
-          background: 'transparent',
-          color: '#000000',
-          borderRadius: '20px 20px 20px 5px',
-          padding: '4px 4px 4px 0',
-        }
-  }
->
-          <div className="w-full">
-            {isUser ? (
-              <div className="whitespace-pre-wrap break-words">{displayText}</div>
-            ) : (
-              <TableRenderer text={displayText} />
-            )}
-            {isStreaming && isLast && !isUser && (
-              <motion.span
-                animate={{ opacity: [0, 1, 0] }}
-                transition={{ repeat: Infinity, duration: 0.8 }}
-                className="inline-block ml-1"
-                style={{ color: '#FA520F' }}
-              >
-                |
-              </motion.span>
-            )}
-          </div>
-        </div>
-        <div className="flex items-center gap-1 px-1">
-          <span className="text-[10px]" style={{ color: 'rgba(0,0,0,0.3)' }}>{msg.time}</span>
-          {isUser && isLast && (
+      <div className="flex items-center justify-between text-[8px] font-mono text-neutral-500 tracking-wider">
+        <span>{isUser ? '[USER_QUERY]' : '[AIP_MODEL_OUTPUT]'}</span>
+        <span>{msg.time}</span>
+      </div>
+
+      <div className={cn(
+        'text-xs font-mono tracking-wide leading-relaxed p-3 border',
+        isUser
+          ? 'bg-[#120803] border-[#FA520F]/30 text-neutral-200'
+          : 'bg-black border-neutral-800 text-neutral-300'
+      )}>
+        <div className="w-full">
+          {isUser ? (
+            <div className="whitespace-pre-wrap break-words">{displayText}</div>
+          ) : (
+            <TableRenderer text={displayText} />
+          )}
+          {isStreaming && isLast && !isUser && (
             <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-[10px]"
-              style={{ color: '#FA520F' }}
-            >✓✓</motion.span>
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ repeat: Infinity, duration: 0.8 }}
+              className="inline-block ml-1 text-[#FA520F]"
+            >
+              _
+            </motion.span>
           )}
         </div>
       </div>
-      {isUser && (
-        <div
-          className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-[12px]"
-          style={{ background: 'rgba(0,0,0,0.08)', border: '1px solid rgba(0,0,0,0.1)' }}
-        >
-          👤
-        </div>
-      )}
     </motion.div>
   );
 };
 
 const quickPrompts = [
-  { emoji: '🤖', label: 'How can AI help me?' },
-  { emoji: '💻', label: 'Can you build my website?' },
-  { emoji: '⚙️', label: 'How do you modernize tech?' },
-  { emoji: '🛡️', label: 'How do you keep my business secure?' },
-  { emoji: '📊', label: 'How do you turn data into insights?' },
-  { emoji: '💰', label: 'What does it cost?' },
+  { label: 'Integrate custom database models' },
+  { label: 'Audit legacy application security' },
+  { label: 'Set up high-availability cloud cluster' },
+  { label: 'Optimize operations data streams' },
 ];
 
 const ChatAgent = () => {
@@ -315,14 +226,12 @@ const ChatAgent = () => {
 
       let fullResponse = '';
       
-      // Use streaming function with onChunk callback
       await getAnteraResponseStream(apiHistoryPayload, (chunk: string) => {
         fullResponse += chunk;
         setStreamingText(fullResponse);
         scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
       });
 
-      // When streaming is complete, save the final message
       if (fullResponse) {
         const cleanedResponse = cleanMarkdown(fullResponse);
         setMessages(prev => [...prev, { 
@@ -336,8 +245,8 @@ const ChatAgent = () => {
       setIsLoading(false);
       
     } catch (err) {
-      console.error("Antera AI Error:", err);
-      const errorMsg = 'Antera AI is currently recalibrating. Please try again in a moment.';
+      console.error("AIP Terminal Error:", err);
+      const errorMsg = 'SYSTEM RE-CALIBRATION UNDERWAY. RETRY COMMAND SEQUENCE.';
       setMessages(prev => [...prev, { 
         role: 'model', 
         text: errorMsg, 
@@ -350,252 +259,106 @@ const ChatAgent = () => {
 
   return (
     <>
-      {/* FAB (Antera style) */}
+      {/* Stark Terminal FAB Button */}
       <AnimatePresence>
         {!isOpen && (
           <motion.button
             key="fab"
-            initial={{ scale: 0, opacity: 0 }}
+            initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            whileHover={{ scale: 1.05 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 w-14 h-14 md:w-16 md:h-16 rounded-full shadow-2xl flex items-center justify-center"
-            style={{ background: '#000000' }}
+            className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 px-5 py-3 rounded-none shadow-2xl flex items-center gap-2 bg-[#FA520F] border border-[#FA520F] text-white font-mono text-[10px] tracking-[0.2em] uppercase font-semibold"
           >
-            <motion.div
-              className="absolute inset-0 rounded-full"
-              style={{ background: '#FA520F' }}
-              animate={{ scale: [1, 1.35, 1], opacity: [0.5, 0, 0.5] }}
-              transition={{ repeat: Infinity, duration: 2.8, ease: 'easeInOut' }}
-            />
-            <span className="relative text-xl md:text-2xl">
-              <Image src="/antera-logo.jpeg" alt="Antera" width={28} height={28} className="rounded-full" />
-            </span>
-            <div className="absolute -top-0.5 -right-0.5 w-3 h-3 md:w-4 md:h-4 bg-[#FA520F] rounded-full border-2 border-white" />
+            <Terminal className="w-3.5 h-3.5" />
+            <span>Open AIP Terminal</span>
           </motion.button>
         )}
       </AnimatePresence>
 
-      {/* Chat window */}
+      {/* AIP Terminal Window */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop for mobile */}
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              animate={{ opacity: 0.3 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 z-40 bg-black/20 md:hidden"
+              className="fixed inset-0 z-40 bg-black"
             />
 
             <motion.div
               key="chat"
-              initial={{ opacity: 0, scale: 0.85, y: 60 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.85, y: 60 }}
-              transition={{ type: 'spring', damping: 26, stiffness: 300 }}
-              className="chat-window fixed bottom-0 left-0 right-0 md:bottom-8 md:right-8 md:left-auto z-50 flex flex-col overflow-hidden mx-auto"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 15 }}
+              transition={{ duration: 0.2 }}
+              className="fixed bottom-0 right-0 left-0 md:bottom-8 md:right-8 md:left-auto z-50 flex flex-col overflow-hidden bg-black border border-neutral-800 shadow-2xl mx-auto"
               style={{
                 width: '100%',
-                maxWidth: '100%',
-                height: '90vh',
-                maxHeight: '90vh',
-                borderTopLeftRadius: 32,
-                borderTopRightRadius: 32,
-                borderBottomLeftRadius: 0,
-                borderBottomRightRadius: 0,
-                border: 'none',
-                boxShadow: '0 -10px 40px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.06) inset',
-                background: 'rgba(255,255,255,0.55)',
-                backdropFilter: 'blur(40px)',
-                WebkitBackdropFilter: 'blur(40px)',
+                maxWidth: '440px',
+                height: '75vh',
+                maxHeight: '680px',
               }}
             >
-              {/* Desktop phone shape */}
-              <style>{`
-                @media (min-width: 768px) {
-                  .chat-window {
-                    width: 390px !important;
-                    max-width: 390px !important;
-                    height: min(780px, calc(100vh - 7rem)) !important;
-                    max-height: min(780px, calc(100vh - 7rem)) !important;
-                    border-radius: 52px !important;
-                    border: 10px solid #0F0F0F !important;
-                    box-shadow:
-                      0 0 0 1px rgba(255,255,255,0.08) inset,
-                      0 50px 120px rgba(0,0,0,0.6),
-                      0 20px 60px rgba(0,0,0,0.35) !important;
-                    bottom: 2rem !important;
-                    right: 2rem !important;
-                    left: auto !important;
-                    top: auto !important;
-                    margin: 0 !important;
-                    overflow: hidden !important;
-                  }
-                }
-              `}</style>
-
-              {/* Glass background blobs */}
-              <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ borderRadius: 'inherit', zIndex: 0 }}>
-                <div className="absolute -top-8 -left-8 w-48 h-48 rounded-full opacity-15" style={{ background: '#FA520F', filter: 'blur(40px)' }} />
-                <div className="absolute -bottom-8 -right-8 w-56 h-56 rounded-full opacity-10" style={{ background: '#000000', filter: 'blur(50px)' }} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full opacity-5" style={{ background: '#FA520F', filter: 'blur(60px)' }} />
-              </div>
-
-              {/* Drag handle (mobile) */}
-              <div className="flex justify-center pt-2 pb-1 md:hidden relative z-10">
-                <div className="w-12 h-1.5 rounded-full bg-gray-400/50" />
-              </div>
-
-              {/* Dynamic Island / Notch */}
-              <div className="relative z-10 flex justify-center pt-3 pb-1 shrink-0">
-                <motion.div
-                  className="flex items-center justify-between px-4"
-                  style={{
-                    width: 126,
-                    height: 34,
-                    background: '#000000',
-                    borderRadius: 20,
-                  }}
-                  whileHover={{ width: 180 }}
-                  transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
-                >
-                  <div className="w-2 h-2 rounded-full bg-white/20" />
-                  <motion.div
-                    className="w-1.5 h-1.5 rounded-full bg-[#FA520F]"
-                    animate={{ opacity: [1, 0.3, 1] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                  />
-                </motion.div>
-              </div>
-
-              {/* Status Bar */}
-              <div className="relative z-10 flex items-center justify-between px-7 py-1 shrink-0">
-                <span className="text-black text-[12px] font-bold tracking-tight">{clockTime}</span>
-                <div className="flex items-center gap-1.5">
-                  <Signal size={12} style={{ color: '#000000' }} />
-                  <Wifi size={12} style={{ color: '#000000' }} />
-                  <Battery size={14} style={{ color: '#000000' }} />
+              {/* Header Terminal Title Bar */}
+              <div className="flex items-center justify-between px-4 py-3 bg-[#0F0F0F] border-b border-neutral-800 select-none">
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#FA520F] animate-pulse" />
+                  <span className="text-[9px] font-mono font-semibold tracking-[0.2em] text-neutral-200">ANTERA_AIP_CONSOLE</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="text-[8px] font-mono text-neutral-600">{clockTime}</span>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="text-neutral-500 hover:text-white transition-colors"
+                  >
+                    <ChevronDown className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
 
-              {/* Messages area */}
+              {/* Terminal Logs View */}
               <div
                 ref={scrollRef}
-                className="relative z-10 flex-1 overflow-y-auto px-4 py-4 space-y-3"
+                className="flex-1 overflow-y-auto p-4 space-y-4 font-mono scrollbar-none"
                 style={{ scrollbarWidth: 'none' }}
               >
-                <div className="flex justify-end mb-2">
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setIsOpen(false)}
-                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all"
-                    style={{ background: 'rgba(0,0,0,0.07)' }}
-                  >
-                    <ChevronDown size={16} style={{ color: '#000000' }} />
-                  </motion.button>
+                {/* Console System Info */}
+                <div className="text-[8px] text-neutral-600 leading-relaxed uppercase border-b border-neutral-900 pb-3">
+                  <div>SECURE CONNECTION ESTABLISHED // AIP_v15_SECURE</div>
+                  <div>AUTHORIZED INTAKE TERMINAL ONLY. ALL TRANSACTIONS LOGGED.</div>
                 </div>
 
-                {/* Welcome state */}
                 {messages.length === 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15 }}
-                    className="flex flex-col items-center pt-2 pb-2 space-y-5"
-                  >
-                    <Avatar size={64} />
-                    <div className="text-center space-y-1.5">
-                      <p className="font-bold text-[17px]" style={{ color: '#000000' }}>Hello, I'm Antera Chat Agent 🤖</p>
-                      <p className="text-[12.5px] leading-relaxed max-w-[280px] mx-auto" style={{ color: 'rgba(0,0,0,0.45)' }}>
-                        I'm your AI partner for system building and intelligent automation, web & app development, and infrastructure.
-                      </p>
+                  <div className="space-y-4">
+                    <div className="text-[10px] text-neutral-400 font-mono tracking-wide leading-relaxed font-light">
+                      Initializing AIP query sequence. Select a structured operations route or specify custom telemetry requests in the console terminal input.
                     </div>
 
-                    {/* Date pill */}
-                    <div
-                      className="px-4 py-1.5 text-[10px] tracking-widest uppercase"
-                      style={{
-                        background: 'rgba(0,0,0,0.06)',
-                        borderRadius: 20,
-                        color: 'rgba(0,0,0,0.35)',
-                      }}
-                    >
-                      Today
-                    </div>
-
-                    {/* Assistant opening bubble */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.45 }}
-                      className="flex items-end gap-2 w-full max-w-[85%]"
-                    >
-                      <Avatar size={28} />
-                      <div
-                        className="px-4 py-2.5 text-[14.5px] font-medium leading-relaxed flex-1"
-                        style={{
-                          background: 'transparent',
-                          color: '#000000',
-                          padding: '4px 4px 4px 0',
-                        }}
-                      >
-                        Karibu Sana! What can I help you with today? 🚀
-                      </div>
-                    </motion.div>
-
-                    {/* Quick prompts grid */}
-                    <div className="grid grid-cols-2 gap-2 w-full">
+                    {/* Pre-configured terminal inputs */}
+                    <div className="flex flex-col gap-2">
                       {quickPrompts.map((q, i) => (
-                        <motion.button
+                        <button
                           key={i}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.55 + i * 0.06 }}
-                          whileHover={{ scale: 1.03, y: -1 }}
-                          whileTap={{ scale: 0.97 }}
                           onClick={() => handleSend(q.label)}
-                          className="flex items-center gap-2 px-3 py-2.5 text-left text-[11.5px] font-medium transition-all"
-                          style={{
-                            background: 'rgba(255,255,255,0.7)',
-                            backdropFilter: 'blur(12px)',
-                            WebkitBackdropFilter: 'blur(12px)',
-                            borderRadius: 14,
-                            border: '1px solid rgba(0,0,0,0.09)',
-                            color: '#000000',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-                          }}
+                          className="w-full text-left p-2.5 bg-[#0A0A0F] border border-neutral-800 text-[9px] font-mono text-neutral-300 hover:border-[#FA520F] hover:text-[#FA520F] transition-all"
                         >
-                          <span className="text-[16px]">{q.emoji}</span>
-                          <span className="leading-tight">{q.label}</span>
-                        </motion.button>
+                          &gt; {q.label}
+                        </button>
                       ))}
-                    </div>
-                  </motion.div>
-                )}
-
-                {/* Date pill when messages exist */}
-                {messages.length > 0 && (
-                  <div className="flex justify-center">
-                    <div
-                      className="px-4 py-1.5 text-[10px] tracking-widest uppercase"
-                      style={{ background: 'rgba(0,0,0,0.06)', borderRadius: 20, color: 'rgba(0,0,0,0.35)' }}
-                    >
-                      Today
                     </div>
                   </div>
                 )}
 
-                {/* Render all messages */}
+                {/* Messages mapping */}
                 {messages.map((msg, idx) => (
                   <Bubble key={idx} msg={msg} isLast={idx === messages.length - 1} />
                 ))}
 
-                {/* Streaming message */}
+                {/* Streaming view */}
                 {isLoading && streamingText && (
                   <Bubble 
                     msg={{ 
@@ -608,99 +371,36 @@ const ChatAgent = () => {
                   />
                 )}
 
-                {/* Loading dots (shown before streaming starts) */}
+                {/* Loading State indicator */}
                 {isLoading && !streamingText && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex items-end gap-2"
-                  >
-                    <Avatar size={28} />
-                    <div className="px-2 py-2">
-                      <TypingDots />
-                    </div>
-                  </motion.div>
+                  <div className="pt-2">
+                    <TypingDots />
+                  </div>
                 )}
               </div>
 
-              {/* Input area with home bar */}
-              <div
-                className="relative z-10 px-4 pt-3 shrink-0"
-                style={{
-                  background: 'rgba(255,255,255,0.6)',
-                  backdropFilter: 'blur(20px)',
-                  WebkitBackdropFilter: 'blur(20px)',
-                  borderTop: '1px solid rgba(0,0,0,0.07)',
-                  paddingBottom: 'max(12px, env(safe-area-inset-bottom, 12px))',
-                }}
-              >
-                <div
-                  className="flex items-center gap-2 px-3 py-2"
-                  style={{
-                    background: 'rgba(0,0,0,0.05)',
-                    borderRadius: 26,
-                    border: '1px solid rgba(0,0,0,0.09)',
-                  }}
-                >
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-7 h-7 flex items-center justify-center"
-                    style={{ color: 'rgba(0,0,0,0.3)' }}
-                  >
-                    <Mic size={16} />
-                  </motion.button>
-
+              {/* Terminal Command Input Field */}
+              <div className="p-3 bg-[#0A0A0A] border-t border-neutral-800 flex items-stretch gap-2">
+                <div className="flex-1 flex items-center bg-black border border-neutral-800 px-3 py-1 text-xs">
+                  <span className="text-[#FA520F] font-mono mr-2 select-none">&gt;</span>
                   <input
                     ref={inputRef}
                     type="text"
                     value={input}
                     onChange={e => setInput(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && !e.shiftKey && handleSend()}
-                    placeholder="Message Antera..."
-                    className="flex-1 bg-transparent text-[14.5px] font-semibold outline-none"
-                    style={{ color: '#000000' }}
+                    placeholder="ENTER COMMAND OR OPT_SEQ..."
+                    className="flex-1 bg-transparent font-mono text-[10px] text-neutral-200 outline-none uppercase placeholder:text-neutral-700"
                     disabled={isLoading}
                   />
-
-                  <AnimatePresence mode="wait">
-                    {input.trim() && !isLoading ? (
-                      <motion.button
-                        key="send"
-                        initial={{ scale: 0, rotate: -45 }}
-                        animate={{ scale: 1, rotate: 0 }}
-                        exit={{ scale: 0, rotate: 45 }}
-                        transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
-                        whileHover={{ scale: 1.12 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => handleSend()}
-                        disabled={isLoading}
-                        className="w-8 h-8 rounded-full flex items-center justify-center text-white shadow-md"
-                        style={{ background: '#000000' }}
-                      >
-                        <Send size={14} />
-                      </motion.button>
-                    ) : (
-                      <motion.span
-                        key="idle"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0 }}
-                        className="text-[17px] select-none"
-                      >
-                        🤖
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
                 </div>
-
-                {/* Home bar indicator */}
-                <div className="flex justify-center mt-3 mb-1">
-                  <div
-                    className="w-28 h-[5px] rounded-full"
-                    style={{ background: 'rgba(0,0,0,0.18)' }}
-                  />
-                </div>
+                <button
+                  onClick={() => handleSend()}
+                  disabled={isLoading || !input.trim()}
+                  className="bg-[#FA520F] text-white hover:bg-white hover:text-black font-mono font-semibold text-[9px] tracking-widest px-4 uppercase transition-colors duration-300 disabled:opacity-40"
+                >
+                  RUN
+                </button>
               </div>
             </motion.div>
           </>

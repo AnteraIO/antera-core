@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import hero1 from '../assets/hero-1.jpg';
 import hero2 from '../assets/hero-2.jpg';
@@ -12,151 +13,103 @@ export const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const heroImages = [hero1, hero2, hero3];
 
-  // Rotate background images every 15 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % heroImages.length);
-    }, 15000);
+    }, 12000);
     return () => clearInterval(interval);
   }, []);
 
-  // Split headline into individual words for staggered animation
-  const titleWords = "Grow Your Business. With Smart Technology.".split(" ");
-
   return (
-    <section className="relative min-h-screen w-full bg-black overflow-hidden flex items-center">
-      {/* Background image slideshow with crossfade */}
-      <div className="absolute inset-0 z-0">
+    <section className="relative min-h-screen w-full bg-black overflow-hidden flex items-center pt-14">
+      {/* Background Slideshow with extreme high contrast */}
+      <div className="absolute inset-0 z-0 select-none">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImage}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={{ opacity: 0.45 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
+            transition={{ duration: 2.0, ease: "easeInOut" }}
             className="absolute inset-0"
           >
             <Image
               src={heroImages[currentImage]}
-              alt={`Hero Background ${currentImage + 1}`}
+              alt={`ANTERA Systems Background`}
               fill
               priority
-              className="object-cover object-center scale-105"
+              className="object-cover object-center scale-102 filter brightness-[0.7]"
             />
           </motion.div>
         </AnimatePresence>
-        {/* Warm sunset gradient overlay with Palantir-style technical overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/50 to-[#FA520F]/20 z-[1]" />
 
-        {/* Fine grid pattern overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] z-[2]" />
+        {/* Deep tech gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-[1]" />
+        <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-black/50 to-transparent z-[1]" />
+
+        {/* Stark 1px grid lines for blueprint look */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] z-[2]" />
       </div>
 
-      {/* Decorative corner ornaments - top left */}
-      <div className="absolute top-20 left-4 md:top-24 md:left-8 z-20 w-16 h-16 pointer-events-none">
-        <svg viewBox="0 0 100 100" className="w-full h-full">
-          <path d="M2 2 L30 2" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
-          <path d="M2 2 L2 30" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
-          <circle cx="2" cy="2" r="1.5" fill="#FA520F" />
-        </svg>
+      {/* Corporate Technical Details */}
+      <div className="absolute top-24 left-12 z-20 hidden xl:flex flex-col gap-1 text-[8px] font-mono text-neutral-600 tracking-[0.2em] uppercase pointer-events-none select-none">
+        <div>SYS.ID: ANTERA_CORE_v15</div>
+        <div>REGION: DAR_ES_SALAAM_TZ</div>
+        <div>COORDINATES: 6.7924° S, 39.2083° E</div>
       </div>
 
-      {/* Decorative corner ornaments - top right */}
-      <div className="absolute top-20 right-4 md:top-24 md:right-8 z-20 w-16 h-16 pointer-events-none">
-        <svg viewBox="0 0 100 100" className="w-full h-full">
-          <path d="M98 2 L70 2" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
-          <path d="M98 2 L98 30" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
-          <circle cx="98" cy="2" r="1.5" fill="#FA520F" />
-        </svg>
+      <div className="absolute top-24 right-12 z-20 hidden xl:flex flex-col items-end gap-1 text-[8px] font-mono text-neutral-600 tracking-[0.2em] uppercase pointer-events-none select-none">
+        <div>ORBITAL_STATUS: ACTIVE</div>
+        <div>INTEGRITY_CHECK: PASS</div>
+        <div>Sovereignty secured</div>
       </div>
 
-      {/* Decorative corner ornaments - bottom left */}
-      <div className="absolute bottom-8 left-4 md:bottom-12 md:left-8 z-20 w-16 h-16 pointer-events-none">
-        <svg viewBox="0 0 100 100" className="w-full h-full">
-          <path d="M2 98 L30 98" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
-          <path d="M2 98 L2 70" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
-          <circle cx="2" cy="98" r="1.5" fill="#FA520F" />
-        </svg>
-      </div>
+      {/* Main Content Area */}
+      <div className="relative z-30 mx-auto w-full max-w-[1440px] px-6 md:px-12 py-24 flex flex-col justify-center">
+        <div className="max-w-4xl">
+          {/* Subtle minimal tag */}
+          <div className="inline-flex items-center gap-2 mb-8 select-none">
+            <span className="w-1 h-1 bg-[#FA520F]" />
+            <span className="text-[9px] font-mono tracking-[0.3em] uppercase text-[#FA520F]">
+              Foundational Software for Africa
+            </span>
+          </div>
 
-      {/* Decorative corner ornaments - bottom right */}
-      <div className="absolute bottom-8 right-4 md:bottom-12 md:right-8 z-20 w-16 h-16 pointer-events-none">
-        <svg viewBox="0 0 100 100" className="w-full h-full">
-          <path d="M98 98 L70 98" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
-          <path d="M98 98 L98 70" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
-          <circle cx="98" cy="98" r="1.5" fill="#FA520F" />
-        </svg>
-      </div>
-
-      {/* Decorative crosshairs / dots */}
-      <div className="absolute top-1/2 left-8 -translate-y-1/2 z-20 hidden lg:block opacity-35">
-        <div className="flex flex-col gap-4">
-          <div className="w-1.5 h-1.5 rounded-full bg-white" />
-          <div className="w-1.5 h-1.5 rounded-full bg-white/50" />
-          <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-        </div>
-      </div>
-
-      {/* Main content */}
-      <div className="relative z-30 mx-auto flex w-full max-w-7xl flex-col justify-center px-6 md:px-12 py-20 mt-12">
-        <div className="max-w-4xl text-left">
-          {/* Tag */}
-          <motion.div
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 backdrop-blur-sm text-[10px] font-mono tracking-widest text-[#FA520F] uppercase mb-6"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FA520F] animate-pulse" />
-            Empowering Tanzanian Enterprise
-          </motion.div>
-
-          {/* Animated headline with larger text sizes */}
-          <h1 className="mb-6 text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.05]">
-            {titleWords.map((word, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: index * 0.08,
-                  duration: 0.8,
-                  ease: [0.16, 1, 0.3, 1]
-                }}
-                className="inline-block mr-3"
-              >
-                {word}
-              </motion.span>
-            ))}
+          {/* Large Stark Palantir-style Title */}
+          <h1 className="text-4xl md:text-7xl lg:text-8xl font-extralight tracking-[-0.03em] text-white leading-[1.05] mb-8 font-sans">
+            Build tailored systems.<br />
+            <span className="text-neutral-400 font-extralight">Secure your operations.</span>
           </h1>
 
-          {/* Animated description with larger text */}
-          <motion.p 
-            className="mb-10 max-w-2xl text-base md:text-lg leading-relaxed text-neutral-300 font-light"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            We build tailored systems, webapps, mobile apps, chatbots, and AI for Tanzanian SMEs, solopreneurs, and NGOs, connecting agents, tools, and data so small teams can solve niche problems faster, protect digital sovereignty, and expand their footprint.
-          </motion.p>
+          {/* Stark Description */}
+          <p className="max-w-2xl text-sm md:text-base leading-relaxed text-neutral-400 font-mono tracking-wider font-light mb-12">
+            We build custom systems, digital platforms, and Applied AI solutions for Tanzanian SMEs, NGOs, and high-growth startups, connecting critical data models and pipelines securely so small groups solve niche operations faster.
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="flex flex-wrap gap-4"
-          >
-            <a href="https://wa.me/255760984921" target="_blank" className="btn-primary flex items-center gap-2">
+          {/* Palantir Stark Action buttons */}
+          <div className="flex flex-wrap gap-6 font-mono text-[9px] tracking-[0.2em] uppercase">
+            <a
+              href="https://wa.me/255760984921"
+              target="_blank"
+              className="bg-[#FA520F] text-white px-8 py-3.5 hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-2"
+            >
               <span>Contact Sales</span>
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              <ArrowRight className="w-3.5 h-3.5" />
             </a>
-            <a href="/solutions" className="btn-secondary text-white border-white/20 hover:border-white flex items-center gap-2">
-              <span>Explore Solutions</span>
+            <a
+              href="/solutions"
+              className="bg-transparent text-white border border-neutral-800 hover:border-white px-8 py-3.5 transition-all duration-300 flex items-center justify-center"
+            >
+              <span>Explore Ecosystem</span>
             </a>
-          </motion.div>
+          </div>
         </div>
+      </div>
+
+      {/* Tiny minimal scroll indicator at bottom */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 pointer-events-none select-none opacity-40">
+        <span className="text-[7px] font-mono tracking-[0.3em] uppercase text-neutral-400">Scroll</span>
+        <div className="w-px h-8 bg-gradient-to-b from-neutral-400 to-transparent" />
       </div>
     </section>
   );

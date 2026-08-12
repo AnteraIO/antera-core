@@ -12,22 +12,13 @@ import customerInsightsImage from '../assets/Customer-Insights.png';
 import performanceMonitoringImage from '../assets/Performance-Monitoring.png';
 import decisionSupportSystemsImage from '../assets/Decision-Support-Systems.png';
 
-const DiamondDecoration = ({ className = "" }: { className?: string }) => (
-  <motion.div className={`w-16 h-16 border border-neutral-200 rotate-45 ${className}`}
-    initial={{ opacity: 0, scale: 0 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-  />
-);
-
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.05 } }
+  visible: { opacity: 1, transition: { staggerChildren: 0.05, delayChildren: 0.05 } }
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 15 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
 };
 
@@ -37,56 +28,54 @@ export const CommunicationSection = () => {
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
   const channels = [
-    { name: 'AI Chatbots', desc: 'Sleek, context-aware chatbot models.' },
-    { name: 'SMS Solutions', desc: 'Secure, targeted localized messaging channels.' },
-    { name: 'USSD Menu', desc: 'High-visibility lightweight interactive modules.' },
-    { name: 'Workflow Automation', desc: 'Reduce latency on manual and repetitive tasks.' },
-    { name: 'Security Infrastructures', desc: 'Advanced defensive layers for system integrity.' },
-    { name: 'System Integrations', desc: 'Connect distributed databases securely.' },
+    { name: 'AI Chatbots', desc: 'Secure, context-aware chatbot deployments trained on company values and schemas.' },
+    { name: 'SMS Solutions', desc: 'Sovereign local SMS delivery models integrated safely with your database.' },
+    { name: 'USSD Systems', desc: 'Robust off-grid interactive USSD structures for high-reliability consumer touchpoints.' },
+    { name: 'Workflow Automation', desc: 'Connect software agents directly to database event streams to optimize internal resources.' },
+    { name: 'Security Architecture', desc: 'Protect distributed enterprise networks from targeted exploits and compliance drift.' },
+    { name: 'Sovereign Integration', desc: 'Establish resilient API mappings and pipeline structures with distributed nodes.' },
   ];
 
   return (
-    <section ref={containerRef} id="solutions" className="bg-[#FAFAF8] text-black font-sans antialiased w-full overflow-hidden selection:bg-[#FA520F] selection:text-white">
-      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
+    <section ref={containerRef} id="solutions" className="bg-[#0B0B0B] text-white antialiased w-full overflow-hidden border-b border-neutral-900 selection:bg-[#FA520F] selection:text-white">
+      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-[#FA520F] z-[100] origin-left" style={{ scaleX }} />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32">
-
-        <header className="mb-24 md:mb-40 text-center">
-          <motion.h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[1.05]"
-            initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Automate <span className="text-neutral-400 block font-normal">Work.</span>
-          </motion.h1>
-          <motion.p className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-8 font-light"
-            initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            Connect with your customers and automate workflows. We help you solve manual and repetitive tasks while improving response times and staff productivity.
-          </motion.p>
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-24 md:py-32">
+        <header className="mb-24 text-left max-w-4xl">
+          <div className="text-[10px] font-mono tracking-[0.25em] uppercase text-[#FA520F] mb-4">Operations Engine</div>
+          <h2 className="text-4xl md:text-6xl font-light tracking-tight text-white mb-6 leading-none">
+            Automate Work. Streamline Communications.
+          </h2>
+          <p className="text-sm md:text-base leading-relaxed text-neutral-400 font-mono tracking-wider font-light max-w-2xl">
+            Empower your team with autonomous operations software designed to connect remote agents, tools, and databases with near-zero friction.
+          </p>
         </header>
 
-        <div className="relative max-w-5xl mx-auto">
-          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-
-          <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-neutral-200 bg-white shadow-sm"
-          >
-            {channels.map((channel, i) => (
-              <motion.a href="#" key={i} variants={itemVariants} custom={i}
-                className="group p-8 md:p-12 min-h-[220px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors duration-300 border-b md:border-b-0 lg:border-r border-neutral-200 last:border-r-0 cursor-pointer"
-              >
-                <div>
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#FA520F] mb-6 group-hover:scale-150 transition-transform duration-300" />
-                  <h3 className="text-xl font-light tracking-tight text-black mb-2">{channel.name}</h3>
-                  <p className="text-xs text-neutral-500 font-light leading-relaxed">{channel.desc}</p>
-                </div>
-                <div className="mt-4 flex items-center justify-end">
-                  <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-[#FA520F] transition-colors duration-300" />
-                </div>
-              </motion.a>
-            ))}
-            <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
-          </motion.div>
-        </div>
+        {/* Palantir Stark 3x2 grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-neutral-800 divide-y md:divide-y-0 lg:divide-y-0 lg:divide-x divide-neutral-800 bg-black"
+        >
+          {channels.map((channel, i) => (
+            <motion.div
+              key={i}
+              variants={itemVariants}
+              className="group p-8 md:p-12 min-h-[220px] flex flex-col justify-between hover:bg-neutral-950 transition-colors duration-300 border-b border-neutral-800"
+            >
+              <div>
+                <div className="w-1.5 h-1.5 rounded-full bg-[#FA520F] mb-6 group-hover:scale-125 transition-transform duration-300" />
+                <h3 className="text-xl font-light tracking-tight text-white mb-2">{channel.name}</h3>
+                <p className="text-xs text-neutral-400 font-mono tracking-wide font-light leading-relaxed">{channel.desc}</p>
+              </div>
+              <div className="mt-6 flex items-center justify-end">
+                <ArrowRight className="w-4 h-4 text-neutral-600 group-hover:text-[#FA520F] transition-colors duration-300" />
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
@@ -98,52 +87,57 @@ export const ApplicationSection = () => {
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
   return (
-    <section ref={containerRef} className="bg-[#FAFAF8] text-black font-sans antialiased w-full overflow-hidden selection:bg-[#FA520F] selection:text-white">
-      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
+    <section ref={containerRef} className="bg-[#0B0B0B] text-white antialiased w-full overflow-hidden border-b border-neutral-900 selection:bg-[#FA520F] selection:text-white">
+      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-[#FA520F] z-[100] origin-left" style={{ scaleX }} />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32">
-
-        <header className="mb-24 md:mb-40 text-center">
-          <motion.h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[1.05]"
-            initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Digital <span className="text-neutral-400 block font-normal">Platforms.</span>
-          </motion.h1>
-          <motion.p className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-8 font-light"
-            initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            We design and develop modern websites and applications that are secure, reliable, and aligned with real business needs.
-          </motion.p>
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-24 md:py-32">
+        <header className="mb-24 text-left max-w-4xl">
+          <div className="text-[10px] font-mono tracking-[0.25em] uppercase text-[#FA520F] mb-4">Core Systems</div>
+          <h2 className="text-4xl md:text-6xl font-light tracking-tight text-white mb-6 leading-none">
+            Tailored Digital Platforms.
+          </h2>
+          <p className="text-sm md:text-base leading-relaxed text-neutral-400 font-mono tracking-wider font-light max-w-2xl">
+            We design, develop, and audit custom high-availability applications configured for minimum latency on local infrastructure networks.
+          </p>
         </header>
 
-        <div className="relative max-w-5xl mx-auto">
-          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-
-          <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 lg:grid-cols-2 border border-neutral-200 bg-white shadow-sm"
+        <div className="grid grid-cols-1 lg:grid-cols-2 border border-neutral-800 divide-y lg:divide-y-0 lg:divide-x divide-neutral-800 bg-black">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="group p-8 md:p-12 min-h-[500px] flex flex-col justify-between hover:bg-neutral-950 transition-colors duration-300"
           >
-            <motion.div variants={itemVariants} className="group p-8 md:p-12 min-h-[500px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors duration-300 border-b lg:border-b-0 lg:border-r border-neutral-200">
-              <div>
-                <div className="w-1.5 h-1.5 rounded-full bg-[#FA520F] mb-6" />
-                <h3 className="text-2xl font-light tracking-tight mt-4 mb-3">Web & Mobile Applications</h3>
-                <p className="text-sm md:text-base text-neutral-500 font-light leading-relaxed">Secure, scalable digital platforms that support growth and improve user experience across all devices.</p>
-              </div>
-              <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.4 }} className="mt-8 border border-black/10 overflow-hidden shadow-sm">
-                <Image src={mobileAppImage} alt="Mobile App Interface" className="w-full h-auto object-cover" />
-              </motion.div>
-            </motion.div>
+            <div>
+              <div className="w-1.5 h-1.5 rounded-full bg-[#FA520F] mb-6" />
+              <h3 className="text-2xl font-light tracking-tight text-white mb-3">Enterprise Web & Mobile Applications</h3>
+              <p className="text-xs md:text-sm text-neutral-400 font-mono tracking-wide leading-relaxed font-light">
+                Production-ready corporate software mapped perfectly to target end-user behaviors and localized bandwidth limits.
+              </p>
+            </div>
+            <div className="mt-8 border border-neutral-800 overflow-hidden bg-[#121212] p-2">
+              <Image src={mobileAppImage} alt="Mobile App Interface" className="w-full h-auto object-cover opacity-70 filter brightness-110 grayscale" />
+            </div>
+          </motion.div>
 
-            <motion.div variants={itemVariants} className="group p-8 md:p-12 min-h-[500px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors duration-300">
-              <div>
-                <div className="w-1.5 h-1.5 rounded-full bg-[#FA520F] mb-6" />
-                <h3 className="text-2xl font-light tracking-tight mt-4 mb-3">Corporate Digital Portals</h3>
-                <p className="text-sm md:text-base text-neutral-500 font-light leading-relaxed">Improve brand credibility and digital presence with integrated business systems and secure development practices.</p>
-              </div>
-              <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.4 }} className="mt-8 border border-black/10 overflow-hidden shadow-sm">
-                <Image src={webCommandImage} alt="Web Command Dashboard" className="w-full h-auto object-cover" />
-              </motion.div>
-            </motion.div>
-            <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="group p-8 md:p-12 min-h-[500px] flex flex-col justify-between hover:bg-neutral-950 transition-colors duration-300"
+          >
+            <div>
+              <div className="w-1.5 h-1.5 rounded-full bg-[#FA520F] mb-6" />
+              <h3 className="text-2xl font-light tracking-tight text-white mb-3">Corporate Digital Portals</h3>
+              <p className="text-xs md:text-sm text-neutral-400 font-mono tracking-wide leading-relaxed font-light">
+                Optimize brand footprint and regulatory compliance with modern, fully-auditable web control terminals.
+              </p>
+            </div>
+            <div className="mt-8 border border-neutral-800 overflow-hidden bg-[#121212] p-2">
+              <Image src={webCommandImage} alt="Web Command Dashboard" className="w-full h-auto object-cover opacity-70 filter brightness-110 grayscale" />
+            </div>
           </motion.div>
         </div>
       </div>
@@ -157,55 +151,53 @@ export const DataIntelligenceSection = () => {
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
   const features = [
-    { title: 'Executive Dashboards', image: businessIntelligenceImage },
-    { title: 'Predictive Analytics', image: predictiveAnalyticsImage },
-    { title: 'Data Pipelines', image: realTimeDashboardsImage },
-    { title: 'Single Source of Truth', image: customerInsightsImage },
-    { title: 'Data Governance', image: performanceMonitoringImage },
-    { title: 'Forecasting Insights', image: decisionSupportSystemsImage },
+    { title: 'Executive Dashboards', image: businessIntelligenceImage, num: '01' },
+    { title: 'Predictive Models', image: predictiveAnalyticsImage, num: '02' },
+    { title: 'Telemetry Pipelines', image: realTimeDashboardsImage, num: '03' },
+    { title: 'Consolidated Ledgers', image: customerInsightsImage, num: '04' },
+    { title: 'Information Security', image: performanceMonitoringImage, num: '05' },
+    { title: 'Forecasting Engines', image: decisionSupportSystemsImage, num: '06' },
   ];
 
   return (
-    <section ref={containerRef} id="models" className="bg-[#FAFAF8] text-black font-sans antialiased w-full overflow-hidden selection:bg-[#FA520F] selection:text-white">
-      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
+    <section ref={containerRef} id="models" className="bg-[#0B0B0B] text-white antialiased w-full overflow-hidden selection:bg-[#FA520F] selection:text-white">
+      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-[#FA520F] z-[100] origin-left" style={{ scaleX }} />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32">
-
-        <header className="mb-24 md:mb-40 text-center">
-          <motion.h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[1.05]"
-            initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Data into <span className="text-neutral-400 block font-normal">Decisions.</span>
-          </motion.h1>
-          <motion.p className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-8 font-light"
-            initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            We build data systems leadership can trust, from clean pipelines to executive dashboards. Turn data into actionable insights for smarter decision making.
-          </motion.p>
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-24 md:py-32">
+        <header className="mb-24 text-left max-w-4xl">
+          <div className="text-[10px] font-mono tracking-[0.25em] uppercase text-[#FA520F] mb-4">Decision Systems</div>
+          <h2 className="text-4xl md:text-6xl font-light tracking-tight text-white mb-6 leading-none">
+            Transform Telemetry into Decisions.
+          </h2>
+          <p className="text-sm md:text-base leading-relaxed text-neutral-400 font-mono tracking-wider font-light max-w-2xl">
+            Establish clean, high-integrity data pipelines from internal ledgers and field inputs to secure management control screens.
+          </p>
         </header>
 
-        <div className="relative max-w-5xl mx-auto">
-          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-
-          <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-neutral-200 bg-white shadow-sm"
-          >
-            {features.map((feature, i) => (
-              <motion.div key={i} variants={itemVariants} custom={i}
-                className="group p-8 md:p-12 min-h-[400px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors duration-300 border-b md:border-b-0 lg:border-r border-neutral-200 last:border-r-0"
-              >
-                <div>
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#FA520F] mb-6" />
-                  <h3 className="text-xl font-light tracking-tight mt-4 mb-3">{feature.title}</h3>
-                </div>
-                <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.4 }} className="mt-4 border border-black/5 overflow-hidden shadow-sm">
-                  <Image src={feature.image} alt={feature.title} className="w-full h-auto object-cover" />
-                </motion.div>
-              </motion.div>
-            ))}
-            <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
-          </motion.div>
-        </div>
+        {/* Stark Palantir 3x2 grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-neutral-800 divide-y md:divide-y-0 lg:divide-y-0 lg:divide-x divide-neutral-800 bg-black"
+        >
+          {features.map((feature, i) => (
+            <motion.div
+              key={i}
+              variants={itemVariants}
+              className="group p-8 md:p-12 min-h-[400px] flex flex-col justify-between hover:bg-neutral-950 transition-colors duration-300 border-b border-neutral-800"
+            >
+              <div>
+                <span className="text-[9px] font-mono tracking-widest text-neutral-600 block mb-6">[{feature.num} // ANALYSIS]</span>
+                <h3 className="text-xl font-light tracking-tight text-white mb-3">{feature.title}</h3>
+              </div>
+              <div className="mt-6 border border-neutral-800 overflow-hidden bg-[#121212] p-1.5 shadow-md">
+                <Image src={feature.image} alt={feature.title} className="w-full h-auto object-cover opacity-65 filter grayscale contrast-125" />
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
