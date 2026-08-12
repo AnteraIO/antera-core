@@ -24,7 +24,7 @@ export async function sendWelcomeEmail(email: string, name?: string) {
                     <!-- Header with Logo -->
                     <tr>
                       <td style="background-color: #000000; padding: 30px 20px; text-align: center;">
-                        <img src="${logoUrl}" alt="Antera Group Software" width="180" style="display: block; max-width: 180px; height: auto; margin: 0 auto 15px;" />
+                        <img src="${logoUrl}" alt="Antera Software" width="180" style="display: block; max-width: 180px; height: auto; margin: 0 auto 15px;" />
                         <h1 style="color: #FA520F; margin: 0; font-size: 22px; text-transform: uppercase; letter-spacing: 3px; font-weight: 700;">ANTERA GROUP</h1>
                         <p style="color: #ffffff; margin: 5px 0 0; font-size: 14px; letter-spacing: 1px; opacity: 0.8;">SOFTWARE</p>
                       </td>
@@ -49,7 +49,7 @@ export async function sendWelcomeEmail(email: string, name?: string) {
                     <tr>
                       <td style="background-color: #f8f8f8; padding: 20px 30px; text-align: center; border-top: 1px solid #e0e0e0;">
                         <p style="font-size: 12px; color: #666; margin: 0;">
-                          &copy; ${new Date().getFullYear()} Antera Group Software. All rights reserved.
+                          &copy; ${new Date().getFullYear()} Antera Software. All rights reserved.
                         </p>
                         <p style="font-size: 12px; color: #999; margin: 5px 0 0;">
                           <a href="https://www.antera.co.tz" style="color: #FA520F; text-decoration: none;">antera.co.tz</a>
@@ -67,9 +67,9 @@ export async function sendWelcomeEmail(email: string, name?: string) {
   // Invoke the Supabase Edge Function to send the email
   const { data, error } = await supabase.functions.invoke('send-email', {
     body: {
-      sender: { name: "ANTERA GROUP SOFTWARE", email: "sheldoncodesdaily@gmail.com" },
+      sender: { name: "ANTERA SOFTWARE", email: "sheldoncodesdaily@gmail.com" },
       to: [{ email: email, name: name || email }],
-      subject: "Welcome to Antera Group Software",
+      subject: "Welcome to Antera Software",
       htmlContent: welcomeHtml
     }
   });
@@ -102,8 +102,8 @@ export async function sendBroadcastEmail(subject: string, content: string, subsc
                     <!-- Header with Logo -->
                     <tr>
                       <td style="background-color: #000000; padding: 30px 20px; text-align: center;">
-                        <img src="${logoUrl}" alt="Antera Group Software" width="180" style="display: block; max-width: 180px; height: auto; margin: 0 auto 15px;" />
-                        <h1 style="color: #FA520F; margin: 0; font-size: 22px; text-transform: uppercase; letter-spacing: 3px; font-weight: 700;">ANTERA GROUP SOFTWARE</h1>
+                        <img src="${logoUrl}" alt="Antera Software" width="180" style="display: block; max-width: 180px; height: auto; margin: 0 auto 15px;" />
+                        <h1 style="color: #FA520F; margin: 0; font-size: 22px; text-transform: uppercase; letter-spacing: 3px; font-weight: 700;">ANTERA SOFTWARE</h1>
                       </td>
                     </tr>
                     <!-- Body -->
@@ -122,7 +122,7 @@ export async function sendBroadcastEmail(subject: string, content: string, subsc
                     <tr>
                       <td style="background-color: #f8f8f8; padding: 20px 30px; text-align: center; border-top: 1px solid #e0e0e0;">
                         <p style="font-size: 12px; color: #666; margin: 0;">
-                          &copy; ${new Date().getFullYear()} Antera Group Software. All rights reserved.
+                          &copy; ${new Date().getFullYear()} Antera Software. All rights reserved.
                         </p>
                         <p style="font-size: 12px; color: #999; margin: 5px 0 0;">
                           <a href="https://www.antera.co.tz" style="color: #FA520F; text-decoration: none;">antera.co.tz</a>
