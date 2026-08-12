@@ -11,7 +11,7 @@ import {
   MessageCircle,
   Crown,
   BarChart3,
-  Link,
+  Link as LinkIcon,
   Smartphone
 } from 'lucide-react';
 import NextLink from 'next/link';
@@ -69,7 +69,7 @@ const marqueeItems = [
     product: 'Kava',
     title: 'Seamless Integrations',
     desc: 'Connect with your favorite tools and platforms for a unified workflow experience without friction.',
-    icon: Link,
+    icon: LinkIcon,
   },
   {
     product: 'Sekela Pos',
