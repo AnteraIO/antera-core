@@ -151,7 +151,7 @@ export const FinalCTAAndFooter = () => {
                 <FooterLink href="https://aibruno.vercel.app/">AI Bruno</FooterLink>
                 <FooterLink href="https://swahiba.vercel.app/">Swahiba</FooterLink>
                 <FooterLink href="/solutions">AI Solutions</FooterLink>
-                <FooterLink href="/sekela-apis">App Development</FooterLink>
+                <FooterLink href="/products">App Development</FooterLink>
                 <FooterLink href="/models">Data Science</FooterLink>
                 <FooterLink href="/solutions">Business Automation</FooterLink>
               </ul>
@@ -164,8 +164,6 @@ export const FinalCTAAndFooter = () => {
                 <FooterLink href="/team">Team</FooterLink>
                 <FooterLink href="/office">Office</FooterLink>
                 <FooterLink href="/solutions">Solutions</FooterLink>
-                <FooterLink href="/sekela-apis">Sekela APIS</FooterLink>
-                <FooterLink href="/developers">Developers</FooterLink>
                 <FooterLink href="/blog">Blog</FooterLink>
               </ul>
             </div>

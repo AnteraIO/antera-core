@@ -23,11 +23,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/solutions',
     '/models',
     '/blog',
-    '/developers',
     '/company',
     '/customers',
     '/team',
-    '/sekela-apis',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

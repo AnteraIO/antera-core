@@ -24,8 +24,6 @@ export const Navbar = () => {
   const navLinks = [
     { name: t('nav.products'), href: '/products' },
     { name: t('nav.solutions'), href: '/solutions' },
-    { name: t('nav.sekela'), href: '/sekela-apis' },
-    { name: t('nav.developers'), href: '/developers' },
     { name: t('nav.blog'), href: '/blog' },
     { name: t('nav.customers'), href: '/customers' },
     { name: t('nav.company'), href: '/company' },
@@ -33,7 +31,7 @@ export const Navbar = () => {
 
   const blogLatestPosts = [
     { title: 'Antera Group Office', href: '/office', desc: 'Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development' },
-    { title: 'Introducing Search Toolkit', href: '/developers', desc: 'Modern Data Science and Model Implementations for Tanzanian Markets' },
+    { title: 'Introducing Search Toolkit', href: '/blog', desc: 'Modern Data Science and Model Implementations for Tanzanian Markets' },
   ];
 
   return (
@@ -63,15 +61,23 @@ export const Navbar = () => {
             : 'bg-white text-black border-neutral-200'
         }`}
       >
-        {/* Logo - Image Removed, Text Only */}
+        {/* Logo - Image Added */}
         <Link href="/" className="flex items-center gap-3 flex-shrink-0 z-50">
+          <Image
+            src="/antera-logo.jpeg"
+            alt="Antera Logo"
+            width={32}
+            height={32}
+            className="object-contain"
+          />
           <span className="text-xl font-semibold tracking-tight">Antera</span>
         </Link>
 
         {/* Action Buttons */}
         <div className="flex items-center gap-4 z-50">
           <Link 
-            href="/developers"
+            href="https://wa.me/255760984921"
+            target="_blank"
             className={`hidden lg:flex px-6 py-2 text-sm font-medium border transition-colors ${
               isOpen 
                 ? 'border-zinc-600 hover:bg-zinc-800 text-white' 
@@ -243,7 +249,7 @@ export const Navbar = () => {
                     View All Products <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>
-                <Link href="/sekela-apis" onClick={() => setIsOpen(false)} className="w-1/2 pr-4 group cursor-pointer block">
+                <Link href="/products" onClick={() => setIsOpen(false)} className="w-1/2 pr-4 group cursor-pointer block">
                   <div className="flex flex-col gap-3">
                     <span className="text-[10px] font-bold text-zinc-400 tracking-widest uppercase">
                       Sekela POS & Kava AI
