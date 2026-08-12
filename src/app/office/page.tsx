@@ -2,6 +2,13 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import Image from 'next/image';
+import { 
+  MapPin, 
+  Clock, 
+  Globe, 
+  Mail, 
+  Phone 
+} from 'lucide-react';
 import officeBg from '@/assets/hero-2.jpg';
 
 const GrainOverlay = () => (
@@ -11,67 +18,6 @@ const GrainOverlay = () => (
       backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
     }}
   />
-);
-
-const PixelMapPinIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }}
-    transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <path d="M12 6a4 4 0 0 1 4 4c0 3-4 8-4 8s-4-5-4-8a4 4 0 0 1 4-4z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <circle cx="12" cy="10" r="1.5" fill="white"/>
-  </motion.svg>
-);
-
-const PixelClockIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }}
-    transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <circle cx="12" cy="12" r="5" stroke="white" strokeWidth="1.5"/>
-    <path d="M12 8v4l2.5 2.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
-);
-
-const PixelGlobeIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }}
-    transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
-    <circle cx="12" cy="12" r="5" stroke="white" strokeWidth="1.5"/>
-    <path d="M12 7v10M7 12h10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-    <ellipse cx="12" cy="12" rx="5" ry="2.5" stroke="white" strokeWidth="1.5"/>
-  </motion.svg>
-);
-
-const PixelMailIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }}
-    transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#60A5FA" stroke="#3B82F6" strokeWidth="1"/>
-    <rect x="7" y="9" width="10" height="7" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <path d="M7 9l5 4 5-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
-);
-
-const PixelPhoneIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }}
-    transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#F59E0B" stroke="#B45309" strokeWidth="1"/>
-    <path d="M11 6a1 1 0 0 1 2 0 1 1 0 0 1-2 0z" fill="white"/>
-    <rect x="9" y="8" width="6" height="10" rx="1" stroke="white" strokeWidth="1.5"/>
-  </motion.svg>
 );
 
 const ArrowLink = ({ 
@@ -135,7 +81,7 @@ export default function OfficePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            Our <span className="text-[#FA520F]">Office</span>
+            Our Office.
           </motion.h1>
           <motion.p 
             className="text-lg max-w-xl leading-relaxed text-neutral-600 mt-3"
@@ -156,7 +102,7 @@ export default function OfficePage() {
             viewport={{ once: true }}
             transition={{ delay: 0, duration: 0.7 }}
           >
-            <PixelMapPinIcon />
+            <MapPin className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
               <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Location</h3>
               <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed max-w-md">
@@ -176,7 +122,7 @@ export default function OfficePage() {
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.7 }}
           >
-            <PixelClockIcon />
+            <Clock className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
               <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Operating Hours</h3>
               <div className="space-y-3">
@@ -199,7 +145,7 @@ export default function OfficePage() {
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.7 }}
           >
-            <PixelMailIcon />
+            <Mail className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
               <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Email</h3>
               <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
@@ -220,7 +166,7 @@ export default function OfficePage() {
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.7 }}
           >
-            <PixelPhoneIcon />
+            <Phone className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
               <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Phone</h3>
               <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
@@ -241,7 +187,7 @@ export default function OfficePage() {
             viewport={{ once: true }}
             transition={{ delay: 0.4, duration: 0.7 }}
           >
-            <PixelGlobeIcon />
+            <Globe className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
               <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Connect</h3>
               <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
@@ -261,7 +207,7 @@ export default function OfficePage() {
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 0.7 }}
           >
-            <PixelMapPinIcon />
+            <MapPin className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
               <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Visit Us</h3>
               <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed max-w-md">
