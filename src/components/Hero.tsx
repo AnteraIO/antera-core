@@ -12,7 +12,14 @@ export const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const heroImages = [hero1, hero2, hero3];
 
-  // Rotate background images every 15 seconds
+  const nextSlide = () => {
+    setCurrentImage((prev) => (prev + 1) % heroImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentImage((prev) => (prev - 1 + heroImages.length) % heroImages.length);
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % heroImages.length);
@@ -20,118 +27,68 @@ export const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Split headline into individual words for staggered animation
-  const titleWords = "Grow Your Business. With Smart Technology.".split(" ");
-
   return (
-    <section className="relative min-h-screen w-full bg-black overflow-hidden">
-      {/* Background image slideshow with crossfade */}
-      <div className="absolute inset-0 z-0">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentImage}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="absolute inset-0"
+    <section className="relative min-h-screen w-full bg-[#fafafa] flex flex-col">
+      
+      <main className="flex-grow flex items-center justify-center px-4 md:px-8 py-6 md:py-10 bg-[#fafafa]">
+        <div className="relative w-full max-w-[1400px] h-[70vh] md:h-[80vh] rounded-2xl overflow-hidden bg-black shadow-sm">
+          
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentImage}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={heroImages[currentImage]}
+                alt={`Hero Background ${currentImage + 1}`}
+                fill
+                priority
+                className="object-cover object-center"
+              />
+            </motion.div>
+          </AnimatePresence>
+          
+          <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/10 to-transparent z-[1]" />
+
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute top-8 md:top-12 left-8 md:left-12 z-10 max-w-xl bg-black/70 backdrop-blur-sm p-6 md:p-8 rounded-sm"
           >
-            <Image
-              src={heroImages[currentImage]}
-              alt={`Hero Background ${currentImage + 1}`}
-              fill
-              priority
-              className="object-cover object-center"
-            />
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight text-white">
+              Grow Your Business. With Smart Technology.
+            </h1>
+            
+            <p className="mt-4 text-sm md:text-base font-normal text-gray-200 leading-relaxed max-w-lg">
+              We build tailored systems, webapps, mobile apps, chatbots, and AI for Tanzanian SMEs, solopreneurs, and NGOs, connecting agents, tools, and data so small teams can solve niche problems faster, protect digital sovereignty, and expand their footprint.
+            </p>
           </motion.div>
-        </AnimatePresence>
-        {/* Warm sunset gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-[#FA520F]/30 to-[#FCD34D]/20 z-[1]" />
-      </div>
 
-      {/* Decorative corner ornaments - top left */}
-      <div className="absolute top-0 left-0 z-20 w-24 h-24 md:w-32 md:h-32 pointer-events-none">
-        <svg viewBox="0 0 100 100" className="w-full h-full">
-          <path d="M2 2 L30 2 L30 6 L6 6 L6 30 L2 30 Z" fill="none" stroke="white" strokeWidth="1.5" opacity="0.3" />
-          <path d="M10 10 L25 10 L25 14 L14 14 L14 25 L10 25 Z" fill="none" stroke="white" strokeWidth="1" opacity="0.2" />
-          <circle cx="8" cy="8" r="1.5" fill="white" opacity="0.25" />
-        </svg>
-      </div>
-
-      {/* Decorative corner ornaments - top right */}
-      <div className="absolute top-0 right-0 z-20 w-24 h-24 md:w-32 md:h-32 pointer-events-none">
-        <svg viewBox="0 0 100 100" className="w-full h-full">
-          <path d="M98 2 L70 2 L70 6 L94 6 L94 30 L98 30 Z" fill="none" stroke="white" strokeWidth="1.5" opacity="0.3" />
-          <path d="M90 10 L75 10 L75 14 L86 14 L86 25 L90 25 Z" fill="none" stroke="white" strokeWidth="1" opacity="0.2" />
-          <circle cx="92" cy="8" r="1.5" fill="white" opacity="0.25" />
-        </svg>
-      </div>
-
-      {/* Decorative corner ornaments - bottom left */}
-      <div className="absolute bottom-0 left-0 z-20 w-24 h-24 md:w-32 md:h-32 pointer-events-none">
-        <svg viewBox="0 0 100 100" className="w-full h-full">
-          <path d="M2 98 L30 98 L30 94 L6 94 L6 70 L2 70 Z" fill="none" stroke="white" strokeWidth="1.5" opacity="0.3" />
-          <path d="M10 90 L25 90 L25 86 L14 86 L14 75 L10 75 Z" fill="none" stroke="white" strokeWidth="1" opacity="0.2" />
-          <circle cx="8" cy="92" r="1.5" fill="white" opacity="0.25" />
-        </svg>
-      </div>
-
-      {/* Decorative corner ornaments - bottom right */}
-      <div className="absolute bottom-0 right-0 z-20 w-24 h-24 md:w-32 md:h-32 pointer-events-none">
-        <svg viewBox="0 0 100 100" className="w-full h-full">
-          <path d="M98 98 L70 98 L70 94 L94 94 L94 70 L98 70 Z" fill="none" stroke="white" strokeWidth="1.5" opacity="0.3" />
-          <path d="M90 90 L75 90 L75 86 L86 86 L86 75 L90 75 Z" fill="none" stroke="white" strokeWidth="1" opacity="0.2" />
-          <circle cx="92" cy="92" r="1.5" fill="white" opacity="0.25" />
-        </svg>
-      </div>
-
-      {/* Decorative edge lines */}
-      <div className="absolute top-8 left-12 right-12 z-20 h-px pointer-events-none">
-        <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      </div>
-      <div className="absolute bottom-8 left-12 right-12 z-20 h-px pointer-events-none">
-        <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      </div>
-      <div className="absolute top-12 left-8 bottom-12 z-20 w-px pointer-events-none">
-        <div className="w-full h-full bg-gradient-to-b from-transparent via-white/20 to-transparent" />
-      </div>
-      <div className="absolute top-12 right-8 bottom-12 z-20 w-px pointer-events-none">
-        <div className="w-full h-full bg-gradient-to-b from-transparent via-white/20 to-transparent" />
-      </div>
-
-      {/* Main content */}
-      <div className="relative z-30 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 py-20 lg:px-8">
-        <div className="max-w-4xl">
-          {/* Animated headline with larger text sizes */}
-          <h1 className="mb-4 text-7xl md:text-8xl lg:text-9xl font-medium leading-[1.08] tracking-tight text-white">
-            {titleWords.map((word, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, y: 60 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: index * 0.15,
-                  duration: 0.8,
-                  ease: [0.16, 1, 0.3, 1]
-                }}
-                className="inline-block mr-3"
-              >
-                {word}
-              </motion.span>
-            ))}
-          </h1>
-
-          {/* Animated description with larger text */}
-          <motion.p 
-            className="mb-12 max-w-2xl text-xl md:text-2xl leading-relaxed text-white font-medium"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          <button 
+            onClick={prevSlide}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-black/40 hover:bg-black/60 backdrop-blur-sm text-white transition-all duration-200 rounded-full"
           >
-            We build tailored systems, webapps, mobile apps, chatbots, and AI for Tanzanian SMEs, solopreneurs, and NGOs, connecting agents, tools, and data so small teams can solve niche problems faster, protect digital sovereignty, and expand their footprint.
-          </motion.p>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+          </button>
+
+          <button 
+            onClick={nextSlide}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-black/40 hover:bg-black/60 backdrop-blur-sm text-white transition-all duration-200 rounded-full"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </button>
+
         </div>
-      </div>
+      </main>
     </section>
   );
 };
