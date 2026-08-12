@@ -16,7 +16,7 @@ import {
   Link2,
   Headphones,
   Building2,
-  Cpu,
+  Key,
   Globe2,
   FileText,
   Target,
@@ -193,7 +193,7 @@ export const WhySection = () => {
 
   const reasons = [
     { title: 'Enterprise Experience.', desc: 'Built by engineers with experience in high-level environments.', icon: Building2 },
-    { title: 'Embedded Security.', desc: 'Security is not an afterthought; it is embedded in every solution.', icon: Cpu },
+    { title: 'Embedded Security.', desc: 'Security is not an afterthought; it is embedded in every solution.', icon: Key },
     { title: 'African Market Focus.', desc: 'Practical solutions specifically aligned to African markets.', icon: Globe2 },
     { title: 'Clear Documentation.', desc: 'We provide clear scope, milestones, and full documentation.', icon: FileText },
     { title: 'Outcome Driven.', desc: 'Our solutions are focused on delivering real business value.', icon: Target },
