@@ -2,6 +2,12 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { 
+  Database, 
+  LineChart, 
+  Brain,
+  BarChart3
+} from 'lucide-react';
 
 const GrainOverlay = () => (
   <div 
@@ -10,42 +16,6 @@ const GrainOverlay = () => (
       backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
     }}
   />
-);
-
-const PixelDataIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }}
-    transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <ellipse cx="12" cy="7" rx="5" ry="2" stroke="white" strokeWidth="1.5"/>
-    <path d="M7 7v5c0 1.1 2.24 2 5 2s5-.9 5-2V7" stroke="white" strokeWidth="1.5"/>
-    <path d="M7 12v5c0 1.1 2.24 2 5 2s5-.9 5-2v-5" stroke="white" strokeWidth="1.5"/>
-  </motion.svg>
-);
-
-const PixelAnalyticsIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }}
-    transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <path d="M6 16l4-6 3 2 5-8" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
-);
-
-const PixelBrainIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }}
-    transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
-    <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
 );
 
 const DiamondDecoration = ({ className = "" }: { className?: string }) => (
@@ -72,9 +42,9 @@ export const ModelsPage = () => {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         
         <div className="flex justify-center items-center gap-8 mb-12">
-          <PixelDataIcon />
-          <PixelAnalyticsIcon />
-          <PixelBrainIcon />
+          <Database className="w-14 h-14 text-black/60 hover:text-[#FA520F] transition-colors duration-200" />
+          <LineChart className="w-14 h-14 text-black/60 hover:text-[#FA520F] transition-colors duration-200" />
+          <Brain className="w-14 h-14 text-black/60 hover:text-[#FA520F] transition-colors duration-200" />
         </div>
 
         <header className="mb-24 md:mb-40 text-center">
@@ -84,7 +54,7 @@ export const ModelsPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            Data <span className="text-[#FA520F]">Intelligence.</span>
+            Data Intelligence.
           </motion.h1>
           <motion.p 
             className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
@@ -108,7 +78,7 @@ export const ModelsPage = () => {
               viewport={{ once: true }}
               transition={{ delay: 0, duration: 0.7 }}
             >
-              <PixelDataIcon />
+              <Database className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
               <div className="mt-auto">
                 <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Data Architecture</h3>
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
@@ -124,7 +94,7 @@ export const ModelsPage = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.1, duration: 0.7 }}
             >
-              <PixelAnalyticsIcon />
+              <LineChart className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
               <div className="mt-auto">
                 <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Predictive Analytics</h3>
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
@@ -140,7 +110,7 @@ export const ModelsPage = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.7 }}
             >
-              <PixelBrainIcon />
+              <Brain className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
               <div className="mt-auto">
                 <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Applied AI</h3>
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
@@ -156,7 +126,7 @@ export const ModelsPage = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.7 }}
             >
-              <PixelDataIcon />
+              <BarChart3 className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
               <div className="mt-auto">
                 <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Business Intelligence</h3>
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
@@ -172,7 +142,7 @@ export const ModelsPage = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.7 }}
             >
-              <PixelAnalyticsIcon />
+              <LineChart className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
               <div className="mt-auto">
                 <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">How We Work</h3>
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-2xl">
