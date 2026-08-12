@@ -13,7 +13,7 @@ export default function BlogCTA() {
             
             <div className="p-8 md:p-12 lg:p-16 border-b lg:border-b-0 lg:border-r border-neutral-200 flex flex-col justify-center">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-[-0.03em] leading-[0.95] mb-6">
-                Stay Connected to the <span className="text-[#FA520F]">Future</span>
+                Stay Connected to the Future.
               </h2>
               <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
                 Our Blogs cover the intersection of Technology, AI, automation, and Tanzania and global digital infrastructure.
