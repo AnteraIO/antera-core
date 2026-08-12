@@ -99,7 +99,7 @@ export const NewProductsMarquee = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            What we are <span className="text-[#FA520F]">building</span>
+            What we are building.
           </motion.h1>
           <motion.p 
             className="text-lg max-w-xl leading-relaxed text-neutral-600 mt-3"
