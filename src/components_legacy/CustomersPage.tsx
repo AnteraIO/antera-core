@@ -1,9 +1,10 @@
 'use client';
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { StaticImageData } from 'next/image';
-import { Star, ShieldCheck, ArrowUpRight, ChevronRight, Quote } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 
 import blacksand1 from '../assets/blacksand-1.png';
 import blacksand2 from '../assets/blacksand-2.png';
@@ -51,220 +52,6 @@ const ScrambleText = ({ text, className = "" }: { text: string; className?: stri
   return <span className={className}>{displayText}</span>;
 };
 
-const MagneticButton = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    x.set((e.clientX - centerX) * 0.3);
-    y.set((e.clientY - centerY) * 0.3);
-  };
-
-  const handleMouseLeave = () => { x.set(0); y.set(0); };
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{ x: useSpring(x, { stiffness: 150, damping: 15 }), y: useSpring(y, { stiffness: 150, damping: 15 }) }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-const ImageGallery = ({ images, title }: { images: (string | StaticImageData)[]; title: string }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], ["8deg", "-8deg"]);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-8deg", "8deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
-    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
-  };
-
-  return (
-    <div className="relative">
-      <motion.div
-        ref={containerRef}
-        className="relative aspect-[16/10] rounded-lg overflow-hidden border-4 border-black shadow-[8px_8px_0px_0px_#000000] cursor-pointer"
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d", perspective: 1000 }}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => { setIsHovered(false); mouseX.set(0); mouseY.set(0); }}
-      >
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={activeIndex}
-            src={(images[activeIndex] as any).src || images[activeIndex]}
-            alt={`${title} - ${activeIndex + 1}`}
-            className="w-full h-full object-cover"
-            initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
-            transition={{ duration: 0.5 }}
-          />
-        </AnimatePresence>
-
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
-          animate={{ opacity: isHovered ? 1 : 0.3 }}
-        />
-
-        <div className="absolute bottom-4 left-4 bg-black text-white px-3 py-1 text-xs font-mono font-bold border-2 border-white">
-          {String(activeIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
-        </div>
-
-        <AnimatePresence>
-          {isHovered && (
-            <>
-              <motion.button
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                onClick={(e) => { e.stopPropagation(); setActiveIndex((prev) => (prev - 1 + images.length) % images.length); }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border-2 border-black flex items-center justify-center hover:bg-[#FA520F] hover:text-white transition-colors"
-              >
-                <ChevronRight className="w-5 h-5 rotate-180" />
-              </motion.button>
-              <motion.button
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                onClick={(e) => { e.stopPropagation(); setActiveIndex((prev) => (prev + 1) % images.length); }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white border-2 border-black flex items-center justify-center hover:bg-[#FA520F] hover:text-white transition-colors"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </motion.button>
-            </>
-          )}
-        </AnimatePresence>
-      </motion.div>
-
-      <div className="flex gap-2 mt-4 justify-center">
-        {images.map((img, i) => (
-          <motion.button
-            key={i}
-            onClick={() => setActiveIndex(i)}
-            className={`relative w-16 h-10 border-2 overflow-hidden ${activeIndex === i ? 'border-[#FA520F]' : 'border-black/30'}`}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <img src={(img as any).src || img} alt="" className="w-full h-full object-cover" />
-            {activeIndex === i && (
-              <motion.div className="absolute inset-0 bg-[#FA520F]/20" layoutId={`thumb-${title}`} />
-            )}
-          </motion.button>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const ClientShowcase = ({ client, images, description, index }: { client: string; images: (string | StaticImageData)[]; description: string; index: number; }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.8]);
-  const isEven = index % 2 === 0;
-
-  return (
-    <motion.div ref={ref} style={{ opacity, scale }} className="mb-32 relative">
-      <motion.div className="absolute -top-20 left-0 text-[150px] font-black font-mono text-black/5 leading-none select-none pointer-events-none" style={{ y }}>
-        0{index + 1}
-      </motion.div>
-
-      <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center ${isEven ? '' : 'lg:flex-row-reverse'}`}>
-        <motion.div className={`${isEven ? 'lg:order-1' : 'lg:order-2'}`}
-          initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <motion.h2 className="text-4xl md:text-6xl font-black font-mono uppercase tracking-tighter mb-6 leading-none"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-          >
-            <ScrambleText text={client} />
-          </motion.h2>
-
-          <motion.p className="text-neutral-600 font-mono text-sm md:text-base leading-relaxed mb-8 max-w-lg"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-          >
-            {description}
-          </motion.p>
-
-          <MagneticButton>
-            <motion.button
-              className="group inline-flex items-center gap-2 px-6 py-3 text-sm font-medium border-2 border-black hover:bg-black hover:text-white transition-all"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              View Case Study
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </motion.button>
-          </MagneticButton>
-        </motion.div>
-
-        <motion.div className={`${isEven ? 'lg:order-2' : 'lg:order-1'}`}
-          initial={{ opacity: 0, x: isEven ? 50 : -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        >
-          <ImageGallery images={images} title={client} />
-        </motion.div>
-      </div>
-    </motion.div>
-  );
-};
-
-const ParticleBackground = () => {
-  const particles = Array.from({ length: 20 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 4 + 2,
-    duration: Math.random() * 20 + 10,
-    delay: Math.random() * 5,
-  }));
-
-  return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full bg-[#FA520F]/10"
-          style={{ width: p.size, height: p.size, left: `${p.x}%`, top: `${p.y}%` }}
-          animate={{ y: [0, -100, 0], x: [0, 50, 0], opacity: [0.2, 0.5, 0.2] }}
-          transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "easeInOut" }}
-        />
-      ))}
-    </div>
-  );
-};
-
 const GrainOverlay = () => (
   <div className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03]"
     style={{
@@ -273,47 +60,87 @@ const GrainOverlay = () => (
   />
 );
 
-const PixelLandmarkIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <rect x="8" y="8" width="3" height="8" fill="white"/>
-    <rect x="13" y="8" width="3" height="8" fill="white"/>
-    <rect x="8" y="6" width="8" height="2" fill="white"/>
-  </motion.svg>
-);
+// Individual Client Card styled exactly like the Hero
+const ClientCard = ({ client, images, description, index }: { client: string; images: (string | StaticImageData)[]; description: string; index: number }) => {
+  const [currentImage, setCurrentImage] = useState(0);
 
-const PixelRadioIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="1.5"/>
-    <path d="M12 4v2M12 18v2M4 12h2M18 12h2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
-);
+  const nextSlide = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImage((prev) => (prev + 1) % images.length);
+  };
 
-const PixelShoppingIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
-    <path d="M8 8h8l-1 7H9L8 8z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M9 8V6a3 3 0 0 1 6 0v2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-    <circle cx="10" cy="16" r="1" fill="white"/>
-    <circle cx="14" cy="16" r="1" fill="white"/>
-  </motion.svg>
-);
+  const prevSlide = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+  };
 
-const PixelHeartPulseIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#EF4444" stroke="#B91C1C" strokeWidth="1"/>
-    <path d="M6 12h3l2-4 3 8 2-4h2" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
-);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 15000);
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  return (
+    <div className="relative w-full h-[70vh] md:h-[80vh] rounded-2xl overflow-hidden bg-black shadow-sm">
+      
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentImage}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={images[currentImage]}
+            alt={`${client} showcase ${currentImage + 1}`}
+            fill
+            priority
+            className="object-cover object-center"
+          />
+        </motion.div>
+      </AnimatePresence>
+      
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent z-[1]" />
+
+      <motion.div 
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute top-8 md:top-12 left-8 md:left-12 z-10 max-w-xl bg-black/80 backdrop-blur-sm p-6 md:p-8 rounded-sm"
+      >
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight text-white font-sans">
+          <ScrambleText text={client} />
+        </h1>
+        
+        <p className="mt-4 text-sm md:text-base font-normal text-gray-200 leading-relaxed max-w-lg font-sans">
+          {description}
+        </p>
+      </motion.div>
+
+      <button 
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-black/40 hover:bg-black/60 backdrop-blur-sm text-white transition-all duration-200 rounded-full"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+      </button>
+
+      <button 
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-black/40 hover:bg-black/60 backdrop-blur-sm text-white transition-all duration-200 rounded-full"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+      </button>
+
+    </div>
+  );
+};
 
 export const CustomersPage = () => {
   const { t } = useLanguage();
@@ -321,54 +148,42 @@ export const CustomersPage = () => {
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
 
   const clients = [
-    { client: "Blacksand Adventures", images: [blacksand1, blacksand2, blacksand3, blacksand4], description: "A premium adventure tourism platform revolutionizing how travelers discover and book exclusive African safari experiences. Built with real-time availability, immersive 3D previews, and seamless payment integration." },
+    { client: "Blacksand Adventures", images: [blacksand1, blacksand2, blacksand3, blacksand4], description: "A premium adventure tourism platform revolutionizing how travelers discover and book exclusive African safari experiences. Built with real-time availability, immersive previews, and seamless payment integration." },
     { client: "Travel Nest Africa", images: [nest1, nest2, nest3, nest4, nest5, nest6], description: "An all-in-one travel management ecosystem connecting local operators with global travelers. Features AI-powered itinerary generation, dynamic pricing, and a comprehensive vendor dashboard." },
     { client: "Sekela POS", images: [sekelaweb1, sekelaweb2, sekelaweb3], description: "A next-generation point-of-sale system designed for African retail businesses. Inventory management, and real-time analytics dashboard." },
     { client: "Nawwi Wellness", images: [nawwi1, nawwi2, nawwi3, nawwi4, nawwi5, nawwi6], description: "Luxury scent-led wellness from the heart of Tanzania. Handcrafted candles and immersive sensory experiences using premium coconut-soy wax and locally sourced essential oils. Sustainable, plastic-free packaging supporting local ethical agriculture in Tanzania." }
   ];
 
-  const industries = [
-    { title: "Finance & FinTech", icon: PixelLandmarkIcon },
-    { title: "Telecom & Tech", icon: PixelRadioIcon },
-    { title: "SMEs & Retail", icon: PixelShoppingIcon },
-    { title: "Healthcare", icon: PixelHeartPulseIcon }
-  ];
-
   return (
-    <div ref={containerRef} className="relative bg-white min-h-screen text-black font-sans antialiased w-full overflow-hidden selection:bg-[#FA520F] selection:text-white">
-      <ParticleBackground />
+    <div ref={containerRef} className="relative bg-[#fafafa] min-h-screen text-black font-sans antialiased w-full overflow-hidden selection:bg-[#FA520F] selection:text-white pt-32 pb-24">
       <GrainOverlay />
 
       <motion.div className="fixed top-0 left-0 right-0 h-[1px] bg-black z-[100] origin-left" style={{ scaleX: scrollYProgress }} />
 
-      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 relative z-10">
-        <section className="mb-32 pt-32">
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1] mb-12 text-left">Industries We Serve.</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {industries.map((industry, i) => (
-              <motion.div key={industry.title} className="bg-[#F5F5F5] p-8 md:p-12 min-h-[200px] flex flex-col justify-between"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.7 }}
-              >
-                <industry.icon />
-                <div className="mt-auto">
-                  <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">{industry.title}</h3>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+      <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
+        
+        <section className="mb-16 md:mb-24 px-6 md:px-8">
+          <h1 className="text-5xl md:text-7xl font-normal tracking-[-0.02em] leading-[1.1] mb-4 font-sans">
+            The Companies We Work and Collaborate With.
+          </h1>
+          <p className="text-lg text-neutral-600 max-w-2xl font-sans">
+            We are solving complex problems across all industries in days, not years.
+          </p>
         </section>
 
-        <div className="mb-32">
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1] mb-16 text-left">The Companies We Work With</h2>
+        {/* SEPARATE CARDS STACKED VERTICALLY */}
+        <div className="flex flex-col gap-16 md:gap-20 px-6 md:px-8">
           {clients.map((client, index) => (
-            <ClientShowcase key={client.client} client={client.client} images={client.images} description={client.description} index={index} />
+            <ClientCard 
+              key={client.client} 
+              client={client.client} 
+              images={client.images} 
+              description={client.description} 
+              index={index} 
+            />
           ))}
         </div>
 
-   
       </div>
     </div>
   );
