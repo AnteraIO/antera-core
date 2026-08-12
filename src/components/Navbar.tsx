@@ -1,411 +1,314 @@
 'use client';
-import React, { useState } from 'react'
-import { Menu, X, ChevronDown, ArrowRight, Globe, Layers, Building2, Code, BriefcaseBusiness,Lock,Star, Database, MessageSquare, Users, Target, TrendingUp, Network, Brain, LineChart, Phone, Mail, Share2, Smartphone,MonitorCog } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
-import Link from 'next/link'
-import Image from 'next/image'
-import { usePathname } from 'next/navigation'
-import { useLanguage } from '../context/LanguageContext'
 
-interface BlogLink {
-  title: string
-  href: string
-}
-
-interface CategoryItem {
-  name: string
-  href: string
-  icon: React.ComponentType<{ className?: string }>
-}
+import React, { useState } from 'react';
+import { Menu, X, Globe, ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { useLanguage } from '../context/LanguageContext';
 
 export const Navbar = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [activeMenu, setActiveMenu] = useState<string | null>(null)
-  const [showLangs, setShowLangs] = useState(false)
-  const { language, setLanguage, t } = useLanguage()
-  const pathname = usePathname()
+  const [isOpen, setIsOpen] = useState(false);
+  const [isBannerVisible, setIsBannerVisible] = useState(true);
+  const [showLangs, setShowLangs] = useState(false);
+  
+  const { language, setLanguage, t } = useLanguage();
+  const pathname = usePathname();
 
   const languages: { code: 'en' | 'sw'; name: string }[] = [
     { code: 'en', name: 'EN' },
     { code: 'sw', name: 'SW' }
-  ]
-
-  const blogLatestPosts: BlogLink[] = [
-    { title: 'Antera Group Office', href: '/office' },
-    { title: 'Solutions.', href: '/solutions' },
-    { title: 'Introducing Search Toolkit', href: '/developers' },
-  ]
-
-  const blogCategories: CategoryItem[] = [
-    { name: t('nav.products'), href: '/products', icon: Layers },
-    { name: t('nav.company'), href: '/company', icon: Building2 },
-    { name: t('nav.developers'), href: '/developers', icon: Code },
-    { name: t('nav.solutions'), href: '/solutions', icon: BriefcaseBusiness},
-  ]
-
-  const dropdownConfigs: Record<string, {
-    leftTitle: string
-    leftItems: { title: string; desc: string; href: string }[]
-    bottomLinkText: string
-    bottomLinkHref: string
-    rightTitle: string
-    rightItems: { name: string; href: string; icon: React.ComponentType<{ className?: string }> }[]
-  }> = {
-    'Products': {
-      leftTitle: t('dropdown.products.featured_title'),
-      leftItems: [
-        { title: t('dropdown.products.title1'), desc: t('dropdown.products.desc1'), href: '/sekela-apis' },
-        { title: t('dropdown.products.title2'), desc: t('dropdown.products.desc2'), href: '/products' },
-      ],
-      bottomLinkText: t('dropdown.products.read_all'),
-      bottomLinkHref: '/products',
-      rightTitle: t('dropdown.products.cat_title'),
-      rightItems: [
-        { name: t('dropdown.products.cat1'), href: '/products', icon: Code },
-        { name: t('dropdown.products.cat2'), href: '/products', icon: Layers },
-        { name: t('dropdown.products.cat3'), href: '/products', icon: Globe },
-        { name: t('dropdown.products.cat4'), href: '/products', icon: Building2 },
-      ]
-    },
-    'Solutions': {
-      leftTitle: t('dropdown.solutions.featured_title'),
-      leftItems: [
-        { title: t('dropdown.solutions.title1'), desc: t('dropdown.solutions.desc1'), href: '/solutions' },
-        { title: t('dropdown.solutions.title2'), desc: t('dropdown.solutions.desc2'), href: '/solutions' },
-      ],
-      bottomLinkText: t('dropdown.solutions.read_all'),
-      bottomLinkHref: '/solutions',
-      rightTitle: t('dropdown.solutions.cat_title'),
-      rightItems: [
-        { name: t('dropdown.solutions.cat1'), href: '/solutions', icon: Globe },
-        { name: t('dropdown.solutions.cat2'), href: '/solutions', icon: Lock },
-        { name: t('dropdown.solutions.cat3'), href: '/solutions', icon: TrendingUp },
-        { name: t('dropdown.solutions.cat4'), href: '/solutions', icon: BriefcaseBusiness },
-      ]
-    },
-    'Sekela APIS': {
-      leftTitle: t('dropdown.sekela.featured_title'),
-      leftItems: [
-        { title: t('dropdown.sekela.title1'), desc: t('dropdown.sekela.desc1'), href: '/sekela-apis' },
-        { title: t('dropdown.sekela.title2'), desc: t('dropdown.sekela.desc2'), href: '/sekela-apis' },
-      ],
-      bottomLinkText: t('dropdown.sekela.read_all'),
-      bottomLinkHref: '/sekela-apis',
-      rightTitle: t('dropdown.sekela.cat_title'),
-      rightItems: [
-        { name: t('dropdown.sekela.cat1'), href: '/sekela-apis', icon: Database },
-        { name: t('dropdown.sekela.cat2'), href: '/sekela-apis', icon: MessageSquare },
-      ]
-    },
-    'Developers': {
-      leftTitle: t('dropdown.developers.featured_title'),
-      leftItems: [
-        { title: t('dropdown.developers.title1'), desc: t('dropdown.developers.desc1'), href: '/developers' },
-        { title: t('dropdown.developers.title2'), desc: t('dropdown.developers.desc2'), href: '/developers' },
-      ],
-      bottomLinkText: t('dropdown.developers.read_all'),
-      bottomLinkHref: '/developers',
-      rightTitle: t('dropdown.developers.cat_title'),
-      rightItems: [
-        { name: t('dropdown.developers.cat1'), href: '/developers', icon: Code },
-        { name: t('dropdown.developers.cat2'), href: '/developers', icon: Network },
-        { name: t('dropdown.developers.cat3'), href: '/developers', icon: Database },
-        { name: t('dropdown.developers.cat4'), href: '/developers', icon: Layers },
-      ]
-    },
-    'Blog': {
-      leftTitle: t('blog.latest_briefings'),
-      leftItems: blogLatestPosts.map(p => ({ title: p.title, desc: '', href: p.href })),
-      bottomLinkText: t('blog.read_all'),
-      bottomLinkHref: '/blog',
-      rightTitle: 'Categories',
-      rightItems: blogCategories.map(c => ({ name: c.name, href: c.href, icon: c.icon }))
-    },
-    'Company': {
-      leftTitle: t('dropdown.company.featured_title'),
-      leftItems: [
-        { title: t('dropdown.company.title1'), desc: t('dropdown.company.desc1'), href: '/company' },
-        { title: t('dropdown.company.title2'), desc: t('dropdown.company.desc2'), href: '/company' },
-      ],
-      bottomLinkText: t('dropdown.company.read_all'),
-      bottomLinkHref: '/company',
-      rightTitle: t('dropdown.company.cat_title'),
-      rightItems: [
-        { name: t('dropdown.company.cat1'), href: '/company', icon: Target },
-        { name: t('dropdown.company.cat2'), href: '/company', icon:  Star},
-        { name: t('dropdown.company.cat3'), href: '/company', icon: Users },
-      ]
-    }
-  }
-
-  const navLinks = [
-    { name: t('nav.products'), href: '/products', isDropdown: true, key: 'Products' },
-    { name: t('nav.solutions'), href: '/solutions', isDropdown: true, key: 'Solutions' },
-    { name: t('nav.sekela'), href: '/sekela-apis', isDropdown: true, key: 'Sekela APIS' },
-    { name: t('nav.developers'), href: '/developers', isDropdown: true, key: 'Developers' },
-    { name: t('nav.blog'), href: '/blog', isDropdown: true, key: 'Blog', alignRight: true },
-    { name: t('nav.customers'), href: '/customers' },
-    { name: t('nav.company'), href: '/company', isDropdown: true, key: 'Company', alignRight: true },
-  ]
-
-  const marqueeTextItems = [
-    { text: "AI Solutions and Intelligent Systems for Tanzanian and African Markets", badge: "AI & AUTOMATION", icon: Brain },
-    { text: "Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development", badge: "DEVELOPMENT", icon: MonitorCog },
-    { text: "Modern Data Science and Model Implementations", badge: "BUSINESS INTELLIGENCE", icon: LineChart },
-    { text: "Sekela POS, Kava AI Career Assistant", badge: "OUR PLATFORMS", icon: Smartphone },
-    { text: "Call us: +255 625 534 921 | +255 760 984 921 | +255 774 174 921", badge: "CALL US", icon: Phone },
-    { text: "info@antera.co.tz", badge: "EMAIL", icon: Mail },
-    { text: "Follow @antera_tz on Instagram, X, and LinkedIn", badge: "SOCIALS", icon: Share2 }
   ];
 
-  // Repeat items for infinite horizontal marquee scroll
-  const repeatedMarquee = [...marqueeTextItems, ...marqueeTextItems, ...marqueeTextItems, ...marqueeTextItems];
+  const navLinks = [
+    { name: t('nav.products'), href: '/products' },
+    { name: t('nav.solutions'), href: '/solutions' },
+    { name: t('nav.sekela'), href: '/sekela-apis' },
+    { name: t('nav.developers'), href: '/developers' },
+    { name: t('nav.blog'), href: '/blog' },
+    { name: t('nav.customers'), href: '/customers' },
+    { name: t('nav.company'), href: '/company' },
+  ];
+
+  const blogLatestPosts = [
+    { title: 'Antera Group Office', href: '/office', desc: 'Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development' },
+    { title: 'Introducing Search Toolkit', href: '/developers', desc: 'Modern Data Science and Model Implementations for Tanzanian Markets' },
+  ];
 
   return (
-    <>
-      <nav 
-        className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-neutral-200 text-xs font-mono font-bold antialiased uppercase tracking-wider h-20 flex flex-col"
-        onMouseLeave={() => setActiveMenu(null)}
-      >
-        {/* Top Marquee */}
-        <div className="w-full bg-[#1F1F1F] text-white h-6 overflow-hidden flex items-center relative border-b border-neutral-800 z-50">
-          <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#1F1F1F] to-transparent z-10 pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#1F1F1F] to-transparent z-10 pointer-events-none" />
-
-          <div className="flex whitespace-nowrap animate-marquee hover:[animation-play-state:paused] cursor-pointer py-1">
-            {repeatedMarquee.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <div key={index} className="flex items-center gap-2 mx-6 text-[10px] tracking-normal font-medium text-neutral-300 normal-case">
-                  <span className="bg-[#FA520F] text-white text-[8px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-none flex-shrink-0">
-                    {item.badge}
-                  </span>
-                  {Icon && <Icon className="w-3.5 h-3.5 text-[#FA520F] shrink-0" />}
-                  <span>{item.text}</span>
-                </div>
-              );
-            })}
+    <header className="fixed top-0 left-0 right-0 z-50 font-sans">
+      {/* Top Banner - Using Antera Marquee Content */}
+      {isBannerVisible && (
+        <div className="bg-[#111111] text-white text-xs py-2 px-6 flex justify-between items-center w-full tracking-wide">
+          <div className="flex-1 flex justify-start items-center gap-4 pl-2 overflow-hidden whitespace-nowrap">
+            <span>
+              AI Solutions and Intelligent Systems for Tanzanian and African Markets | Call us: +255 760 984 921
+            </span>
           </div>
+          <button 
+            onClick={() => setIsBannerVisible(false)}
+            className="text-gray-400 hover:text-white transition-colors ml-4 shrink-0"
+          >
+            <X size={14} />
+          </button>
         </div>
+      )}
 
-        <div className="mx-auto flex items-stretch justify-between h-[56px] w-full">
+      {/* Main Navbar */}
+      <nav 
+        className={`w-full flex items-center justify-between px-6 py-4 transition-colors duration-200 border-b ${
+          isOpen 
+            ? 'bg-[#18181b] text-white border-zinc-800' 
+            : 'bg-white text-black border-neutral-200'
+        }`}
+      >
+        {/* Logo - Image Removed, Text Only */}
+        <Link href="/" className="flex items-center gap-3 flex-shrink-0 z-50">
+          <span className="text-xl font-semibold tracking-tight">Antera</span>
+        </Link>
+
+        {/* Action Buttons */}
+        <div className="flex items-center gap-4 z-50">
+          <Link 
+            href="/developers"
+            className={`hidden lg:flex px-6 py-2 text-sm font-medium border transition-colors ${
+              isOpen 
+                ? 'border-zinc-600 hover:bg-zinc-800 text-white' 
+                : 'border-black hover:bg-gray-50 text-black'
+            }`}
+          >
+            {t('nav.start_building')}
+          </Link>
           
-          <div className="flex items-stretch">
-            <Link href="/" className="flex items-center gap-3 px-6 border-r border-neutral-200 hover:bg-neutral-50 transition-colors flex-shrink-0 relative">
-              <span className="absolute inset-0 border-t border-l border-neutral-50 pointer-events-none" />
-              <Image src="/antera-logo.jpeg" alt="ANTERA Logo" width={24} height={24} className="h-6 w-6 object-contain" />
-              <span className="font-black text-black tracking-tighter">ANTERA</span>
-            </Link>
+          <Link 
+            href="https://wa.me/255760984921"
+            target="_blank"
+            className={`hidden lg:flex px-6 py-2 text-sm font-medium border transition-colors ${
+              isOpen 
+                ? 'border-[#FA520F] bg-[#FA520F] text-white hover:bg-[#e0490d]' 
+                : 'border-black bg-white text-black hover:bg-neutral-50'
+            }`}
+          >
+            {t('nav.contact_sales')}
+          </Link>
 
-            <div className="hidden lg:flex items-stretch">
-              {navLinks.map((link) => (
-                link.isDropdown ? (
-                  <div
-                    key={link.name}
-                    onMouseEnter={() => setActiveMenu(link.key)}
-                    className="relative flex items-stretch border-r border-neutral-200"
-                  >
-                    <Link
-                      href={link.href}
-                      className={`px-5 transition-colors flex items-center gap-1.5 ${
-                        activeMenu === link.key || pathname === link.href ? 'bg-neutral-50 text-black' : 'text-black hover:bg-neutral-50'
+          {/* Language Selector */}
+          <div className="relative flex items-center">
+            <button
+              onClick={() => setShowLangs(!showLangs)}
+              className={`p-2 border transition-colors ${
+                isOpen 
+                  ? 'border-zinc-600 hover:bg-zinc-800 text-white' 
+                  : 'border-black hover:bg-gray-50 text-black'
+              }`}
+            >
+              <Globe className="w-5 h-5" />
+            </button>
+            
+            <AnimatePresence>
+              {showLangs && (
+                <motion.div
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 4 }}
+                  className={`absolute right-0 top-[48px] border shadow-sm w-24 flex flex-col ${
+                    isOpen ? 'bg-[#18181b] border-zinc-700' : 'bg-white border-neutral-200'
+                  }`}
+                >
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        setLanguage(lang.code);
+                        setShowLangs(false);
+                      }}
+                      className={`w-full px-4 py-3 text-left text-sm font-medium transition-colors border-b last:border-none ${
+                        isOpen ? 'border-zinc-700' : 'border-neutral-100'
+                      } ${
+                        language === lang.code 
+                          ? 'bg-[#FA520F] text-white' 
+                          : isOpen 
+                            ? 'text-white hover:bg-zinc-800' 
+                            : 'text-black hover:bg-neutral-50'
                       }`}
                     >
-                      <span>{link.name}</span>
-                      <ChevronDown className={`w-3 h-3 stroke-[2.5px] transition-transform duration-150 ${activeMenu === link.key ? 'rotate-180' : ''}`} />
-                    </Link>
-
-                    <AnimatePresence>
-                      {activeMenu === link.key && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 5 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 5 }}
-                          transition={{ duration: 0.12 }}
-                          className={`absolute top-[56px] bg-white border-x border-b border-neutral-200 z-50 flex w-[680px] text-left cursor-default ${
-                            link.alignRight ? 'right-[-1px] left-auto' : 'left-[-1px] right-auto'
-                          }`}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <div className="w-7/12 border-r border-neutral-200 flex flex-col bg-white">
-                            <div className="px-6 py-3 text-[10px] uppercase font-bold tracking-wider text-neutral-400 bg-neutral-50 border-b border-neutral-200">
-                              {dropdownConfigs[link.key].leftTitle}
-                            </div>
-                            <div className="flex flex-col divide-y divide-neutral-100">
-                              {dropdownConfigs[link.key].leftItems.map((post, i) => (
-                                <Link
-                                  key={i} 
-                                  href={post.href}
-                                  className="px-6 py-4 flex flex-col justify-center text-black hover:bg-neutral-50 font-bold transition-colors group"
-                                >
-                                  <div className="flex items-center justify-between">
-                                    <span className="truncate pr-4">{post.title}</span>
-                                    <ArrowRight className="w-4 h-4 stroke-[2.5px] text-neutral-300 group-hover:text-[#FA520F] transition-colors shrink-0" />
-                                  </div>
-                                  {post.desc && (
-                                    <p className="text-[10px] text-neutral-400 font-normal lowercase normal-case tracking-normal mt-1 leading-normal">
-                                      {post.desc}
-                                    </p>
-                                  )}
-                                </Link>
-                              ))}
-                            </div>
-                            <Link href={dropdownConfigs[link.key].bottomLinkHref} className="px-6 py-4 mt-auto border-t border-neutral-200 bg-neutral-50 text-xs font-bold text-[#FA520F] flex items-center gap-1.5 hover:bg-black hover:text-white transition-colors">
-                              <span>{dropdownConfigs[link.key].bottomLinkText}</span>
-                              <ArrowRight className="w-3.5 h-3.5 stroke-[2.5px]" />
-                            </Link>
-                          </div>
-
-                          <div className="w-5/12 bg-neutral-50 flex flex-col">
-                            <div className="px-6 py-3 text-[10px] uppercase font-bold tracking-wider text-neutral-400 bg-neutral-50 border-b border-neutral-200">
-                              {dropdownConfigs[link.key].rightTitle}
-                            </div>
-                            <div className="p-6 flex flex-col gap-4 font-bold text-black">
-                              {dropdownConfigs[link.key].rightItems.map((category, i) => {
-                                const Icon = category.icon
-                                return (
-                                  <Link
-                                    key={i} 
-                                    href={category.href}
-                                    className="hover:text-[#FA520F] flex items-center gap-3 transition-colors group"
-                                  >
-                                    <Icon className="w-4 h-4 text-neutral-600 group-hover:text-[#FA520F] transition-colors shrink-0" />
-                                    <span>{category.name}</span>
-                                  </Link>
-                                )
-                              })}
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ) : (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    onMouseEnter={() => setActiveMenu(null)}
-                    className={`px-5 border-r border-neutral-200 transition-colors flex items-center ${
-                      pathname === link.href ? 'bg-neutral-100 text-black' : 'text-black hover:bg-neutral-50'
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                )
-              ))}
-            </div>
+                      {lang.code.toUpperCase()}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-
-          <div className="hidden lg:flex items-stretch">
-            <div className="relative flex items-stretch border-l border-neutral-200">
-              <button
-                id="lang-selector"
-                onClick={() => setShowLangs(!showLangs)}
-                className="px-4 flex items-center gap-2 text-black hover:bg-neutral-50 transition-colors"
-              >
-                <Globe className="w-4 h-4 stroke-[2.5px]" />
-                <span>{language}</span>
-              </button>
-              <AnimatePresence>
-                {showLangs && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 4 }}
-                    className="absolute right-0 top-[56px] bg-white border border-neutral-200 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.05)] z-50 w-24 flex flex-col divide-y divide-neutral-100"
-                  >
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        id={`lang-${lang.code}`}
-                        onClick={() => {
-                          setLanguage(lang.code)
-                          setShowLangs(false)
-                        }}
-                        className={`w-full px-4 py-2.5 text-left text-xs font-bold transition-colors ${
-                          language === lang.code ? 'bg-[#FA520F] text-white' : 'text-black hover:bg-neutral-50'
-                        }`}
-                      >
-                        {lang.code}
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <Link href="/developers" className="px-6 flex items-center gap-2 border-l border-neutral-200 text-black hover:bg-neutral-50 transition-colors">
-              <span>{t('nav.start_building')}</span>
-              <ChevronDown className="w-3 h-3 stroke-[2.5px] opacity-60" />
-            </Link>
-            
-            <Link href="https://wa.me/255760984921" target="_blank" className="px-6 bg-[#FA520F] text-white font-bold flex items-center justify-center hover:bg-black border-l border-neutral-200 transition-colors gap-2 relative group">
-              <span className="absolute inset-0 border-t border-l border-white/10 pointer-events-none group-hover:border-white/5" />
-              <span>{t('nav.contact_sales')}</span>
-              <ArrowRight className="w-4 h-4 stroke-[2.5px]" />
-            </Link>
-          </div>
-
+          
+          {/* Menu Toggle */}
           <button
-            className="lg:hidden px-6 flex items-center justify-center text-black border-l border-neutral-200 hover:bg-neutral-50"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => setIsOpen(!isOpen)}
+            className={`p-2 border transition-colors ${
+              isOpen
+                ? 'bg-white text-black border-white hover:bg-gray-200'
+                : 'bg-white text-black border-black hover:bg-gray-50'
+            }`}
           >
-            {isMobileMenuOpen ? <X className="w-5 h-5 stroke-[2.5px]" /> : <Menu className="w-5 h-5 stroke-[2.5px]" />}
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </nav>
 
+      {/* Mega Menu Dropdown */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.1 }}
-            className="fixed inset-0 top-20 bg-white z-40 lg:hidden flex flex-col divide-y-4 divide-neutral-200 border-t border-neutral-200 overflow-y-auto font-mono font-bold text-xs uppercase tracking-wider"
+            transition={{ duration: 0.2 }}
+            className="absolute top-full left-0 w-full h-[100vh] bg-[#18181b] text-white overflow-y-auto pb-32"
           >
-            <div className="flex flex-col divide-y-2 divide-neutral-100 text-black">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`px-6 py-4 hover:bg-neutral-50 ${pathname === link.href ? 'bg-[#FA520F] text-white' : ''}`}
-                >
-                  {link.name}
-                </Link>
-              ))}
+            <div className="max-w-[1600px] mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
               
-              <div className="px-6 py-4 bg-neutral-50 flex items-center gap-4 border-b border-neutral-200">
-                <Globe className="w-4 h-4 stroke-[2.5px] text-neutral-400" />
-                {languages.map(lang => (
-                  <button
-                    key={lang.code}
-                    onClick={() => setLanguage(lang.code)}
-                    className={`px-2 py-0.5 border border-neutral-200 ${language === lang.code ? 'bg-[#FA520F] text-white shadow-[1px_1px_0px_0px_rgba(0,0,0,0.05)]' : 'bg-white text-black'}`}
-                  >
-                    {lang.name}
-                  </button>
-                ))}
+              {/* Column 1: Navigation */}
+              <div className="lg:col-span-3">
+                <div className="border-b border-zinc-700 pb-3 mb-6">
+                  <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
+                    Navigation
+                  </span>
+                </div>
+                <ul className="flex flex-col gap-5 text-[22px] font-light">
+                  {navLinks.map((link) => (
+                    <li key={link.name}>
+                      <Link 
+                        href={link.href} 
+                        onClick={() => setIsOpen(false)}
+                        className={`hover:text-[#FA520F] transition-colors ${
+                          pathname === link.href ? 'text-[#FA520F]' : 'text-white'
+                        }`}
+                      >
+                        {link.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
-            
-            <div className="mt-auto bg-neutral-50 flex flex-col divide-y-2 divide-neutral-200 border-t border-neutral-200">
-              <Link href="/developers" className="p-4 font-bold text-center text-black hover:bg-neutral-100 transition-colors">
-                {t('nav.start_building')}
-              </Link>
-              <Link 
-                href="https://wa.me/255760984921"
-                target="_blank"
-                onClick={() => setIsMobileMenuOpen(false)} 
-                className="p-4 font-bold text-center bg-[#FA520F] text-white hover:bg-black transition-colors"
-              >
-                {t('nav.contact_sales')}
-              </Link>
+
+              {/* Column 2: Latest News & Impact (Using Antera Blog Content) */}
+              <div className="lg:col-span-6 pr-8">
+                <div className="flex justify-between items-center border-b border-zinc-700 pb-3 mb-6">
+                  <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
+                    Latest Updates
+                  </span>
+                  <Link 
+                    href="/blog" 
+                    onClick={() => setIsOpen(false)}
+                    className="text-[10px] font-bold text-zinc-400 hover:text-white tracking-widest uppercase transition-colors flex items-center gap-1"
+                  >
+                    View Blog <ArrowRight className="w-3 h-3" />
+                  </Link>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-8">
+                  {blogLatestPosts.map((post, i) => (
+                    <Link 
+                      href={post.href} 
+                      key={i}
+                      onClick={() => setIsOpen(false)}
+                      className="flex flex-col gap-3 group cursor-pointer"
+                    >
+                      <span className="text-[10px] font-bold text-[#FA520F] tracking-widest uppercase">
+                        Featured Post
+                      </span>
+                      <h3 className="text-lg font-medium leading-snug group-hover:text-[#FA520F] transition-colors">
+                        {post.title}
+                      </h3>
+                      <p className="text-sm text-zinc-400 leading-relaxed">
+                        {post.desc}
+                      </p>
+                      <span className="text-sm font-medium mt-1 group-hover:underline flex items-center gap-2 text-zinc-300">
+                        Read More <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Latest Platforms Section */}
+                <div className="flex justify-between items-center border-b border-zinc-700 pb-3 mt-12 mb-6">
+                  <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
+                    Our Platforms
+                  </span>
+                  <Link 
+                    href="/products" 
+                    onClick={() => setIsOpen(false)}
+                    className="text-[10px] font-bold text-zinc-400 hover:text-white tracking-widest uppercase transition-colors flex items-center gap-1"
+                  >
+                    View All Products <ArrowRight className="w-3 h-3" />
+                  </Link>
+                </div>
+                <Link href="/sekela-apis" onClick={() => setIsOpen(false)} className="w-1/2 pr-4 group cursor-pointer block">
+                  <div className="flex flex-col gap-3">
+                    <span className="text-[10px] font-bold text-zinc-400 tracking-widest uppercase">
+                      Sekela POS & Kava AI
+                    </span>
+                    <h3 className="text-lg font-medium leading-snug group-hover:text-[#FA520F] transition-colors">
+                      Sekela POS and Kava AI Career Assistant
+                    </h3>
+                  </div>
+                </Link>
+              </div>
+
+              {/* Column 3: Offerings & Quick Links */}
+              <div className="lg:col-span-3">
+                <div className="flex justify-between items-center border-b border-zinc-700 pb-3 mb-6">
+                  <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
+                    Company
+                  </span>
+                  <Link 
+                    href="/company"
+                    onClick={() => setIsOpen(false)}
+                    className="text-[10px] font-bold text-zinc-400 hover:text-white tracking-widest uppercase transition-colors"
+                  >
+                    About Us ↗
+                  </Link>
+                </div>
+                <p className="text-[15px] text-zinc-300 leading-relaxed mb-6">
+                  Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development for the modern African market.
+                </p>
+                <Link 
+                  href="/developers" 
+                  onClick={() => setIsOpen(false)}
+                  className="text-sm font-medium hover:text-[#FA520F] transition-colors inline-block mb-12 flex items-center gap-2"
+                >
+                  <ArrowRight className="w-4 h-4" /> Learn more about Developers Toolkit
+                </Link>
+
+                <div className="border-b border-zinc-700 pb-3 mb-6">
+                  <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
+                    Contact & Socials
+                  </span>
+                </div>
+                <ul className="flex flex-col gap-4 text-sm text-zinc-300">
+                  <li className="flex items-center gap-2">
+                    <span className="text-zinc-500">Email:</span>
+                    <a href="mailto:info@antera.co.tz" className="hover:text-white transition-colors">info@antera.co.tz</a>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-zinc-500">Phone:</span>
+                    <a href="tel:+255760984921" className="hover:text-white transition-colors">+255 760 984 921</a>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-zinc-500">Socials:</span>
+                    <a href="#" className="hover:text-white transition-colors">Instagram</a>
+                    <span className="text-zinc-600">/</span>
+                    <a href="#" className="hover:text-white transition-colors">X</a>
+                    <span className="text-zinc-600">/</span>
+                    <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
+                  </li>
+                </ul>
+              </div>
+
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
-  )
-}
+    </header>
+  );
+};
