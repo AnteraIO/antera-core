@@ -24,7 +24,7 @@ export const Hero = () => {
   const titleWords = "Grow Your Business. With Smart Technology.".split(" ");
 
   return (
-    <section className="relative min-h-screen w-full bg-black overflow-hidden">
+    <section className="relative min-h-screen w-full bg-black overflow-hidden flex items-center">
       {/* Background image slideshow with crossfade */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
@@ -41,76 +41,85 @@ export const Hero = () => {
               alt={`Hero Background ${currentImage + 1}`}
               fill
               priority
-              className="object-cover object-center"
+              className="object-cover object-center scale-105"
             />
           </motion.div>
         </AnimatePresence>
-        {/* Warm sunset gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-[#FA520F]/30 to-[#FCD34D]/20 z-[1]" />
+        {/* Warm sunset gradient overlay with Palantir-style technical overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/50 to-[#FA520F]/20 z-[1]" />
+
+        {/* Fine grid pattern overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] z-[2]" />
       </div>
 
       {/* Decorative corner ornaments - top left */}
-      <div className="absolute top-0 left-0 z-20 w-24 h-24 md:w-32 md:h-32 pointer-events-none">
+      <div className="absolute top-20 left-4 md:top-24 md:left-8 z-20 w-16 h-16 pointer-events-none">
         <svg viewBox="0 0 100 100" className="w-full h-full">
-          <path d="M2 2 L30 2 L30 6 L6 6 L6 30 L2 30 Z" fill="none" stroke="white" strokeWidth="1.5" opacity="0.3" />
-          <path d="M10 10 L25 10 L25 14 L14 14 L14 25 L10 25 Z" fill="none" stroke="white" strokeWidth="1" opacity="0.2" />
-          <circle cx="8" cy="8" r="1.5" fill="white" opacity="0.25" />
+          <path d="M2 2 L30 2" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
+          <path d="M2 2 L2 30" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
+          <circle cx="2" cy="2" r="1.5" fill="#FA520F" />
         </svg>
       </div>
 
       {/* Decorative corner ornaments - top right */}
-      <div className="absolute top-0 right-0 z-20 w-24 h-24 md:w-32 md:h-32 pointer-events-none">
+      <div className="absolute top-20 right-4 md:top-24 md:right-8 z-20 w-16 h-16 pointer-events-none">
         <svg viewBox="0 0 100 100" className="w-full h-full">
-          <path d="M98 2 L70 2 L70 6 L94 6 L94 30 L98 30 Z" fill="none" stroke="white" strokeWidth="1.5" opacity="0.3" />
-          <path d="M90 10 L75 10 L75 14 L86 14 L86 25 L90 25 Z" fill="none" stroke="white" strokeWidth="1" opacity="0.2" />
-          <circle cx="92" cy="8" r="1.5" fill="white" opacity="0.25" />
+          <path d="M98 2 L70 2" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
+          <path d="M98 2 L98 30" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
+          <circle cx="98" cy="2" r="1.5" fill="#FA520F" />
         </svg>
       </div>
 
       {/* Decorative corner ornaments - bottom left */}
-      <div className="absolute bottom-0 left-0 z-20 w-24 h-24 md:w-32 md:h-32 pointer-events-none">
+      <div className="absolute bottom-8 left-4 md:bottom-12 md:left-8 z-20 w-16 h-16 pointer-events-none">
         <svg viewBox="0 0 100 100" className="w-full h-full">
-          <path d="M2 98 L30 98 L30 94 L6 94 L6 70 L2 70 Z" fill="none" stroke="white" strokeWidth="1.5" opacity="0.3" />
-          <path d="M10 90 L25 90 L25 86 L14 86 L14 75 L10 75 Z" fill="none" stroke="white" strokeWidth="1" opacity="0.2" />
-          <circle cx="8" cy="92" r="1.5" fill="white" opacity="0.25" />
+          <path d="M2 98 L30 98" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
+          <path d="M2 98 L2 70" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
+          <circle cx="2" cy="98" r="1.5" fill="#FA520F" />
         </svg>
       </div>
 
       {/* Decorative corner ornaments - bottom right */}
-      <div className="absolute bottom-0 right-0 z-20 w-24 h-24 md:w-32 md:h-32 pointer-events-none">
+      <div className="absolute bottom-8 right-4 md:bottom-12 md:right-8 z-20 w-16 h-16 pointer-events-none">
         <svg viewBox="0 0 100 100" className="w-full h-full">
-          <path d="M98 98 L70 98 L70 94 L94 94 L94 70 L98 70 Z" fill="none" stroke="white" strokeWidth="1.5" opacity="0.3" />
-          <path d="M90 90 L75 90 L75 86 L86 86 L86 75 L90 75 Z" fill="none" stroke="white" strokeWidth="1" opacity="0.2" />
-          <circle cx="92" cy="92" r="1.5" fill="white" opacity="0.25" />
+          <path d="M98 98 L70 98" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
+          <path d="M98 98 L98 70" fill="none" stroke="white" strokeWidth="1" opacity="0.4" />
+          <circle cx="98" cy="98" r="1.5" fill="#FA520F" />
         </svg>
       </div>
 
-      {/* Decorative edge lines */}
-      <div className="absolute top-8 left-12 right-12 z-20 h-px pointer-events-none">
-        <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      </div>
-      <div className="absolute bottom-8 left-12 right-12 z-20 h-px pointer-events-none">
-        <div className="w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      </div>
-      <div className="absolute top-12 left-8 bottom-12 z-20 w-px pointer-events-none">
-        <div className="w-full h-full bg-gradient-to-b from-transparent via-white/20 to-transparent" />
-      </div>
-      <div className="absolute top-12 right-8 bottom-12 z-20 w-px pointer-events-none">
-        <div className="w-full h-full bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+      {/* Decorative crosshairs / dots */}
+      <div className="absolute top-1/2 left-8 -translate-y-1/2 z-20 hidden lg:block opacity-35">
+        <div className="flex flex-col gap-4">
+          <div className="w-1.5 h-1.5 rounded-full bg-white" />
+          <div className="w-1.5 h-1.5 rounded-full bg-white/50" />
+          <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+        </div>
       </div>
 
       {/* Main content */}
-      <div className="relative z-30 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 py-20 lg:px-8">
-        <div className="max-w-4xl">
+      <div className="relative z-30 mx-auto flex w-full max-w-7xl flex-col justify-center px-6 md:px-12 py-20 mt-12">
+        <div className="max-w-4xl text-left">
+          {/* Tag */}
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 backdrop-blur-sm text-[10px] font-mono tracking-widest text-[#FA520F] uppercase mb-6"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FA520F] animate-pulse" />
+            Empowering Tanzanian Enterprise
+          </motion.div>
+
           {/* Animated headline with larger text sizes */}
-          <h1 className="mb-4 text-7xl md:text-8xl lg:text-9xl font-medium leading-[1.08] tracking-tight text-white">
+          <h1 className="mb-6 text-5xl md:text-7xl lg:text-8xl font-light tracking-tight text-white leading-[1.05]">
             {titleWords.map((word, index) => (
               <motion.span
                 key={index}
-                initial={{ opacity: 0, y: 60 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ 
-                  delay: index * 0.15,
+                  delay: index * 0.08,
                   duration: 0.8,
                   ease: [0.16, 1, 0.3, 1]
                 }}
@@ -123,13 +132,30 @@ export const Hero = () => {
 
           {/* Animated description with larger text */}
           <motion.p 
-            className="mb-12 max-w-2xl text-xl md:text-2xl leading-relaxed text-white font-medium"
-            initial={{ opacity: 0, y: 40 }}
+            className="mb-10 max-w-2xl text-base md:text-lg leading-relaxed text-neutral-300 font-light"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 0.5, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             We build tailored systems, webapps, mobile apps, chatbots, and AI for Tanzanian SMEs, solopreneurs, and NGOs, connecting agents, tools, and data so small teams can solve niche problems faster, protect digital sovereignty, and expand their footprint.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="flex flex-wrap gap-4"
+          >
+            <a href="https://wa.me/255760984921" target="_blank" className="btn-primary flex items-center gap-2">
+              <span>Contact Sales</span>
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+            <a href="/solutions" className="btn-secondary text-white border-white/20 hover:border-white flex items-center gap-2">
+              <span>Explore Solutions</span>
+            </a>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -133,9 +133,9 @@ export const ProductsPage = () => {
             >
               <PixelCodeIcon />
               <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Sekela APIs</h3>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Sekela Suite</h3>
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
-                  High-throughput communication endpoints for SMS, USSD, and voice automation.
+                  High-throughput communication integration platforms for SMS, USSD, and voice automation.
                 </p>
               </div>
             </motion.div>

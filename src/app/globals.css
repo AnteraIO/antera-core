@@ -4,12 +4,12 @@
 
 @layer base {
   body {
-    background-color: #fffaeb;
+    background-color: #FAFAF8;
     color: #1F1F1F;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "ss01", "ss02", "cv01", "cv11";
-    font-family: var(--font-williwaw), var(--font-inter), sans-serif;
+    font-family: var(--font-inter), sans-serif;
   }
 
   /* Specific override for the Navbar Marquee container and its contents to use Inter */
@@ -25,11 +25,11 @@
   }
 
   .btn-primary {
-    @apply bg-[#FA520F] text-[#fffaeb] px-8 py-4 rounded-none font-bold transition-all hover:bg-[#1F1F1F] hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50;
+    @apply bg-[#FA520F] text-white px-8 py-3 rounded-none font-medium tracking-wider uppercase text-xs transition-all duration-300 hover:bg-[#1F1F1F] disabled:opacity-50 border border-[#FA520F] hover:border-[#1F1F1F];
   }
 
   .btn-secondary {
-    @apply bg-transparent text-[#1F1F1F] border border-[#1F1F1F] px-8 py-4 rounded-none font-bold transition-all hover:bg-[#1F1F1F] hover:text-[#fffaeb];
+    @apply bg-transparent text-[#1F1F1F] border border-[#1F1F1F] px-8 py-3 rounded-none font-medium tracking-wider uppercase text-xs transition-all duration-300 hover:bg-[#1F1F1F] hover:text-white hover:border-[#1F1F1F];
   }
 
   .mistral-border {
@@ -43,11 +43,11 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #fffaeb;
+  background: #FAFAF8;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -56,4 +56,12 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #d4410a;
+}
+
+/* Palantir Grid Blueprint background style */
+.palantir-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
 }

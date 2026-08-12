@@ -220,7 +220,7 @@ export const SekelaAPIsPage = () => {
             >
               <PixelBotIcon />
               <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">ChatBot APIs</h3>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">ChatBot Integrations</h3>
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
                   Automate customer support and internal workflows with intelligent chat interfaces.
                 </p>
@@ -243,7 +243,7 @@ export const SekelaAPIsPage = () => {
             >
               <PixelSproutIcon />
               <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Shamba API</h3>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Shamba Suite</h3>
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
                   Plug-and-play alerts for farmers: weather updates, crop advice, and farming insights.
                 </p>

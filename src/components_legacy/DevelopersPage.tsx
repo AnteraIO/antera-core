@@ -153,9 +153,9 @@ export const DevelopersPage = () => {
             >
               <PixelTerminalIcon />
               <div className="mt-auto">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">API Reference</h3>
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Documentation</h3>
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed max-w-md">
-                  Complete REST API documentation with authentication guides, rate limits, and code examples.
+                  Complete platform documentation with authentication guides, best practices, and integration examples.
                 </p>
                 <ArrowLink text="Explore docs" />
               </div>
@@ -226,7 +226,7 @@ export const DevelopersPage = () => {
               <div className="mt-auto">
                 <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight mb-3">Code Playground</h3>
                 <p className="text-base md:text-lg text-neutral-500 leading-relaxed">
-                  Interactive sandbox for testing API calls, SDK methods, and component previews in real-time.
+                  Interactive sandbox for testing platform integrations, SDK methods, and component previews in real-time.
                 </p>
                 <ArrowLink text="Launch playground" />
               </div>

@@ -2,9 +2,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { 
-  ShoppingBag, 
-  Sparkles, 
-  Award, 
   ArrowUpRight, 
   Store, 
   Warehouse, 
@@ -128,16 +125,16 @@ export const NewProductsMarquee = () => {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32">
         <header className="mb-24 md:mb-40 text-center">
           <motion.h1 
-            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
+            className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[1.05]"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            New Products <span className="text-[#FA520F]">Soon</span>
+            New Products <span className="text-[#FA520F] font-normal">Soon</span>
           </motion.h1>
           <motion.p 
-            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
+            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6 font-light"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -151,7 +148,7 @@ export const NewProductsMarquee = () => {
         <div className="relative max-w-5xl mx-auto">
           <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
 
-          <div className="relative border border-neutral-200 bg-white p-8 md:p-12 overflow-hidden">
+          <div className="relative border border-neutral-200 bg-white p-8 md:p-12 overflow-hidden shadow-sm">
             {/* Background Image */}
             <div className="absolute inset-0 z-0 opacity-10">
               <Image
@@ -188,17 +185,13 @@ export const NewProductsMarquee = () => {
                 return (
                   <motion.div
                     key={index}
-                    className="w-[280px] md:w-[350px] shrink-0 bg-white/90 backdrop-blur-sm border border-neutral-200 p-6 flex flex-col justify-between hover:bg-white/95 hover:border-[#FA520F]/50 transition-all duration-300 group shadow-sm"
-                    whileHover={{ y: -4 }}
+                    className="w-[280px] md:w-[350px] shrink-0 bg-white/90 backdrop-blur-sm border border-neutral-200 p-6 flex flex-col justify-between hover:bg-white hover:border-[#FA520F]/50 transition-all duration-300 group shadow-sm"
+                    whileHover={{ y: -3 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <div>
                       <div className="flex justify-between items-start mb-4">
-                        <span className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 border ${
-                          item.product === 'Kava'
-                            ? 'text-[#FA520F] border-[#FA520F]/30'
-                            : 'text-[#FA520F] border-[#FA520F]/30'
-                        }`}>
+                        <span className="font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 border text-[#FA520F] border-[#FA520F]/30">
                           {item.badge}
                         </span>
                         <span className="text-neutral-400 font-mono text-[11px] font-medium">
@@ -210,17 +203,17 @@ export const NewProductsMarquee = () => {
                         <Icon className="w-5 h-5 text-[#FA520F] opacity-60 group-hover:opacity-100 transition-opacity duration-200" />
                       </div>
 
-                      <h4 className="text-lg md:text-xl font-normal text-black tracking-tight mb-2 group-hover:text-[#FA520F] transition-colors duration-200">
+                      <h4 className="text-lg font-light text-black tracking-tight mb-2 group-hover:text-[#FA520F] transition-colors duration-200">
                         {item.title}
                       </h4>
 
-                      <p className="text-xs md:text-sm text-neutral-500 font-light leading-relaxed">
+                      <p className="text-xs text-neutral-500 font-light leading-relaxed">
                         {item.desc}
                       </p>
                     </div>
 
                     <div className="mt-6 pt-4 border-t border-neutral-100 flex justify-between items-center">
-                      <span className="text-xs font-medium text-neutral-400 group-hover:text-black transition-colors duration-200">
+                      <span className="text-xs font-light text-neutral-400 group-hover:text-black transition-colors duration-200">
                         {item.highlight}
                       </span>
                       <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-[#FA520F] transition-colors duration-200" />

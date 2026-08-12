@@ -1,7 +1,7 @@
 'use client';
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 
 import awsLogo from '../assets/aws.png';
 import digitalOceanLogo from '../assets/digital-ocean.png';
@@ -9,20 +9,8 @@ import netlifyLogo from '../assets/netlify.png';
 import vercelLogo from '../assets/vercel-logo.png';
 import supabaseLogo from '../assets/supabase.png';
 import kaziboksiLogo from '../assets/kaziboksi.jpg';
-//import pawaLogo from '../assets/pawa-ai.png';
 import sekelaPosLogo from '../assets/sekela-pos.png';
 import brevoLogo from '../assets/Brevo.png';
-
-const PixelPartnerIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }}
-    transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <path d="M12 7l4 4-4 4-4-4 4-4z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
-);
 
 const DiamondDecoration = ({ className = "" }: { className?: string }) => (
   <motion.div 
@@ -41,7 +29,6 @@ const partners = [
   { name: 'Vercel', logo: vercelLogo },
   { name: 'Supabase', logo: supabaseLogo },
   { name: 'kaziboksi', logo: kaziboksiLogo },
-  //{ name: 'Pawa AI', logo: pawaLogo },
   { name: 'Brevo', logo: brevoLogo },
   { name: 'Sekela POS', logo: sekelaPosLogo },
 ];
@@ -60,33 +47,33 @@ export const PartnersSection = () => {
 
         <header className="mb-24 md:mb-40 text-center">
           <motion.h1 
-            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
+            className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[1.05]"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            Engineered <span className="text-[#FA520F]">With</span>
+            Engineered <span className="text-[#FA520F] font-normal">With</span>
           </motion.h1>
           <motion.p 
-            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
+            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6 font-light"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-          Leveraging world-class infrastructure to deliver scalable, high-performance solutions.
+            Leveraging world-class infrastructure to deliver scalable, high-performance solutions.
           </motion.p>
         </header>
 
         <div className="relative max-w-5xl mx-auto">
           <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
 
-          <div className="border border-neutral-200 bg-white p-8 md:p-12 overflow-hidden">
+          <div className="border border-neutral-200 bg-white p-8 md:p-12 overflow-hidden shadow-sm">
             <motion.div
               className="flex gap-16 md:gap-24"
               animate={{ x: [0, -1920] }}
-              transition={{ duration: 20, ease: "linear", repeat: Infinity, repeatType: "loop" }}
+              transition={{ duration: 25, ease: "linear", repeat: Infinity, repeatType: "loop" }}
               style={{ width: "max-content" }}
             >
               {tripledPartners.map((partner, index) => (

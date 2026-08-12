@@ -83,7 +83,7 @@ export const Navbar = () => {
         { name: t('dropdown.solutions.cat4'), href: '/solutions', icon: BriefcaseBusiness },
       ]
     },
-    'Sekela APIS': {
+    'Sekela Suite': {
       leftTitle: t('dropdown.sekela.featured_title'),
       leftItems: [
         { title: t('dropdown.sekela.title1'), desc: t('dropdown.sekela.desc1'), href: '/sekela-apis' },
@@ -141,7 +141,7 @@ export const Navbar = () => {
   const navLinks = [
     { name: t('nav.products'), href: '/products', isDropdown: true, key: 'Products' },
     { name: t('nav.solutions'), href: '/solutions', isDropdown: true, key: 'Solutions' },
-    { name: t('nav.sekela'), href: '/sekela-apis', isDropdown: true, key: 'Sekela APIS' },
+    { name: t('nav.sekela'), href: '/sekela-apis', isDropdown: true, key: 'Sekela Suite' },
     { name: t('nav.developers'), href: '/developers', isDropdown: true, key: 'Developers' },
     { name: t('nav.blog'), href: '/blog', isDropdown: true, key: 'Blog', alignRight: true },
     { name: t('nav.customers'), href: '/customers' },
