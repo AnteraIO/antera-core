@@ -1,8 +1,24 @@
 'use client';
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import Image, { StaticImageData } from 'next/image';
-import { ArrowRight } from 'lucide-react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import Image from 'next/image';
+import {
+  ArrowRight,
+  Bot,
+  MessageSquare,
+  Hash,
+  Cpu,
+  ShieldCheck,
+  Layers,
+  Smartphone,
+  Globe,
+  LayoutDashboard,
+  LineChart,
+  Database,
+  Target,
+  Scale,
+  TrendingUp
+} from 'lucide-react';
 import mobileAppImage from '../assets/mobile-app.png';
 import webCommandImage from '../assets/web-command.png';
 import businessIntelligenceImage from '../assets/Business-Intelligence.png';
@@ -12,156 +28,80 @@ import customerInsightsImage from '../assets/Customer-Insights.png';
 import performanceMonitoringImage from '../assets/Performance-Monitoring.png';
 import decisionSupportSystemsImage from '../assets/Decision-Support-Systems.png';
 
+interface ModernIconProps {
+  icon: React.ComponentType<any>;
+  bgColor: string;
+  borderColor: string;
+  rotateDir: number;
+}
+
+const ModernIcon = ({ icon: Icon, bgColor, borderColor, rotateDir }: ModernIconProps) => {
+  return (
+    <motion.div
+      className="w-14 h-14 rounded-xl flex items-center justify-center border shadow-sm"
+      style={{ backgroundColor: bgColor, borderColor: borderColor }}
+      whileHover={{ scale: 1.1, rotate: rotateDir * 5 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      <Icon className="w-7 h-7 text-white" strokeWidth={1.5} />
+    </motion.div>
+  );
+};
+
 const PixelChatbotIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <rect x="7" y="8" width="10" height="6" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <circle cx="10" cy="11" r="1" fill="white"/>
-    <circle cx="14" cy="11" r="1" fill="white"/>
-    <path d="M9 17v1a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+  <ModernIcon icon={Bot} bgColor="#FA520F" borderColor="#C2410C" rotateDir={1} />
 );
 
 const PixelSmsIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <rect x="6" y="7" width="12" height="8" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <path d="M6 11h12" stroke="white" strokeWidth="1.5"/>
-  </motion.svg>
+  <ModernIcon icon={MessageSquare} bgColor="#3B82F6" borderColor="#1D4ED8" rotateDir={-1} />
 );
 
 const PixelUssdIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#F59E0B" stroke="#B45309" strokeWidth="1"/>
-    <rect x="7" y="6" width="10" height="2" rx="0.5" fill="white"/>
-    <rect x="7" y="10" width="10" height="2" rx="0.5" fill="white"/>
-    <rect x="7" y="14" width="6" height="2" rx="0.5" fill="white"/>
-  </motion.svg>
+  <ModernIcon icon={Hash} bgColor="#F59E0B" borderColor="#B45309" rotateDir={1} />
 );
 
 const PixelWorkflowIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
-    <rect x="6" y="7" width="4" height="3" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <rect x="14" y="7" width="4" height="3" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <rect x="6" y="14" width="4" height="3" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <rect x="14" y="14" width="4" height="3" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <path d="M10 8.5h4M8 10v4M16 10v4M10 15.5h4" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+  <ModernIcon icon={Cpu} bgColor="#10B981" borderColor="#059669" rotateDir={-1} />
 );
 
 const PixelSecurityIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#EF4444" stroke="#B91C1C" strokeWidth="1"/>
-    <path d="M12 3s-7 3-7 9c0 3.5 3 7 7 7s7-3.5 7-7c0-6-7-9-7-9z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M9 12l2 2 4-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+  <ModernIcon icon={ShieldCheck} bgColor="#EF4444" borderColor="#B91C1C" rotateDir={1} />
 );
 
 const PixelIntegrationIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#8B5CF6" stroke="#7C3AED" strokeWidth="1"/>
-    <rect x="6" y="6" width="4" height="4" fill="white"/>
-    <rect x="14" y="6" width="4" height="4" fill="white"/>
-    <rect x="6" y="14" width="4" height="4" fill="white"/>
-    <rect x="14" y="14" width="4" height="4" fill="white"/>
-    <path d="M10 8h4M8 10v4M16 10v4M10 16h4" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+  <ModernIcon icon={Layers} bgColor="#8B5CF6" borderColor="#7C3AED" rotateDir={-1} />
 );
 
 const PixelMobileIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <rect x="8" y="7" width="8" height="10" rx="1" stroke="white" strokeWidth="1.5"/>
-    <path d="M10 6h4" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
+  <ModernIcon icon={Smartphone} bgColor="#FA520F" borderColor="#C2410C" rotateDir={1} />
 );
 
 const PixelWebIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1"/>
-    <rect x="6" y="8" width="12" height="8" rx="0.5" stroke="white" strokeWidth="1.5"/>
-    <path d="M6 11h12" stroke="white" strokeWidth="1.5"/>
-  </motion.svg>
+  <ModernIcon icon={Globe} bgColor="#3B82F6" borderColor="#1D4ED8" rotateDir={-1} />
 );
 
 const PixelDashboardIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#10B981" stroke="#059669" strokeWidth="1"/>
-    <rect x="7" y="7" width="4" height="4" rx="0.5" fill="white"/>
-    <rect x="13" y="7" width="4" height="4" rx="0.5" fill="white"/>
-    <rect x="7" y="13" width="4" height="4" rx="0.5" fill="white"/>
-    <rect x="13" y="13" width="4" height="4" rx="0.5" fill="white"/>
-  </motion.svg>
+  <ModernIcon icon={LayoutDashboard} bgColor="#10B981" borderColor="#059669" rotateDir={1} />
 );
 
 const PixelAnalyticsIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#F59E0B" stroke="#B45309" strokeWidth="1"/>
-    <path d="M6 16l4-6 3 4 5-8" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+  <ModernIcon icon={LineChart} bgColor="#F59E0B" borderColor="#B45309" rotateDir={-1} />
 );
 
 const PixelPipelineIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#EF4444" stroke="#B91C1C" strokeWidth="1"/>
-    <rect x="6" y="9" width="4" height="6" rx="0.5" fill="white"/>
-    <rect x="10" y="7" width="4" height="8" rx="0.5" fill="white"/>
-    <rect x="14" y="11" width="4" height="4" rx="0.5" fill="white"/>
-  </motion.svg>
+  <ModernIcon icon={Database} bgColor="#EF4444" borderColor="#B91C1C" rotateDir={1} />
 );
 
 const PixelTruthIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#8B5CF6" stroke="#7C3AED" strokeWidth="1"/>
-    <circle cx="12" cy="12" r="5" stroke="white" strokeWidth="1.5"/>
-    <circle cx="12" cy="12" r="2" fill="white"/>
-  </motion.svg>
+  <ModernIcon icon={Target} bgColor="#8B5CF6" borderColor="#7C3AED" rotateDir={-1} />
 );
 
 const PixelGovernanceIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#06B6D4" stroke="#0891B2" strokeWidth="1"/>
-    <rect x="7" y="7" width="10" height="2" rx="0.5" fill="white"/>
-    <rect x="7" y="11" width="8" height="2" rx="0.5" fill="white"/>
-    <rect x="7" y="15" width="6" height="2" rx="0.5" fill="white"/>
-  </motion.svg>
+  <ModernIcon icon={Scale} bgColor="#06B6D4" borderColor="#0891B2" rotateDir={1} />
 );
 
 const PixelForecastIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#64748B" stroke="#475569" strokeWidth="1"/>
-    <path d="M7 17l3-4 3 2 4-6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M17 7v4h-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </motion.svg>
+  <ModernIcon icon={TrendingUp} bgColor="#64748B" borderColor="#475569" rotateDir={-1} />
 );
 
 const containerVariants = {

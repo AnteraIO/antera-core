@@ -63,8 +63,17 @@ export const Navbar = () => {
             : 'bg-white text-black border-neutral-200'
         }`}
       >
-        {/* Logo - Image Removed, Text Only */}
+        {/* Logo - Image integrated next to text branding */}
         <Link href="/" className="flex items-center gap-3 flex-shrink-0 z-50">
+          <div className="relative w-8 h-8 rounded-full overflow-hidden border border-neutral-200">
+            <Image
+              src="/antera-logo.jpeg"
+              alt="Antera Logo"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
           <span className="text-xl font-semibold tracking-tight">Antera</span>
         </Link>
 
