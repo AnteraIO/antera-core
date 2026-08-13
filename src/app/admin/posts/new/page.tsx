@@ -15,35 +15,6 @@ const GrainOverlay = () => (
   />
 );
 
-const PixelEditIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <path d="M8 16l3-8 3 8H8z" fill="white"/>
-    <path d="M10 14h4" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
-);
-
-const PixelWandIcon = () => (
-  <motion.svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#8B5CF6" stroke="#7C3AED" strokeWidth="1"/>
-    <path d="M12 6v4M10 8h4" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-    <path d="M8 12l8 8M16 12l-8 8" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
-);
-
-const DiamondDecoration = ({ className = "" }: { className?: string }) => (
-  <motion.div className={`w-16 h-16 border border-neutral-200 rotate-45 ${className}`}
-    initial={{ opacity: 0, scale: 0 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-  />
-);
-
 export default function NewPost() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -121,97 +92,91 @@ export default function NewPost() {
   };
 
   return (
-    <div ref={containerRef} className="bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+    <div ref={containerRef} className="bg-[#FAFAF8] text-black min-h-screen pt-16 md:pt-20 lg:pt-24 selection:bg-[#FA520F] selection:text-white">
       <GrainOverlay />
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         
-        <div className="flex justify-center items-center gap-8 mb-12">
-          <PixelEditIcon />
-          <PixelWandIcon />
-        </div>
-
-        <header className="mb-24 md:mb-40 text-center">
+        <header className="text-center py-12">
           <motion.h1 
-            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
+            className="text-5xl md:text-6xl lg:text-7xl font-medium tracking-[-0.02em] leading-[1.1]"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            Write <span className="text-[#FA520F]">Articles.</span>
+            Write Articles.
           </motion.h1>
         </header>
 
         <div className="relative max-w-5xl mx-auto">
-          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-
-          <motion.div 
-            className="border border-neutral-200 bg-white p-8 md:p-12"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.7 }}
-          >
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
-              <div className="flex gap-3">
-                <button
-                  onClick={() => handleSubmit('draft')}
-                  disabled={isSaving}
-                  className="flex items-center justify-center gap-2 px-6 py-3 border border-neutral-200 text-sm font-medium hover:border-black hover:bg-black hover:text-white transition-all disabled:opacity-50"
-                >
-                  <Save size={16} /> Save Draft
-                </button>
-                <button
-                  onClick={() => handleSubmit('published')}
-                  disabled={isSaving}
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-[#FA520F] text-white text-sm font-medium hover:bg-black transition-all disabled:opacity-50"
-                >
-                  <Send size={16} /> Publish Now
-                </button>
-              </div>
+          <div className="border border-neutral-200 bg-white">
+            
+            {/* Fixed Action Buttons - Always visible */}
+            <div className="sticky top-16 md:top-20 lg:top-24 z-20 bg-white border-b border-neutral-200 px-6 md:px-10 py-4 flex flex-wrap gap-3">
+              <button
+                onClick={() => handleSubmit('draft')}
+                disabled={isSaving}
+                className="bg-[#F5F5F5] px-4 py-2 text-sm font-medium hover:bg-[#EAEAEA] transition-colors disabled:opacity-50 flex items-center gap-2"
+              >
+                <Save size={14} />
+                Save Draft
+              </button>
+              <button
+                onClick={() => handleSubmit('published')}
+                disabled={isSaving}
+                className="bg-[#FA520F] px-4 py-2 text-sm font-medium text-white hover:bg-black transition-colors disabled:opacity-50 flex items-center gap-2"
+              >
+                <Send size={14} />
+                Publish Now
+              </button>
             </div>
 
-            <div className="space-y-8">
+            {/* Scrollable Content Area */}
+            <div className="p-6 md:p-10 space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
+              {/* Title */}
               <div>
-                <label className="block text-xs font-mono font-bold uppercase tracking-widest text-neutral-400 mb-3">Title</label>
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-500 mb-3">Title</label>
                 <div className="flex gap-2">
                   <input
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="flex-1 p-4 border border-neutral-200 text-xl font-medium tracking-tight outline-none focus:border-black transition-colors bg-[#FAFAF8]"
+                    className="flex-1 p-3 border border-neutral-200 text-lg font-medium tracking-tight outline-none focus:border-black transition-colors bg-[#FAFAF8]"
+                    placeholder="Enter post title..."
                   />
                   <button
                     onClick={handleAIByTitle}
                     disabled={isGenerating}
-                    className="px-4 bg-black text-white border border-black hover:bg-[#FA520F] transition-colors"
+                    className="px-4 bg-black text-white border border-black hover:bg-[#FA520F] hover:border-[#FA520F] transition-colors disabled:opacity-50 flex items-center justify-center"
                   >
-                    <Wand2 size={20} className={isGenerating ? 'animate-spin' : ''} />
+                    <Wand2 size={18} className={isGenerating ? 'animate-spin' : ''} />
                   </button>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Content & Excerpt */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2">
-                  <label className="block text-xs font-mono font-bold uppercase tracking-widest text-neutral-400 mb-3">Main Content</label>
-                  <div className="border border-neutral-200 bg-[#FAFAF8]">
+                  <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-500 mb-3">Main Content</label>
+                  <div className="border border-neutral-200 bg-[#FAFAF8] overflow-hidden">
                     <RichTextEditor content={content} onChange={setContent} />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono font-bold uppercase tracking-widest text-neutral-400 mb-3">Excerpt</label>
+                  <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-500 mb-3">Excerpt</label>
                   <textarea
                     value={excerpt}
                     onChange={(e) => setExcerpt(e.target.value)}
-                    className="w-full p-4 border border-neutral-200 font-mono text-sm h-48 outline-none focus:border-black transition-colors bg-[#FAFAF8] resize-none"
+                    className="w-full p-3 border border-neutral-200 font-mono text-sm h-40 outline-none focus:border-black transition-colors bg-[#FAFAF8] resize-none"
                     placeholder="Short summary..."
                   />
                 </div>
               </div>
             </div>
-          </motion.div>
-          <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
+
+          </div>
         </div>
       </div>
     </div>

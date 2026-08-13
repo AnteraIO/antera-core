@@ -1,13 +1,22 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import RichTextEditor from '@/components/admin/RichTextEditor';
 import { Wand2, Save, Send, Loader2 } from 'lucide-react';
 import { postSchema } from '@/lib/validations';
 import { supabase } from '@/lib/supabase';
 
+const GrainOverlay = () => (
+  <div 
+    className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03]"
+    style={{
+      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+    }}
+  />
+);
+
 export default function EditPost() {
-  // State management for form fields and UI status
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [excerpt, setExcerpt] = useState('');
@@ -17,8 +26,10 @@ export default function EditPost() {
   const router = useRouter();
   const params = useParams();
   const id = params.id;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
-  // Load existing post data when component mounts
   useEffect(() => {
     async function loadPost() {
       const { data, error } = await supabase
@@ -37,7 +48,6 @@ export default function EditPost() {
     if (id) loadPost();
   }, [id]);
 
-  // AI content generation based on title input
   const handleAIByTitle = async () => {
     if (!title) return alert('Please enter a title first.');
     setIsGenerating(true);
@@ -59,7 +69,6 @@ export default function EditPost() {
 
           let extractedContent = contentMatch ? contentMatch[1].trim() : raw;
 
-          // Handle potential JSON
           if (extractedContent.trim().startsWith('{')) {
               try {
                   const cleaned = extractedContent.replace(/```json\n?|\n?```/g, '').trim();
@@ -78,10 +87,8 @@ export default function EditPost() {
     }
   };
 
-  // Handle post update submission
   const handleSubmit = async (status: 'draft' | 'published') => {
     setIsSaving(true);
-    // Generate URL-friendly slug from title
     const postData = {
       title,
       content,
@@ -90,7 +97,6 @@ export default function EditPost() {
       status,
     };
 
-    // Validate post data before submission
     const validation = postSchema.safeParse(postData);
     if (!validation.success) {
         alert('Validation failed: ' + JSON.stringify(validation.error.format()));
@@ -99,7 +105,6 @@ export default function EditPost() {
     }
 
     try {
-        // Update existing post in database
         const { error } = await supabase
             .from('blog_posts')
             .update(validation.data)
@@ -115,76 +120,98 @@ export default function EditPost() {
     }
   };
 
-  // Show loading spinner while fetching post data
-  if (isLoading) return <div className="flex items-center justify-center h-screen"><Loader2 className="animate-spin" /></div>;
+  if (isLoading) return (
+    <div className="flex items-center justify-center h-screen bg-[#FAFAF8]">
+      <Loader2 className="animate-spin text-[#FA520F]" size={32} />
+    </div>
+  );
 
   return (
-    // Main container with top padding to prevent navbar overlap
-    <div className="pt-24 px-4 md:px-8 pb-8 max-w-5xl mx-auto">
-      {/* Header with title and action buttons */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
-          <h1 className="text-3xl font-black uppercase tracking-tighter">Edit Blog Post</h1>
-          <div className="flex flex-wrap gap-3 w-full md:w-auto">
+    <div ref={containerRef} className="bg-[#FAFAF8] text-black min-h-screen pt-16 md:pt-20 lg:pt-24 selection:bg-[#FA520F] selection:text-white">
+      <GrainOverlay />
+      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
+
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+        
+        <header className="text-center py-12">
+          <motion.h1 
+            className="text-5xl md:text-6xl lg:text-7xl font-medium tracking-[-0.02em] leading-[1.1]"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Edit Post.
+          </motion.h1>
+        </header>
+
+        <div className="relative max-w-5xl mx-auto">
+          <div className="border border-neutral-200 bg-white">
+            
+            {/* Fixed Action Buttons - Always visible */}
+            <div className="sticky top-16 md:top-20 lg:top-24 z-20 bg-white border-b border-neutral-200 px-6 md:px-10 py-4 flex flex-wrap gap-3">
               <button
                 onClick={() => handleSubmit('draft')}
                 disabled={isSaving}
-                className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2 border-2 border-black font-bold uppercase text-sm hover:bg-neutral-100 transition-all"
+                className="bg-[#F5F5F5] px-4 py-2 text-sm font-medium hover:bg-[#EAEAEA] transition-colors disabled:opacity-50 flex items-center gap-2"
               >
-                <Save size={16} /> Update Draft
+                <Save size={14} />
+                Update Draft
               </button>
               <button
                 onClick={() => handleSubmit('published')}
                 disabled={isSaving}
-                className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2 bg-[#FA520F] text-white border-2 border-black font-bold uppercase text-sm shadow-[4px_4px_0px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all"
+                className="bg-[#FA520F] px-4 py-2 text-sm font-medium text-white hover:bg-black transition-colors disabled:opacity-50 flex items-center gap-2"
               >
-                <Send size={16} /> Publish Changes
+                <Send size={14} />
+                Publish Changes
               </button>
-          </div>
-      </div>
+            </div>
 
-      {/* Main form content area */}
-      <div className="space-y-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Left column - Title and Content Editor */}
-            <div className="lg:col-span-2 space-y-6">
-                <div>
-                  <label className="block text-[10px] font-mono font-bold uppercase mb-2 text-neutral-400">Title</label>
-                  <div className="flex gap-2">
-                      <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        className="flex-1 p-4 border-2 border-black text-xl font-bold uppercase tracking-tight focus:shadow-[4px_4px_0px_0px_#FA520F] outline-none transition-all"
-                      />
-                      <button
-                        onClick={handleAIByTitle}
-                        disabled={isGenerating}
-                        className="px-4 bg-black text-white border-2 border-black hover:bg-[#FA520F] transition-colors"
-                        title="Generate content from title"
-                      >
-                        <Wand2 size={20} className={isGenerating ? 'animate-spin' : ''} />
-                      </button>
+            {/* Scrollable Content Area */}
+            <div className="p-6 md:p-10 space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
+              {/* Title */}
+              <div>
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-500 mb-3">Title</label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className="flex-1 p-3 border border-neutral-200 text-lg font-medium tracking-tight outline-none focus:border-black transition-colors bg-[#FAFAF8]"
+                    placeholder="Enter post title..."
+                  />
+                  <button
+                    onClick={handleAIByTitle}
+                    disabled={isGenerating}
+                    className="px-4 bg-black text-white border border-black hover:bg-[#FA520F] hover:border-[#FA520F] transition-colors disabled:opacity-50 flex items-center justify-center"
+                  >
+                    <Wand2 size={18} className={isGenerating ? 'animate-spin' : ''} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Content & Excerpt */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="lg:col-span-2">
+                  <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-500 mb-3">Main Content</label>
+                  <div className="border border-neutral-200 bg-[#FAFAF8] overflow-hidden">
+                    <RichTextEditor content={content} onChange={setContent} />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-mono font-bold uppercase mb-2 text-neutral-400">Main Content</label>
-                  <RichTextEditor content={content} onChange={setContent} />
+                  <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-500 mb-3">Excerpt</label>
+                  <textarea
+                    value={excerpt}
+                    onChange={(e) => setExcerpt(e.target.value)}
+                    className="w-full p-3 border border-neutral-200 font-mono text-sm h-40 outline-none focus:border-black transition-colors bg-[#FAFAF8] resize-none"
+                    placeholder="Short summary..."
+                  />
                 </div>
+              </div>
             </div>
 
-            {/* Right column - Metadata section */}
-            <div className="space-y-6">
-                <div className="p-6 border-2 border-black bg-neutral-50 shadow-[4px_4px_0px_0px_#000000]">
-                    <label className="block text-[10px] font-mono font-bold uppercase mb-4 text-neutral-400">Excerpt</label>
-                    <textarea
-                        value={excerpt}
-                        onChange={(e) => setExcerpt(e.target.value)}
-                        className="w-full p-3 border-2 border-black font-mono text-xs h-32 outline-none focus:border-[#FA520F] transition-colors"
-                        placeholder="Short summary for the index..."
-                    />
-                </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>

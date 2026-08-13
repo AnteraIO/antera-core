@@ -12,28 +12,6 @@ const GrainOverlay = () => (
   />
 );
 
-const PixelMegaphoneIcon = () => (
-  <motion.svg 
-    width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    whileHover={{ scale: 1.1, rotate: 5 }}
-    transition={{ type: "spring", stiffness: 300 }}
-  >
-    <rect x="4" y="4" width="16" height="16" rx="2" fill="#FA520F" stroke="#C2410C" strokeWidth="1"/>
-    <path d="M8 8h2v8H8V8zm4 1l4-1v8l-4-1V9z" fill="white"/>
-    <path d="M16 10v4" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-  </motion.svg>
-);
-
-const DiamondDecoration = ({ className = "" }: { className?: string }) => (
-  <motion.div 
-    className={`w-16 h-16 border border-neutral-200 rotate-45 ${className}`}
-    initial={{ opacity: 0, scale: 0 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-  />
-);
-
 export default function BroadcastPage() {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
@@ -72,19 +50,20 @@ export default function BroadcastPage() {
   };
 
   return (
-    <div ref={containerRef} className="bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+    <div ref={containerRef} className="bg-[#FAFAF8] text-black min-h-screen pt-16 md:pt-20 lg:pt-24 selection:bg-[#FA520F] selection:text-white">
       <GrainOverlay />
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         
-        <div className="flex justify-center items-center gap-8 mb-12">
-          <PixelMegaphoneIcon />
-        </div>
-
-        <header className="mb-24 md:mb-40 text-center">
+        <header className="text-center py-12">
+          <div className="flex justify-center items-center mb-6">
+            <div className="w-12 h-12 bg-[#FA520F] rounded-sm flex items-center justify-center">
+              <Megaphone size={24} className="text-white" />
+            </div>
+          </div>
           <motion.h1 
-            className="text-6xl md:text-8xl lg:text-9xl font-normal tracking-[-0.03em] leading-[0.95]"
+            className="text-5xl md:text-6xl lg:text-7xl font-medium tracking-[-0.02em] leading-[1.1]"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
@@ -92,7 +71,7 @@ export default function BroadcastPage() {
             Broadcast.
           </motion.h1>
           <motion.p 
-            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-6"
+            className="text-base md:text-lg max-w-2xl leading-relaxed text-neutral-500 mx-auto mt-4 font-light"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
@@ -102,69 +81,69 @@ export default function BroadcastPage() {
         </header>
 
         <div className="relative max-w-3xl mx-auto">
-          <DiamondDecoration className="absolute -top-8 -left-8 hidden md:block" />
-
-          <motion.div 
-            className="border border-neutral-200 bg-white p-8 md:p-12"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.7 }}
-          >
-            <form onSubmit={handleBroadcast} className="space-y-8">
-              <div>
-                <label className="block text-xs font-mono font-bold uppercase tracking-widest text-neutral-400 mb-3">Subject</label>
-                <input
-                  type="text"
-                  value={subject}
-                  onChange={(e) => setSubject(e.target.value)}
-                  placeholder="New Product Launch"
-                  className="w-full p-4 border border-neutral-200 outline-none focus:border-black transition-colors font-medium tracking-tight bg-[#FAFAF8]"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-mono font-bold uppercase tracking-widest text-neutral-400 mb-3">Message Content</label>
-                <textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Type your message here..."
-                  className="w-full p-4 border border-neutral-200 outline-none focus:border-black transition-colors font-mono text-sm h-64 bg-[#FAFAF8] resize-none"
-                  required
-                />
-              </div>
-
+          <div className="border border-neutral-200 bg-white">
+            
+            {/* Fixed Send Button */}
+            <div className="sticky top-16 md:top-20 lg:top-24 z-20 bg-white border-b border-neutral-200 px-6 md:px-10 py-4">
               <button
                 type="submit"
+                form="broadcast-form"
                 disabled={status === 'loading'}
-                className="w-full bg-black text-white p-4 font-medium text-sm flex items-center justify-center gap-2 hover:bg-[#FA520F] transition-colors disabled:opacity-50"
+                className="w-full bg-[#FA520F] text-white py-3 font-medium text-sm flex items-center justify-center gap-2 hover:bg-black transition-colors disabled:opacity-50"
               >
                 {status === 'loading' ? (
                   <>
-                    <Loader2 size={20} className="animate-spin" /> Sending...
+                    <Loader2 size={18} className="animate-spin" /> Sending...
                   </>
                 ) : (
                   <>
-                    <Send size={20} /> Send Email
+                    <Send size={18} /> Send Broadcast
                   </>
                 )}
               </button>
+            </div>
 
-              {status === 'success' && (
-                <div className="p-4 border border-[#10B981] text-[#10B981] font-mono text-xs font-bold uppercase">
-                  {responseMsg}
+            {/* Scrollable Content Area */}
+            <div className="p-6 md:p-10 space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto">
+              <form id="broadcast-form" onSubmit={handleBroadcast} className="space-y-6">
+                <div>
+                  <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-500 mb-3">Subject</label>
+                  <input
+                    type="text"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                    placeholder="New Product Launch"
+                    className="w-full p-3 border border-neutral-200 outline-none focus:border-black transition-colors font-medium tracking-tight bg-[#FAFAF8]"
+                    required
+                  />
                 </div>
-              )}
 
-              {status === 'error' && (
-                <div className="p-4 border border-[#EF4444] text-[#EF4444] font-mono text-xs font-bold uppercase">
-                  {responseMsg}
+                <div>
+                  <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-500 mb-3">Message Content</label>
+                  <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Type your message here..."
+                    className="w-full p-3 border border-neutral-200 outline-none focus:border-black transition-colors font-mono text-sm h-64 bg-[#FAFAF8] resize-none"
+                    required
+                  />
                 </div>
-              )}
-            </form>
-          </motion.div>
 
-          <DiamondDecoration className="absolute -bottom-8 -right-8 hidden md:block" />
+                {status === 'success' && (
+                  <div className="p-4 border border-[#10B981] text-[#10B981] font-mono text-xs font-bold uppercase">
+                    {responseMsg}
+                  </div>
+                )}
+
+                {status === 'error' && (
+                  <div className="p-4 border border-[#EF4444] text-[#EF4444] font-mono text-xs font-bold uppercase">
+                    {responseMsg}
+                  </div>
+                )}
+              </form>
+            </div>
+
+          </div>
         </div>
 
       </div>
