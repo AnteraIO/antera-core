@@ -134,8 +134,18 @@ export const FinalCTAAndFooter = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-neutral-200 bg-white/70 backdrop-blur-sm">
             
+            {/* Column 1: Brand with Logo */}
             <div className="group p-8 md:p-12 min-h-[280px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors border-b md:border-b-0 lg:border-r border-neutral-200">
               <div className="flex items-center gap-3 mb-6">
+                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-neutral-200 bg-white flex-shrink-0">
+                  <Image
+                    src="/antera-logo.jpeg"
+                    alt="Antera Logo"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
                 <span className="text-lg font-semibold tracking-tight text-black">Antera Software</span>
               </div>
               <p className="text-sm text-[#1F1F1F] font-medium leading-relaxed">
