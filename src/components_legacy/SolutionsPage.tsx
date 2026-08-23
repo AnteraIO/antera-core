@@ -8,22 +8,13 @@ import {
   BarChart,
   Laptop,
   Wrench,
-  Shield,
+Lock,
   Layout,
   BarChart3,
   Bot
 } from 'lucide-react';
 
 import anteraVideo from '../assets/antera-video.mp4';
-
-const GrainOverlay = () => (
-  <div 
-    className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03]"
-    style={{
-      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-    }}
-  />
-);
 
 export const SolutionsPage = () => {
   const { t } = useLanguage();
@@ -50,11 +41,26 @@ export const SolutionsPage = () => {
   };
 
   return (
-    <div ref={containerRef} className="relative pt-28 pb-20 bg-white min-h-screen text-black font-sans antialiased w-full overflow-hidden">
-      <GrainOverlay />
+    <div 
+      ref={containerRef} 
+      className="relative pt-28 pb-20 min-h-screen text-black font-sans antialiased w-full overflow-hidden"
+      style={{
+        background: 'rgba(255, 255, 255, 0.15)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+      }}
+    >
+      {/* Glassmorphism background layers */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-300/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-300/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-200/20 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-20 w-80 h-80 bg-pink-300/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-72 h-72 bg-cyan-300/20 rounded-full blur-3xl" />
+      </div>
       
       <motion.div 
-        className="fixed top-0 left-0 right-0 h-[1px] bg-black z-[9997] origin-left"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-[#FA520F] z-[9997] origin-left"
         style={{ scaleX }}
       />
 
@@ -68,7 +74,7 @@ export const SolutionsPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            Do it all<br />with Antera.
+            Do it all with Antera.
           </motion.h1>
           <motion.p 
             className="text-lg max-w-xl leading-relaxed text-neutral-600 mt-3"
@@ -88,7 +94,7 @@ export const SolutionsPage = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black">
+          <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black/40 backdrop-blur-sm border border-white/20">
             <video
               src={anteraVideo}
               className="w-full h-full object-cover"
@@ -111,7 +117,7 @@ export const SolutionsPage = () => {
           {/* Card 1 - Large (2x1) */}
           <motion.div 
             variants={itemVariants}
-            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
           >
             <Laptop className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
@@ -125,7 +131,7 @@ export const SolutionsPage = () => {
           {/* Card 2 - Small (1x1) */}
           <motion.div 
             variants={itemVariants}
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
           >
             <Wrench className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
@@ -139,9 +145,9 @@ export const SolutionsPage = () => {
           {/* Card 3 */}
           <motion.div 
             variants={itemVariants}
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
           >
-            <Shield className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
+            <Lock className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
               <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Security & Risk</h3>
               <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
@@ -153,7 +159,7 @@ export const SolutionsPage = () => {
           {/* Card 4 */}
           <motion.div 
             variants={itemVariants}
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
           >
             <Layout className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
@@ -167,7 +173,7 @@ export const SolutionsPage = () => {
           {/* Card 5 - Tall card (1x2) */}
           <motion.div 
             variants={itemVariants}
-            className="md:row-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="md:row-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
           >
             <Bot className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
@@ -181,7 +187,7 @@ export const SolutionsPage = () => {
           {/* Card 6 - Large (2x1) */}
           <motion.div 
             variants={itemVariants}
-            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
           >
             <BarChart3 className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">

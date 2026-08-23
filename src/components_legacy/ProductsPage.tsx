@@ -9,15 +9,6 @@ import {
   Brain
 } from 'lucide-react';
 
-const GrainOverlay = () => (
-  <div 
-    className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03]"
-    style={{
-      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-    }}
-  />
-);
-
 export const ProductsPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
@@ -37,11 +28,30 @@ export const ProductsPage = () => {
   };
 
   return (
-    <div ref={containerRef} className="bg-white text-black min-h-screen pt-16 md:pt-20 lg:pt-24 selection:bg-[#FA520F] selection:text-white">
-      <GrainOverlay />
-      <motion.div className="fixed top-0 left-0 right-0 h-[1px] bg-black z-[100] origin-left" style={{ scaleX }} />
+    <div 
+      ref={containerRef} 
+      className="relative text-black min-h-screen pt-16 md:pt-20 lg:pt-24 selection:bg-[#FA520F] selection:text-white overflow-hidden"
+      style={{
+        background: 'rgba(255, 255, 255, 0.15)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+      }}
+    >
+      {/* Glassmorphism background layers */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-300/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-teal-300/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-200/20 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-20 w-80 h-80 bg-green-300/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-72 h-72 bg-lime-300/20 rounded-full blur-3xl" />
+      </div>
 
-      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32">
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-[2px] bg-[#FA520F] z-[100] origin-left" 
+        style={{ scaleX }} 
+      />
+
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32">
 
         {/* Header — Left Aligned */}
         <header className="mb-16">
@@ -74,7 +84,7 @@ export const ProductsPage = () => {
           {/* Card 1 - Large (2x1) */}
           <motion.div 
             variants={itemVariants}
-            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
           >
             <Code className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
@@ -88,7 +98,7 @@ export const ProductsPage = () => {
           {/* Card 2 - Small (1x1) */}
           <motion.div 
             variants={itemVariants}
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
           >
             <Settings className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
@@ -102,7 +112,7 @@ export const ProductsPage = () => {
           {/* Card 3 */}
           <motion.div 
             variants={itemVariants}
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
           >
             <Cloud className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
@@ -116,7 +126,7 @@ export const ProductsPage = () => {
           {/* Card 4 */}
           <motion.div 
             variants={itemVariants}
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
           >
             <Box className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
@@ -130,7 +140,7 @@ export const ProductsPage = () => {
           {/* Card 5 - Tall (1x2) */}
           <motion.div 
             variants={itemVariants}
-            className="md:row-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="md:row-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
           >
             <Brain className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
@@ -144,7 +154,7 @@ export const ProductsPage = () => {
           {/* Card 6 - Large (2x1) */}
           <motion.div 
             variants={itemVariants}
-            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
           >
             <Brain className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">

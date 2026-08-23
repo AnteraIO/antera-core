@@ -9,8 +9,7 @@ import {
   BarChart,
   Search,
   PenTool,
-  Zap,
-  Shield,
+  Rocket,
   Lock,
   Target,
   Eye,
@@ -21,15 +20,6 @@ import {
 } from 'lucide-react';
 
 import anteraVideo from '../assets/company-video.mp4';
-
-const GrainOverlay = () => (
-  <div 
-    className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03]"
-    style={{
-      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-    }}
-  />
-);
 
 export const CompanyPage = () => {
   const { t } = useLanguage();
@@ -48,15 +38,30 @@ export const CompanyPage = () => {
   };
 
   return (
-    <div ref={containerRef} className="bg-white min-h-screen text-black font-sans antialiased selection:bg-[#FA520F] selection:text-white">
-      <GrainOverlay />
+    <div 
+      ref={containerRef} 
+      className="relative min-h-screen text-black font-sans antialiased selection:bg-[#FA520F] selection:text-white overflow-hidden"
+      style={{
+        background: 'rgba(255, 255, 255, 0.15)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+      }}
+    >
+      {/* Glassmorphism background layers */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-orange-300/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-amber-300/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-yellow-200/20 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-20 w-80 h-80 bg-rose-300/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-72 h-72 bg-pink-300/20 rounded-full blur-3xl" />
+      </div>
       
       <motion.div 
-        className="fixed top-0 left-0 right-0 h-[1px] bg-black z-[100] origin-left"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-[#FA520F] z-[100] origin-left"
         style={{ scaleX }}
       />
 
-      <main className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32">
+      <main className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32">
         
         {/* Header */}
         <section className="mb-16">
@@ -66,7 +71,7 @@ export const CompanyPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            Do it all<br />with Antera.
+            Do it all with Antera.
           </motion.h1>
           <motion.p 
             className="text-lg max-w-xl leading-relaxed text-neutral-600 mt-3"
@@ -86,7 +91,7 @@ export const CompanyPage = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black">
+          <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-black/40 backdrop-blur-sm border border-white/20">
             <video
               ref={videoRef}
               src={anteraVideo}
@@ -115,7 +120,7 @@ export const CompanyPage = () => {
         {/* Grid 1: Mission & Reach */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-24 md:mb-32">
           <motion.div 
-            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -131,7 +136,7 @@ export const CompanyPage = () => {
           </motion.div>
 
           <motion.div 
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -150,7 +155,7 @@ export const CompanyPage = () => {
         {/* Grid 2: Expertise & Applied AI */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-24 md:mb-32">
           <motion.div 
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -166,7 +171,7 @@ export const CompanyPage = () => {
           </motion.div>
 
           <motion.div 
-            className="md:row-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="md:row-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -182,7 +187,7 @@ export const CompanyPage = () => {
           </motion.div>
 
           <motion.div 
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -214,7 +219,7 @@ export const CompanyPage = () => {
         {/* Grid 3: How We Work */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-24 md:mb-32">
           <motion.div 
-            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -230,7 +235,7 @@ export const CompanyPage = () => {
           </motion.div>
 
           <motion.div 
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -246,13 +251,13 @@ export const CompanyPage = () => {
           </motion.div>
 
           <motion.div 
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.7 }}
           >
-            <Zap className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
+            <Rocket className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
               <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Deliver</h3>
               <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
@@ -262,13 +267,13 @@ export const CompanyPage = () => {
           </motion.div>
 
           <motion.div 
-            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.7 }}
           >
-            <Shield className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
+            <Lock className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
               <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Optimize</h3>
               <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed max-w-md">
@@ -281,7 +286,7 @@ export const CompanyPage = () => {
         {/* Grid 4: Values */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <motion.div 
-            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -297,7 +302,7 @@ export const CompanyPage = () => {
           </motion.div>
 
           <motion.div 
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -313,7 +318,7 @@ export const CompanyPage = () => {
           </motion.div>
 
           <motion.div 
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -329,7 +334,7 @@ export const CompanyPage = () => {
           </motion.div>
 
           <motion.div 
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -345,7 +350,7 @@ export const CompanyPage = () => {
           </motion.div>
 
           <motion.div 
-            className="md:row-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="md:row-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -361,13 +366,13 @@ export const CompanyPage = () => {
           </motion.div>
 
           <motion.div 
-            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
+            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group hover:shadow-lg hover:shadow-[#FA520F]/5 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 0.7 }}
           >
-            <Shield className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
+            <Lock className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
             <div className="mt-auto">
               <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Accountability</h3>
               <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed max-w-md">
