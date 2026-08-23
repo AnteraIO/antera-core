@@ -160,6 +160,7 @@ export const FinalCTAAndFooter = () => {
                 <FooterLink href="https://kava.co.tz/">Kava</FooterLink>
                 <FooterLink href="https://aibruno.vercel.app/">AI Bruno</FooterLink>
                 <FooterLink href="https://swahiba.vercel.app/">Swahiba</FooterLink>
+                <FooterLink href="/data-analytics">Data Analytics</FooterLink>
                 <FooterLink href="/solutions">AI Solutions</FooterLink>
                 <FooterLink href="/models">Data Science</FooterLink>
                 <FooterLink href="/solutions">Business Automation</FooterLink>

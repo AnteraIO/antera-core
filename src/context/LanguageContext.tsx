@@ -13,6 +13,7 @@ const translations: Record<Language, Record<string, string>> = {
   en: {
     'nav.products': 'Products',
     'nav.solutions': 'Solutions',
+    'nav.data_analytics': 'Data Analytics',
     'nav.models': 'Models',
     'nav.blog': 'Blog',
     'nav.customers': 'Customers',
@@ -82,6 +83,7 @@ const translations: Record<Language, Record<string, string>> = {
   sw: {
     'nav.products': 'Bidhaa',
     'nav.solutions': 'Suluhisho',
+    'nav.data_analytics': 'Uchambuzi wa Data',
     'nav.models': 'Mifumo',
     'nav.blog': 'Blogu',
     'nav.customers': 'Wateja',
