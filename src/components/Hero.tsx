@@ -44,10 +44,26 @@ export const Hero = () => {
   }, []); 
 
   return (
-    <section className="relative min-h-screen w-full bg-[#fafafa] flex flex-col pt-16 md:pt-20 lg:pt-24">
+    <section 
+      className="relative min-h-screen w-full flex flex-col pt-16 md:pt-20 lg:pt-24 overflow-hidden"
+      style={{
+        background: 'rgba(255, 255, 255, 0.15)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+      }}
+    >
+      {/* Glassmorphism background layers */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-300/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-indigo-300/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-200/20 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-20 w-80 h-80 bg-violet-300/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-72 h-72 bg-rose-300/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-pink-300/20 rounded-full blur-3xl" />
+      </div>
       
-      <main className="flex-grow flex items-center justify-center px-4 md:px-8 py-6 md:py-10 bg-[#fafafa]">
-        <div className="relative w-full max-w-[1400px] h-[70vh] md:h-[80vh] rounded-2xl overflow-hidden bg-black shadow-sm">
+      <main className="flex-grow flex items-center justify-center px-4 md:px-8 py-6 md:py-10 relative z-10">
+        <div className="relative w-full max-w-[1400px] h-[70vh] md:h-[80vh] rounded-2xl overflow-hidden bg-black/20 backdrop-blur-sm shadow-sm border border-white/20">
           
           <AnimatePresence mode="wait">
             <motion.div

@@ -1,6 +1,6 @@
 'use client';
 import React, { useRef } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   ArrowUpRight, 
   Store, 
@@ -80,16 +80,28 @@ const marqueeItems = [
 
 export const NewProductsMarquee = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef });
-  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
-  
   const duplicatedItems = [...marqueeItems, ...marqueeItems, ...marqueeItems];
 
   return (
-    <section ref={containerRef} className="bg-white text-black font-sans w-full overflow-hidden selection:bg-[#FA520F] selection:text-white">
-      <motion.div className="fixed top-0 left-0 right-0 h-[1px] bg-black z-[100] origin-left" style={{ scaleX }} />
+    <section 
+      ref={containerRef} 
+      className="text-black font-sans w-full overflow-hidden selection:bg-[#FA520F] selection:text-white relative"
+      style={{
+        background: 'rgba(255, 255, 255, 0.15)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+      }}
+    >
+      {/* Glassmorphism background layers */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-teal-300/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-emerald-300/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-200/20 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-20 w-80 h-80 bg-green-300/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-72 h-72 bg-lime-300/20 rounded-full blur-3xl" />
+      </div>
 
-      <div className="w-full py-20 md:py-28">
+      <div className="w-full py-20 md:py-28 relative z-10">
         
         <header className="text-left px-6 md:px-12 lg:px-20 mb-16">
           <motion.h1 
@@ -112,10 +124,10 @@ export const NewProductsMarquee = () => {
           </motion.p>
         </header>
 
-        <div className="relative w-full overflow-hidden bg-white">
+        <div className="relative w-full overflow-hidden bg-white/30 backdrop-blur-sm">
           
-          <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-white/30 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-white/30 to-transparent z-10 pointer-events-none" />
 
           <motion.div
             className="flex gap-0 w-max relative z-10"
@@ -133,7 +145,7 @@ export const NewProductsMarquee = () => {
               return (
                 <motion.div
                   key={index}
-                  className="w-[280px] md:w-[340px] shrink-0 bg-[#F5F5F5] p-8 md:p-10 flex flex-col h-[400px] md:h-[460px] justify-between mr-6 md:mr-8 group"
+                  className="w-[280px] md:w-[340px] shrink-0 bg-[#F5F5F5] p-8 md:p-10 flex flex-col h-[400px] md:h-[460px] justify-between mr-6 md:mr-8 group rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5"
                   whileHover={{ y: -4 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >

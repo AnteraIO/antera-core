@@ -10,14 +10,27 @@ import banner5 from '../assets/banner-5.png';
 
 export const TrustSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef });
-  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
   return (
-    <section ref={containerRef} className="bg-white text-black font-sans w-full overflow-hidden selection:bg-[#FA520F] selection:text-white">
-      <motion.div className="fixed top-0 left-0 right-0 h-[1px] bg-black z-[100] origin-left" style={{ scaleX }} />
+    <section 
+      ref={containerRef} 
+      className="text-black font-sans w-full overflow-hidden selection:bg-[#FA520F] selection:text-white relative"
+      style={{
+        background: 'rgba(255, 255, 255, 0.15)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+      }}
+    >
+      {/* Glassmorphism background layers */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-red-300/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-300/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-200/20 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-20 w-80 h-80 bg-rose-300/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-72 h-72 bg-yellow-300/20 rounded-full blur-3xl" />
+      </div>
 
-      <div className="w-full px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-[1400px] mx-auto">
+      <div className="w-full px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-[1400px] mx-auto relative z-10">
         <header className="mb-16">
           <motion.h1 
             className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1]"
@@ -41,7 +54,7 @@ export const TrustSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden"
+            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -51,7 +64,9 @@ export const TrustSection = () => {
               <Image src={banner1} alt="Security preparedness" fill className="object-cover" priority={false} />
             </div>
             <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">We're Always Prepared</h3>
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">
+                We're Always Prepared
+              </h3>
               <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
                 Be ready for any security issue with faster response times and clear recovery plans.
               </p>
@@ -59,7 +74,7 @@ export const TrustSection = () => {
           </motion.div>
 
           <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden"
+            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -69,7 +84,9 @@ export const TrustSection = () => {
               <Image src={banner2} alt="Secure access" fill className="object-cover" priority={false} />
             </div>
             <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Data Ownership</h3>
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">
+                Data Ownership
+              </h3>
               <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
                 Protect your data with strong identity management and best practise.
               </p>
@@ -83,14 +100,28 @@ export const TrustSection = () => {
 
 export const ServicesSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef });
-  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
   return (
-    <section ref={containerRef} id="products" className="bg-white text-black font-sans w-full overflow-hidden selection:bg-[#FA520F] selection:text-white">
-      <motion.div className="fixed top-0 left-0 right-0 h-[1px] bg-black z-[100] origin-left" style={{ scaleX }} />
+    <section 
+      ref={containerRef} 
+      id="products" 
+      className="text-black font-sans w-full overflow-hidden selection:bg-[#FA520F] selection:text-white relative"
+      style={{
+        background: 'rgba(255, 255, 255, 0.15)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+      }}
+    >
+      {/* Glassmorphism background layers */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-300/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-300/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sky-200/20 rounded-full blur-3xl" />
+        <div className="absolute top-40 left-20 w-80 h-80 bg-indigo-300/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-40 right-20 w-72 h-72 bg-violet-300/20 rounded-full blur-3xl" />
+      </div>
 
-      <div className="w-full px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-[1400px] mx-auto">
+      <div className="w-full px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-[1400px] mx-auto relative z-10">
         <header className="mb-16">
           <motion.h1 
             className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1]"
@@ -114,7 +145,7 @@ export const ServicesSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden"
+            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -124,7 +155,9 @@ export const ServicesSection = () => {
               <Image src={banner3} alt="AI Chatbots" fill className="object-cover" priority={false} />
             </div>
             <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">AI Chatbots</h3>
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">
+                AI Chatbots
+              </h3>
               <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
                 Automate customer and internal support to improve response times and staff productivity.
               </p>
@@ -132,7 +165,7 @@ export const ServicesSection = () => {
           </motion.div>
 
           <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden"
+            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -142,7 +175,9 @@ export const ServicesSection = () => {
               <Image src={banner4} alt="Workflow Automation" fill className="object-cover" priority={false} />
             </div>
             <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Workflow Automation</h3>
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">
+                Workflow Automation
+              </h3>
               <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
                 Eliminate manual and repetitive tasks with practical AI solutions that expand your business.
               </p>
@@ -150,7 +185,7 @@ export const ServicesSection = () => {
           </motion.div>
 
           <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden"
+            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -160,7 +195,9 @@ export const ServicesSection = () => {
               <Image src={banner5} alt="Secure AI Copilots" fill className="object-cover" priority={false} />
             </div>
             <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Secure AI Copilots</h3>
+              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">
+                Secure AI Copilots
+              </h3>
               <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
                 Turn your documents into insights while keeping your systems secure and governed.
               </p>
