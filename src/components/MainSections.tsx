@@ -10,13 +10,6 @@ import banner5 from '../assets/banner-5.png';
 
 export const TrustSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start']
-  });
-
-  const springConfig = { stiffness: 100, damping: 30 };
-  const smoothProgress = useSpring(scrollYProgress, springConfig);
 
   return (
     <section 
@@ -28,7 +21,7 @@ export const TrustSection = () => {
         WebkitBackdropFilter: 'blur(20px) saturate(180%)',
       }}
     >
-      {/* Glassmorphism background layers with subtle scroll parallax */}
+      {/* Glassmorphism background layers */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-0 w-96 h-96 bg-red-300/30 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-300/20 rounded-full blur-3xl" />
@@ -41,18 +34,18 @@ export const TrustSection = () => {
         <header className="mb-16">
           <motion.h1 
             className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1]"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             Reduce Risk. Strengthen Security.
           </motion.h1>
           <motion.p 
             className="text-lg max-w-xl leading-relaxed text-neutral-600 mt-3"
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             transition={{ delay: 0.15, duration: 0.6 }}
           >
             We help you prepare for incidents and keep your digital platforms safe from cyber threats.
@@ -61,14 +54,13 @@ export const TrustSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group cursor-default"
-            initial={{ opacity: 0, y: 40, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            whileHover={{ y: -8 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0, duration: 0.7 }}
           >
-            <div className="absolute inset-0 z-0 opacity-10 group-hover:scale-105 transition-transform duration-700">
+            <div className="absolute inset-0 z-0 opacity-10">
               <Image src={banner1} alt="Security preparedness" fill className="object-cover" priority={false} />
             </div>
             <div className="relative z-10">
@@ -82,14 +74,13 @@ export const TrustSection = () => {
           </motion.div>
 
           <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group cursor-default"
-            initial={{ opacity: 0, y: 40, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            whileHover={{ y: -8 }}
-            transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1, duration: 0.7 }}
           >
-            <div className="absolute inset-0 z-0 opacity-10 group-hover:scale-105 transition-transform duration-700">
+            <div className="absolute inset-0 z-0 opacity-10">
               <Image src={banner2} alt="Secure access" fill className="object-cover" priority={false} />
             </div>
             <div className="relative z-10">
@@ -134,18 +125,18 @@ export const ServicesSection = () => {
         <header className="mb-16">
           <motion.h1 
             className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1]"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             Automate smarter. Scale faster.
           </motion.h1>
           <motion.p 
             className="text-lg max-w-xl leading-relaxed text-neutral-600 mt-3"
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             transition={{ delay: 0.15, duration: 0.6 }}
           >
             We implement practical AI solutions that reduce repetitive work while keeping systems secure and governed.
@@ -154,14 +145,13 @@ export const ServicesSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group cursor-default"
-            initial={{ opacity: 0, y: 40, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            whileHover={{ y: -8 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0, duration: 0.7 }}
           >
-            <div className="absolute inset-0 z-0 opacity-10 group-hover:scale-105 transition-transform duration-700">
+            <div className="absolute inset-0 z-0 opacity-10">
               <Image src={banner3} alt="AI Chatbots" fill className="object-cover" priority={false} />
             </div>
             <div className="relative z-10">
@@ -175,14 +165,13 @@ export const ServicesSection = () => {
           </motion.div>
 
           <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group cursor-default"
-            initial={{ opacity: 0, y: 40, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            whileHover={{ y: -8 }}
-            transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1, duration: 0.7 }}
           >
-            <div className="absolute inset-0 z-0 opacity-10 group-hover:scale-105 transition-transform duration-700">
+            <div className="absolute inset-0 z-0 opacity-10">
               <Image src={banner4} alt="Workflow Automation" fill className="object-cover" priority={false} />
             </div>
             <div className="relative z-10">
@@ -196,14 +185,13 @@ export const ServicesSection = () => {
           </motion.div>
 
           <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group cursor-default"
-            initial={{ opacity: 0, y: 40, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            whileHover={{ y: -8 }}
-            transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.7 }}
           >
-            <div className="absolute inset-0 z-0 opacity-10 group-hover:scale-105 transition-transform duration-700">
+            <div className="absolute inset-0 z-0 opacity-10">
               <Image src={banner5} alt="Secure AI Copilots" fill className="object-cover" priority={false} />
             </div>
             <div className="relative z-10">
