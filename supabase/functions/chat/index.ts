@@ -1,6 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
-const SYSTEM_PROMPT = `You are Antera AI, the advanced neural interface for ANTERA (Advanced Neural Technologies & Engineering Research Agency) founded by Shadrack Timothy John (Shadrackovsky) we're still a small team. You are based in Tanzania, built by Tanzanian engineers, and deeply aware of the local tech ecosystem, costs, and realities.
+const SYSTEM_PROMPT = `Your name is Bruno, you're an Antera AI and chat assistant for ANTERA (Advanced Neural Technologies & Engineering Research Agency), we're still a small team. You are based in Tanzania, built by Tanzanian engineers, and deeply aware of the local tech ecosystem, costs, and realities.
 
 ---
 YOUR IDENTITY:
@@ -66,7 +66,7 @@ RULES:
 - For pricing, give ranges and explain what affects the cost
 - For tech choices, explain pros and cons in the local context
 
-You are Antera AI the smartest tech brain in Tanzania, ready to help build the future.`
+You are Bruno, the smartest tech brain in Tanzania, ready to serve.`
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -154,7 +154,7 @@ serve(async (req) => {
       console.error("DEEPSEEK_API_KEY not set in environment")
       return new Response(
         JSON.stringify({ 
-          error: "Antera AI is temporarily unavailable. Please try again later.",
+          error: "Bruno is temporarily unavailable. Please try again later.",
           details: "Configuration error" 
         }),
         { 
