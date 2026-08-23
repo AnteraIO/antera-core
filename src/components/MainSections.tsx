@@ -8,6 +8,21 @@ import banner3 from '../assets/banner-3.png';
 import banner4 from '../assets/banner-4.png';
 import banner5 from '../assets/banner-5.png';
 
+const trustCards = [
+  {
+    title: "We're Always Prepared",
+    desc: "Be ready for any security issue with faster response times and clear recovery plans.",
+    image: banner1,
+    accent: "text-blue-500",
+  },
+  {
+    title: "Data Ownership",
+    desc: "Protect your data with strong identity management and best practise.",
+    image: banner2,
+    accent: "text-orange-400",
+  }
+];
+
 export const TrustSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -21,91 +36,103 @@ export const TrustSection = () => {
   return (
     <section 
       ref={containerRef} 
-      className="text-black font-sans w-full overflow-hidden selection:bg-[#FA520F] selection:text-white relative"
-      style={{
-        background: 'rgba(255, 255, 255, 0.15)',
-        backdropFilter: 'blur(20px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-      }}
+      className="text-black font-sans w-full overflow-hidden relative selection:bg-[#FA520F] selection:text-white"
+      style={{ backgroundColor: '#F9FAFB' }}
     >
-      {/* Glassmorphism background layers with subtle scroll parallax */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-red-300/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-orange-300/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-200/20 rounded-full blur-3xl" />
-        <div className="absolute top-20 right-20 w-80 h-80 bg-rose-300/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-20 w-72 h-72 bg-yellow-300/20 rounded-full blur-3xl" />
-      </div>
+      {/* Subtle background gradient mimicking the light atmosphere */}
+      <motion.div 
+        className="absolute inset-0 -z-10 pointer-events-none overflow-hidden"
+        style={{ y: smoothProgress }}
+      >
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-red-100/40 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/3" />
+        <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-orange-100/30 rounded-full blur-[100px] -translate-x-1/3 translate-y-1/3" />
+      </motion.div>
 
       <div className="w-full px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-[1400px] mx-auto relative z-10">
-        <header className="mb-16">
+        
+        {/* Header matched to the split layout in the design */}
+        <header className="mb-20 flex flex-col md:flex-row md:items-end gap-8 md:gap-16">
           <motion.h1 
-            className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1]"
+            className="text-5xl md:text-7xl lg:text-[80px] font-bold tracking-tight leading-[1.05]"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            Reduce Risk. Strengthen Security.
+            Reduce Risk.<br />Strengthen<br />Security.
           </motion.h1>
-          <motion.p 
-            className="text-lg max-w-xl leading-relaxed text-neutral-600 mt-3"
+          <motion.div 
+            className="pb-2 md:pb-4"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: 0.15, duration: 0.6 }}
           >
-            We help you prepare for incidents and keep your digital platforms safe from cyber threats.
-          </motion.p>
+            <p className="text-lg md:text-xl max-w-md leading-relaxed text-neutral-600 font-medium">
+              We help you prepare for incidents and keep your digital platforms safe from cyber threats.
+            </p>
+          </motion.div>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group cursor-default"
-            initial={{ opacity: 0, y: 40, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            whileHover={{ y: -8 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="absolute inset-0 z-0 opacity-10 group-hover:scale-105 transition-transform duration-700">
-              <Image src={banner1} alt="Security preparedness" fill className="object-cover" priority={false} />
-            </div>
-            <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">
-                We're Always Prepared
-              </h3>
-              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
-                Be ready for any security issue with faster response times and clear recovery plans.
-              </p>
-            </div>
-          </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {trustCards.map((card, index) => {
+            const itemNumber = String(index + 1).padStart(2, '0');
+            return (
+              <motion.div 
+                key={index}
+                className="relative bg-[#1C1C1C] p-8 md:p-10 h-[480px] flex flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 group cursor-default"
+                initial={{ opacity: 0, y: 40, scale: 0.98 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ delay: index * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {/* Background image reduced to a subtle texture */}
+                <div className="absolute inset-0 z-0 opacity-[0.07] group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
+                  <Image src={card.image} alt={card.title} fill className="object-cover" priority={false} />
+                </div>
+                
+                <div className="relative z-10 flex flex-col h-full">
+                  {/* Top Number */}
+                  <div className="text-white/30 text-sm font-mono mb-8">
+                    {itemNumber}
+                  </div>
 
-          <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group cursor-default"
-            initial={{ opacity: 0, y: 40, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            whileHover={{ y: -8 }}
-            transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="absolute inset-0 z-0 opacity-10 group-hover:scale-105 transition-transform duration-700">
-              <Image src={banner2} alt="Secure access" fill className="object-cover" priority={false} />
-            </div>
-            <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">
-                Data Ownership
-              </h3>
-              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
-                Protect your data with strong identity management and best practise.
-              </p>
-            </div>
-          </motion.div>
+                  <h3 className="text-[26px] md:text-3xl font-semibold text-white tracking-tight leading-snug mb-5">
+                    {card.title}
+                  </h3>
+                  <p className="text-sm md:text-base text-neutral-400 font-normal leading-relaxed flex-grow">
+                    {card.desc}
+                  </p>
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>
   )
 }
+
+const serviceCards = [
+  {
+    title: "AI Chatbots",
+    desc: "Automate customer and internal support to improve response times and staff productivity.",
+    image: banner3,
+    accent: "text-blue-500",
+  },
+  {
+    title: "Workflow Automation",
+    desc: "Eliminate manual and repetitive tasks with practical AI solutions that expand your business.",
+    image: banner4,
+    accent: "text-orange-400",
+  },
+  {
+    title: "Secure AI Copilots",
+    desc: "Turn your documents into insights while keeping your systems secure and governed.",
+    image: banner5,
+    accent: "text-purple-400",
+  }
+];
 
 export const ServicesSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -114,107 +141,74 @@ export const ServicesSection = () => {
     <section 
       ref={containerRef} 
       id="products" 
-      className="text-black font-sans w-full overflow-hidden selection:bg-[#FA520F] selection:text-white relative"
-      style={{
-        background: 'rgba(255, 255, 255, 0.15)',
-        backdropFilter: 'blur(20px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-      }}
+      className="text-black font-sans w-full overflow-hidden relative selection:bg-[#FA520F] selection:text-white"
+      style={{ backgroundColor: '#F9FAFB' }}
     >
-      {/* Glassmorphism background layers */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-300/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-300/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sky-200/20 rounded-full blur-3xl" />
-        <div className="absolute top-40 left-20 w-80 h-80 bg-indigo-300/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-40 right-20 w-72 h-72 bg-violet-300/20 rounded-full blur-3xl" />
+      {/* Subtle background gradient mimicking the light atmosphere */}
+      <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-100/40 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/3" />
+        <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-indigo-100/30 rounded-full blur-[100px] -translate-x-1/3 translate-y-1/3" />
       </div>
 
       <div className="w-full px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-[1400px] mx-auto relative z-10">
-        <header className="mb-16">
+        
+        {/* Header matched to the split layout in the design */}
+        <header className="mb-20 flex flex-col md:flex-row md:items-end gap-8 md:gap-16">
           <motion.h1 
-            className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1]"
+            className="text-5xl md:text-7xl lg:text-[80px] font-bold tracking-tight leading-[1.05]"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            Automate smarter. Scale faster.
+            Automate smarter.<br />Scale faster.
           </motion.h1>
-          <motion.p 
-            className="text-lg max-w-xl leading-relaxed text-neutral-600 mt-3"
+          <motion.div 
+            className="pb-2 md:pb-4"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: 0.15, duration: 0.6 }}
           >
-            We implement practical AI solutions that reduce repetitive work while keeping systems secure and governed.
-          </motion.p>
+            <p className="text-lg md:text-xl max-w-md leading-relaxed text-neutral-600 font-medium">
+              We implement practical AI solutions that reduce repetitive work while keeping systems secure and governed.
+            </p>
+          </motion.div>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group cursor-default"
-            initial={{ opacity: 0, y: 40, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            whileHover={{ y: -8 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="absolute inset-0 z-0 opacity-10 group-hover:scale-105 transition-transform duration-700">
-              <Image src={banner3} alt="AI Chatbots" fill className="object-cover" priority={false} />
-            </div>
-            <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">
-                AI Chatbots
-              </h3>
-              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
-                Automate customer and internal support to improve response times and staff productivity.
-              </p>
-            </div>
-          </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {serviceCards.map((card, index) => {
+            const itemNumber = String(index + 1).padStart(2, '0');
+            return (
+              <motion.div 
+                key={index}
+                className="relative bg-[#1C1C1C] p-8 md:p-10 h-[480px] flex flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 group cursor-default"
+                initial={{ opacity: 0, y: 40, scale: 0.98 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ delay: index * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {/* Background image reduced to a subtle texture */}
+                <div className="absolute inset-0 z-0 opacity-[0.07] group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
+                  <Image src={card.image} alt={card.title} fill className="object-cover" priority={false} />
+                </div>
+                
+                <div className="relative z-10 flex flex-col h-full">
+                  {/* Top Number */}
+                  <div className="text-white/30 text-sm font-mono mb-8">
+                    {itemNumber}
+                  </div>
 
-          <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group cursor-default"
-            initial={{ opacity: 0, y: 40, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            whileHover={{ y: -8 }}
-            transition={{ delay: 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="absolute inset-0 z-0 opacity-10 group-hover:scale-105 transition-transform duration-700">
-              <Image src={banner4} alt="Workflow Automation" fill className="object-cover" priority={false} />
-            </div>
-            <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">
-                Workflow Automation
-              </h3>
-              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
-                Eliminate manual and repetitive tasks with practical AI solutions that expand your business.
-              </p>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            className="relative bg-[#F5F5F5] p-10 md:p-16 min-h-[400px] flex flex-col justify-end overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#FA520F]/5 group cursor-default"
-            initial={{ opacity: 0, y: 40, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            whileHover={{ y: -8 }}
-            transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="absolute inset-0 z-0 opacity-10 group-hover:scale-105 transition-transform duration-700">
-              <Image src={banner5} alt="Secure AI Copilots" fill className="object-cover" priority={false} />
-            </div>
-            <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">
-                Secure AI Copilots
-              </h3>
-              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
-                Turn your documents into insights while keeping your systems secure and governed.
-              </p>
-            </div>
-          </motion.div>
+                  <h3 className="text-[26px] md:text-3xl font-semibold text-white tracking-tight leading-snug mb-5">
+                    {card.title}
+                  </h3>
+                  <p className="text-sm md:text-base text-neutral-400 font-normal leading-relaxed flex-grow">
+                    {card.desc}
+                  </p>
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>
