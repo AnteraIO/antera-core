@@ -7,18 +7,10 @@ import {
   Clock, 
   Globe, 
   Mail, 
-  Phone 
+  Phone,
+  ArrowUpRight
 } from 'lucide-react';
 import officeBg from '@/assets/hero-2.jpg';
-
-const GrainOverlay = () => (
-  <div 
-    className="fixed inset-0 pointer-events-none z-[9998] opacity-[0.03]"
-    style={{
-      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-    }}
-  />
-);
 
 const ArrowLink = ({ 
   text, 
@@ -39,14 +31,12 @@ const ArrowLink = ({
   return (
     <a 
       href={linkHref}
-      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-black group-hover:text-[#FA520F] transition-colors"
+      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-[#171321] hover:text-[#171321]/70 transition-colors"
       target={href?.startsWith('http') ? "_blank" : undefined}
       rel={href?.startsWith('http') ? "noopener noreferrer" : undefined}
     >
       <span>{text}</span>
-      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
+      <ArrowUpRight className="w-4 h-4" />
     </a>
   );
 };
@@ -56,9 +46,81 @@ export default function OfficePage() {
   const { scrollYProgress } = useScroll({ target: containerRef });
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
+  const officeCards = [
+    {
+      id: 'location',
+      icon: MapPin,
+      title: 'Location',
+      content: 'Dar es Salaam, Tanzania',
+      link: { text: 'Get directions', href: 'https://maps.google.com/maps?q=Dar+es+Salaam,+Tanzania' },
+      span: 'large'
+    },
+    {
+      id: 'hours',
+      icon: Clock,
+      title: 'Operating Hours',
+      content: (
+        <>
+          <div className="flex justify-between text-base md:text-lg text-gray-700">
+            <span>MON to FRI</span>
+            <span className="font-medium text-[#171321]">08:00 - 18:00 EAT</span>
+          </div>
+          <div className="flex justify-between text-base md:text-lg text-gray-700">
+            <span>SAT to SUN</span>
+            <span className="font-medium text-[#171321]">Closed (Remote Only)</span>
+          </div>
+        </>
+      ),
+      span: 'small'
+    },
+    {
+      id: 'email',
+      icon: Mail,
+      title: 'Email',
+      content: 'info@antera.co.tz',
+      link: { text: 'Send email', href: 'info@antera.co.tz', isEmail: true },
+      span: 'small'
+    },
+    {
+      id: 'phone',
+      icon: Phone,
+      title: 'Phone',
+      content: '+255 760 984 921',
+      link: { text: 'Call now', href: '+255760984921', isPhone: true },
+      span: 'small'
+    },
+    {
+      id: 'connect',
+      icon: Globe,
+      title: 'Connect',
+      content: 'Follow our journey across digital platforms and stay updated with the latest from Antera Group.',
+      link: { text: 'Visit website', href: 'https://antera.co.tz' },
+      span: 'tall'
+    },
+    {
+      id: 'visit',
+      icon: MapPin,
+      title: 'Visit Us',
+      content: 'Schedule a meeting with our team to discuss your next project or partnership opportunity.',
+      link: { text: 'Book appointment', href: 'https://calendly.com/antera-group/meeting' },
+      span: 'large'
+    }
+  ];
+
+  const getGridClass = (span: string) => {
+    switch(span) {
+      case 'large': return 'md:col-span-2';
+      case 'tall': return 'md:row-span-2';
+      default: return '';
+    }
+  };
+
   return (
-    <div ref={containerRef} className="relative bg-white text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white overflow-hidden">
-      {/* Background Image */}
+    <section 
+      ref={containerRef} 
+      className="bg-white text-[#171321] font-sans w-full py-24 md:py-32 relative overflow-hidden border-t border-gray-100"
+    >
+      {/* Background Image - Subtle */}
       <div className="absolute inset-0 z-0 opacity-5">
         <Image
           src={officeBg}
@@ -69,14 +131,17 @@ export default function OfficePage() {
         />
       </div>
 
-      <GrainOverlay />
-      <motion.div className="fixed top-0 left-0 right-0 h-[1px] bg-black z-[100] origin-left" style={{ scaleX }} />
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-[2px] bg-[#171321] z-[100] origin-left" 
+        style={{ scaleX }} 
+      />
 
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
-
+      <div className="relative z-10 w-full max-w-[1500px] mx-auto px-6 md:px-12 lg:px-20">
+        
+        {/* Header */}
         <header className="mb-16">
           <motion.h1 
-            className="text-5xl md:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.1]"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -84,7 +149,7 @@ export default function OfficePage() {
             Our Office.
           </motion.h1>
           <motion.p 
-            className="text-lg max-w-xl leading-relaxed text-neutral-600 mt-3"
+            className="text-lg md:text-xl max-w-2xl leading-relaxed text-gray-600 mt-4"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, duration: 0.6 }}
@@ -93,135 +158,60 @@ export default function OfficePage() {
           </motion.p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          
-          <motion.div 
-            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0, duration: 0.7 }}
-          >
-            <MapPin className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
-            <div className="mt-auto">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Location</h3>
-              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed max-w-md">
-                Dar es Salaam, Tanzania
-              </p>
-              <ArrowLink 
-                text="Get directions" 
-                href="https://maps.google.com/maps?q=Dar+es+Salaam,+Tanzania"
-              />
-            </div>
-          </motion.div>
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {officeCards.map((card, index) => {
+            const Icon = card.icon;
+            const isPurple = index % 2 === 0;
+            const gridClass = getGridClass(card.span);
+            
+            return (
+              <motion.div
+                key={card.id}
+                className={`${gridClass} flex flex-col justify-between p-10 min-h-[320px] transition-all duration-300 hover:-translate-y-2 ${
+                  isPurple 
+                    ? 'bg-[#EFE8FF] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)]' 
+                    : 'bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 hover:shadow-[0_12px_40px_rgb(0,0,0,0.12)]'
+                }`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05, duration: 0.7 }}
+              >
+                <div>
+                  <Icon className="w-12 h-12 text-[#171321] mb-8" strokeWidth={1.5} />
+                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-[#171321] mb-4">
+                    {card.title}
+                  </h3>
+                  
+                  {typeof card.content === 'string' ? (
+                    <p className="text-lg text-gray-700 leading-snug">
+                      {card.content}
+                    </p>
+                  ) : (
+                    <div className="space-y-3">
+                      {card.content}
+                    </div>
+                  )}
 
-          <motion.div 
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.7 }}
-          >
-            <Clock className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
-            <div className="mt-auto">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Operating Hours</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between text-base md:text-lg text-neutral-600 font-light">
-                  <span>MON to FRI</span>
-                  <span className="font-medium text-black">08:00 - 18:00 EAT</span>
+                  {card.link && (
+                    <a 
+                      href={card.link.isEmail ? `mailto:${card.link.href}` : card.link.isPhone ? `tel:${card.link.href}` : card.link.href}
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-[#171321] hover:text-[#171321]/70 transition-colors"
+                      target={card.link.href?.startsWith('http') ? "_blank" : undefined}
+                      rel={card.link.href?.startsWith('http') ? "noopener noreferrer" : undefined}
+                    >
+                      <span>{card.link.text}</span>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </a>
+                  )}
                 </div>
-                <div className="flex justify-between text-base md:text-lg text-neutral-600 font-light">
-                  <span>SAT to SUN</span>
-                  <span className="font-medium text-black">Closed (Remote Only)</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.7 }}
-          >
-            <Mail className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
-            <div className="mt-auto">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Email</h3>
-              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
-                info@antera.co.tz
-              </p>
-              <ArrowLink 
-                text="Send email" 
-                href="info@antera.co.tz"
-                isEmail={true}
-              />
-            </div>
-          </motion.div>
-
-          <motion.div 
-            className="bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.7 }}
-          >
-            <Phone className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
-            <div className="mt-auto">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Phone</h3>
-              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
-                +255 760 984 921
-              </p>
-              <ArrowLink 
-                text="Call now" 
-                href="+255760984921"
-                isPhone={true}
-              />
-            </div>
-          </motion.div>
-
-          <motion.div 
-            className="md:row-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4, duration: 0.7 }}
-          >
-            <Globe className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
-            <div className="mt-auto">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Connect</h3>
-              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
-                Follow our journey across digital platforms and stay updated with the latest from Antera Group.
-              </p>
-              <ArrowLink 
-                text="Visit website" 
-                href="https://antera.co.tz"
-              />
-            </div>
-          </motion.div>
-
-          <motion.div 
-            className="md:col-span-2 bg-[#F5F5F5] p-8 md:p-12 min-h-[360px] md:min-h-[420px] flex flex-col justify-between group"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5, duration: 0.7 }}
-          >
-            <MapPin className="w-14 h-14 text-black/60 group-hover:text-[#FA520F] transition-colors duration-200" />
-            <div className="mt-auto">
-              <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">Visit Us</h3>
-              <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed max-w-md">
-                Schedule a meeting with our team to discuss your next project or partnership opportunity.
-              </p>
-              <ArrowLink 
-                text="Book appointment" 
-                href="https://calendly.com/antera-group/meeting"
-              />
-            </div>
-          </motion.div>
-
+              </motion.div>
+            );
+          })}
         </div>
+
       </div>
-    </div>
+    </section>
   );
 }
