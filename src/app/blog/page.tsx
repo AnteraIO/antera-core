@@ -50,8 +50,8 @@ export default async function BlogListing() {
                   </div>
                 )}
                 <div className="flex items-center gap-2 mb-4">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-1 bg-[#1A1A1A] text-white">Read</span>
-                  <span className="text-[10px] font-mono text-neutral-500 uppercase">{new Date(post.created_at).toLocaleDateString()}</span>
+                <span className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-0.5 bg-[#1A1A1A] text-white rounded-full">Read</span>
+                <span className="text-[10px] font-mono text-neutral-500 uppercase">{new Date(post.created_at).toLocaleDateString()}</span>
                 </div>
                 <h2 className="text-2xl md:text-3xl font-normal tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors duration-200">{post.title}</h2>
                 <p className="text-base text-neutral-600 font-light leading-relaxed line-clamp-3 mb-6">
