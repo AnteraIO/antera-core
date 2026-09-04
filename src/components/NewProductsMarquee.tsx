@@ -88,7 +88,7 @@ export const NewProductsMarquee = () => {
       className="text-black font-sans w-full overflow-hidden relative selection:bg-[#FA520F] selection:text-white"
       style={{ backgroundColor: '#F9FAFB' }}
     >
-      {/* Subtle background gradient mimicking the image's light atmosphere */}
+      {/* Subtle background */}
       <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-[800px] h-[800px] bg-blue-100/40 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-orange-100/30 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3" />
@@ -176,8 +176,21 @@ export const NewProductsMarquee = () => {
                     </p>
 
                     {/* Bottom Action Button */}
-                    <button className="w-full bg-[#EAEAEA] text-black py-3.5 px-4 rounded-lg text-[15px] font-semibold hover:bg-white transition-colors duration-200 mt-auto">
-                      Explore {item.product}
+                    <button className="relative w-full py-3.5 px-4 rounded-full text-[15px] font-semibold mt-auto overflow-hidden group transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
+                      {/* Glass background with blur effect */}
+                      <div className="absolute inset-0 bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.12)] rounded-full" />
+                      
+                      {/* Shine overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      
+                      {/* Inner glow */}
+                      <div className="absolute inset-[1px] bg-gradient-to-b from-white/5 to-transparent rounded-full" />
+                      
+                      {/* Button content */}
+                      <span className="relative z-10 text-white/90 group-hover:text-white transition-colors duration-300 flex items-center justify-center gap-2">
+                        Explore {item.product}
+                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                      </span>
                     </button>
 
                   </div>
