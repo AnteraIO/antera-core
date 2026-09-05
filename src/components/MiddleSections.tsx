@@ -4,19 +4,6 @@ import { motion, useScroll, useSpring } from 'framer-motion';
 import Image from 'next/image';
 import { 
   ArrowRight,
-  Bot,
-  Laptop,
-  Workflow,
-  Link2,
-  Smartphone,
-  Globe,
-  LayoutDashboard,
-  LineChart,
-  BarChart3,
-  GitBranch,
-  Database,
-  Lock,
-  TrendingUp,
   ArrowUpRight
 } from 'lucide-react';
 import mobileAppImage from '../assets/mobile-app.png';
@@ -27,6 +14,39 @@ import realTimeDashboardsImage from '../assets/Real-Time-Dashboards.png';
 import customerInsightsImage from '../assets/Customer-Insights.png';
 import performanceMonitoringImage from '../assets/Performance-Monitoring.png';
 import decisionSupportSystemsImage from '../assets/Decision-Support-Systems.png';
+
+const iconUrls = {
+  chatbot: 'https://cdn-icons-png.flaticon.com/128/9095/9095835.png',
+  development: 'https://cdn-icons-png.flaticon.com/128/8004/8004415.png',
+  analytics: 'https://cdn-icons-png.flaticon.com/128/12775/12775154.png',
+  automation: 'https://cdn-icons-png.flaticon.com/128/4429/4429903.png',
+  security: 'https://cdn-icons-png.flaticon.com/128/10527/10527707.png',
+  integration: 'https://cdn-icons-png.flaticon.com/128/16901/16901433.png',
+  smartphone: 'https://cdn-icons-png.flaticon.com/128/5217/5217391.png',
+  globe: 'https://cdn-icons-png.flaticon.com/128/9967/9967347.png',
+  dashboard: 'https://cdn-icons-png.flaticon.com/128/18287/18287548.png',
+  predictive: 'https://cdn-icons-png.flaticon.com/128/2782/2782066.png',
+  pipeline: 'https://cdn-icons-png.flaticon.com/128/12610/12610422.png',
+  database: 'https://cdn-icons-png.flaticon.com/128/11948/11948089.png',
+  governance: 'https://cdn-icons-png.flaticon.com/128/12251/12251807.png',
+  forecasting: 'https://cdn-icons-png.flaticon.com/128/3488/3488658.png',
+};
+
+const IconImage = ({
+  src,
+  alt,
+  className = "w-16 h-16 object-contain",
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) => (
+  <img 
+    src={src} 
+    alt={alt}
+    className={className}
+  />
+);
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -44,12 +64,12 @@ export const CommunicationSection = () => {
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
   const channels = [
-    { name: 'AI Chatbots', icon: Bot },
-    { name: 'System Development', icon: Laptop},
-    { name: 'Data Analytics', icon: BarChart3 },
-    { name: 'Workflow Automation', icon: Workflow },
-    { name: 'Security Infrastructures', icon: Lock },
-    { name: 'System Integrations', icon: Link2 },
+    { name: 'AI Chatbots', icon: iconUrls.chatbot },
+    { name: 'System Development', icon: iconUrls.development },
+    { name: 'Data Analytics', icon: iconUrls.analytics },
+    { name: 'Workflow Automation', icon: iconUrls.automation },
+    { name: 'Security Infrastructures', icon: iconUrls.security },
+    { name: 'System Integrations', icon: iconUrls.integration },
   ];
 
   return (
@@ -62,7 +82,7 @@ export const CommunicationSection = () => {
 
       <div className="w-full max-w-[1500px] mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-12 lg:gap-24 relative z-10">
         
-        {/* Left Sidebar Column (Mimicking MeetKai left pane) */}
+        {/* Left Sidebar Column*/}
         <div className="w-full lg:w-1/4 xl:w-1/5 flex flex-col gap-10 lg:sticky top-32 h-fit">
           <div>
             <h3 className="text-sm font-medium text-black">Solutions</h3>
@@ -97,7 +117,7 @@ export const CommunicationSection = () => {
             </motion.p>
           </header>
 
-          {/* Core Philosophy Style Split */}
+          {/* Core Philosophy */}
           <motion.div 
             variants={containerVariants} 
             initial="hidden" 
@@ -112,7 +132,7 @@ export const CommunicationSection = () => {
             <div className="w-full md:w-2/3">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-12 gap-x-8">
                 {channels.map((channel, i) => {
-                  const Icon = channel.icon;
+                  const IconUrl = channel.icon;
                   return (
                     <motion.div 
                       key={i} 
@@ -120,7 +140,7 @@ export const CommunicationSection = () => {
                       className="group flex items-start gap-4 cursor-pointer"
                     >
                       <div className="bg-neutral-100 p-3 rounded-lg group-hover:bg-black group-hover:text-white transition-colors duration-300">
-                        <Icon className="w-6 h-6" />
+                        <IconImage src={IconUrl} alt={channel.name} className="w-10 h-10 object-contain" />
                       </div>
                       <div>
                         <h3 className="text-lg font-medium text-black group-hover:underline decoration-1 underline-offset-4 transition-all duration-300">
@@ -187,7 +207,7 @@ export const ApplicationSection = () => {
             <div className="flex flex-col md:flex-row gap-8 lg:gap-16">
               <div className="w-full md:w-1/3">
                 <h2 className="text-2xl font-medium tracking-tight flex items-center gap-3">
-                  <Smartphone className="w-6 h-6 text-neutral-400" /> Web & Mobile
+                  <IconImage src={iconUrls.smartphone} alt="Web & Mobile" className="w-10 h-10 object-contain" /> Web & Mobile
                 </h2>
               </div>
               <div className="w-full md:w-2/3">
@@ -212,7 +232,7 @@ export const ApplicationSection = () => {
             <div className="flex flex-col md:flex-row gap-8 lg:gap-16">
               <div className="w-full md:w-1/3">
                 <h2 className="text-2xl font-medium tracking-tight flex items-center gap-3">
-                  <Globe className="w-6 h-6 text-neutral-400" /> Corporate Portals
+                  <IconImage src={iconUrls.globe} alt="Corporate Portals" className="w-10 h-10 object-contain" /> Corporate Portals
                 </h2>
               </div>
               <div className="w-full md:w-2/3">
@@ -234,12 +254,12 @@ export const ApplicationSection = () => {
 
 export const DataIntelligenceSection = () => {
   const features = [
-    { title: 'Executive Dashboards', image: businessIntelligenceImage, icon: LayoutDashboard },
-    { title: 'Predictive Analytics', image: predictiveAnalyticsImage, icon: LineChart },
-    { title: 'Data Pipelines', image: realTimeDashboardsImage, icon: GitBranch },
-    { title: 'Single Source of Truth', image: customerInsightsImage, icon: Database },
-    { title: 'Data Governance', image: performanceMonitoringImage, icon: Lock },
-    { title: 'Forecasting Insights', image: decisionSupportSystemsImage, icon: TrendingUp },
+    { title: 'Executive Dashboards', image: businessIntelligenceImage, icon: iconUrls.dashboard },
+    { title: 'Predictive Analytics', image: predictiveAnalyticsImage, icon: iconUrls.predictive },
+    { title: 'Data Pipelines', image: realTimeDashboardsImage, icon: iconUrls.pipeline },
+    { title: 'Single Source of Truth', image: customerInsightsImage, icon: iconUrls.database },
+    { title: 'Data Governance', image: performanceMonitoringImage, icon: iconUrls.governance },
+    { title: 'Forecasting Insights', image: decisionSupportSystemsImage, icon: iconUrls.forecasting },
   ];
 
   return (
@@ -286,7 +306,7 @@ export const DataIntelligenceSection = () => {
             className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 pt-16 border-t border-neutral-100"
           >
             {features.map((feature, i) => {
-              const Icon = feature.icon;
+              const IconUrl = feature.icon;
               return (
                 <motion.div 
                   key={i} 
@@ -294,7 +314,7 @@ export const DataIntelligenceSection = () => {
                   className="group flex flex-col gap-6"
                 >
                   <div className="flex items-center gap-3">
-                    <Icon className="w-5 h-5 text-neutral-400" />
+                    <IconImage src={IconUrl} alt={feature.title} className="w-10 h-10 object-contain" />
                     <h3 className="text-xl font-medium tracking-tight text-black">
                       {feature.title}
                     </h3>
