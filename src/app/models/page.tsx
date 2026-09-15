@@ -2,8 +2,8 @@ import { ModelsPage } from "@/components_legacy/ModelsPage";
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Models | AI Research',
-  description: 'Explore ANTERA\'s neural models and research papers on advanced AI technologies.',
+  title: 'Models | AI Integration',
+  description: 'Explore ANTERA\'s AI orchestration, model integration, and secure enterprise data platforms.',
 };
 
 export default function Page() {

@@ -22,7 +22,7 @@ export const ModelsPage = () => {
     {
       icon: LineChart,
       title: 'Predictive Analytics',
-      desc: 'Machine learning models trained to forecast trends, identify risks, and surface opportunities before they become obvious.'
+      desc: 'Predictive analytics and ML integrations that forecast trends, identify risks, and surface opportunities before they become obvious.'
     },
     {
       icon: Brain,
@@ -37,7 +37,7 @@ export const ModelsPage = () => {
     {
       icon: LineChart,
       title: 'How We Work',
-      desc: 'We start by understanding your data landscape, then build custom solutions that integrate with your existing infrastructure. Every model is trained, tested, and deployed with governance and explainability in mind.',
+      desc: 'We integrate and orchestrate existing AI models within secure data platforms, layering proprietary tools, governance, and workflows to make models usable for mission-critical enterprise operations.',
       span: 'full'
     }
   ];
