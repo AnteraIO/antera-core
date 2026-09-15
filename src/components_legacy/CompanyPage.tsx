@@ -44,7 +44,7 @@ export const CompanyPage = () => {
     // Row 2: Expertise & Applied AI
     { id: 'expertise', title: 'Our Expertise', desc: 'Built by engineers with hands-on experience in cloud, AI, and cybersecurity.', icon: Users, span: 'small' },
     { id: 'ai', title: 'Applied AI', desc: 'End-to-end AI solutions for enterprise transformation.', icon: BarChart, span: 'tall' },
-    { id: 'models', title: 'Frontier Models', desc: 'State-of-the-art ML models trained for African languages and contexts.', icon: Settings, span: 'small' },
+    { id: 'models', title: 'AI Model Integration', desc: 'Orchestrating existing AI models within secure data platforms tailored for enterprise contexts.', icon: Settings, span: 'small' },
     
     // Row 3: How We Work
     { id: 'assess', title: 'Assess', desc: 'Understand business goals, systems, and risks before any work begins.', icon: Search, span: 'large' },

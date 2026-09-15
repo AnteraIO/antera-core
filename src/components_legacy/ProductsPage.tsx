@@ -52,8 +52,8 @@ export const ProductsPage = () => {
     },
     { 
       id: 'ml', 
-      title: 'Machine Learning Models', 
-      desc: 'State-of-the-art machine learning models trained for African content and contexts.', 
+      title: 'Model Orchestration & Integration',
+      desc: 'Integrating and orchestrating existing AI models within secure data platforms with custom governance and workflows.',
       icon: Brain,
       span: 'large'
     },
