@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-import { Hero } from '@/components/Hero';
 // import { NewProductsMarquee } from '@/components/NewProductsMarquee';
 
 const TrustSection = dynamic(() => import('@/components/MainSections').then(mod => mod.TrustSection));
@@ -15,7 +14,6 @@ const WhySection = dynamic(() => import('@/components/FinalSections').then(mod =
 export default function Home() {
   return (
     <>
-      <Hero />
       {/* <NewProductsMarquee /> */}
       <PartnersSection />
       <TrustSection />
