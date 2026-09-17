@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote, Star } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface Testimonial {
   quote: string;
@@ -13,96 +13,109 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    quote: "ANTERA transformed our digital infrastructure with high-throughput systems and seamless API integrations. Their technical execution in East Africa is unmatched.",
+    quote: '"ANTERA transformed our digital infrastructure with high-throughput systems and seamless API integrations. Their technical execution in East Africa is unmatched."',
     author: "Raymond Shirima",
     role: "Head of Digital Operations",
-    company: "Blacksand Adventures"
+    company: "BLACKSAND"
   },
   {
-    quote: "The team delivered custom data pipelines and real-time telemetry dashboards that empowered our leadership to make faster, data-backed decisions.",
+    quote: '"The team delivered custom data pipelines and real-time telemetry dashboards that empowered our leadership to make faster, data-backed decisions."',
     author: "Sarah Kimaro",
     role: "Managing Director",
-    company: "Travel Nest Africa"
+    company: "TRAVEL NEST"
   },
   {
-    quote: "Sekela POS and ANTERA's business automation solutions completely streamlined our retail ops. Reliable, scalable, and tailored to local market needs.",
+    quote: '"Sekela POS and ANTERA\'s business automation solutions completely streamlined our retail ops. Reliable, scalable, and tailored to local market needs."',
     author: "Geofrey M.",
     role: "Chief Technology Officer",
-    company: "Kazibox Logistics"
+    company: "KAZIBOX"
+  },
+  {
+    quote: '"We needed to start scaling and building out autonomous orchestration across all enterprise services with high reliability and zero downtime."',
+    author: "Alex K.",
+    role: "VP of Engineering",
+    company: "ENTERPRISE"
   }
 ];
 
 export const PartnerTestimonials = () => {
   return (
-    <section className="w-full bg-[#FAF9F6] text-[#171321] py-20 md:py-28 font-sans relative overflow-hidden border-t border-gray-200/60 selection:bg-[#FA520F] selection:text-white">
-      {/* Background ambient light */}
-      <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-100/30 rounded-full blur-[120px]" />
-      </div>
-
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 relative z-10">
-        <header className="mb-16 text-center max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-200/60 text-xs font-mono uppercase tracking-widest text-neutral-700 mb-4"
-          >
-            <Star className="w-3.5 h-3.5 text-[#FA520F] fill-[#FA520F]" />
-            <span>Testimonials</span>
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#171321] leading-tight"
-          >
-            What our partners say about us
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg md:text-xl text-gray-600 mt-4 leading-relaxed font-normal"
-          >
-            Hear from enterprise leaders and partners who build and scale their technology with ANTERA.
-          </motion.p>
-        </header>
+    <section className="w-full bg-white text-neutral-900 py-16 md:py-24 font-sans border-t border-neutral-200">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
+        
+        {/* Header */}
+        <motion.h2 
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-neutral-900 mb-12 md:mb-16"
+        >
+          What our partners say about us
+        </motion.h2>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-16">
           {testimonials.map((item, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: idx * 0.12 }}
-              className="bg-white p-8 md:p-10 rounded-2xl border border-gray-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] transition-all duration-300 flex flex-col justify-between group"
+              transition={{ duration: 0.5, delay: idx * 0.08 }}
+              style={{
+                clipPath: 'polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%)',
+              }}
+              className="bg-[#EFEFEF] p-6 md:p-7 flex flex-col justify-between min-h-[360px] hover:bg-[#E8E8E8] transition-colors duration-200"
             >
+              {/* Top: Company Header */}
               <div>
-                <Quote className="w-10 h-10 text-[#FA520F]/40 mb-6 group-hover:text-[#FA520F] transition-colors duration-300" />
-                <p className="text-base md:text-lg text-neutral-800 leading-relaxed font-normal italic mb-8">
-                  "{item.quote}"
-                </p>
+                <span className="text-xs font-mono uppercase tracking-widest text-neutral-800 block mb-8 font-medium">
+                  {item.company}
+                </span>
               </div>
 
-              <div className="pt-6 border-t border-gray-100 flex flex-col">
-                <span className="text-base font-bold text-[#171321]">
-                  {item.author}
-                </span>
-                <span className="text-sm text-gray-500 font-medium">
-                  {item.role}, <span className="text-[#171321] font-semibold">{item.company}</span>
-                </span>
+              {/* Bottom: Quote Text */}
+              <div>
+                <p className="text-xs md:text-sm text-neutral-600 leading-relaxed font-normal">
+                  {item.quote}
+                </p>
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Bottom CTA Block */}
+        <div className="pt-10 border-t border-neutral-200 grid grid-cols-1 md:grid-cols-2 gap-5">
+          <motion.a
+            href="#request-demo"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="bg-[#E5E5E5] hover:bg-[#DCDCDC] transition-colors p-8 md:p-10 flex items-center justify-between group cursor-pointer"
+          >
+            <span className="text-2xl md:text-3xl font-normal tracking-tight text-neutral-900">
+              Request a Demo
+            </span>
+            <ArrowRight className="w-6 h-6 text-neutral-900 group-hover:translate-x-1 transition-transform" />
+          </motion.a>
+
+          <motion.a
+            href="#start-building"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-[#141414] hover:bg-[#222222] transition-colors text-white p-8 md:p-10 flex items-center justify-between group cursor-pointer"
+          >
+            <span className="text-2xl md:text-3xl font-normal tracking-tight">
+              Start Building
+            </span>
+            <ArrowRight className="w-6 h-6 text-white group-hover:translate-x-1 transition-transform" />
+          </motion.a>
+        </div>
+
       </div>
     </section>
   );
