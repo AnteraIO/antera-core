@@ -29,22 +29,20 @@ export const PartnersSection = () => {
   const tripledPartners = [...partners, ...partners, ...partners];
 
   return (
-    <section 
-      ref={containerRef} 
+    <section
+      ref={containerRef}
       className="text-black font-sans w-full overflow-hidden relative selection:bg-[#FA520F] selection:text-white"
       style={{ backgroundColor: '#F9FAFB' }}
     >
-      {/* Subtle background gradient mimicking the image's light atmosphere */}
       <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-[800px] h-[800px] bg-blue-100/40 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-orange-100/30 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3" />
       </div>
 
       <div className="w-full py-20 md:py-28 relative z-10">
-        
-        {/* Header matched to the split layout in the design */}
+
         <header className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 mb-20 flex flex-col md:flex-row md:items-end gap-8 md:gap-16">
-          <motion.h1 
+          <motion.h1
             className="text-5xl md:text-7xl lg:text-[80px] font-bold tracking-tight leading-[1.05]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -53,7 +51,7 @@ export const PartnersSection = () => {
           >
             Engineered with<br />the best.<br />Powered by the best.
           </motion.h1>
-          <motion.div 
+          <motion.div
             className="pb-2 md:pb-4"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -66,21 +64,19 @@ export const PartnersSection = () => {
           </motion.div>
         </header>
 
-        {/* Full Width Clean Marquee Strip */}
-        <div className="relative w-full overflow-hidden border-y border-neutral-200/50 py-12">
-          {/* Fades updated to match the #F9FAFB background */}
+        <div className="relative w-full overflow-hidden border-y border-neutral-200/50 py-16">
           <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-[#F9FAFB] to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-[#F9FAFB] to-transparent z-10 pointer-events-none" />
 
           <motion.div
-            className="flex gap-16 md:gap-24"
-            animate={{ x: [0, -1920] }}
-            transition={{ duration: 20, ease: "linear", repeat: Infinity, repeatType: "loop" }}
+            className="flex gap-20 md:gap-32 items-center"
+            animate={{ x: [0, -2400] }}
+            transition={{ duration: 25, ease: "linear", repeat: Infinity, repeatType: "loop" }}
             style={{ width: "max-content" }}
           >
             {tripledPartners.map((partner, index) => (
-              <motion.div 
-                key={index} 
+              <motion.div
+                key={index}
                 className="flex items-center justify-center flex-shrink-0"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
@@ -88,20 +84,19 @@ export const PartnersSection = () => {
                 <Image
                   src={partner.logo}
                   alt={partner.name}
-                  className="h-8 md:h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
+                  className="h-16 md:h-20 lg:h-24 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
                 />
               </motion.div>
             ))}
           </motion.div>
         </div>
 
-        {/* Call to Action Bottom Section */}
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 mt-20 grid grid-cols-1 md:grid-cols-2 gap-6">
           <a
             href="https://wa.me/255760984921"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#EAEAEA] text-black p-8 md:p-10 flex items-center justify-between group cursor-pointer hover:bg-[#DCDCDC] transition-colors duration-200 rounded-2xl"
+            className="bg-[#EAEAEA] text-black p-8 md:p-10 flex items-center justify-between group cursor-pointer hover:bg-[#DCDCDC] transition-colors duration-200"
           >
             <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">Request a Demo</h3>
             <ArrowUpRight className="w-8 h-8 text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
@@ -110,7 +105,7 @@ export const PartnersSection = () => {
             href="https://wa.me/255760984921"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#1C1C1C] text-white p-8 md:p-10 flex items-center justify-between group cursor-pointer hover:bg-black transition-colors duration-200 rounded-2xl"
+            className="bg-[#1C1C1C] text-white p-8 md:p-10 flex items-center justify-between group cursor-pointer hover:bg-black transition-colors duration-200"
           >
             <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">Start Building</h3>
             <ArrowUpRight className="w-8 h-8 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
