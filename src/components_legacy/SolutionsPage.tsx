@@ -13,8 +13,6 @@ import {
   Bot
 } from 'lucide-react';
 
-import anteraVideo from '../assets/antera-video.mp4';
-
 export const SolutionsPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
@@ -106,26 +104,6 @@ export const SolutionsPage = () => {
             We implement practical AI and technology solutions that reduce repetitive work while keeping systems secure and governed.
           </motion.p>
         </header>
-
-        {/* Video Section */}
-        <motion.div 
-          className="mb-24"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="relative aspect-video w-full overflow-hidden bg-black/5 rounded-[2rem] border border-gray-100">
-            <video
-              src={anteraVideo}
-              className="w-full h-full object-cover"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-          </div>
-        </motion.div>
 
         {/* Bento Grid */}
         <motion.div 

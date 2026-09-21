@@ -18,8 +18,6 @@ import {
   Users
 } from 'lucide-react';
 
-import anteraVideo from '../assets/company-video.mp4';
-
 export const CompanyPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -101,41 +99,7 @@ export const CompanyPage = () => {
           </motion.p>
         </header>
 
-        {/* Video Section */}
-        <motion.div 
-          className="mb-24"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="relative aspect-video w-full overflow-hidden bg-black/5 rounded-[2rem] border border-gray-100">
-            <video
-              ref={videoRef}
-              src={anteraVideo}
-              className="w-full h-full object-cover"
-              loop
-              playsInline
-              controls={isPlaying}
-            />
-            {!isPlaying && (
-              <button
-                onClick={handlePlay}
-                className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group"
-              >
-                <motion.div 
-                  className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center"
-                  whileHover={{ scale: 1.15 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Play className="w-8 h-8 text-[#171321] ml-1" fill="currentColor" />
-                </motion.div>
-              </button>
-            )}
-          </div>
-        </motion.div>
-
-        {/* How We Work Title - Moved up for better flow */}
+        {/* How We Work Title */}
         <div className="mb-12">
           <motion.h2 
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#171321]"
