@@ -41,27 +41,46 @@ export const PartnersSection = () => {
 
       <div className="w-full py-20 md:py-28 relative z-10">
 
-        <header className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 mb-20 flex flex-col md:flex-row md:items-end gap-8 md:gap-16">
+        {/* HEADER — centered two-tone + rotated side text */}
+        <header className="relative max-w-5xl mx-auto text-center mb-20 px-6 md:px-10">
+          <motion.div
+            className="absolute right-0 top-0 hidden lg:flex items-start justify-center h-full pointer-events-none"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ delay: 0.4, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span
+              className="text-sm md:text-base font-medium tracking-[0.2em] uppercase text-black whitespace-nowrap"
+              style={{
+                writingMode: 'vertical-rl',
+                transform: 'rotate(180deg)',
+              }}
+            >
+              Tanzanian Best Software Engineers.
+            </span>
+          </motion.div>
+
           <motion.h1
-            className="text-5xl md:text-7xl lg:text-[80px] font-bold tracking-tight leading-[1.05]"
+            className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span className="block text-black">Engineered with the best</span>
+            <span className="block text-[#3E9C8F]">powered by the best</span>
+          </motion.h1>
+
+          <motion.p
+            className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-10 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            Engineered with<br />the best.<br />Powered by the best.
-          </motion.h1>
-          <motion.div
-            className="pb-2 md:pb-4"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15, duration: 0.6 }}
-          >
-            <p className="text-lg md:text-xl max-w-md leading-relaxed text-neutral-600 font-medium">
-              We are leveraging world-class infrastructure to deliver scalable, high-performance solutions.
-            </p>
-          </motion.div>
+            We are leveraging world-class infrastructure to deliver scalable, high-performance solutions.
+          </motion.p>
         </header>
 
         <div className="relative w-full overflow-hidden border-y border-neutral-200/50 py-16">

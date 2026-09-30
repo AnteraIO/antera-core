@@ -1,216 +1,262 @@
 'use client';
 import React, { useRef } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
+import { Play } from 'lucide-react';
+
 import banner1 from '../assets/banner-1.png';
 import banner2 from '../assets/banner-2.png';
 import banner3 from '../assets/banner-3.png';
 import banner4 from '../assets/banner-4.png';
 import banner5 from '../assets/banner-5.png';
 
-const trustCards = [
-  {
-    title: "We're Always Prepared",
-    desc: "Be ready for any security issue with faster response times and clear recovery plans.",
-    image: banner1,
-    accent: "text-blue-500",
-  },
-  {
-    title: "Data Ownership",
-    desc: "Protect your data with strong identity management and best practise.",
-    image: banner2,
-    accent: "text-orange-400",
-  }
-];
+import heroVideo from '../assets/antera-video.mp4';
 
+const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
+  <MotionConfig reducedMotion="never">{children}</MotionConfig>
+);
+
+const gridVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+};
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] } },
+};
+const textVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
+};
+
+// ==========================================
+// TRUST SECTION — matching the masonry aesthetic
+// ==========================================
 export const TrustSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start']
-  });
+  const { scrollYProgress } = useScroll({ target: containerRef });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
-  const springConfig = { stiffness: 100, damping: 30 };
-  const smoothProgress = useSpring(scrollYProgress, springConfig);
+  const trustCards = [
+    {
+      title: "We're Always Prepared",
+      description: "Be ready for any security issue with faster response times and clear recovery plans.",
+      image: banner1,
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70',
+      span: 'md:col-span-7', height: 'h-[560px]',
+      imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl',
+    },
+    {
+      title: "Data Ownership",
+      description: "Protect your data with strong identity management and best practices.",
+      image: banner2,
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
+      span: 'md:col-span-5', height: 'h-[560px]',
+      imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
+    },
+  ];
 
   return (
-    <section 
-      ref={containerRef} 
-      className="text-black font-sans w-full overflow-hidden relative selection:bg-[#FA520F] selection:text-white"
-      style={{ backgroundColor: '#F9FAFB' }}
-    >
-      {/* Subtle background gradient mimicking the light atmosphere */}
-      <motion.div 
-        className="absolute inset-0 -z-10 pointer-events-none overflow-hidden"
-        style={{ y: smoothProgress }}
-      >
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-red-100/40 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/3" />
-        <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-orange-100/30 rounded-full blur-[100px] -translate-x-1/3 translate-y-1/3" />
-      </motion.div>
+    <MotionWrapper>
+      <section ref={containerRef} className="bg-white text-black font-sans w-full py-32">
+        <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
-      <div className="w-full px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-[1400px] mx-auto relative z-10">
-        
-        {/* Header matched to the split layout in the design */}
-        <header className="mb-20 flex flex-col md:flex-row md:items-end gap-8 md:gap-16">
-          <motion.h1 
-            className="text-5xl md:text-7xl lg:text-[80px] font-bold tracking-tight leading-[1.05]"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Reduce Risk.<br />Strengthen<br />Security.
-          </motion.h1>
-          <motion.div 
-            className="pb-2 md:pb-4"
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: 0.15, duration: 0.6 }}
-          >
-            <p className="text-lg md:text-xl max-w-md leading-relaxed text-neutral-600 font-medium">
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
+          {/* HEADER — centered two-tone */}
+          <header className="max-w-5xl mx-auto text-center mb-24">
+            <motion.h1
+              className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              <span className="block text-black">Reduce risk that</span>
+              <span className="block text-[#3E9C8F]">strengthen security</span>
+            </motion.h1>
+
+            <motion.p
+              className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-10 max-w-2xl mx-auto"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+              transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
               We help you prepare for incidents and keep your digital platforms safe from cyber threats.
-            </p>
-          </motion.div>
-        </header>
+            </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {trustCards.map((card, index) => {
-            const itemNumber = String(index + 1).padStart(2, '0');
-            return (
-              <motion.div 
-                key={index}
-                className="relative bg-[#1C1C1C] p-8 md:p-10 h-[480px] flex flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 group cursor-default"
-                initial={{ opacity: 0, y: 40, scale: 0.98 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ delay: index * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            <motion.a
+              href="#showreel"
+              className="inline-flex items-center gap-4 mt-12 group"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+              transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <span className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-black transition-colors duration-300 group-hover:bg-black">
+                <Play className="w-4 h-4 fill-black group-hover:fill-white transition-colors duration-300" />
+              </span>
+              <span className="text-base md:text-lg font-medium border-b-2 border-black pb-0.5">
+                Watch our showreel
+              </span>
+            </motion.a>
+          </header>
+
+          <motion.div
+            variants={gridVariants} initial="hidden" whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-3"
+          >
+            {trustCards.map((card, i) => (
+              <motion.div
+                key={i}
+                variants={cardVariants}
+                className={`group relative overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text} ${card.span} ${card.height}`}
               >
-                {/* Background image reduced to a subtle texture */}
-                <div className="absolute inset-0 z-0 opacity-[0.07] group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
-                  <Image src={card.image} alt={card.title} fill className="object-cover" priority={false} />
+                <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 ${card.imgClass}`}>
+                  <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
                 </div>
-                
-                <div className="relative z-10 flex flex-col h-full">
-                  {/* Top Number */}
-                  <div className="text-white/30 text-sm font-mono mb-8">
-                    {itemNumber}
-                  </div>
 
-                  <h3 className="text-[26px] md:text-3xl font-semibold text-white tracking-tight leading-snug mb-5">
+                <div className="relative z-20 max-w-[85%]">
+                  <h3 className="text-3xl md:text-4xl lg:text-[44px] font-bold tracking-[-0.02em] leading-[1.05]">
                     {card.title}
                   </h3>
-                  <p className="text-sm md:text-base text-neutral-400 font-normal leading-relaxed flex-grow">
-                    {card.desc}
-                  </p>
+
+                  <div className="overflow-hidden">
+                    <div className="max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                      <p className={`text-2xl md:text-3xl ${card.subText} mt-5 leading-[1.3] max-w-lg`}>
+                        {card.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
-            )
-          })}
+            ))}
+          </motion.div>
         </div>
-      </div>
-    </section>
-  )
-}
+      </section>
+    </MotionWrapper>
+  );
+};
 
-const serviceCards = [
-  {
-    title: "AI Chatbots",
-    desc: "Automate customer and internal support to improve response times and staff productivity.",
-    image: banner3,
-    accent: "text-blue-500",
-  },
-  {
-    title: "Workflow Automation",
-    desc: "Eliminate manual and repetitive tasks with practical AI solutions that expand your business.",
-    image: banner4,
-    accent: "text-orange-400",
-  },
-  {
-    title: "Secure AI Copilots",
-    desc: "Turn your documents into insights while keeping your systems secure and governed.",
-    image: banner5,
-    accent: "text-purple-400",
-  }
-];
-
+// ==========================================
+// SERVICES SECTION — matching the masonry aesthetic
+// ==========================================
 export const ServicesSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const serviceCards = [
+    {
+      title: "AI Chatbots",
+      description: "Automate customer and internal support to improve response times and staff productivity.",
+      image: banner3,
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70',
+      span: 'md:col-span-7', height: 'h-[560px]',
+      imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl',
+    },
+    {
+      title: "Workflow Automation",
+      description: "Eliminate manual and repetitive tasks with practical AI solutions that expand your business.",
+      image: banner4,
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
+      span: 'md:col-span-5', height: 'h-[560px]',
+      imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
+    },
+    {
+      title: "Secure AI Copilots",
+      description: "Turn your documents into insights while keeping your systems secure and governed.",
+      image: banner5,
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70',
+      span: 'md:col-span-5', height: 'h-[520px]',
+      imgClass: 'absolute -bottom-20 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl',
+    },
+    {
+      title: "Data Analytics",
+      description: "Clean pipelines and dashboards that turn raw operational data into decisions you can act on.",
+      image: banner3,
+      color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70',
+      span: 'md:col-span-7', height: 'h-[520px]',
+      imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl',
+    },
+    {
+      title: "Security Infrastructures",
+      description: "Layered defenses, access control, and monitoring to keep your data and operations safe.",
+      image: banner1,
+      color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70',
+      span: 'md:col-span-6', height: 'h-[480px]',
+      imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl',
+    },
+    {
+      title: "System Integrations",
+      description: "Connect your tools, CRMs, and data sources so information flows without friction.",
+      image: banner2,
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
+      span: 'md:col-span-6', height: 'h-[480px]',
+      imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
+    },
+  ];
 
   return (
-    <section 
-      ref={containerRef} 
-      id="products" 
-      className="text-black font-sans w-full overflow-hidden relative selection:bg-[#FA520F] selection:text-white"
-      style={{ backgroundColor: '#F9FAFB' }}
-    >
-      {/* Subtle background gradient mimicking the light atmosphere */}
-      <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-100/40 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/3" />
-        <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-indigo-100/30 rounded-full blur-[100px] -translate-x-1/3 translate-y-1/3" />
-      </div>
+    <MotionWrapper>
+      <section id="products" className="bg-white text-black font-sans w-full py-32">
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
+          {/* HEADER — centered two-tone */}
+          <header className="max-w-5xl mx-auto text-center mb-24">
+            <motion.h1
+              className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              <span className="block text-black">Automate smarter that</span>
+              <span className="block text-[#3E9C8F]">scale faster</span>
+            </motion.h1>
 
-      <div className="w-full px-6 md:px-12 lg:px-20 py-24 md:py-32 max-w-[1400px] mx-auto relative z-10">
-        
-        {/* Header matched to the split layout in the design */}
-        <header className="mb-20 flex flex-col md:flex-row md:items-end gap-8 md:gap-16">
-          <motion.h1 
-            className="text-5xl md:text-7xl lg:text-[80px] font-bold tracking-tight leading-[1.05]"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Automate smarter.<br />Scale faster.
-          </motion.h1>
-          <motion.div 
-            className="pb-2 md:pb-4"
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: 0.15, duration: 0.6 }}
-          >
-            <p className="text-lg md:text-xl max-w-md leading-relaxed text-neutral-600 font-medium">
+            <motion.p
+              className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-10 max-w-2xl mx-auto"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+              transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
               We implement practical AI solutions that reduce repetitive work while keeping systems secure and governed.
-            </p>
-          </motion.div>
-        </header>
+            </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {serviceCards.map((card, index) => {
-            const itemNumber = String(index + 1).padStart(2, '0');
-            return (
-              <motion.div 
-                key={index}
-                className="relative bg-[#1C1C1C] p-8 md:p-10 h-[480px] flex flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 group cursor-default"
-                initial={{ opacity: 0, y: 40, scale: 0.98 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ delay: index * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            <motion.a
+              href="#showreel"
+              className="inline-flex items-center gap-4 mt-12 group"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+              transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <span className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-black transition-colors duration-300 group-hover:bg-black">
+                <Play className="w-4 h-4 fill-black group-hover:fill-white transition-colors duration-300" />
+              </span>
+              <span className="text-base md:text-lg font-medium border-b-2 border-black pb-0.5">
+                Watch our showreel
+              </span>
+            </motion.a>
+          </header>
+
+          <motion.div
+            variants={gridVariants} initial="hidden" whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-3"
+          >
+            {serviceCards.map((card, i) => (
+              <motion.div
+                key={i}
+                variants={cardVariants}
+                className={`group relative overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text} ${card.span} ${card.height}`}
               >
-                {/* Background image reduced to a subtle texture */}
-                <div className="absolute inset-0 z-0 opacity-[0.07] group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
-                  <Image src={card.image} alt={card.title} fill className="object-cover" priority={false} />
+                <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 ${card.imgClass}`}>
+                  <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
                 </div>
-                
-                <div className="relative z-10 flex flex-col h-full">
-                  {/* Top Number */}
-                  <div className="text-white/30 text-sm font-mono mb-8">
-                    {itemNumber}
-                  </div>
 
-                  <h3 className="text-[26px] md:text-3xl font-semibold text-white tracking-tight leading-snug mb-5">
+                <div className="relative z-20 max-w-[85%]">
+                  <h3 className="text-3xl md:text-4xl lg:text-[44px] font-bold tracking-[-0.02em] leading-[1.05]">
                     {card.title}
                   </h3>
-                  <p className="text-sm md:text-base text-neutral-400 font-normal leading-relaxed flex-grow">
-                    {card.desc}
-                  </p>
+
+                  <div className="overflow-hidden">
+                    <div className="max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                      <p className={`text-2xl md:text-3xl ${card.subText} mt-5 leading-[1.3] max-w-lg`}>
+                        {card.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
-            )
-          })}
+            ))}
+          </motion.div>
         </div>
-      </div>
-    </section>
-  )
-}
+      </section>
+    </MotionWrapper>
+  );
+};

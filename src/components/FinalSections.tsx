@@ -1,270 +1,307 @@
 'use client';
 import React, { useRef } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
-import {
-  LayoutDashboard,
-  PenTool,
-  Rocket,
-  TrendingUp,
-  Cloud,
-  GitBranch,
-  DollarSign,
-  Lock,
-  Fingerprint,
-  Monitor,
-  Link2,
-  Headphones,
-  Building2,
-  Key,
-  Globe2,
-  FileText,
-  Target,
-  Eye,
-  GraduationCap,
-  BarChart3
-} from 'lucide-react';
+import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
+import Image from 'next/image';
 
+import banner1 from '../assets/banner-1.png';
+import banner2 from '../assets/banner-2.png';
+import banner3 from '../assets/banner-3.png';
+import banner4 from '../assets/banner-4.png';
+import banner5 from '../assets/banner-5.png';
+import mobileAppImage from '../assets/mobile-app.png';
+import webCommandImage from '../assets/web-command.png';
+
+const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
+  <MotionConfig reducedMotion="never">{children}</MotionConfig>
+);
+
+const gridVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+};
+const tileVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
+};
+const textVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
+};
+
+// ==========================================
+// OPERATION SECTION
+// ==========================================
 export const OperationSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
-  const steps = [
-    { id: 'assess', name: 'Assess.', desc: 'Understand your business goals, systems, and risks to find the best way forward.', icon: LayoutDashboard },
-    { id: 'design', name: 'Design.', desc: 'Create secure, scalable, and practical architectures tailored to your specific needs.', icon: PenTool },
-    { id: 'deliver', name: 'Deliver.', desc: 'Implement solutions in clear phases and milestones for highly predictable results.', icon: Rocket },
-    { id: 'optimize', name: 'Optimize.', desc: 'Measure the impact and continuously improve your systems based on live results.', icon: TrendingUp },
+  const tiles = [
+    // Row 1
+    { type: 'text', label: '01', title: 'Assess.', desc: 'Understand your business goals, systems, and risks to find the best way forward.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/80', bgImage: banner1, span: 'md:col-span-2', height: 'h-[340px]' },
+    { type: 'image', image: banner1, span: 'md:col-span-3', height: 'h-[340px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: banner2, span: 'md:col-span-3', height: 'h-[340px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: banner3, span: 'md:col-span-2', height: 'h-[340px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: banner4, span: 'md:col-span-2', height: 'h-[340px]', imgClass: 'w-full h-full object-cover' },
+
+    // Row 2
+    { type: 'image', image: banner5, span: 'md:col-span-4', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'text', label: '02', title: 'Design.', desc: 'Create secure, scalable architectures tailored to your needs.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: mobileAppImage, span: 'md:col-span-2', height: 'h-[400px]' },
+    { type: 'image', image: mobileAppImage, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'text', label: '03', title: 'Deliver.', desc: 'Implement solutions in clear phases and milestones.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: webCommandImage, span: 'md:col-span-2', height: 'h-[400px]' },
+    { type: 'text', label: '04', title: 'Optimize.', desc: 'Measure impact and continuously improve.', color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/85', bgImage: banner3, span: 'md:col-span-2', height: 'h-[400px]' },
   ];
 
   return (
-    <section 
-      ref={containerRef} 
-      className="bg-white text-[#171321] font-sans w-full py-24 md:py-32 relative overflow-hidden"
-    >
-      <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-[#171321] z-[100] origin-left" style={{ scaleX }} />
+    <MotionWrapper>
+      <section ref={containerRef} className="bg-white text-black font-sans w-full py-32 relative overflow-hidden">
+        <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
-      <div className="w-full pl-6 md:pl-12 lg:pl-20 max-w-[1500px] mx-auto">
-        <header className="mb-16 pr-6 md:pr-12 lg:pr-20">
-          <motion.h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            How we operate to serve you.
-          </motion.h1>
-          <motion.p 
-            className="text-lg md:text-xl max-w-2xl leading-relaxed text-gray-600 mt-4"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15, duration: 0.6 }}
-          >
-            Work with Tanzanian top Software, Hardware , AI and ML Engineers to enable transformation that drives impact to your Company, School, Office or Organization.
-          </motion.p>
-        </header>
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
+          {/* Header — centered two-tone */}
+          <header className="max-w-5xl mx-auto text-center mb-20">
+            <motion.h1
+              className="text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[0.98]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              <span className="block text-black">How we operate</span>
+              <span className="block text-[#3E9C8F]">to serve you</span>
+            </motion.h1>
+          </header>
 
-        {/* Horizontal Scroll Container mimicking the screenshot's carousel */}
-        <div 
-          className="flex overflow-x-auto gap-6 pb-12 pr-6 md:pr-12 lg:pr-20 snap-x snap-mandatory"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            const isPurple = index % 2 === 0;
-            return (
+          <motion.div
+            variants={gridVariants} initial="hidden" whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-3"
+          >
+            {tiles.map((tile, i) => (
               <motion.div
-                key={step.id}
-                className={`flex-none w-[85vw] md:w-[380px] snap-start flex flex-col justify-between p-10 rounded-[2rem] min-h-[380px] transition-transform duration-300 hover:-translate-y-2 ${
-                  isPurple ? 'bg-[#EFE8FF]' : 'bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100'
+                key={i}
+                variants={tileVariants}
+                className={`group relative overflow-hidden cursor-pointer ${tile.span} ${tile.height} ${
+                  tile.type === 'text' ? `${tile.color} ${tile.text} flex flex-col justify-between p-6 md:p-8` : ''
                 }`}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.7 }}
               >
-                <div>
-                  <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-[#171321] mb-6">
-                    {step.name}
-                  </h3>
-                  <p className="text-lg md:text-xl text-gray-700 leading-snug">
-                    {step.desc}
-                  </p>
-                </div>
-                <div className="mt-12">
-                  <Icon className="w-12 h-12 text-[#171321]" strokeWidth={1.5} />
-                </div>
+                {/* Background image for text tiles */}
+                {tile.type === 'text' && tile.bgImage && (
+                  <>
+                    <Image
+                      src={tile.bgImage}
+                      alt=""
+                      fill
+                      className="object-cover opacity-[0.12] transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-[0.22] group-hover:scale-[1.06]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                  </>
+                )}
+
+                {tile.type === 'image' ? (
+                  <>
+                    <Image
+                      src={tile.image}
+                      alt=""
+                      className={`${tile.imgClass} transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.08] group-hover:opacity-70`}
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-700 pointer-events-none" />
+                  </>
+                ) : (
+                  <>
+                    <div className="relative z-20">
+                      <p className="text-[10px] font-medium uppercase tracking-[0.2em] opacity-70 mb-4">{tile.label}</p>
+                      <h3 className="text-2xl md:text-3xl lg:text-[34px] font-bold tracking-[-0.02em] leading-[1.05]">
+                        {tile.title}
+                      </h3>
+                    </div>
+                    <p className={`relative z-20 text-lg md:text-xl ${tile.subText} leading-snug mt-6`}>
+                      {tile.desc}
+                    </p>
+                  </>
+                )}
               </motion.div>
-            )
-          })}
+            ))}
+          </motion.div>
         </div>
-      </div>
-    </section>
+      </section>
+    </MotionWrapper>
   );
 };
 
+// ==========================================
+// DATA SCIENCE / INFRASTRUCTURE SECTION
+// ==========================================
 export const DataScienceSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  const services = [
-    { title: 'Cloud Modernization.', desc: 'Migrate and operate cloud systems with high visibility and security.', icon: Cloud },
-    { title: 'DevOps Automation.', desc: 'Faster releases with automated CI/CD pipelines and live monitoring.', icon: GitBranch },
-    { title: 'Cost Optimization.', desc: 'Achieve predictable cloud costs and better infrastructure governance.', icon: DollarSign },
-    { title: 'Security Audits.', desc: 'Assess your current environment and identify critical security risks.', icon: Lock },
-    { title: 'Identity Management.', desc: 'Strengthen enterprise security with robust access control policies.', icon: Fingerprint },
-    { title: 'Digital Platforms.', desc: 'Build highly secure websites and applications aligned to business needs.', icon: Monitor },
-    { title: 'System Integration.', desc: 'Seamless integration between your core business systems for efficiency.', icon: Link2 },
-    { title: 'Managed IT Support.', desc: 'Reliable IT operations that let your core business focus on growth.', icon: Headphones },
+  const tiles = [
+    // Row 1
+    { type: 'text', label: '01', title: 'Cloud Modernization.', desc: 'Migrate and operate cloud systems with high visibility and security.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: banner5, span: 'md:col-span-3', height: 'h-[360px]' },
+    { type: 'image', image: banner5, span: 'md:col-span-3', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: mobileAppImage, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'text', label: '02', title: 'DevOps Automation.', desc: 'Faster releases with automated CI/CD pipelines.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: webCommandImage, span: 'md:col-span-2', height: 'h-[360px]' },
+    { type: 'image', image: webCommandImage, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
+
+    // Row 2
+    { type: 'image', image: banner1, span: 'md:col-span-4', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'text', label: '03', title: 'Cost Optimization.', desc: 'Predictable cloud costs and better governance.', color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/85', bgImage: banner2, span: 'md:col-span-2', height: 'h-[400px]' },
+    { type: 'image', image: banner2, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'text', label: '04', title: 'Security Audits.', desc: 'Identify critical security risks in your environment.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/85', bgImage: banner3, span: 'md:col-span-2', height: 'h-[400px]' },
+    { type: 'image', image: banner3, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
   ];
 
   return (
-    <section 
-      ref={containerRef} 
-      className="bg-white text-[#171321] font-sans w-full py-24 md:py-32 relative overflow-hidden border-t border-gray-100"
-    >
-      <div className="w-full pl-6 md:pl-12 lg:pl-20 max-w-[1500px] mx-auto">
-        <header className="mb-16 pr-6 md:pr-12 lg:pr-20">
-          <motion.h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Infrastructure and Operations.
-          </motion.h1>
-          <motion.p 
-            className="text-lg md:text-xl max-w-2xl leading-relaxed text-gray-600 mt-4"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15, duration: 0.6 }}
-          >
-            Modern infrastructure designed for reliability, uncompromised security, and strict cost control.
-          </motion.p>
-        </header>
+    <MotionWrapper>
+      <section className="bg-white text-black font-sans w-full py-32 border-t border-neutral-200">
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
+          <header className="max-w-5xl mx-auto text-center mb-20">
+            <motion.h1
+              className="text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[0.98]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              <span className="block text-black">Infrastructure</span>
+              <span className="block text-[#3E9C8F]">and operations</span>
+            </motion.h1>
+          </header>
 
-        <div 
-          className="flex overflow-x-auto gap-6 pb-12 pr-6 md:pr-12 lg:pr-20 snap-x snap-mandatory"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            const isPurple = index % 2 === 1; // Offset colors
-            return (
+          <motion.div
+            variants={gridVariants} initial="hidden" whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-3"
+          >
+            {tiles.map((tile, i) => (
               <motion.div
-                key={index}
-                className={`flex-none w-[85vw] md:w-[380px] snap-start flex flex-col justify-between p-10 rounded-[2rem] min-h-[380px] transition-transform duration-300 hover:-translate-y-2 ${
-                  isPurple ? 'bg-[#EFE8FF]' : 'bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100'
+                key={i}
+                variants={tileVariants}
+                className={`group relative overflow-hidden cursor-pointer ${tile.span} ${tile.height} ${
+                  tile.type === 'text' ? `${tile.color} ${tile.text} flex flex-col justify-between p-6 md:p-8` : ''
                 }`}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05, duration: 0.7 }}
               >
-                <div>
-                  <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[#171321] mb-6 pr-4">
-                    {service.title}
-                  </h3>
-                  <p className="text-lg md:text-xl text-gray-700 leading-snug">
-                    {service.desc}
-                  </p>
-                </div>
-                <div className="mt-12">
-                  <Icon className="w-12 h-12 text-[#171321]" strokeWidth={1.5} />
-                </div>
+                {tile.type === 'text' && tile.bgImage && (
+                  <>
+                    <Image
+                      src={tile.bgImage}
+                      alt=""
+                      fill
+                      className="object-cover opacity-[0.12] transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-[0.22] group-hover:scale-[1.06]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                  </>
+                )}
+
+                {tile.type === 'image' ? (
+                  <>
+                    <Image
+                      src={tile.image}
+                      alt=""
+                      className={`${tile.imgClass} transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.08] group-hover:opacity-70`}
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-700 pointer-events-none" />
+                  </>
+                ) : (
+                  <>
+                    <div className="relative z-20">
+                      <p className="text-[10px] font-medium uppercase tracking-[0.2em] opacity-70 mb-4">{tile.label}</p>
+                      <h3 className="text-2xl md:text-3xl lg:text-[34px] font-bold tracking-[-0.02em] leading-[1.05]">
+                        {tile.title}
+                      </h3>
+                    </div>
+                    <p className={`relative z-20 text-lg md:text-xl ${tile.subText} leading-snug mt-6`}>
+                      {tile.desc}
+                    </p>
+                  </>
+                )}
               </motion.div>
-            )
-          })}
+            ))}
+          </motion.div>
         </div>
-      </div>
-    </section>
+      </section>
+    </MotionWrapper>
   );
 };
 
+// ==========================================
+// WHY SECTION
+// ==========================================
 export const WhySection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const tiles = [
+    // Row 1
+    { type: 'text', label: '01', title: 'Enterprise Experience.', desc: 'Built by engineers with experience in high-level environments.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: banner4, span: 'md:col-span-3', height: 'h-[360px]' },
+    { type: 'image', image: banner4, span: 'md:col-span-3', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'text', label: '02', title: 'Embedded Security.', desc: 'Security is embedded in every solution.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: banner2, span: 'md:col-span-2', height: 'h-[360px]' },
+    { type: 'image', image: banner2, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: banner5, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
 
-  const reasons = [
-    { title: 'Enterprise Experience.', desc: 'Built by engineers with experience in high-level environments.', icon: Building2 },
-    { title: 'Embedded Security.', desc: 'Security is not an afterthought; it is embedded in every solution.', icon: Key },
-    { title: 'African Market Focus.', desc: 'Practical solutions specifically aligned to African markets.', icon: Globe2 },
-    { title: 'Clear Documentation.', desc: 'We provide clear scope, milestones, and full documentation.', icon: FileText },
-    { title: 'Outcome Driven.', desc: 'Our solutions are focused on delivering real business value.', icon: Target },
-    { title: 'Transparency.', desc: 'We value accountability and clear communication with our partners.', icon: Eye },
-    { title: 'Continuous Learning.', desc: 'We constantly improve our skills to offer the latest technology.', icon: GraduationCap },
-    { title: 'Scalable Systems.', desc: 'Every piece of code is designed to support your future growth.', icon: BarChart3 },
+    // Row 2
+    { type: 'image', image: webCommandImage, span: 'md:col-span-3', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'text', label: '03', title: 'African Market Focus.', desc: 'Practical solutions aligned to African markets.', color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/85', bgImage: banner3, span: 'md:col-span-3', height: 'h-[400px]' },
+    { type: 'text', label: '04', title: 'Clear Documentation.', desc: 'Full scope, milestones, and documentation.', color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/85', bgImage: banner1, span: 'md:col-span-2', height: 'h-[400px]' },
+    { type: 'image', image: banner3, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'text', label: '05', title: 'Outcome Driven.', desc: 'Focused on delivering real business value.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/85', bgImage: mobileAppImage, span: 'md:col-span-2', height: 'h-[400px]' },
   ];
 
   return (
-    <section 
-      ref={containerRef} 
-      className="bg-white text-[#171321] font-sans w-full py-24 md:py-32 relative overflow-hidden border-t border-gray-100"
-    >
-      <div className="w-full pl-6 md:pl-12 lg:pl-20 max-w-[1500px] mx-auto">
-        <header className="mb-16 pr-6 md:pr-12 lg:pr-20">
-          <motion.h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            What makes us different from Others.
-          </motion.h1>
-          <motion.p 
-            className="text-lg md:text-xl max-w-2xl leading-relaxed text-gray-600 mt-4"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15, duration: 0.6 }}
-          >
-            Partner with a team that prioritizes engineering excellence and clear business outcomes.
-          </motion.p>
-        </header>
+    <MotionWrapper>
+      <section className="bg-white text-black font-sans w-full py-32 border-t border-neutral-200">
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
+          <header className="max-w-5xl mx-auto text-center mb-20">
+            <motion.h1
+              className="text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[0.98]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              <span className="block text-black">What makes us different</span>
+              <span className="block text-[#3E9C8F]">from others</span>
+            </motion.h1>
+          </header>
 
-        <div 
-          className="flex overflow-x-auto gap-6 pb-12 pr-6 md:pr-12 lg:pr-20 snap-x snap-mandatory"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          {reasons.map((reason, index) => {
-            const Icon = reason.icon;
-            const isPurple = index % 2 === 0;
-            return (
+          <motion.div
+            variants={gridVariants} initial="hidden" whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-3"
+          >
+            {tiles.map((tile, i) => (
               <motion.div
-                key={index}
-                className={`flex-none w-[85vw] md:w-[380px] snap-start flex flex-col justify-between p-10 rounded-[2rem] min-h-[380px] transition-transform duration-300 hover:-translate-y-2 ${
-                  isPurple ? 'bg-[#EFE8FF]' : 'bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100'
+                key={i}
+                variants={tileVariants}
+                className={`group relative overflow-hidden cursor-pointer ${tile.span} ${tile.height} ${
+                  tile.type === 'text' ? `${tile.color} ${tile.text} flex flex-col justify-between p-6 md:p-8` : ''
                 }`}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05, duration: 0.7 }}
               >
-                <div>
-                  <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[#171321] mb-6 pr-4">
-                    {reason.title}
-                  </h3>
-                  <p className="text-lg md:text-xl text-gray-700 leading-snug">
-                    {reason.desc}
-                  </p>
-                </div>
-                <div className="mt-12">
-                  <Icon className="w-12 h-12 text-[#171321]" strokeWidth={1.5} />
-                </div>
+                {tile.type === 'text' && tile.bgImage && (
+                  <>
+                    <Image
+                      src={tile.bgImage}
+                      alt=""
+                      fill
+                      className="object-cover opacity-[0.12] transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-[0.22] group-hover:scale-[1.06]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                  </>
+                )}
+
+                {tile.type === 'image' ? (
+                  <>
+                    <Image
+                      src={tile.image}
+                      alt=""
+                      className={`${tile.imgClass} transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.08] group-hover:opacity-70`}
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-700 pointer-events-none" />
+                  </>
+                ) : (
+                  <>
+                    <div className="relative z-20">
+                      <p className="text-[10px] font-medium uppercase tracking-[0.2em] opacity-70 mb-4">{tile.label}</p>
+                      <h3 className="text-2xl md:text-3xl lg:text-[34px] font-bold tracking-[-0.02em] leading-[1.05]">
+                        {tile.title}
+                      </h3>
+                    </div>
+                    <p className={`relative z-20 text-lg md:text-xl ${tile.subText} leading-snug mt-6`}>
+                      {tile.desc}
+                    </p>
+                  </>
+                )}
               </motion.div>
-            )
-          })}
+            ))}
+          </motion.div>
         </div>
-      </div>
-      
-      {/* Hide scrollbar for webkit (Chrome/Safari) */}
-      <style dangerouslySetInnerHTML={{__html: `
-        ::-webkit-scrollbar {
-          display: none;
-        }
-      `}} />
-    </section>
+      </section>
+    </MotionWrapper>
   );
 };
