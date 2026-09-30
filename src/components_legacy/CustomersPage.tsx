@@ -1,247 +1,133 @@
 'use client';
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
-import { StaticImageData } from 'next/image';
+import { motion, useScroll, useSpring, AnimatePresence, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
-import { ArrowUpRight } from 'lucide-react';
 
 import blacksand1 from '../assets/blacksand-1.png';
-import blacksand2 from '../assets/blacksand-2.png';
-import blacksand3 from '../assets/blacksand-3.png';
-import blacksand4 from '../assets/blacksand-4.png';
 import nest1 from '../assets/nest-1.png';
-import nest2 from '../assets/nest-2.png';
-import nest3 from '../assets/nest-3.png';
-import nest4 from '../assets/nest-4.png';
-import nest5 from '../assets/nest-5.png';
-import nest6 from '../assets/nest-6.png';
 import sekelaweb1 from '../assets/sekelaweb-1.png';
-import sekelaweb2 from '../assets/sekelaweb-2.png';
-import sekelaweb3 from '../assets/sekelaweb-3.png';
 import nawwi1 from '../assets/nawwi-1.png';
-import nawwi2 from '../assets/nawwi-2.png';
-import nawwi3 from '../assets/nawwi-3.png';
-import nawwi4 from '../assets/nawwi-4.png';
-import nawwi5 from '../assets/nawwi-5.png';
-import nawwi6 from '../assets/nawwi-6.png';
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } }
-};
+const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
+  <MotionConfig reducedMotion="never">{children}</MotionConfig>
+);
 
-const itemVariants = {
+const textVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
 };
 
-// Individual Client Card
-const ClientCard = ({ 
-  client, 
-  images, 
-  description, 
-  index 
-}: { 
-  client: string; 
-  images: (string | StaticImageData)[]; 
-  description: string; 
-  index: number 
-}) => {
-  const [currentImage, setCurrentImage] = useState(0);
-
-  const nextSlide = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentImage((prev) => (prev + 1) % images.length);
-  };
-
-  const prevSlide = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 15000);
-    return () => clearInterval(interval);
-  }, [images.length]);
-
-  return (
-    <motion.div 
-      variants={itemVariants}
-      className="relative w-full h-[70vh] md:h-[80vh] overflow-hidden rounded-[2rem] bg-neutral-50"
-    >
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentImage}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
-          className="absolute inset-0"
-        >
-          <Image
-            src={images[currentImage]}
-            alt={`${client} showcase ${currentImage + 1}`}
-            fill
-            priority
-            className="object-cover object-center opacity-90"
-          />
-        </motion.div>
-      </AnimatePresence>
-      
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-[1]" />
-
-      {/* Client info - bottom left like the sections */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-8 md:bottom-12 left-8 md:left-12 z-10 max-w-xl"
-      >
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-          {client}
-        </h2>
-        <p className="mt-3 text-sm md:text-base text-gray-200 leading-relaxed max-w-lg">
-          {description}
-        </p>
-      </motion.div>
-
-      {/* Navigation buttons */}
-      <button 
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white transition-all duration-200 rounded-full border border-white/20"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-        </svg>
-      </button>
-
-      <button 
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white transition-all duration-200 rounded-full border border-white/20"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 md:w-6 md:h-6">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-        </svg>
-      </button>
-
-      {/* Slide indicator dots */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-        {images.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={(e) => {
-              e.stopPropagation();
-              setCurrentImage(idx);
-            }}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              idx === currentImage ? 'bg-white w-6' : 'bg-white/40'
-            }`}
-          />
-        ))}
-      </div>
-    </motion.div>
-  );
-};
+const SLIDE_DURATION = 10000;
 
 export const CustomersPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
+  const [currentClient, setCurrentClient] = useState(0);
+  const [progressKey, setProgressKey] = useState(0);
+
   const clients = [
-    { 
-      client: "Blacksand Adventures", 
-      images: [blacksand1, blacksand2, blacksand3, blacksand4], 
-      description: "A premium adventure tourism platform revolutionizing how travelers discover and book exclusive African safari experiences. Built with real-time availability, immersive previews, and seamless payment integration." 
-    },
-    { 
-      client: "Travel Nest Africa", 
-      images: [nest1, nest2, nest3, nest4, nest5, nest6], 
-      description: "An all-in-one travel management ecosystem connecting local operators with global travelers. Features AI-powered itinerary generation, dynamic pricing, and a comprehensive vendor dashboard." 
-    },
-    { 
-      client: "Sekela POS", 
-      images: [sekelaweb1, sekelaweb2, sekelaweb3], 
-      description: "A next-generation point-of-sale system designed for African retail businesses. Inventory management, and real-time analytics dashboard." 
-    },
-    { 
-      client: "Nawwi Wellness", 
-      images: [nawwi1, nawwi2, nawwi3, nawwi4, nawwi5, nawwi6], 
-      description: "Luxury scent-led wellness from the heart of Tanzania. Handcrafted candles and immersive sensory experiences using premium coconut-soy wax and locally sourced essential oils. Sustainable, plastic-free packaging supporting local ethical agriculture in Tanzania." 
-    }
+    { client: 'Blacksand Adventures', image: blacksand1 },
+    { client: 'Travel Nest Africa', image: nest1 },
+    { client: 'Sekela POS', image: sekelaweb1 },
+    { client: 'Nawwi Wellness', image: nawwi1 },
   ];
 
+  const activeClient = clients[currentClient];
+
+  const goToClient = (idx: number) => {
+    setCurrentClient(idx);
+    setProgressKey((k) => k + 1);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentClient((prev) => {
+        setProgressKey((k) => k + 1);
+        return (prev + 1) % clients.length;
+      });
+    }, SLIDE_DURATION);
+    return () => clearInterval(interval);
+  }, [clients.length]);
+
   return (
-    <section 
-      ref={containerRef} 
-      className="bg-white text-[#171321] font-sans w-full overflow-hidden relative py-24"
-    >
-      <motion.div 
-        className="fixed top-0 left-0 right-0 h-[2px] bg-[#171321] z-[100] origin-left" 
-        style={{ scaleX }} 
-      />
+    <MotionWrapper>
+      <section
+        ref={containerRef}
+        className="bg-white text-black font-sans w-full pt-32 pb-32 relative overflow-hidden"
+      >
+        <motion.div
+          className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left"
+          style={{ scaleX }}
+        />
 
-      <div className="w-full max-w-[1500px] mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-12 lg:gap-24 relative z-10">
-        
-        {/* Left Sidebar Column */}
-        <div className="w-full lg:w-1/4 xl:w-1/5 flex flex-col gap-10 lg:sticky top-32 h-fit">
-          <div>
-            <h3 className="text-sm font-medium text-[#171321]">Clients</h3>
-            <p className="text-sm text-neutral-500 mt-1">Our partners</p>
-          </div>
-          <a href="mailto:hello@antera.co.tz" className="flex items-center gap-2 text-base font-medium border-b border-[#171321] w-fit pb-1 hover:opacity-60 transition-opacity">
-            Work With Us <ArrowUpRight className="w-4 h-4" />
-          </a>
-        </div>
-
-        {/* Right Content Column */}
-        <div className="w-full lg:w-3/4 xl:w-4/5 flex flex-col gap-24">
-          
-          {/* Header */}
-          <header className="max-w-4xl">
-            <motion.h1 
-              className="text-5xl md:text-6xl lg:text-[72px] font-normal tracking-[-0.02em] leading-[1.05]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
+          <header className="max-w-[1400px] mx-auto text-center mb-16">
+            <motion.h1
+              className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              The Companies We Work and Collaborate With.
+              <span className="block text-black">Happy</span>
+              <span className="block text-[#3E9C8F]">clients</span>
             </motion.h1>
-            <motion.p 
-              className="text-xl md:text-2xl leading-[1.6] text-neutral-800 mt-8 max-w-3xl"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15, duration: 0.6 }}
-            >
-              We are solving complex problems across all industries in days, not years.
-            </motion.p>
           </header>
-
-          {/* Client Cards */}
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="flex flex-col gap-12 md:gap-16"
-          >
-            {clients.map((client, index) => (
-              <ClientCard 
-                key={client.client} 
-                client={client.client} 
-                images={client.images} 
-                description={client.description} 
-                index={index} 
-              />
-            ))}
-          </motion.div>
-
         </div>
-      </div>
-    </section>
+
+        <div className="w-full px-6 md:px-12 mb-8 max-w-[1600px] mx-auto">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+            {clients.map((c, idx) => {
+              const isActive = currentClient === idx;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => goToClient(idx)}
+                  className={`relative overflow-hidden px-4 py-2 text-[14px] whitespace-nowrap rounded-[3px] border transition-colors duration-200 ${
+                    isActive
+                      ? 'bg-[#D9D9D9] border-[#D9D9D9] text-[#111622]'
+                      : 'bg-white border-gray-200 text-gray-500 hover:text-[#111622] hover:border-gray-300'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      key={progressKey}
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: SLIDE_DURATION / 1000, ease: 'linear' }}
+                      className="absolute inset-0 bg-[#C4C4C4] origin-left"
+                      aria-hidden
+                    />
+                  )}
+                  <span className="relative z-10">{c.client}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="w-full flex justify-center">
+          <div className="relative w-[94%] md:w-[91%] lg:w-[89%] overflow-hidden bg-[#0A0A0A] shadow-[0_30px_80px_rgba(0,0,0,0.15)]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentClient}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="relative w-full"
+              >
+                <Image
+                  src={activeClient.image}
+                  alt={activeClient.client}
+                  priority
+                  className="w-full h-auto object-contain"
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </section>
+    </MotionWrapper>
   );
 };
 

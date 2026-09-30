@@ -1,159 +1,219 @@
 'use client';
-import React, { useRef, useState } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
+import Image from 'next/image';
 import { Play } from 'lucide-react';
-import {
-  Code,
-  Settings,
-  BarChart,
-  Search,
-  PenTool,
-  Rocket,
-  Lock,
-  Target,
-  Eye,
-  BookOpen,
-  CheckCircle,
-  Globe,
-  Users
-} from 'lucide-react';
+
+import mobileAppImage from '../assets/mobile-app.png';
+import webCommandImage from '../assets/web-command.png';
+import businessIntelligenceImage from '../assets/Business-Intelligence.png';
+import predictiveAnalyticsImage from '../assets/Predictive-Analytics.png';
+import realTimeDashboardsImage from '../assets/Real-Time-Dashboards.png';
+import customerInsightsImage from '../assets/Customer-Insights.png';
+import performanceMonitoringImage from '../assets/Performance-Monitoring.png';
+import decisionSupportSystemsImage from '../assets/Decision-Support-Systems.png';
+
+import heroVideo from '../assets/antera-video.mp4';
+
+const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
+  <MotionConfig reducedMotion="never">{children}</MotionConfig>
+);
+
+const gridVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+};
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] } },
+};
+const textVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
+};
 
 export const CompanyPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  
   const { scrollYProgress } = useScroll({ target: containerRef });
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
-  const handlePlay = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
-  // Card data for easier management
-  const cards = [
-    // Row 1: Mission & Reach
-    { id: 'mission', title: 'Our Mission', desc: 'To enable organizations across Africa to compete and grow in a digital-first world.', icon: Code, span: 'large' },
-    { id: 'reach', title: 'African Reach', desc: 'Delivering practical technology solutions tailored to African businesses.', icon: Globe, span: 'small' },
-    
-    // Row 2: Expertise & Applied AI
-    { id: 'expertise', title: 'Our Expertise', desc: 'Built by engineers with hands-on experience in cloud, AI, and cybersecurity.', icon: Users, span: 'small' },
-    { id: 'ai', title: 'Applied AI', desc: 'End-to-end AI solutions for enterprise transformation.', icon: BarChart, span: 'tall' },
-    { id: 'models', title: 'AI Model Integration', desc: 'Orchestrating existing AI models within secure data platforms tailored for enterprise contexts.', icon: Settings, span: 'small' },
-    
-    // Row 3: How We Work
-    { id: 'assess', title: 'Assess', desc: 'Understand business goals, systems, and risks before any work begins.', icon: Search, span: 'large' },
-    { id: 'design', title: 'Design', desc: 'Create secure, scalable, and practical architectures.', icon: PenTool, span: 'small' },
-    { id: 'deliver', title: 'Deliver', desc: 'Implement solutions in clear phases and milestones.', icon: Rocket, span: 'small' },
-    { id: 'optimize', title: 'Optimize', desc: 'Measure impact and continuously improve performance.', icon: Lock, span: 'large' },
-    
-    // Row 4: Values
-    { id: 'security', title: 'Security-first', desc: 'Every solution starts with protecting your data and systems.', icon: Lock, span: 'large' },
-    { id: 'outcome', title: 'Outcome-driven', desc: 'Practical solutions that deliver real business results.', icon: Target, span: 'small' },
-    { id: 'transparency', title: 'Transparency', desc: 'Clear communication and accountability at every step.', icon: Eye, span: 'small' },
-    { id: 'learning', title: 'Continuous learning', desc: 'Always improving and staying ahead of technology trends.', icon: BookOpen, span: 'small' },
-    { id: 'expertise2', title: 'Our Expertise', desc: 'Our team combines strong technical skills with practical business understanding across cloud, AI, data, and cybersecurity.', icon: CheckCircle, span: 'tall' },
-    { id: 'accountability', title: 'Accountability', desc: 'We take ownership of outcomes and stand by our work.', icon: Lock, span: 'large' },
+  const workCards = [
+    { title: 'Assess', description: 'Understand business goals, systems, and risks before any work begins.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: businessIntelligenceImage, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Design', description: 'Create secure, scalable, and practical architectures.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: mobileAppImage, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Deliver', description: 'Implement solutions in clear phases and milestones.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: realTimeDashboardsImage, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Optimize', description: 'Measure impact and continuously improve performance.', color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70', image: predictiveAnalyticsImage, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl' },
   ];
 
-  const getGridClass = (span: string) => {
-    switch(span) {
-      case 'large': return 'md:col-span-2';
-      case 'tall': return 'md:row-span-2';
-      default: return '';
-    }
-  };
+  const valueCards = [
+    { title: 'Security first', description: 'Every solution starts with protecting your data and systems.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: performanceMonitoringImage, span: 'md:col-span-7', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Outcome driven', description: 'Practical solutions that deliver real business results.', color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70', image: customerInsightsImage, span: 'md:col-span-5', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-20 w-[90%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Transparency', description: 'Clear communication and accountability at every step.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: decisionSupportSystemsImage, span: 'md:col-span-5', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Continuous learning', description: 'Always improving and staying ahead of technology trends.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: webCommandImage, span: 'md:col-span-7', height: 'h-[480px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Our expertise', description: 'Strong technical skills paired with practical business understanding across cloud, AI, data, and cybersecurity.', color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70', image: businessIntelligenceImage, span: 'md:col-span-8', height: 'h-[440px]', imgClass: 'absolute -bottom-24 -right-20 w-[70%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Accountability', description: 'We take ownership of outcomes and stand by our work.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: mobileAppImage, span: 'md:col-span-4', height: 'h-[440px]', imgClass: 'absolute -bottom-20 -right-16 w-[100%] h-auto object-contain drop-shadow-2xl' },
+  ];
 
   return (
-    <section 
-      ref={containerRef} 
-      className="bg-white text-[#171321] font-sans w-full py-24 md:py-32 relative overflow-hidden border-t border-gray-100"
-    >
-      <motion.div 
-        className="fixed top-0 left-0 right-0 h-[2px] bg-[#171321] z-[100] origin-left" 
-        style={{ scaleX }} 
-      />
+    <MotionWrapper>
+      <section ref={containerRef} className="bg-white text-black font-sans w-full pt-32 pb-32 scroll-smooth">
+        <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
-      <div className="w-full max-w-[1500px] mx-auto px-6 md:px-12 lg:px-20">
-        
-        {/* Header */}
-        <header className="mb-16">
-          <motion.h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Do it all with Antera.
-          </motion.h1>
-          <motion.p 
-            className="text-lg md:text-xl max-w-2xl leading-relaxed text-gray-600 mt-4"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.6 }}
-          >
-            Enabling organizations across Africa to compete and grow in a digital-first world.
-          </motion.p>
-        </header>
+        {/* ==========================================
+            HERO
+        ========================================== */}
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
+          <header className="max-w-5xl mx-auto text-center mb-16">
+            <motion.p
+              className="text-xs md:text-sm font-medium tracking-[0.25em]  text-neutral-500 mb-8"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              About Antera Technologies.
+            </motion.p>
 
-        {/* How We Work Title */}
-        <div className="mb-12">
-          <motion.h2 
-            className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[#171321]"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            How We Work.
-          </motion.h2>
+            <motion.h1
+              className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              <span className="block text-black">A technology partner</span>
+              <span className="block text-[#3E9C8F]">working from Africa for the world</span>
+            </motion.h1>
+
+            <motion.p
+              className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-10 max-w-2xl mx-auto"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+              transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Welcome to Antera. We started out as a specialist software and systems engineering team, crafting bespoke digital platforms for premium clients across Africa. That is still the core of the business, but we now offer a range of services across cloud, AI, data, and cybersecurity.
+            </motion.p>
+
+            {/* Fixed: scrolls to the Work section below */}
+            <motion.a
+              href="#how-we-work"
+              className="inline-flex items-center gap-4 mt-12 group cursor-pointer"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+              transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <span className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-black transition-colors duration-300 group-hover:bg-black">
+                <Play className="w-4 h-4 fill-black group-hover:fill-white transition-colors duration-300" />
+              </span>
+              <span className="text-base md:text-lg font-medium border-b-2 border-black pb-0.5">
+                Watch our showreel
+              </span>
+            </motion.a>
+          </header>
         </div>
 
-        {/* Bento Grid */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          {cards.map((card, index) => {
-            const Icon = card.icon;
-            const isPurple = index % 2 === 0;
-            const gridClass = getGridClass(card.span);
-            
-            return (
+        {/* ==========================================
+            HOW WE WORK — this is where showreel scrolls to
+        ========================================== */}
+        <div id="how-we-work" className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32 scroll-mt-24">
+          <header className="max-w-5xl mx-auto text-center mb-24">
+            <motion.h2
+              className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              <span className="block text-black">Four steps from</span>
+              <span className="block text-[#3E9C8F]">problem to outcome</span>
+            </motion.h2>
+          </header>
+
+          <motion.div
+            variants={gridVariants} initial="hidden" whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-3"
+          >
+            {workCards.map((card, i) => (
               <motion.div
-                key={card.id}
-                className={`${gridClass} flex flex-col justify-between p-10 min-h-[280px] transition-all duration-300 hover:-translate-y-2 ${
-                  isPurple 
-                    ? 'bg-[#EFE8FF] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)]' 
-                    : 'bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 hover:shadow-[0_12px_40px_rgb(0,0,0,0.12)]'
-                }`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05, duration: 0.7 }}
+                key={i}
+                variants={cardVariants}
+                className={`group relative overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text} ${card.span} ${card.height}`}
               >
-                <div>
-                  <Icon className="w-12 h-12 text-[#171321] mb-8" strokeWidth={1.5} />
-                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-[#171321] mb-4">
+                <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 ${card.imgClass}`}>
+                  <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
+                </div>
+
+                <div className="relative z-20 max-w-[85%]">
+                  <h3 className="text-3xl md:text-4xl lg:text-[44px] font-bold tracking-[-0.02em] leading-[1.05]">
                     {card.title}
                   </h3>
-                  <p className="text-lg text-gray-700 leading-snug">
-                    {card.desc}
-                  </p>
+
+                  <div className="overflow-hidden">
+                    <div className="max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                      <p className={`text-2xl md:text-3xl ${card.subText} mt-5 leading-[1.3] max-w-lg`}>
+                        {card.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
-            );
-          })}
-        </motion.div>
+            ))}
+          </motion.div>
+        </div>
 
-      </div>
-    </section>
+        {/* ==========================================
+            VALUES
+        ========================================== */}
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
+          <header className="max-w-5xl mx-auto text-center mb-24">
+            <motion.h2
+              className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              <span className="block text-black">Principles that</span>
+              <span className="block text-[#3E9C8F]">guide every project</span>
+            </motion.h2>
+          </header>
+
+          <motion.div
+            variants={gridVariants} initial="hidden" whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-3"
+          >
+            {valueCards.map((card, i) => (
+              <motion.div
+                key={i}
+                variants={cardVariants}
+                className={`group relative overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text} ${card.span} ${card.height}`}
+              >
+                <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 ${card.imgClass}`}>
+                  <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
+                </div>
+
+                <div className="relative z-20 max-w-[85%]">
+                  <h3 className="text-3xl md:text-4xl lg:text-[44px] font-bold tracking-[-0.02em] leading-[1.05]">
+                    {card.title}
+                  </h3>
+
+                  <div className="overflow-hidden">
+                    <div className="max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                      <p className={`text-2xl md:text-3xl ${card.subText} mt-5 leading-[1.3] max-w-lg`}>
+                        {card.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* ==========================================
+            CLOSING
+        ========================================== */}
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
+          <header className="max-w-5xl mx-auto text-center">
+            <motion.h2
+              className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              <span className="block text-black">Do it all</span>
+              <span className="block text-[#3E9C8F]">with Antera</span>
+            </motion.h2>
+          </header>
+        </div>
+
+      </section>
+    </MotionWrapper>
   );
 };
 

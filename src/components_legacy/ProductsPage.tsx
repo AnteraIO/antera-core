@@ -1,8 +1,8 @@
 'use client';
-
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 
 import hero1 from '@/assets/intelligence.jpg';
 import hero2 from '@/assets/data-architecture.jpg';
@@ -15,282 +15,249 @@ import orchestration from '@/assets/orchestration.jpg';
 import SDK from '@/assets/sdk.jpg';
 import architecture from '@/assets/data-architecture.jpg';
 
+const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
+  <MotionConfig reducedMotion="never">{children}</MotionConfig>
+);
+
+const gridVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+};
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] } },
+};
+const textVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
+};
+
+const SLIDE_DURATION = 6000;
+
 export const ProductsPage = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [progressKey, setProgressKey] = useState(0);
 
   const sliderItems = [
-    {
-      id: 'Infrastructure Audit',
-      label: 'SECURITY',
-      title: 'Systematic Mapping and Security Auditing of Distributed Digital Assets ↗',
-      image: hero2,
-    },
-    {
-      id: 'Cloud Orchestration',
-      label: 'INFRASTRUCTURE',
-      title: 'Auto-Scaling Deployments Optimized for Latency Across the African Continent ↗',
-      image: hero3,
-    },
-    {
-      id: 'Custom SDKs',
-      label: 'INTEGRATION',
-      title: 'Tailored Integration Kits for Rapid Deployment in Mobile and Web Environments ↗',
-      image: hero4,
-    },
-    {
-      id: 'Applied AI Services',
-      label: 'APPLIED AI',
-      title: 'End-to-End AI Solutions for Enterprise Transformation ↗',
-      image: hero5,
-    }
+    { id: 'Infrastructure Audit', label: 'SECURITY', title: 'Systematic Mapping and Security Auditing of Distributed Digital Assets', image: hero2 },
+    { id: 'Cloud Orchestration', label: 'INFRASTRUCTURE', title: 'Auto-Scaling Deployments Optimized for Latency Across the African Continent', image: hero3 },
+    { id: 'Custom SDKs', label: 'INTEGRATION', title: 'Tailored Integration Kits for Rapid Deployment in Mobile and Web Environments', image: hero4 },
+    { id: 'Applied AI Services', label: 'APPLIED AI', title: 'End-to-End AI Solutions for Enterprise Transformation', image: hero5 },
   ];
 
   const capabilities = [
-    {
-      id: '1',
-      title: 'Audit',
-      desc: 'Systematic mapping and security auditing of distributed digital assets across your entire infrastructure.',
-      image: Audit
-    },
-    {
-      id: '2',
-      title: 'Cloud',
-      desc: 'Auto-scaling deployments optimized for latency across the African continent, built to handle peak loads.',
-      image: appliedAI
-    },
-    {
-      id: '3',
-      title: 'SDKs',
-      desc: 'Tailored integration kits for rapid deployment in mobile and web environments with native bindings.',
-      image: SDK
-    },
-    {
-      id: '4',
-      title: 'Orchestration',
-      desc: 'Integrating and orchestrating existing AI models within secure data platforms with custom governance and workflows.',
-      image: orchestration
-    }
+    { title: 'Audit', description: 'Systematic mapping and security auditing of distributed digital assets across your entire infrastructure.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: Audit, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Cloud', description: 'Auto-scaling deployments optimized for latency across the African continent, built to handle peak loads.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: appliedAI, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'SDKs', description: 'Tailored integration kits for rapid deployment in mobile and web environments with native bindings.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: SDK, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Orchestration', description: 'Integrating and orchestrating existing AI models within secure data platforms with custom governance and workflows.', color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70', image: orchestration, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl' },
   ];
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % sliderItems.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + sliderItems.length) % sliderItems.length);
+  const goToSlide = (idx: number) => {
+    setCurrentSlide(idx);
+    setProgressKey((k) => k + 1);
+  };
 
-  // Auto-slide every 6 seconds
+  const nextSlide = () => goToSlide((currentSlide + 1) % sliderItems.length);
+  const prevSlide = () => goToSlide((currentSlide - 1 + sliderItems.length) % sliderItems.length);
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % sliderItems.length);
-    }, 6000);
-
+      setCurrentSlide((prev) => {
+        setProgressKey((k) => k + 1);
+        return (prev + 1) % sliderItems.length;
+      });
+    }, SLIDE_DURATION);
     return () => clearInterval(interval);
   }, [sliderItems.length]);
 
   return (
-    <main className="min-h-screen bg-white text-[#111622] font-sans selection:bg-[#111622] selection:text-white pt-[140px] md:pt-[160px] pb-32 overflow-hidden">
+    <MotionWrapper>
+      <section ref={containerRef} className="bg-white text-black font-sans w-full pt-32 pb-32 relative overflow-hidden">
+        <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
-      {/* Top Filter Pills Bar synced with slider */}
-      <div className="w-full px-6 md:px-12 mb-6 max-w-[1440px] mx-auto">
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 scrollbar-none">
-          {sliderItems.map((item, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentSlide(idx)}
-              className={`px-4 py-2 text-[13px] transition-colors whitespace-nowrap rounded-sm ${
-                currentSlide === idx
-                  ? 'bg-[#EAEAEA] text-[#111622] font-medium'
-                  : 'text-gray-500 bg-transparent hover:bg-[#F4F4F4]'
-              }`}
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
+          <header className="max-w-[1400px] mx-auto text-center mb-16">
+            <motion.h1
+              className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              {item.id}
-            </button>
-          ))}
-          <button className="px-4 py-2 text-[13px] text-gray-500 bg-transparent hover:bg-[#F4F4F4] transition-colors whitespace-nowrap rounded-sm">
-            SEE ALL
-          </button>
+              <span className="block text-black">Our products power</span>
+              <span className="block text-[#3E9C8F]">real-time decisions</span>
+            </motion.h1>
+
+            <motion.p
+              className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-12 max-w-2xl mx-auto"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+              transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Our products power real-time, AI-driven decisions in critical commercial enterprises in East Africa, from the factory floors to the front lines.
+            </motion.p>
+          </header>
         </div>
-      </div>
 
-      {/* Full-width Carousel Slider */}
-      <div className="w-full overflow-hidden mb-24 relative">
-        <div
-          className="flex transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-          style={{ transform: `translateX(calc(50vw - 42.5vw - ${currentSlide * 85}vw))` }}
-        >
-          {sliderItems.map((item, idx) => {
-            const isActive = currentSlide === idx;
-            return (
-              <div
-                key={idx}
-                className="w-[85vw] flex-shrink-0 px-2 relative"
-                onClick={() => !isActive && setCurrentSlide(idx)}
-              >
-                {/* Increased height for bigger images */}
-                <div className={`relative w-full h-[450px] md:h-[700px] bg-[#111] overflow-hidden transition-all duration-700 cursor-pointer ${isActive ? 'opacity-100 scale-100' : 'opacity-40 scale-[0.98]'}`}>
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
+        <div className="w-full px-6 md:px-12 mb-6 max-w-[1600px] mx-auto">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+            {sliderItems.map((item, idx) => {
+              const isActive = currentSlide === idx;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => goToSlide(idx)}
+                  className={`relative overflow-hidden px-4 py-2 text-[14px] whitespace-nowrap rounded-[3px] border transition-colors duration-200 ${
+                    isActive
+                      ? 'bg-[#D9D9D9] border-[#D9D9D9] text-[#111622]'
+                      : 'bg-white border-gray-200 text-gray-500 hover:text-[#111622] hover:border-gray-300'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      key={progressKey}
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: SLIDE_DURATION / 1000, ease: 'linear' }}
+                      className="absolute inset-0 bg-[#C4C4C4] origin-left"
+                      aria-hidden
+                    />
+                  )}
+                  <span className="relative z-10">{item.id}</span>
+                </button>
+              );
+            })}
 
-                  {/* Overlay Box */}
-                  <div
-                    className={`absolute top-6 left-6 md:top-10 md:left-10 max-w-[320px] md:max-w-[420px] bg-[#22252a]/95 p-6 md:p-8 text-white shadow-2xl transition-opacity duration-500 delay-100 ${isActive ? 'opacity-100' : 'opacity-0'}`}
-                  >
-                    <p className="text-[11px] font-mono text-gray-400 uppercase tracking-widest mb-3 md:mb-4">
-                      {item.label}
-                    </p>
-                    <h3 className="text-lg md:text-[24px] font-normal leading-snug">
+            <div className="ml-auto pl-4 flex-shrink-0">
+              <button className="px-4 py-2 text-[14px] text-[#111622] bg-white border border-[#111622] hover:bg-[#111622] hover:text-white transition-colors whitespace-nowrap rounded-[3px]">
+                SEE ALL
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
+          <div className="relative w-full h-[500px] md:h-[700px] overflow-hidden bg-[#0A0A0A]">
+            {sliderItems.map((item, idx) => {
+              const isActive = currentSlide === idx;
+              return (
+                <div
+                  key={idx}
+                  onClick={() => !isActive && goToSlide(idx)}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                >
+                  <Image src={item.image} alt={item.title} fill className="object-cover" priority />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+
+                  <div className="absolute bottom-8 left-8 md:bottom-14 md:left-14 max-w-3xl text-white">
+                    <p className="text-[11px] font-medium uppercase tracking-[0.25em] opacity-70 mb-6">{item.label}</p>
+                    <h3 className="text-3xl md:text-5xl lg:text-[64px] font-bold tracking-[-0.03em] leading-[1.02]">
                       {item.title}
                     </h3>
                   </div>
 
-                  {/* Navigation Arrows */}
                   {isActive && (
                     <>
                       <button
                         onClick={(e) => { e.stopPropagation(); prevSlide(); }}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-[#111]/60 hover:bg-[#111] text-white flex items-center justify-center transition-colors"
+                        className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white hover:text-black text-white flex items-center justify-center transition-colors duration-300"
                       >
-                        <span className="text-lg">←</span>
+                        ←
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); nextSlide(); }}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-[#111]/60 hover:bg-[#111] text-white flex items-center justify-center transition-colors"
+                        className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white hover:text-black text-white flex items-center justify-center transition-colors duration-300"
                       >
-                        <span className="text-lg">→</span>
+                        →
                       </button>
                     </>
                   )}
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
 
-      {/* Hero Statement Header */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-28 mt-12">
-        <h1 className="text-[2.5rem] md:text-[3.75rem] lg:text-[4.5rem] leading-[1.05] font-medium tracking-tight text-[#111622] max-w-[1300px]">
-          Our products power real-time, AI-driven decisions in critical commercial enterprises in East Africa, from the factory floors to the front lines.
-        </h1>
-      </div>
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
+          <header className="max-w-[1400px] mx-auto text-center mb-24">
+            <motion.h2
+              className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              <span className="block text-black">Products we</span>
+              <span className="block text-[#3E9C8F]">build for you</span>
+            </motion.h2>
+          </header>
 
-      {/* Products Interactive Section */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-32">
-        <h2 className="text-3xl md:text-[2rem] font-normal tracking-tight text-[#111622] mb-12">
-          Our Products
-        </h2>
-
-        <div className="border-t border-gray-200">
-          {capabilities.map((item, index) => {
-            const isHovered = hoveredIndex === index;
-
-            return (
-              <div
-                key={item.id}
-                className={`group border-b border-gray-200 transition-colors duration-300 cursor-pointer ${
-                  isHovered ? 'bg-[#F9F9F9]' : 'bg-transparent'
-                }`}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
+          <motion.div
+            variants={gridVariants} initial="hidden" whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-3"
+          >
+            {capabilities.map((card, i) => (
+              <motion.div
+                key={i}
+                variants={cardVariants}
+                className={`group relative overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text} ${card.span} ${card.height}`}
               >
-                <div className="grid grid-cols-1 md:grid-cols-12 items-center py-10 md:py-14 min-h-[280px] px-2 md:px-6">
-
-                  {/* Left Column: Description & Number */}
-                  <div className="md:col-span-3 flex flex-col justify-between self-stretch py-2 h-full">
-                    <p className="text-[14.5px] text-gray-800 font-normal leading-snug pr-6 max-w-[260px]">
-                      {item.desc}
-                    </p>
-                    <p className="text-[13px] font-mono text-gray-500 mt-12 md:mt-auto tracking-wide">
-                      {item.id}
-                    </p>
-                  </div>
-
-                  {/* Center Column: Sideways Sliding Image */}
-                  <div className="md:col-span-4 flex justify-center items-center h-[280px] md:h-[320px] relative w-full overflow-hidden px-4 md:px-8">
-                    <AnimatePresence>
-                      {isHovered ? (
-                        <motion.div
-                          key="image-slide"
-                          initial={{ x: '-100%', opacity: 0 }}
-                          animate={{ x: 0, opacity: 1 }}
-                          exit={{ x: '100%', opacity: 0 }}
-                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                          className="absolute inset-0 w-full h-full px-4 md:px-8 py-2"
-                        >
-                          <div className="relative w-full h-full shadow-md">
-                            <Image
-                              src={item.image}
-                              alt={item.title}
-                              fill
-                              className="object-contain"
-                            />
-                          </div>
-                        </motion.div>
-                      ) : (
-                        <motion.div
-                          key="geometric-mark"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="w-full h-full flex items-center justify-center opacity-[0.03] select-none pointer-events-none"
-                        >
-                          <span className="text-[12rem] font-bold tracking-tighter text-[#111622] font-mono leading-none">
-                            {item.title.charAt(0)}
-                          </span>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Right Column: Giant Display Title */}
-                  <div className="md:col-span-5 flex justify-start md:justify-end items-center mt-6 md:mt-0">
-                    <h3 className="text-[4rem] md:text-[5.5rem] lg:text-[7.5rem] font-medium tracking-tight text-[#111622] leading-none">
-                      {item.title}
-                    </h3>
-                  </div>
-
+                <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 ${card.imgClass}`}>
+                  <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
                 </div>
-              </div>
-            );
-          })}
+
+                <div className="relative z-20 max-w-[85%]">
+                  <h3 className="text-3xl md:text-4xl lg:text-[44px] font-bold tracking-[-0.02em] leading-[1.05]">
+                    {card.title}
+                  </h3>
+
+                  <div className="overflow-hidden">
+                    <div className="max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                      <p className={`text-2xl md:text-3xl ${card.subText} mt-5 leading-[1.3] max-w-lg`}>
+                        {card.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-      </div>
 
-      {/* Bottom Closing Callout Card */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-0 border border-gray-200">
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
+          <header className="max-w-[1400px] mx-auto text-center">
+            <motion.h2
+              className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              <span className="block text-black">There is so much</span>
+              <span className="block text-[#3E9C8F]">left to build</span>
+            </motion.h2>
 
-          {/* Left Image */}
-          <div className="md:col-span-6 min-h-[400px] md:min-h-[550px] relative bg-gray-100">
-            <Image
-              src={hero1}
-              alt="ANTERA Engineering Field"
-              fill
-              className="object-cover"
-            />
-          </div>
-
-          {/* Right Callout Block */}
-          <div className="md:col-span-6 p-10 md:p-16 flex flex-col justify-center items-start bg-white">
-            <h3 className="text-3xl md:text-5xl font-medium tracking-tight text-[#111622] mb-6">
-              There is so much left to build
-            </h3>
-            <p className="text-[17px] text-gray-700 leading-relaxed max-w-md mb-10">
+            <motion.p
+              className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-12 max-w-2xl mx-auto"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+              transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
               ANTERA engineers deliver mission-critical outcomes for East Africa's most important institutions.
-            </p>
-            <button className="px-5 py-2.5 border border-gray-300 text-[11px] font-mono uppercase tracking-widest text-gray-600 hover:border-gray-900 hover:text-[#111622] transition-colors">
-              LEARN MORE
-            </button>
-          </div>
+            </motion.p>
 
+            <motion.div
+              className="mt-12"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+              transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Link
+                href="https://wa.me/255760984921"
+                target="_blank"
+                className="inline-flex items-center gap-4 text-base md:text-lg font-medium border-b-2 border-black pb-0.5 hover:opacity-60 transition-opacity"
+              >
+                Learn More
+              </Link>
+            </motion.div>
+          </header>
         </div>
-      </div>
 
-    </main>
+      </section>
+    </MotionWrapper>
   );
 };
 
