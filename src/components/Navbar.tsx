@@ -237,18 +237,16 @@ export const Navbar = () => {
               aria-label="Switch language"
               title={language === 'en' ? 'Kubadili kwenda Kiswahili' : 'Switch to English'}
               className={`
-                flex items-center justify-center px-3.5 h-[44px] backdrop-blur-md font-bold text-xs tracking-wider uppercase
-                transition-all rounded-sm gap-1.5 cursor-pointer select-none
+                flex items-center justify-center w-[44px] h-[44px] backdrop-blur-md
+                transition-all rounded-sm cursor-pointer select-none
                 ${isOpen ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' : iconBtn}
               `}
             >
-              <span className={language === 'sw' ? 'text-[#FA520F] font-extrabold underline underline-offset-4 decoration-2' : 'opacity-70'}>
-                SW
-              </span>
-              <span className="opacity-30">|</span>
-              <span className={language === 'en' ? 'text-[#FA520F] font-extrabold underline underline-offset-4 decoration-2' : 'opacity-70'}>
-                EN
-              </span>
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/744/744480.png"
+                alt="Language Switcher"
+                className="w-5 h-5 object-contain"
+              />
             </button>
 
             <button
