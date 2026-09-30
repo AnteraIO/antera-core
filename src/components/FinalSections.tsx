@@ -1,7 +1,7 @@
 'use client';
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
-import Image from 'next/image';
+import Image, { type StaticImageData } from 'next/image';
 
 import banner1 from '../assets/banner-1.png';
 import banner2 from '../assets/banner-2.png';
@@ -28,6 +28,29 @@ const textVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
 };
 
+type TextTile = {
+  type: 'text';
+  label: string;
+  title: string;
+  desc: string;
+  color: string;
+  text: string;
+  subText: string;
+  bgImage: StaticImageData;
+  span: string;
+  height: string;
+};
+
+type ImageTile = {
+  type: 'image';
+  image: StaticImageData;
+  span: string;
+  height: string;
+  imgClass: string;
+};
+
+type Tile = TextTile | ImageTile;
+
 // ==========================================
 // OPERATION SECTION
 // ==========================================
@@ -36,7 +59,7 @@ export const OperationSection = () => {
   const { scrollYProgress } = useScroll({ target: containerRef });
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
 
-  const tiles = [
+  const tiles: Tile[] = [
     // Row 1
     { type: 'text', label: '01', title: 'Assess.', desc: 'Understand your business goals, systems, and risks to find the best way forward.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/80', bgImage: banner1, span: 'md:col-span-2', height: 'h-[340px]' },
     { type: 'image', image: banner1, span: 'md:col-span-3', height: 'h-[340px]', imgClass: 'w-full h-full object-cover' },
@@ -130,7 +153,7 @@ export const OperationSection = () => {
 // DATA SCIENCE / INFRASTRUCTURE SECTION
 // ==========================================
 export const DataScienceSection = () => {
-  const tiles = [
+  const tiles: Tile[] = [
     // Row 1
     { type: 'text', label: '01', title: 'Cloud Modernization.', desc: 'Migrate and operate cloud systems with high visibility and security.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: banner5, span: 'md:col-span-3', height: 'h-[360px]' },
     { type: 'image', image: banner5, span: 'md:col-span-3', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
@@ -220,7 +243,7 @@ export const DataScienceSection = () => {
 // WHY SECTION
 // ==========================================
 export const WhySection = () => {
-  const tiles = [
+  const tiles: Tile[] = [
     // Row 1
     { type: 'text', label: '01', title: 'Enterprise Experience.', desc: 'Built by engineers with experience in high-level environments.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: banner4, span: 'md:col-span-3', height: 'h-[360px]' },
     { type: 'image', image: banner4, span: 'md:col-span-3', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },

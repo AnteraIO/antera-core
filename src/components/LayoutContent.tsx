@@ -3,7 +3,6 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import { Hero } from '@/components/Hero';
-import { PartnerTestimonials } from '@/components/PartnerTestimonials';
 
 export function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -17,7 +16,6 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
     <>
       <Hero />
       <main>{children}</main>
-      <PartnerTestimonials />
     </>
   );
 }
