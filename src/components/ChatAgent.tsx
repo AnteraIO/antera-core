@@ -5,9 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Mic, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getAnteraResponseStream } from '@/lib/deepseek';
-import Image from 'next/image';
 
 type Msg = { role: 'user' | 'model'; text: string; time: string };
+
+const BRUNO_ICON = 'https://cdn-icons-png.flaticon.com/128/3135/3135768.png';
 
 const getTime = () => new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
@@ -59,12 +60,10 @@ const Avatar = ({ size = 36 }: { size?: number }) => (
       className="absolute inset-[2px] rounded-full flex items-center justify-center overflow-hidden"
       style={{ background: '#000000', backdropFilter: 'blur(8px)' }}
     >
-      <Image
-        src="/antera-logo.jpeg"
-        alt="Antera AI"
-        width={size - 6}
-        height={size - 6}
-        className="object-cover rounded-full"
+      <img
+        src={BRUNO_ICON}
+        alt="Bruno"
+        style={{ width: size - 8, height: size - 8, objectFit: 'contain' }}
       />
     </div>
   </div>
@@ -289,8 +288,8 @@ const ChatAgent = () => {
       setIsLoading(false);
       
     } catch (err) {
-      console.error("Antera AI Error:", err);
-      const errorMsg = 'Antera AI is currently recalibrating. Please try again in a moment.';
+      console.error("Bruno AI Error:", err);
+      const errorMsg = 'Bruno is currently recalibrating. Please try again in a moment.';
       setMessages(prev => [...prev, { 
         role: 'model', 
         text: errorMsg, 
@@ -313,9 +312,15 @@ const ChatAgent = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex items-center gap-2 bg-black text-white px-4 py-3 rounded-full shadow-xl hover:bg-[#1A1A1A] transition-all"
+            aria-label="Chat with Bruno"
+            className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex items-center justify-center rounded-full shadow-xl bg-white hover:bg-gray-50 transition-all"
+            style={{ width: 96, height: 96 }}
           >
-            <span className="text-sm font-medium">Chat with Bruno</span>
+            <img
+              src={BRUNO_ICON}
+              alt="Bruno"
+              style={{ width: 96, height: 96, objectFit: 'contain' }}
+            />
           </motion.button>
         )}
       </AnimatePresence>
@@ -383,9 +388,6 @@ const ChatAgent = () => {
                 <div className="w-12 h-1.5 rounded-full bg-gray-400/40" />
               </div>
 
-              {/* NO DYNAMIC ISLAND. PURE GLASS TOP. */}
-              
-              {/* Messages area */}
               <div
                 ref={scrollRef}
                 className="relative z-10 flex-1 overflow-y-auto px-4 py-4 space-y-3"
@@ -569,15 +571,15 @@ const ChatAgent = () => {
                         <Send size={14} />
                       </motion.button>
                     ) : (
-                      <motion.span
+                      <motion.img
                         key="idle"
+                        src={BRUNO_ICON}
+                        alt="Bruno"
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         exit={{ scale: 0 }}
-                        className="text-[17px] select-none"
-                      >
-                        🤖
-                      </motion.span>
+                        style={{ width: 22, height: 22, objectFit: 'contain' }}
+                      />
                     )}
                   </AnimatePresence>
                 </div>

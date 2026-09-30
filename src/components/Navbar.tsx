@@ -1,68 +1,36 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import {
-  Menu,
-  X,
-  ArrowRight,
-  Mail,
-  Phone,
-  MessageCircle,
-} from 'lucide-react';
+import { ArrowRight, Mail, Phone, MessageCircle, Menu } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '../context/LanguageContext';
 
+const LANGUAGE_ICON = 'https://cdn-icons-png.flaticon.com/128/2200/2200326.png';
+const CLOSE_ICON = 'https://cdn-icons-png.flaticon.com/128/594/594598.png';
+
 const InstagramIcon = () => (
-  <motion.svg
-    width="20" height="20" viewBox="0 0 24 24" fill="none"
-    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-    whileHover={{ scale: 1.1 }} transition={{ type: 'spring', stiffness: 300 }}
-  >
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-  </motion.svg>
+  </svg>
 );
 
 const XIcon = () => (
-  <motion.svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
-    whileHover={{ scale: 1.1 }} transition={{ type: 'spring', stiffness: 300 }}
-  >
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </motion.svg>
+  </svg>
 );
 
 const LinkedinIcon = () => (
-  <motion.svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-    whileHover={{ scale: 1.1 }} transition={{ type: 'spring', stiffness: 300 }}
-  >
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
     <rect x="2" y="9" width="4" height="12"></rect>
     <circle cx="4" cy="4" r="2"></circle>
-  </motion.svg>
-);
-
-const YoutubeIcon = () => (
-  <motion.svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-    whileHover={{ scale: 1.1 }} transition={{ type: 'spring', stiffness: 300 }}
-  >
-    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
-    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
-  </motion.svg>
-);
-
-const FacebookIcon = () => (
-  <motion.svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-    whileHover={{ scale: 1.1 }} transition={{ type: 'spring', stiffness: 300 }}
-  >
-    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-  </motion.svg>
+  </svg>
 );
 
 export const Navbar = () => {
@@ -73,13 +41,17 @@ export const Navbar = () => {
   const { language, setLanguage, t } = useLanguage();
   const pathname = usePathname();
 
-  // Detect scroll — drives both the glass tint AND the banner auto-hide
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
 
   const navLinks = [
     { name: t('nav.products') || 'Products', href: '/products' },
@@ -91,9 +63,7 @@ export const Navbar = () => {
     { name: t('nav.company') || 'Company', href: '/company' },
   ];
 
-  const [blogLatestPosts, setBlogLatestPosts] = useState<
-    Array<{ title: string; href: string; desc: string }>
-  >([
+  const [blogLatestPosts, setBlogLatestPosts] = useState([
     {
       title: 'Antera Group Office',
       href: '/office',
@@ -113,7 +83,7 @@ export const Navbar = () => {
         if (res.ok) {
           const data = await res.json();
           if (Array.isArray(data) && data.length > 0) {
-            const mapped = data.map((post: any) => ({
+            const mapped = data.map((post) => ({
               title: post.title,
               href: `/blog/${post.slug}`,
               desc:
@@ -142,7 +112,6 @@ export const Navbar = () => {
     fetchLatestPosts();
   }, [t]);
 
-  // Glass tint swaps based on scroll position
   const glassBase = scrolled
     ? 'bg-white/60 backdrop-blur-2xl backdrop-saturate-180 border border-black/10 text-[#111622]'
     : 'bg-black/40 backdrop-blur-2xl backdrop-saturate-150 border border-white/15 text-white';
@@ -157,7 +126,6 @@ export const Navbar = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 font-sans pointer-events-none">
-      {/* Top Banner — solid dark, auto-hides on scroll */}
       <AnimatePresence initial={false}>
         {isBannerVisible && !scrolled && (
           <motion.div
@@ -175,17 +143,16 @@ export const Navbar = () => {
               </Link>
               <button
                 onClick={() => setIsBannerVisible(false)}
-                className="absolute right-4 md:right-6 text-gray-400 hover:text-white transition-colors"
                 aria-label="Close banner"
+                className="absolute right-4 md:right-6"
               >
-                <X size={16} />
+                <img src={CLOSE_ICON} alt="Close" width={16} height={16} />
               </button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Navbar wrapper */}
       <div className="px-3 md:px-5 pt-3 md:pt-4 pointer-events-auto">
         <div
           className={`
@@ -196,7 +163,6 @@ export const Navbar = () => {
               : `${glassBase} ${glassShadow}`}
           `}
         >
-          {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-shrink-0 z-50">
             <div className="relative w-6 h-6 rounded-full overflow-hidden grayscale brightness-200">
               <Image
@@ -216,7 +182,6 @@ export const Navbar = () => {
             </span>
           </Link>
 
-          {/* Right-side actions */}
           <div className="flex items-center gap-2 md:gap-3 z-50">
             <Link
               href="/solutions"
@@ -231,28 +196,21 @@ export const Navbar = () => {
               {t('nav.get_started') || 'Get Started'}
             </Link>
 
-            {/* Language Switch Button replacing Search Icon */}
             <button
               onClick={() => setLanguage(language === 'en' ? 'sw' : 'en')}
               aria-label="Switch language"
               title={language === 'en' ? 'Kubadili kwenda Kiswahili' : 'Switch to English'}
               className={`
-                flex items-center justify-center px-3.5 h-[44px] backdrop-blur-md font-bold text-xs tracking-wider uppercase
-                transition-all rounded-sm gap-1.5 cursor-pointer select-none
-                ${isOpen ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' : iconBtn}
+                flex items-center justify-center w-[44px] h-[44px] backdrop-blur-md
+                transition-all rounded-sm cursor-pointer select-none
+                ${isOpen ? 'bg-white/10 hover:bg-white/20 border border-white/20' : iconBtn}
               `}
             >
-              <span className={language === 'sw' ? 'text-[#FA520F] font-extrabold underline underline-offset-4 decoration-2' : 'opacity-70'}>
-                SW
-              </span>
-              <span className="opacity-30">|</span>
-              <span className={language === 'en' ? 'text-[#FA520F] font-extrabold underline underline-offset-4 decoration-2' : 'opacity-70'}>
-                EN
-              </span>
+              <img src={LANGUAGE_ICON} alt="Language" width={22} height={22} />
             </button>
 
             <button
-              aria-label="Menu"
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
               onClick={() => setIsOpen(!isOpen)}
               className={`
                 flex items-center justify-center w-[44px] h-[44px] backdrop-blur-md
@@ -260,180 +218,134 @@ export const Navbar = () => {
                 ${isOpen ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' : iconBtn}
               `}
             >
-              {isOpen ? <X className="w-5 h-5" strokeWidth={2} /> : <Menu className="w-5 h-5" strokeWidth={2} />}
+              {isOpen ? (
+                <img src={CLOSE_ICON} alt="Close" width={22} height={22} />
+              ) : (
+                <Menu className="w-5 h-5" strokeWidth={2} />
+              )}
             </button>
           </div>
         </div>
 
-        {/* Mega Menu */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="
-                mt-2 w-full rounded-md overflow-y-auto max-h-[calc(100vh-140px)] pb-16
+                mt-2 w-full rounded-md overflow-y-auto max-h-[calc(100vh-140px)]
                 bg-[#0e0e12]/95 backdrop-blur-2xl backdrop-saturate-150
                 border border-white/10
                 shadow-[0_20px_60px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.08)]
                 text-white
               "
             >
-              <div className="max-w-[1600px] mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
-                {/* Column 1: Navigation */}
-                <div className="lg:col-span-3">
-                  <ul className="flex flex-col gap-5 text-[22px] font-light">
-                    {navLinks.map((link) => (
-                      <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          onClick={() => setIsOpen(false)}
-                          className={`hover:text-[#FA520F] transition-colors ${
-                            pathname === link.href ? 'text-[#FA520F]' : 'text-white'
-                          }`}
-                        >
-                          {link.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Column 2: Latest News */}
-                <div className="lg:col-span-6 pr-8">
-                  <div className="flex justify-between items-center border-b border-white/10 pb-3 mb-6">
-                    <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
-                      {t('nav.latest_updates') || 'Latest Updates'}
-                    </span>
-                    <Link
-                      href="/blog"
-                      onClick={() => setIsOpen(false)}
-                      className="text-[10px] font-bold text-zinc-400 hover:text-white tracking-widest uppercase transition-colors flex items-center gap-1"
-                    >
-                      {t('nav.view_blog') || 'View Blog'} <ArrowRight className="w-3 h-3" />
-                    </Link>
+              <div className="max-w-[1600px] mx-auto px-6 md:px-10 py-12 md:py-16">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                  <div className="lg:col-span-5">
+                    <ul className="flex flex-col gap-4 text-[32px] md:text-[40px] lg:text-[44px] font-light leading-tight">
+                      {navLinks.slice(0, 3).map((link) => (
+                        <li key={link.href}>
+                          <Link
+                            href={link.href}
+                            onClick={() => setIsOpen(false)}
+                            className={`transition-colors ${
+                              pathname === link.href ? 'text-[#FA520F]' : 'hover:text-[#FA520F] text-white'
+                            }`}
+                          >
+                            {link.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {blogLatestPosts.map((post, i) => (
-                      <Link
-                        href={post.href}
-                        key={i}
-                        onClick={() => setIsOpen(false)}
-                        className="flex flex-col gap-3 group cursor-pointer"
-                      >
-                        <span className="text-[10px] font-bold text-[#FA520F] tracking-widest uppercase">
-                          {t('nav.featured_post') || 'Featured Post'}
-                        </span>
-                        <h3 className="text-lg font-medium leading-snug group-hover:text-[#FA520F] transition-colors">
-                          {post.title}
-                        </h3>
-                        <p className="text-sm text-zinc-400 leading-relaxed">{post.desc}</p>
-                        <span className="text-sm font-medium mt-1 group-hover:underline flex items-center gap-2 text-zinc-300">
-                          {t('nav.read_more') || 'Read More'} <ArrowRight className="w-4 h-4" />
-                        </span>
-                      </Link>
-                    ))}
+                  <div className="lg:col-span-4">
+                    <ul className="flex flex-col gap-4 text-[32px] md:text-[40px] lg:text-[44px] font-light leading-tight">
+                      {navLinks.slice(3).map((link) => (
+                        <li key={link.href}>
+                          <Link
+                            href={link.href}
+                            onClick={() => setIsOpen(false)}
+                            className={`transition-colors ${
+                              pathname === link.href ? 'text-[#FA520F]' : 'hover:text-[#FA520F] text-white'
+                            }`}
+                          >
+                            {link.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  <div className="flex justify-between items-center border-b border-white/10 pb-3 mt-12 mb-6">
-                    <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
-                      {t('nav.our_platforms') || 'Our Platforms'}
-                    </span>
-                    <Link
-                      href="/products"
-                      onClick={() => setIsOpen(false)}
-                      className="text-[10px] font-bold text-zinc-400 hover:text-white tracking-widest uppercase transition-colors flex items-center gap-1"
-                    >
-                      {t('nav.view_all_products') || 'View All Products'} <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  </div>
-                  <Link
-                    href="/solutions"
-                    onClick={() => setIsOpen(false)}
-                    className="w-full md:w-1/2 pr-4 group cursor-pointer block"
-                  >
-                    <div className="flex flex-col gap-3">
-                      <span className="text-[10px] font-bold text-zinc-400 tracking-widest uppercase">
-                        {t('nav.ai_solutions') || 'AI Solutions'}
-                      </span>
-                      <h3 className="text-lg font-medium leading-snug group-hover:text-[#FA520F] transition-colors">
-                        {t('nav.enterprise_ai_desc') || 'Enterprise AI & Digital Transformation'}
-                      </h3>
-                    </div>
-                  </Link>
-                </div>
-
-                {/* Column 3: Company */}
-                <div className="lg:col-span-3">
-                  <div className="flex justify-between items-center border-b border-white/10 pb-3 mb-6">
-                    <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
-                      {t('nav.company') || 'Company'}
-                    </span>
-                    <Link
-                      href="/company"
-                      onClick={() => setIsOpen(false)}
-                      className="text-[10px] font-bold text-zinc-400 hover:text-white tracking-widest uppercase transition-colors"
-                    >
-                      {t('nav.about_us') || 'About Us'} ↗
-                    </Link>
-                  </div>
-                  <p className="text-[15px] text-zinc-300 leading-relaxed mb-6">
-                    {t('nav.company_desc') || 'Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development for the modern African market.'}
-                  </p>
-
-                  <div className="border-b border-white/10 pb-3 mb-6">
-                    <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
-                      {t('nav.contact_socials') || 'Contact & Socials'}
-                    </span>
-                  </div>
-                  <ul className="flex flex-col gap-4 text-sm text-zinc-300">
-                    <li className="flex items-center gap-3">
-                      <Mail className="w-4 h-4 text-zinc-500 shrink-0" />
-                      <a href="mailto:info@antera.co.tz" className="hover:text-white transition-colors">
-                        info@antera.co.tz
-                      </a>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Phone className="w-4 h-4 text-zinc-500 shrink-0" />
-                      <a href="tel:+255774174921" className="hover:text-white transition-colors">
-                        +255 774 174 921
-                      </a>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <MessageCircle className="w-4 h-4 text-zinc-500 shrink-0" />
-                      <a
-                        href="https://wa.me/255760984921"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-white transition-colors"
-                      >
-                        +255 760 984 921
-                      </a>
-                    </li>
-                    <li className="flex flex-col gap-2 pt-2">
-                      <span className="text-zinc-500">{t('nav.follow_us') || 'Follow us:'}</span>
-                      <div className="flex flex-col gap-2 text-sm">
-                        <a href="https://instagram.com/antera_tz" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
-                          <InstagramIcon /> Instagram
-                        </a>
-                        <a href="https://twitter.com/antera_tz" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
-                          <XIcon /> X
-                        </a>
-                        <a href="https://linkedin.com/company/antera_tz" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
-                          <LinkedinIcon /> LinkedIn
-                        </a>
-                        <a href="https://youtube.com/@antera_tz" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
-                          <YoutubeIcon /> YouTube
-                        </a>
-                        <a href="https://facebook.com/antera_tz" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
-                          <FacebookIcon /> Facebook
-                        </a>
+                  <div className="lg:col-span-3">
+                    <div className="bg-white text-[#111622] rounded-sm p-8 md:p-10 min-h-[360px] flex flex-col items-center text-center justify-between relative overflow-hidden">
+                      <div className="absolute top-0 left-0 right-0 h-16 flex items-center justify-center pointer-events-none opacity-90">
+                        <svg viewBox="0 0 300 60" className="w-full h-full">
+                          <path d="M150 20 C140 5, 120 0, 110 10 C115 20, 130 22, 150 20 Z" fill="#7BAE4B" />
+                          <path d="M150 20 C160 5, 180 0, 190 10 C185 20, 170 22, 150 20 Z" fill="#4A90E2" />
+                          <ellipse cx="130" cy="12" rx="6" ry="9" fill="#F4B63F" transform="rotate(-20 130 12)" />
+                          <ellipse cx="170" cy="12" rx="6" ry="9" fill="#E85A28" transform="rotate(20 170 12)" />
+                          <ellipse cx="150" cy="8" rx="6" ry="9" fill="#7BAE4B" />
+                        </svg>
                       </div>
+
+                      <div className="pt-10">
+                        <h3 className="text-[32px] md:text-[38px] font-normal leading-[1.1] text-black">
+                          Talk to<br />Antera
+                        </h3>
+                        <p className="text-[14px] md:text-[15px] text-[#3a3a3a] leading-relaxed mt-4">
+                          Let's build something great together. Get in touch and see how we can help.
+                        </p>
+                      </div>
+
+                      <Link
+                        href="/solutions"
+                        onClick={() => setIsOpen(false)}
+                        className="mt-6 inline-flex items-center gap-2 bg-black hover:bg-[#1a1a1a] text-white text-[15px] font-semibold px-6 py-3.5 rounded-sm transition-colors"
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                        Get Started
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-14 pt-10 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                  <ul className="flex flex-col gap-4 text-[32px] md:text-[40px] lg:text-[44px] font-light leading-tight">
+                    <li>
+                      <Link href="/company" onClick={() => setIsOpen(false)} className="hover:text-[#FA520F] transition-colors text-white">About Us</Link>
+                    </li>
+                    <li>
+                      <Link href="/blog" onClick={() => setIsOpen(false)} className="hover:text-[#FA520F] transition-colors text-white">Media</Link>
+                    </li>
+                    <li>
+                      <Link href="/company" onClick={() => setIsOpen(false)} className="hover:text-[#FA520F] transition-colors text-white">Contact</Link>
                     </li>
                   </ul>
+
+                  <div className="flex items-center gap-3 md:justify-end">
+                    <a href="https://instagram.com/antera_tz" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 rounded-full border border-white/25 flex items-center justify-center text-white/80 hover:text-white hover:border-white transition-colors">
+                      <InstagramIcon />
+                    </a>
+                    <a href="https://twitter.com/antera_tz" target="_blank" rel="noopener noreferrer" aria-label="X" className="w-10 h-10 rounded-full border border-white/25 flex items-center justify-center text-white/80 hover:text-white hover:border-white transition-colors">
+                      <XIcon />
+                    </a>
+                    <a href="https://linkedin.com/company/antera_tz" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-10 h-10 rounded-full border border-white/25 flex items-center justify-center text-white/80 hover:text-white hover:border-white transition-colors">
+                      <LinkedinIcon />
+                    </a>
+                  </div>
+                </div>
+
+                <div className="mt-12 flex justify-center">
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    aria-label="Close menu"
+                  >
+                    <img src={CLOSE_ICON} alt="Close" width={72} height={72} />
+                  </button>
                 </div>
               </div>
             </motion.div>
