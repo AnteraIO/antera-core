@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  experimental: {
+    preloadEntriesOnStart: false,
+    webpackMemoryOptimizations: true,
+  },
 };
 
 export default nextConfig;
