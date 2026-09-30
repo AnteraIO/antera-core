@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useLanguage } from '../context/LanguageContext';
+
 import hero1 from '../assets/hero-1.jpg';
 import hero2 from '../assets/imac.jpg';
 import hero3 from '../assets/bot.jpg';
@@ -22,20 +24,83 @@ const SLIDE_DURATION = 6000;
 export const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [progressKey, setProgressKey] = useState(0);
+  const { language, t } = useLanguage();
+
+  const isSw = language === 'sw';
 
   const sliderItems = [
-    { id: 'Web Apps', label: 'ENTERPRISE 1', title: 'Enterprise Web Applications for Scale ↗', image: hero1 },
-    { id: 'Mobile Systems', label: 'CROSS-PLATFORM 2', title: 'Cross-Platform Mobile Solutions for East Africa ↗', image: hero2 },
-    { id: 'AI Agents', label: 'INTELLIGENCE 3', title: 'Autonomous Chatbots and Intelligent Agents ↗', image: hero3 },
-    { id: 'Data Analytics', label: 'PREDICTIVE 4', title: 'Predictive Models and Data Ecosystems ↗', image: hero4 },
-    { id: 'Dashboards', label: 'TELEMETRY 5', title: 'Real-Time Telemetry & Business Intelligence ↗', image: hero5 },
-    { id: 'Integration', label: 'ARCHITECTURE 6', title: 'Secure API Gateways and System Architecture ↗', image: hero6 },
-    { id: 'Cloud', label: 'INFRASTRUCTURE 7', title: 'Scalable Infrastructure & Cloud Deployments ↗', image: hero7 },
-    { id: 'Security', label: 'SOVEREIGNTY 8', title: 'Digital Sovereignty & Data Protection ↗', image: hero8 },
-    { id: 'Portals', label: 'MANAGEMENT 9', title: 'Custom Management Portals for NGOs ↗', image: hero9 },
-    { id: 'Automation', label: 'WORKFLOW 10', title: 'Workflow Automation for Small Teams ↗', image: hero10 },
-    { id: 'IoT Solutions', label: 'HARDWARE 11', title: 'Connecting Hardware to Cloud Analytics ↗', image: hero11 },
-    { id: 'Machine Learning', label: 'MODELS 12', title: 'Custom LLMs tailored for Tanzanian Markets ↗', image: hero12 },
+    {
+      id: isSw ? 'Wavuti' : 'Web Apps',
+      label: isSw ? 'BIASHARA 1' : 'ENTERPRISE 1',
+      title: isSw ? 'Programu za Wavuti za Biashara kwa Ukuzaji ↗' : 'Enterprise Web Applications for Scale ↗',
+      image: hero1
+    },
+    {
+      id: isSw ? 'Mifumo ya Simu' : 'Mobile Systems',
+      label: isSw ? 'MIFUMO YA SIMU 2' : 'CROSS-PLATFORM 2',
+      title: isSw ? 'Programu za Simu za Majukwaa Mbalimbali kwa Afrika Mashariki ↗' : 'Cross-Platform Mobile Solutions for East Africa ↗',
+      image: hero2
+    },
+    {
+      id: isSw ? 'Wakala wa AI' : 'AI Agents',
+      label: isSw ? 'AKILI BANDIA 3' : 'INTELLIGENCE 3',
+      title: isSw ? 'Wakala wa Mazungumzo na Mifumo ya Akili Bandia ↗' : 'Autonomous Chatbots and Intelligent Agents ↗',
+      image: hero3
+    },
+    {
+      id: isSw ? 'Uchambuzi wa Data' : 'Data Analytics',
+      label: isSw ? 'UCHAMBUZI 4' : 'PREDICTIVE 4',
+      title: isSw ? 'Mifumo ya Kutabiri na Majukwaa ya Data ↗' : 'Predictive Models and Data Ecosystems ↗',
+      image: hero4
+    },
+    {
+      id: isSw ? 'Dashibodi' : 'Dashboards',
+      label: isSw ? 'TAKWIMU 5' : 'TELEMETRY 5',
+      title: isSw ? 'Takwimu za Muda Halisi & Akili ya Biashara ↗' : 'Real-Time Telemetry & Business Intelligence ↗',
+      image: hero5
+    },
+    {
+      id: isSw ? 'Ujumuishaji' : 'Integration',
+      label: isSw ? 'USANIFU 6' : 'ARCHITECTURE 6',
+      title: isSw ? 'Njia Salama za API na Usanifu wa Mifumo ↗' : 'Secure API Gateways and System Architecture ↗',
+      image: hero6
+    },
+    {
+      id: isSw ? 'Wingu' : 'Cloud',
+      label: isSw ? 'MIUNDOMBINU 7' : 'INFRASTRUCTURE 7',
+      title: isSw ? 'Miundombinu Inayokua & Deployments za Wingu ↗' : 'Scalable Infrastructure & Cloud Deployments ↗',
+      image: hero7
+    },
+    {
+      id: isSw ? 'Usalama' : 'Security',
+      label: isSw ? 'ULINZI WA DATA 8' : 'SOVEREIGNTY 8',
+      title: isSw ? 'Ukimiliki wa Kidijitali & Ulinzi wa Data ↗' : 'Digital Sovereignty & Data Protection ↗',
+      image: hero8
+    },
+    {
+      id: isSw ? 'Tovuti' : 'Portals',
+      label: isSw ? 'USIMAMIZI 9' : 'MANAGEMENT 9',
+      title: isSw ? 'Tovuti Maalum za Usimamizi kwa Mashirika ↗' : 'Custom Management Portals for NGOs ↗',
+      image: hero9
+    },
+    {
+      id: isSw ? 'Kazi Otomatiki' : 'Automation',
+      label: isSw ? 'MTIRIRIKO 10' : 'WORKFLOW 10',
+      title: isSw ? 'Kurahisisha Mtiririko wa Kazi kwa Timu Ndogo ↗' : 'Workflow Automation for Small Teams ↗',
+      image: hero10
+    },
+    {
+      id: isSw ? 'Suluhisho za IoT' : 'IoT Solutions',
+      label: isSw ? 'VIFAA 11' : 'HARDWARE 11',
+      title: isSw ? 'Kuunganisha Vifaa na Uchambuzi wa Wingu ↗' : 'Connecting Hardware to Cloud Analytics ↗',
+      image: hero11
+    },
+    {
+      id: isSw ? 'Ujifunzaji Mashine' : 'Machine Learning',
+      label: isSw ? 'MIFUMO 12' : 'MODELS 12',
+      title: isSw ? 'Mifumo ya LLMs Maalum kwa Masoko ya Tanzania ↗' : 'Custom LLMs tailored for Tanzanian Markets ↗',
+      image: hero12
+    },
   ];
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % sliderItems.length);
@@ -79,7 +144,11 @@ export const Hero = () => {
           className="relative z-10 flex flex-col items-center justify-center px-6 mt-16 text-center"
         >
           <h1 className="text-[42px] md:text-[64px] lg:text-[85px] font-medium leading-[1.05] tracking-tight text-white max-w-5xl">
-            We Build Sovereign AI Systems<br />for Every Decision
+            {isSw ? (
+              <>Tunajenga Mifumo Huru ya AI<br />kwa Kila Maamuzi</>
+            ) : (
+              <>We Build Sovereign AI Systems<br />for Every Decision</>
+            )}
           </h1>
         </motion.div>
       </section>
@@ -123,7 +192,7 @@ export const Hero = () => {
             {/* SEE ALL */}
             <div className="ml-auto pl-4 flex-shrink-0">
               <button className="px-4 py-2 text-[14px] text-[#111622] bg-white border border-[#111622] hover:bg-[#111622] hover:text-white transition-colors whitespace-nowrap rounded-[3px]">
-                SEE ALL
+                {t('hero.see_all') || (isSw ? 'TAZAMA ZOTE' : 'SEE ALL')}
               </button>
             </div>
           </div>

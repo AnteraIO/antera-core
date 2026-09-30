@@ -8,7 +8,6 @@ import {
   Mail,
   Phone,
   MessageCircle,
-  Search,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
@@ -98,12 +97,12 @@ export const Navbar = () => {
     {
       title: 'Antera Group Office',
       href: '/office',
-      desc: 'Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development',
+      desc: t('nav.office_desc') || 'Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development',
     },
     {
       title: 'Introducing Search Toolkit',
       href: '/blog',
-      desc: 'Modern Data Science and Model Implementations for Tanzanian Markets',
+      desc: t('nav.search_desc') || 'Modern Data Science and Model Implementations for Tanzanian Markets',
     },
   ]);
 
@@ -128,7 +127,7 @@ export const Navbar = () => {
                 {
                   title: 'Introducing Search Toolkit',
                   href: '/blog',
-                  desc: 'Modern Data Science and Model Implementations for Tanzanian Markets',
+                  desc: t('nav.search_desc') || 'Modern Data Science and Model Implementations for Tanzanian Markets',
                 },
               ]);
             } else {
@@ -141,7 +140,7 @@ export const Navbar = () => {
       }
     }
     fetchLatestPosts();
-  }, []);
+  }, [t]);
 
   // Glass tint swaps based on scroll position
   const glassBase = scrolled
@@ -171,8 +170,7 @@ export const Navbar = () => {
             <div className="bg-[#1f1e24] text-white text-[12px] md:text-[13px] py-2.5 px-10 md:px-14 flex justify-center items-center w-full relative border-b border-white/10">
               <Link href="/blog" className="flex items-center hover:text-gray-300 transition-colors text-center">
                 <span className="underline underline-offset-4 decoration-white/50 hover:decoration-white">
-                  We Build AI Solutions and Intelligent Systems for Tanzanian and African Markets | Call Us:
-                  +255 774 174 921 | WhatsApp: +255 760 984 921
+                  {t('nav.banner') || 'We Build AI Solutions and Intelligent Systems for Tanzanian and African Markets | Call Us: +255 774 174 921 | WhatsApp: +255 760 984 921'}
                 </span>
               </Link>
               <button
@@ -230,18 +228,27 @@ export const Navbar = () => {
                   : 'bg-[#111622] text-white hover:bg-[#1a2030] shadow-[0_2px_12px_rgba(0,0,0,0.15)]'}
               `}
             >
-              Get Started
+              {t('nav.get_started') || 'Get Started'}
             </Link>
 
+            {/* Language Switch Button replacing Search Icon */}
             <button
-              aria-label="Search"
+              onClick={() => setLanguage(language === 'en' ? 'sw' : 'en')}
+              aria-label="Switch language"
+              title={language === 'en' ? 'Kubadili kwenda Kiswahili' : 'Switch to English'}
               className={`
-                flex items-center justify-center w-[44px] h-[44px] backdrop-blur-md
-                transition-colors rounded-sm
+                flex items-center justify-center px-3.5 h-[44px] backdrop-blur-md font-bold text-xs tracking-wider uppercase
+                transition-all rounded-sm gap-1.5 cursor-pointer select-none
                 ${isOpen ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' : iconBtn}
               `}
             >
-              <Search className="w-4 h-4" strokeWidth={2} />
+              <span className={language === 'sw' ? 'text-[#FA520F] font-extrabold underline underline-offset-4 decoration-2' : 'opacity-70'}>
+                SW
+              </span>
+              <span className="opacity-30">|</span>
+              <span className={language === 'en' ? 'text-[#FA520F] font-extrabold underline underline-offset-4 decoration-2' : 'opacity-70'}>
+                EN
+              </span>
             </button>
 
             <button
@@ -279,7 +286,7 @@ export const Navbar = () => {
                 <div className="lg:col-span-3">
                   <ul className="flex flex-col gap-5 text-[22px] font-light">
                     {navLinks.map((link) => (
-                      <li key={link.name}>
+                      <li key={link.href}>
                         <Link
                           href={link.href}
                           onClick={() => setIsOpen(false)}
@@ -298,14 +305,14 @@ export const Navbar = () => {
                 <div className="lg:col-span-6 pr-8">
                   <div className="flex justify-between items-center border-b border-white/10 pb-3 mb-6">
                     <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
-                      Latest Updates
+                      {t('nav.latest_updates') || 'Latest Updates'}
                     </span>
                     <Link
                       href="/blog"
                       onClick={() => setIsOpen(false)}
                       className="text-[10px] font-bold text-zinc-400 hover:text-white tracking-widest uppercase transition-colors flex items-center gap-1"
                     >
-                      View Blog <ArrowRight className="w-3 h-3" />
+                      {t('nav.view_blog') || 'View Blog'} <ArrowRight className="w-3 h-3" />
                     </Link>
                   </div>
 
@@ -318,14 +325,14 @@ export const Navbar = () => {
                         className="flex flex-col gap-3 group cursor-pointer"
                       >
                         <span className="text-[10px] font-bold text-[#FA520F] tracking-widest uppercase">
-                          Featured Post
+                          {t('nav.featured_post') || 'Featured Post'}
                         </span>
                         <h3 className="text-lg font-medium leading-snug group-hover:text-[#FA520F] transition-colors">
                           {post.title}
                         </h3>
                         <p className="text-sm text-zinc-400 leading-relaxed">{post.desc}</p>
                         <span className="text-sm font-medium mt-1 group-hover:underline flex items-center gap-2 text-zinc-300">
-                          Read More <ArrowRight className="w-4 h-4" />
+                          {t('nav.read_more') || 'Read More'} <ArrowRight className="w-4 h-4" />
                         </span>
                       </Link>
                     ))}
@@ -333,14 +340,14 @@ export const Navbar = () => {
 
                   <div className="flex justify-between items-center border-b border-white/10 pb-3 mt-12 mb-6">
                     <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
-                      Our Platforms
+                      {t('nav.our_platforms') || 'Our Platforms'}
                     </span>
                     <Link
                       href="/products"
                       onClick={() => setIsOpen(false)}
                       className="text-[10px] font-bold text-zinc-400 hover:text-white tracking-widest uppercase transition-colors flex items-center gap-1"
                     >
-                      View All Products <ArrowRight className="w-3 h-3" />
+                      {t('nav.view_all_products') || 'View All Products'} <ArrowRight className="w-3 h-3" />
                     </Link>
                   </div>
                   <Link
@@ -350,10 +357,10 @@ export const Navbar = () => {
                   >
                     <div className="flex flex-col gap-3">
                       <span className="text-[10px] font-bold text-zinc-400 tracking-widest uppercase">
-                        AI Solutions
+                        {t('nav.ai_solutions') || 'AI Solutions'}
                       </span>
                       <h3 className="text-lg font-medium leading-snug group-hover:text-[#FA520F] transition-colors">
-                        Enterprise AI & Digital Transformation
+                        {t('nav.enterprise_ai_desc') || 'Enterprise AI & Digital Transformation'}
                       </h3>
                     </div>
                   </Link>
@@ -363,24 +370,23 @@ export const Navbar = () => {
                 <div className="lg:col-span-3">
                   <div className="flex justify-between items-center border-b border-white/10 pb-3 mb-6">
                     <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
-                      Company
+                      {t('nav.company') || 'Company'}
                     </span>
                     <Link
                       href="/company"
                       onClick={() => setIsOpen(false)}
                       className="text-[10px] font-bold text-zinc-400 hover:text-white tracking-widest uppercase transition-colors"
                     >
-                      About Us ↗
+                      {t('nav.about_us') || 'About Us'} ↗
                     </Link>
                   </div>
                   <p className="text-[15px] text-zinc-300 leading-relaxed mb-6">
-                    Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development for
-                    the modern African market.
+                    {t('nav.company_desc') || 'Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development for the modern African market.'}
                   </p>
 
                   <div className="border-b border-white/10 pb-3 mb-6">
                     <span className="text-[10px] font-bold text-zinc-500 tracking-widest uppercase">
-                      Contact & Socials
+                      {t('nav.contact_socials') || 'Contact & Socials'}
                     </span>
                   </div>
                   <ul className="flex flex-col gap-4 text-sm text-zinc-300">
@@ -408,7 +414,7 @@ export const Navbar = () => {
                       </a>
                     </li>
                     <li className="flex flex-col gap-2 pt-2">
-                      <span className="text-zinc-500">Follow us:</span>
+                      <span className="text-zinc-500">{t('nav.follow_us') || 'Follow us:'}</span>
                       <div className="flex flex-col gap-2 text-sm">
                         <a href="https://instagram.com/antera_tz" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
                           <InstagramIcon /> Instagram

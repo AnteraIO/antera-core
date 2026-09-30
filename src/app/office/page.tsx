@@ -11,63 +11,37 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import officeBg from '@/assets/hero-2.jpg';
-
-const ArrowLink = ({ 
-  text, 
-  href, 
-  isEmail = false, 
-  isPhone = false 
-}: { 
-  text: string; 
-  href?: string; 
-  isEmail?: boolean;
-  isPhone?: boolean;
-}) => {
-  let linkHref = href || "#";
-  
-  if (isEmail && href) linkHref = `mailto:${href}`;
-  else if (isPhone && href) linkHref = `tel:${href}`;
-  
-  return (
-    <a 
-      href={linkHref}
-      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-[#171321] hover:text-[#171321]/70 transition-colors"
-      target={href?.startsWith('http') ? "_blank" : undefined}
-      rel={href?.startsWith('http') ? "noopener noreferrer" : undefined}
-    >
-      <span>{text}</span>
-      <ArrowUpRight className="w-4 h-4" />
-    </a>
-  );
-};
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function OfficePage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+  const { language } = useLanguage();
+  const isSw = language === 'sw';
 
   const officeCards = [
     {
       id: 'location',
       icon: MapPin,
-      title: 'Location',
+      title: isSw ? 'Mahali' : 'Location',
       content: 'Dar es Salaam, Tanzania',
-      link: { text: 'Get directions', href: 'https://maps.google.com/maps?q=Dar+es+Salaam,+Tanzania' },
+      link: { text: isSw ? 'Pata maelekezo' : 'Get directions', href: 'https://maps.google.com/maps?q=Dar+es+Salaam,+Tanzania' },
       span: 'large'
     },
     {
       id: 'hours',
       icon: Clock,
-      title: 'Operating Hours',
+      title: isSw ? 'Masaa ya Kazi' : 'Operating Hours',
       content: (
         <>
           <div className="flex justify-between text-base md:text-lg text-gray-700">
-            <span>MON to FRI</span>
+            <span>{isSw ? 'JUM hadi JUM' : 'MON to FRI'}</span>
             <span className="font-medium text-[#171321]">08:00 - 18:00 EAT</span>
           </div>
           <div className="flex justify-between text-base md:text-lg text-gray-700">
-            <span>SAT to SUN</span>
-            <span className="font-medium text-[#171321]">Closed (Remote Only)</span>
+            <span>{isSw ? 'JUM hadi JUM' : 'SAT to SUN'}</span>
+            <span className="font-medium text-[#171321]">{isSw ? 'Imefungwa (Mtandaoni Tu)' : 'Closed (Remote Only)'}</span>
           </div>
         </>
       ),
@@ -78,31 +52,31 @@ export default function OfficePage() {
       icon: Mail,
       title: 'Email',
       content: 'info@antera.co.tz',
-      link: { text: 'Send email', href: 'info@antera.co.tz', isEmail: true },
+      link: { text: isSw ? 'Tuma barua pepe' : 'Send email', href: 'info@antera.co.tz', isEmail: true },
       span: 'small'
     },
     {
       id: 'phone',
       icon: Phone,
-      title: 'Phone',
+      title: isSw ? 'Simu' : 'Phone',
       content: '+255 760 984 921',
-      link: { text: 'Call now', href: '+255760984921', isPhone: true },
+      link: { text: isSw ? 'Piga sasa' : 'Call now', href: '+255760984921', isPhone: true },
       span: 'small'
     },
     {
       id: 'connect',
       icon: Globe,
-      title: 'Connect',
-      content: 'Follow our journey across digital platforms and stay updated with the latest from Antera Group.',
-      link: { text: 'Visit website', href: 'https://antera.co.tz' },
+      title: isSw ? 'Ungana Nasi' : 'Connect',
+      content: isSw ? 'Tufuate kwenye majukwaa ya kidijitali na uendelee kupata taarifa za karibuni kutoka Antera Group.' : 'Follow our journey across digital platforms and stay updated with the latest from Antera Group.',
+      link: { text: isSw ? 'Tembelea tovuti' : 'Visit website', href: 'https://antera.co.tz' },
       span: 'tall'
     },
     {
       id: 'visit',
       icon: MapPin,
-      title: 'Visit Us',
-      content: 'Schedule a meeting with our team to discuss your next project or partnership opportunity.',
-      link: { text: 'Book appointment', href: 'https://calendly.com/antera-group/meeting' },
+      title: isSw ? 'Tutembelee' : 'Visit Us',
+      content: isSw ? 'Panga mkutano na timu yetu kujadili mradi wako unaofuata au fursa ya ushirikiano.' : 'Schedule a meeting with our team to discuss your next project or partnership opportunity.',
+      link: { text: isSw ? 'Weka miadi' : 'Book appointment', href: 'https://calendly.com/antera-group/meeting' },
       span: 'large'
     }
   ];
@@ -146,7 +120,7 @@ export default function OfficePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            Our Office.
+            {isSw ? 'Ofisi Yetu.' : 'Our Office.'}
           </motion.h1>
           <motion.p 
             className="text-lg md:text-xl max-w-2xl leading-relaxed text-gray-600 mt-4"
@@ -154,7 +128,7 @@ export default function OfficePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, duration: 0.6 }}
           >
-            Antera Group operational headquarters and engineering hub.
+            {isSw ? 'Makao makuu ya operesheni na kituo cha uhandisi cha Antera Group.' : 'Antera Group operational headquarters and engineering hub.'}
           </motion.p>
         </header>
 

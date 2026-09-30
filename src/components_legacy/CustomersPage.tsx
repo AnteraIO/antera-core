@@ -2,6 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
+import { useLanguage } from '@/context/LanguageContext';
 
 import blacksand1 from '../assets/blacksand-1.png';
 import nest1 from '../assets/nest-1.png';
@@ -23,6 +24,8 @@ export const CustomersPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+  const { language } = useLanguage();
+  const isSw = language === 'sw';
 
   const [currentClient, setCurrentClient] = useState(0);
   const [progressKey, setProgressKey] = useState(0);
@@ -68,8 +71,12 @@ export const CustomersPage = () => {
               className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">Happy</span>
-              <span className="block text-[#3E9C8F]">clients</span>
+              <span className="block text-black">
+                {isSw ? 'Wateja wetu' : 'Happy'}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {isSw ? 'wenye furaha' : 'clients'}
+              </span>
             </motion.h1>
           </header>
         </div>

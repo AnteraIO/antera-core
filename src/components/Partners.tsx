@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
+import { useLanguage } from '../context/LanguageContext';
 
 import awsLogo from '../assets/aws.png';
 import digitalOceanLogo from '../assets/digital-ocean.png';
@@ -26,6 +27,8 @@ const partners = [
 
 export const PartnersSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { language, t } = useLanguage();
+  const isSw = language === 'sw';
   const tripledPartners = [...partners, ...partners, ...partners];
 
   return (
@@ -57,7 +60,7 @@ export const PartnersSection = () => {
                 transform: 'rotate(180deg)',
               }}
             >
-              Tanzanian Best Software Engineers.
+              {t('partners.side_tag') || (isSw ? 'Mawazo Bora ya Waundaji wa Programu Tanzania.' : 'Tanzanian Best Software Engineers.')}
             </span>
           </motion.div>
 
@@ -68,8 +71,12 @@ export const PartnersSection = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="block text-black">Engineered with the best</span>
-            <span className="block text-[#3E9C8F]">powered by the best</span>
+            <span className="block text-black">
+              {t('partners.title_line1') || (isSw ? 'Imeundwa na walio bora' : 'Engineered with the best')}
+            </span>
+            <span className="block text-[#3E9C8F]">
+              {t('partners.title_line2') || (isSw ? 'inaendeshwa na walio bora' : 'powered by the best')}
+            </span>
           </motion.h1>
 
           <motion.p
@@ -79,7 +86,7 @@ export const PartnersSection = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            We are leveraging world-class infrastructure to deliver scalable, high-performance solutions.
+            {t('partners.desc') || (isSw ? 'Tunatumia miundombinu ya kiwango cha kimataifa kutoa suluhisho zinazoweza kukua na zenye utendaji wa juu.' : 'We are leveraging world-class infrastructure to deliver scalable, high-performance solutions.')}
           </motion.p>
         </header>
 
@@ -117,7 +124,9 @@ export const PartnersSection = () => {
             rel="noopener noreferrer"
             className="bg-[#EAEAEA] text-black p-8 md:p-10 flex items-center justify-between group cursor-pointer hover:bg-[#DCDCDC] transition-colors duration-200"
           >
-            <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">Request a Demo</h3>
+            <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
+              {t('partners.request_demo') || (isSw ? 'Omba Onyesho' : 'Request a Demo')}
+            </h3>
             <ArrowUpRight className="w-8 h-8 text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
           </a>
           <a
@@ -126,7 +135,9 @@ export const PartnersSection = () => {
             rel="noopener noreferrer"
             className="bg-[#1C1C1C] text-white p-8 md:p-10 flex items-center justify-between group cursor-pointer hover:bg-black transition-colors duration-200"
           >
-            <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">Start Building</h3>
+            <h3 className="text-3xl md:text-4xl font-semibold tracking-tight">
+              {t('partners.start_building') || (isSw ? 'Anza Kujenga' : 'Start Building')}
+            </h3>
             <ArrowUpRight className="w-8 h-8 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
           </a>
         </div>

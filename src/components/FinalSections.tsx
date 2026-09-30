@@ -2,6 +2,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image, { type StaticImageData } from 'next/image';
+import { useLanguage } from '../context/LanguageContext';
 
 import banner1 from '../assets/banner-1.png';
 import banner2 from '../assets/banner-2.png';
@@ -58,10 +59,17 @@ export const OperationSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+  const { language, t } = useLanguage();
+  const isSw = language === 'sw';
 
   const tiles: Tile[] = [
     // Row 1
-    { type: 'text', label: '01', title: 'Assess.', desc: 'Understand your business goals, systems, and risks to find the best way forward.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/80', bgImage: banner1, span: 'md:col-span-2', height: 'h-[340px]' },
+    {
+      type: 'text', label: '01',
+      title: isSw ? 'Tathmini.' : 'Assess.',
+      desc: isSw ? 'Kuelewa malengo, mifumo na hatari za biashara yako ili kupata njia bora ya kusonga mbele.' : 'Understand your business goals, systems, and risks to find the best way forward.',
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/80', bgImage: banner1, span: 'md:col-span-2', height: 'h-[340px]'
+    },
     { type: 'image', image: banner1, span: 'md:col-span-3', height: 'h-[340px]', imgClass: 'w-full h-full object-cover' },
     { type: 'image', image: banner2, span: 'md:col-span-3', height: 'h-[340px]', imgClass: 'w-full h-full object-cover' },
     { type: 'image', image: banner3, span: 'md:col-span-2', height: 'h-[340px]', imgClass: 'w-full h-full object-cover' },
@@ -69,10 +77,25 @@ export const OperationSection = () => {
 
     // Row 2
     { type: 'image', image: banner5, span: 'md:col-span-4', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
-    { type: 'text', label: '02', title: 'Design.', desc: 'Create secure, scalable architectures tailored to your needs.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: mobileAppImage, span: 'md:col-span-2', height: 'h-[400px]' },
+    {
+      type: 'text', label: '02',
+      title: isSw ? 'Sanifu.' : 'Design.',
+      desc: isSw ? 'Kutengeneza usanifu salama, unaokua kulingana na mahitaji yako halisi.' : 'Create secure, scalable architectures tailored to your needs.',
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: mobileAppImage, span: 'md:col-span-2', height: 'h-[400px]'
+    },
     { type: 'image', image: mobileAppImage, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
-    { type: 'text', label: '03', title: 'Deliver.', desc: 'Implement solutions in clear phases and milestones.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: webCommandImage, span: 'md:col-span-2', height: 'h-[400px]' },
-    { type: 'text', label: '04', title: 'Optimize.', desc: 'Measure impact and continuously improve.', color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/85', bgImage: banner3, span: 'md:col-span-2', height: 'h-[400px]' },
+    {
+      type: 'text', label: '03',
+      title: isSw ? 'Tekeleza.' : 'Deliver.',
+      desc: isSw ? 'Kutekeleza suluhisho katika awamu na hatua zilizowazi.' : 'Implement solutions in clear phases and milestones.',
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: webCommandImage, span: 'md:col-span-2', height: 'h-[400px]'
+    },
+    {
+      type: 'text', label: '04',
+      title: isSw ? 'Boresha.' : 'Optimize.',
+      desc: isSw ? 'Kupima matokeo na kuendelea kuboresha kwa muendelezo.' : 'Measure impact and continuously improve.',
+      color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/85', bgImage: banner3, span: 'md:col-span-2', height: 'h-[400px]'
+    },
   ];
 
   return (
@@ -87,8 +110,12 @@ export const OperationSection = () => {
               className="text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[0.98]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">How we operate</span>
-              <span className="block text-[#3E9C8F]">to serve you</span>
+              <span className="block text-black">
+                {t('ops.title_line1') || (isSw ? 'Jinsi tunavyofanya kazi' : 'How we operate')}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {t('ops.title_line2') || (isSw ? 'mtawalia kukuhudumia' : 'to serve you')}
+              </span>
             </motion.h1>
           </header>
 
@@ -153,19 +180,42 @@ export const OperationSection = () => {
 // DATA SCIENCE / INFRASTRUCTURE SECTION
 // ==========================================
 export const DataScienceSection = () => {
+  const { language, t } = useLanguage();
+  const isSw = language === 'sw';
+
   const tiles: Tile[] = [
     // Row 1
-    { type: 'text', label: '01', title: 'Cloud Modernization.', desc: 'Migrate and operate cloud systems with high visibility and security.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: banner5, span: 'md:col-span-3', height: 'h-[360px]' },
+    {
+      type: 'text', label: '01',
+      title: isSw ? 'Uboreshaji wa Wingu.' : 'Cloud Modernization.',
+      desc: isSw ? 'Hamisha na endesha mifumo ya wingu na mwonekano wa juu na usalama.' : 'Migrate and operate cloud systems with high visibility and security.',
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: banner5, span: 'md:col-span-3', height: 'h-[360px]'
+    },
     { type: 'image', image: banner5, span: 'md:col-span-3', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
     { type: 'image', image: mobileAppImage, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
-    { type: 'text', label: '02', title: 'DevOps Automation.', desc: 'Faster releases with automated CI/CD pipelines.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: webCommandImage, span: 'md:col-span-2', height: 'h-[360px]' },
+    {
+      type: 'text', label: '02',
+      title: isSw ? 'Otomatiki ya DevOps.' : 'DevOps Automation.',
+      desc: isSw ? 'Matoleo ya haraka na mitiririko ya otomatiki ya CI/CD.' : 'Faster releases with automated CI/CD pipelines.',
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: webCommandImage, span: 'md:col-span-2', height: 'h-[360px]'
+    },
     { type: 'image', image: webCommandImage, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
 
     // Row 2
     { type: 'image', image: banner1, span: 'md:col-span-4', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
-    { type: 'text', label: '03', title: 'Cost Optimization.', desc: 'Predictable cloud costs and better governance.', color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/85', bgImage: banner2, span: 'md:col-span-2', height: 'h-[400px]' },
+    {
+      type: 'text', label: '03',
+      title: isSw ? 'Uboreshaji wa Gharama.' : 'Cost Optimization.',
+      desc: isSw ? 'Gharama za wingu zinazotabirika na usimamizi bora.' : 'Predictable cloud costs and better governance.',
+      color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/85', bgImage: banner2, span: 'md:col-span-2', height: 'h-[400px]'
+    },
     { type: 'image', image: banner2, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
-    { type: 'text', label: '04', title: 'Security Audits.', desc: 'Identify critical security risks in your environment.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/85', bgImage: banner3, span: 'md:col-span-2', height: 'h-[400px]' },
+    {
+      type: 'text', label: '04',
+      title: isSw ? 'Ukaguzi wa Usalama.' : 'Security Audits.',
+      desc: isSw ? 'Baini hatari muhimu za usalama katika mazingira yako.' : 'Identify critical security risks in your environment.',
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/85', bgImage: banner3, span: 'md:col-span-2', height: 'h-[400px]'
+    },
     { type: 'image', image: banner3, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
   ];
 
@@ -178,8 +228,12 @@ export const DataScienceSection = () => {
               className="text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[0.98]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">Infrastructure</span>
-              <span className="block text-[#3E9C8F]">and operations</span>
+              <span className="block text-black">
+                {t('infra.title_line1') || (isSw ? 'Miundombinu' : 'Infrastructure')}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {t('infra.title_line2') || (isSw ? 'na operesheni' : 'and operations')}
+              </span>
             </motion.h1>
           </header>
 
@@ -243,20 +297,48 @@ export const DataScienceSection = () => {
 // WHY SECTION
 // ==========================================
 export const WhySection = () => {
+  const { language, t } = useLanguage();
+  const isSw = language === 'sw';
+
   const tiles: Tile[] = [
     // Row 1
-    { type: 'text', label: '01', title: 'Enterprise Experience.', desc: 'Built by engineers with experience in high-level environments.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: banner4, span: 'md:col-span-3', height: 'h-[360px]' },
+    {
+      type: 'text', label: '01',
+      title: isSw ? 'Uzoefu wa Biashara Kubwa.' : 'Enterprise Experience.',
+      desc: isSw ? 'Imejengwa na wahandisi wenye uzoefu katika mazingira ya kiwango cha juu.' : 'Built by engineers with experience in high-level environments.',
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: banner4, span: 'md:col-span-3', height: 'h-[360px]'
+    },
     { type: 'image', image: banner4, span: 'md:col-span-3', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
-    { type: 'text', label: '02', title: 'Embedded Security.', desc: 'Security is embedded in every solution.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: banner2, span: 'md:col-span-2', height: 'h-[360px]' },
+    {
+      type: 'text', label: '02',
+      title: isSw ? 'Usalama wa Msingi.' : 'Embedded Security.',
+      desc: isSw ? 'Usalama umejumuishwa katika kila suluhisho tunalojenga.' : 'Security is embedded in every solution.',
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: banner2, span: 'md:col-span-2', height: 'h-[360px]'
+    },
     { type: 'image', image: banner2, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
     { type: 'image', image: banner5, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
 
     // Row 2
     { type: 'image', image: webCommandImage, span: 'md:col-span-3', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
-    { type: 'text', label: '03', title: 'African Market Focus.', desc: 'Practical solutions aligned to African markets.', color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/85', bgImage: banner3, span: 'md:col-span-3', height: 'h-[400px]' },
-    { type: 'text', label: '04', title: 'Clear Documentation.', desc: 'Full scope, milestones, and documentation.', color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/85', bgImage: banner1, span: 'md:col-span-2', height: 'h-[400px]' },
+    {
+      type: 'text', label: '03',
+      title: isSw ? 'Uzingativu wa Soko la Afrika.' : 'African Market Focus.',
+      desc: isSw ? 'Suluhisho za vitendo zinazoendana na masoko ya Afrika.' : 'Practical solutions aligned to African markets.',
+      color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/85', bgImage: banner3, span: 'md:col-span-3', height: 'h-[400px]'
+    },
+    {
+      type: 'text', label: '04',
+      title: isSw ? 'Uwekaji Kumbukumbu Wazi.' : 'Clear Documentation.',
+      desc: isSw ? 'Upeo kamili, hatua za utekelezaji na nyaraka wazi.' : 'Full scope, milestones, and documentation.',
+      color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/85', bgImage: banner1, span: 'md:col-span-2', height: 'h-[400px]'
+    },
     { type: 'image', image: banner3, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
-    { type: 'text', label: '05', title: 'Outcome Driven.', desc: 'Focused on delivering real business value.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/85', bgImage: mobileAppImage, span: 'md:col-span-2', height: 'h-[400px]' },
+    {
+      type: 'text', label: '05',
+      title: isSw ? 'Inayolenga Matokeo.' : 'Outcome Driven.',
+      desc: isSw ? 'Inazingatia kutoa thamani halisi ya kibiashara.' : 'Focused on delivering real business value.',
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/85', bgImage: mobileAppImage, span: 'md:col-span-2', height: 'h-[400px]'
+    },
   ];
 
   return (
@@ -268,8 +350,12 @@ export const WhySection = () => {
               className="text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[0.98]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">What makes us different</span>
-              <span className="block text-[#3E9C8F]">from others</span>
+              <span className="block text-black">
+                {t('why.title_line1') || (isSw ? 'Kinachotutofautisha' : 'What makes us different')}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {t('why.title_line2') || (isSw ? 'na wengine' : 'from others')}
+              </span>
             </motion.h1>
           </header>
 

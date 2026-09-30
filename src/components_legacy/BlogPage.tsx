@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
-import { Calendar, User, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface BlogPost {
   title: string;
@@ -11,12 +11,11 @@ interface BlogPost {
 }
 
 export const BlogPage = () => {
-  const { t } = useLanguage();
+  const { language } = useLanguage();
+  const isSw = language === 'sw';
 
   const posts: BlogPost[] = [
-
-    /* blog posts here
-    */
+    /* blog posts here */
   ];
 
   const hasPosts = posts && posts.length > 0;
@@ -31,7 +30,11 @@ export const BlogPage = () => {
           <span className="absolute inset-0 border-b-2 border-r-2 border-black/40 pointer-events-none" />
           
           <h1 className="text-4xl md:text-6xl font-normal uppercase tracking-tighter text-white font-mono leading-none">
-            Our <span className="text-[#FA520F] font-bold">Insights.</span>
+            {isSw ? (
+              <>Makala <span className="text-[#FA520F] font-bold">Zetu.</span></>
+            ) : (
+              <>Our <span className="text-[#FA520F] font-bold">Insights.</span></>
+            )}
           </h1>
         </div>
 
@@ -62,7 +65,7 @@ export const BlogPage = () => {
                 </div>
 
                 <div className="flex items-center gap-2 bg-neutral-50 border-2 border-black group-hover:bg-black group-hover:text-white p-3 font-mono text-xs font-bold uppercase tracking-wider transition-colors shrink-0">
-                  <span>Read Post</span>
+                  <span>{isSw ? 'Soma Makala' : 'Read Post'}</span>
                   <ArrowRight className="w-4 h-4 stroke-[2.5px] text-[#FA520F]" />
                 </div>
               </motion.article>
@@ -83,11 +86,13 @@ export const BlogPage = () => {
             <div className="absolute top-3 right-6 w-2 h-2 bg-neutral-300 border border-black" />
 
             <h3 className="text-xl font-bold uppercase font-mono tracking-wider mb-2">
-              No articles found
+              {isSw ? 'Hakuna makala yaliyopatikana' : 'No articles found'}
             </h3>
             
             <p className="text-neutral-600 font-mono text-xs max-w-xs leading-relaxed font-normal">
-              We haven't published any articles or insights just yet. Check back soon for updates.
+              {isSw
+                ? 'Bado hatujachapisha makala. Rudi hivi karibuni kupata taarifa mpya.'
+                : 'We haven\'t published any articles or insights just yet. Check back soon for updates.'}
             </p>
           </motion.div>
         )}
@@ -95,4 +100,6 @@ export const BlogPage = () => {
       </div>
     </div>
   );
-};export default BlogPage;
+};
+
+export default BlogPage;
