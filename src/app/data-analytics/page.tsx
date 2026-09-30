@@ -1,8 +1,7 @@
 'use client';
-
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 
 import hero1 from '@/assets/intelligence.jpg';
@@ -20,396 +19,299 @@ import diagnosticAnalytics from '@/assets/diagnostic-analytics.png';
 import predictiveAnalyticsImg from '@/assets/predictiveanalytics.png';
 import prescriptiveAnalytics from '@/assets/prescriptive-analytics.png';
 
+const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
+  <MotionConfig reducedMotion="never">{children}</MotionConfig>
+);
+
+const gridVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+};
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] } },
+};
+const textVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } },
+};
+
+const SLIDE_DURATION = 6000;
+
 export default function DataAnalyticsPage() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [hoveredMaturity, setHoveredMaturity] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: containerRef });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [progressKey, setProgressKey] = useState(0);
 
   const sliderItems = [
-    {
-      id: 'Data Architecture',
-      label: 'ENGINEERING',
-      title: 'Building the Data Stack, the Foundation Behind Systems That Work at Scale ↗',
-      image: hero1,
-    },
-    {
-      id: 'Business Intelligence',
-      label: 'DASHBOARDS',
-      title: 'Real-Time Telemetry Turning Raw Enterprise Data into Action ↗',
-      image: hero2,
-    },
-    {
-      id: 'Predictive Analytics',
-      label: 'PREDICTIVE AI',
-      title: 'Forecasting Market Dynamics with High-Fidelity Machine Learning ↗',
-      image: hero3,
-    },
-    {
-      id: 'Data Governance',
-      label: 'GOVERNANCE',
-      title: 'Frameworks Compliant with Regional Regulations, Ensuring Security and Trust ↗',
-      image: hero4,
-    }
+    { id: 'Data Architecture', label: 'ENGINEERING', title: 'Building the Data Stack, the Foundation Behind Systems That Work at Scale', image: hero1 },
+    { id: 'Business Intelligence', label: 'DASHBOARDS', title: 'Real-Time Telemetry Turning Raw Enterprise Data into Action', image: hero2 },
+    { id: 'Predictive Analytics', label: 'PREDICTIVE AI', title: 'Forecasting Market Dynamics with High-Fidelity Machine Learning', image: hero3 },
+    { id: 'Data Governance', label: 'GOVERNANCE', title: 'Frameworks Compliant with Regional Regulations, Ensuring Security and Trust', image: hero4 },
   ];
 
   const capabilities = [
-    {
-      id: '1',
-      title: 'Architecture',
-      desc: 'Build scalable, secure data pipelines and data warehouses that integrate fragmented enterprise sources into a single source of truth.',
-      image: architecture
-    },
-    {
-      id: '2',
-      title: 'Intelligence',
-      desc: 'Real-time executive dashboards and interactive reports designed to translate raw data into instant, actionable decision-making tools.',
-      image: businessIntelligence
-    },
-    {
-      id: '3',
-      title: 'Predictive',
-      desc: 'Deploy custom ML models that forecast customer demand, detect operational anomalies, and optimize resource allocation automatically.',
-      image: predictiveAnalytics
-    },
-    {
-      id: '4',
-      title: 'Governance',
-      desc: 'Frameworks compliant with regional regulations, ensuring security, transparency, privacy, and trustworthy AI adoption.',
-      image: appliedAI
-    }
+    { title: 'Architecture', description: 'Build scalable, secure data pipelines and data warehouses that integrate fragmented enterprise sources into a single source of truth.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: architecture, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Intelligence', description: 'Real-time executive dashboards and interactive reports designed to translate raw data into instant, actionable decision-making tools.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: businessIntelligence, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Predictive', description: 'Deploy custom ML models that forecast customer demand, detect operational anomalies, and optimize resource allocation automatically.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: predictiveAnalytics, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Governance', description: 'Frameworks compliant with regional regulations, ensuring security, transparency, privacy, and trustworthy AI adoption.', color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70', image: appliedAI, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl' },
   ];
 
   const maturityLevels = [
-    {
-      name: 'Descriptive Analytics',
-      question: 'What happened?',
-      detail: 'Consolidating historical records into structured databases and standard reports.',
-      image: descriptiveAnalytics
-    },
-    {
-      name: 'Diagnostic Analytics',
-      question: 'Why did it happen?',
-      detail: 'Deep-dive root cause analysis using correlation, segmentation, and drill-down metrics.',
-      image: diagnosticAnalytics
-    },
-    {
-      name: 'Predictive Analytics',
-      question: 'What will happen?',
-      detail: 'Leveraging statistical models and machine learning to forecast future market shifts.',
-      image: predictiveAnalyticsImg
-    },
-    {
-      name: 'Prescriptive Analytics',
-      question: 'What should we do?',
-      detail: 'AI-driven decision engines that recommend optimal strategy and automate execution.',
-      image: prescriptiveAnalytics
-    }
+    { title: 'Descriptive', description: 'Consolidating historical records into structured databases and standard reports.', color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70', image: descriptiveAnalytics, span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Diagnostic', description: 'Deep-dive root cause analysis using correlation, segmentation, and drill-down metrics.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: diagnosticAnalytics, span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Predictive', description: 'Leveraging statistical models and machine learning to forecast future market shifts.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: predictiveAnalyticsImg, span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl' },
+    { title: 'Prescriptive', description: 'AI-driven decision engines that recommend optimal strategy and automate execution.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: prescriptiveAnalytics, span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl' },
   ];
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % sliderItems.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + sliderItems.length) % sliderItems.length);
+  const goToSlide = (idx: number) => {
+    setCurrentSlide(idx);
+    setProgressKey((k) => k + 1);
+  };
 
-  // Auto-slide every 6 seconds
+  const nextSlide = () => goToSlide((currentSlide + 1) % sliderItems.length);
+  const prevSlide = () => goToSlide((currentSlide - 1 + sliderItems.length) % sliderItems.length);
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % sliderItems.length);
-    }, 6000);
-
+      setCurrentSlide((prev) => {
+        setProgressKey((k) => k + 1);
+        return (prev + 1) % sliderItems.length;
+      });
+    }, SLIDE_DURATION);
     return () => clearInterval(interval);
   }, [sliderItems.length]);
 
   return (
-    <main className="min-h-screen bg-white text-[#111622] font-sans selection:bg-[#111622] selection:text-white pt-[140px] md:pt-[160px] pb-32 overflow-hidden">
+    <MotionWrapper>
+      <section ref={containerRef} className="bg-white text-black font-sans w-full pt-32 pb-32 relative overflow-hidden">
+        <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
-      {/* Top Filter Pills Bar synced with slider */}
-      <div className="w-full px-6 md:px-12 mb-6 max-w-[1440px] mx-auto">
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 scrollbar-none">
-          {sliderItems.map((item, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentSlide(idx)}
-              className={`px-4 py-2 text-[13px] transition-colors whitespace-nowrap rounded-sm ${
-                currentSlide === idx
-                  ? 'bg-[#EAEAEA] text-[#111622] font-medium'
-                  : 'text-gray-500 bg-transparent hover:bg-[#F4F4F4]'
-              }`}
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
+          <header className="max-w-[1400px] mx-auto text-center mb-16">
+            <motion.h1
+              className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              {item.id}
-            </button>
-          ))}
-          <button className="px-4 py-2 text-[13px] text-gray-500 bg-transparent hover:bg-[#F4F4F4] transition-colors whitespace-nowrap rounded-sm">
-            SEE ALL
-          </button>
+              <span className="block text-black">Our analytics power</span>
+              <span className="block text-[#3E9C8F]">real-time decisions</span>
+            </motion.h1>
+
+            <motion.p
+              className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-12 max-w-2xl mx-auto"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+              transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Our analytics power real-time, AI-driven decisions in critical commercial enterprises in East Africa, from the factory floors to the front lines.
+            </motion.p>
+          </header>
         </div>
-      </div>
 
-      {/* Full-width Carousel Slider */}
-      <div className="w-full overflow-hidden mb-24 relative">
-        <div
-          className="flex transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-          style={{ transform: `translateX(calc(50vw - 42.5vw - ${currentSlide * 85}vw))` }}
-        >
-          {sliderItems.map((item, idx) => {
-            const isActive = currentSlide === idx;
-            return (
-              <div
-                key={idx}
-                className="w-[85vw] flex-shrink-0 px-2 relative"
-                onClick={() => !isActive && setCurrentSlide(idx)}
-              >
-                {/* Increased height for bigger images */}
-                <div className={`relative w-full h-[450px] md:h-[700px] bg-[#111] overflow-hidden transition-all duration-700 cursor-pointer ${isActive ? 'opacity-100 scale-100' : 'opacity-40 scale-[0.98]'}`}>
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
+        <div className="w-full px-6 md:px-12 mb-6 max-w-[1600px] mx-auto">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+            {sliderItems.map((item, idx) => {
+              const isActive = currentSlide === idx;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => goToSlide(idx)}
+                  className={`relative overflow-hidden px-4 py-2 text-[14px] whitespace-nowrap rounded-[3px] border transition-colors duration-200 ${
+                    isActive
+                      ? 'bg-[#D9D9D9] border-[#D9D9D9] text-[#111622]'
+                      : 'bg-white border-gray-200 text-gray-500 hover:text-[#111622] hover:border-gray-300'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      key={progressKey}
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: SLIDE_DURATION / 1000, ease: 'linear' }}
+                      className="absolute inset-0 bg-[#C4C4C4] origin-left"
+                      aria-hidden
+                    />
+                  )}
+                  <span className="relative z-10">{item.id}</span>
+                </button>
+              );
+            })}
 
-                  {/* Overlay Box */}
-                  <div
-                    className={`absolute top-6 left-6 md:top-10 md:left-10 max-w-[320px] md:max-w-[420px] bg-[#22252a]/95 p-6 md:p-8 text-white shadow-2xl transition-opacity duration-500 delay-100 ${isActive ? 'opacity-100' : 'opacity-0'}`}
-                  >
-                    <p className="text-[11px] font-mono text-gray-400 uppercase tracking-widest mb-3 md:mb-4">
-                      {item.label}
-                    </p>
-                    <h3 className="text-lg md:text-[24px] font-normal leading-snug">
+            <div className="ml-auto pl-4 flex-shrink-0">
+              <button className="px-4 py-2 text-[14px] text-[#111622] bg-white border border-[#111622] hover:bg-[#111622] hover:text-white transition-colors whitespace-nowrap rounded-[3px]">
+                SEE ALL
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
+          <div className="relative w-full h-[500px] md:h-[700px] overflow-hidden bg-[#0A0A0A]">
+            {sliderItems.map((item, idx) => {
+              const isActive = currentSlide === idx;
+              return (
+                <div
+                  key={idx}
+                  onClick={() => !isActive && goToSlide(idx)}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                >
+                  <Image src={item.image} alt={item.title} fill className="object-cover" priority />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+
+                  <div className="absolute bottom-8 left-8 md:bottom-14 md:left-14 max-w-3xl text-white">
+                    <p className="text-[11px] font-medium uppercase tracking-[0.25em] opacity-70 mb-6">{item.label}</p>
+                    <h3 className="text-3xl md:text-5xl lg:text-[64px] font-bold tracking-[-0.03em] leading-[1.02]">
                       {item.title}
                     </h3>
                   </div>
 
-                  {/* Navigation Arrows */}
                   {isActive && (
                     <>
                       <button
                         onClick={(e) => { e.stopPropagation(); prevSlide(); }}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-[#111]/60 hover:bg-[#111] text-white flex items-center justify-center transition-colors"
+                        className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white hover:text-black text-white flex items-center justify-center transition-colors duration-300"
                       >
-                        <span className="text-lg">←</span>
+                        ←
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); nextSlide(); }}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-[#111]/60 hover:bg-[#111] text-white flex items-center justify-center transition-colors"
+                        className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white hover:text-black text-white flex items-center justify-center transition-colors duration-300"
                       >
-                        <span className="text-lg">→</span>
+                        →
                       </button>
                     </>
                   )}
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Hero Statement Header */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-28 mt-12">
-        <h1 className="text-[2.5rem] md:text-[3.75rem] lg:text-[4.5rem] leading-[1.05] font-medium tracking-tight text-[#111622] max-w-[1300px]">
-          Our analytics power real-time, AI-driven decisions in critical commercial enterprises in East Africa, from the factory floors to the front lines.
-        </h1>
-      </div>
-
-      {/* Data Interactive Section */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-32">
-        <h2 className="text-3xl md:text-[2rem] font-normal tracking-tight text-[#111622] mb-12">
-          Our Solutions
-        </h2>
-
-        <div className="border-t border-gray-200">
-          {capabilities.map((item, index) => {
-            const isHovered = hoveredIndex === index;
-
-            return (
-              <div
-                key={item.id}
-                className={`group border-b border-gray-200 transition-colors duration-300 cursor-pointer ${
-                  isHovered ? 'bg-[#F9F9F9]' : 'bg-transparent'
-                }`}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <div className="grid grid-cols-1 md:grid-cols-12 items-center py-10 md:py-14 min-h-[280px] px-2 md:px-6">
-
-                  {/* Left Column: Description & Number */}
-                  <div className="md:col-span-3 flex flex-col justify-between self-stretch py-2 h-full">
-                    <p className="text-[14.5px] text-gray-800 font-normal leading-snug pr-6 max-w-[260px]">
-                      {item.desc}
-                    </p>
-                    <p className="text-[13px] font-mono text-gray-500 mt-12 md:mt-auto tracking-wide">
-                      {item.id}
-                    </p>
-                  </div>
-
-                  {/* Center Column: Sideways Sliding Image */}
-                  <div className="md:col-span-4 flex justify-center items-center h-[280px] md:h-[320px] relative w-full overflow-hidden px-4 md:px-8">
-                    <AnimatePresence>
-                      {isHovered ? (
-                        <motion.div
-                          key="image-slide"
-                          initial={{ x: '-100%', opacity: 0 }}
-                          animate={{ x: 0, opacity: 1 }}
-                          exit={{ x: '100%', opacity: 0 }}
-                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                          className="absolute inset-0 w-full h-full px-4 md:px-8 py-2"
-                        >
-                          <div className="relative w-full h-full shadow-md">
-                            <Image
-                              src={item.image}
-                              alt={item.title}
-                              fill
-                              className="object-contain"
-                            />
-                          </div>
-                        </motion.div>
-                      ) : (
-                        <motion.div
-                          key="geometric-mark"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="w-full h-full flex items-center justify-center opacity-[0.03] select-none pointer-events-none"
-                        >
-                          <span className="text-[12rem] font-bold tracking-tighter text-[#111622] font-mono leading-none">
-                            {item.title.charAt(0)}
-                          </span>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Right Column: Giant Display Title */}
-                  <div className="md:col-span-5 flex justify-start md:justify-end items-center mt-6 md:mt-0">
-                    <h3 className="text-[4rem] md:text-[5.5rem] lg:text-[7.5rem] font-medium tracking-tight text-[#111622] leading-none">
-                      {item.title}
-                    </h3>
-                  </div>
-
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Enterprise Analytics Maturity Assessment */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-32">
-        <h2 className="text-3xl md:text-[2rem] font-normal tracking-tight text-[#111622] mb-12">
-          Enterprise Analytics Maturity Assessment
-        </h2>
-
-        <div className="border-t border-gray-200">
-          {maturityLevels.map((lvl, index) => {
-            const isHovered = hoveredMaturity === index;
-
-            return (
-              <div
-                key={index}
-                className={`group border-b border-gray-200 transition-colors duration-300 cursor-pointer ${
-                  isHovered ? 'bg-[#F9F9F9]' : 'bg-transparent'
-                }`}
-                onMouseEnter={() => setHoveredMaturity(index)}
-                onMouseLeave={() => setHoveredMaturity(null)}
-              >
-                <div className="grid grid-cols-1 md:grid-cols-12 items-center py-10 md:py-14 min-h-[280px] px-2 md:px-6">
-
-                  {/* Left Column: Description & Number */}
-                  <div className="md:col-span-3 flex flex-col justify-between self-stretch py-2 h-full">
-                    <p className="text-[14.5px] text-gray-800 font-normal leading-snug pr-6 max-w-[260px]">
-                      {lvl.detail}
-                    </p>
-                    <p className="text-[13px] font-mono text-gray-500 mt-12 md:mt-auto tracking-wide">
-                      {index + 1}
-                    </p>
-                  </div>
-
-                  {/* Center Column: Sideways Sliding Image */}
-                  <div className="md:col-span-4 flex justify-center items-center h-[280px] md:h-[320px] relative w-full overflow-hidden px-4 md:px-8">
-                    <AnimatePresence>
-                      {isHovered ? (
-                        <motion.div
-                          key="image-slide"
-                          initial={{ x: '-100%', opacity: 0 }}
-                          animate={{ x: 0, opacity: 1 }}
-                          exit={{ x: '100%', opacity: 0 }}
-                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                          className="absolute inset-0 w-full h-full px-4 md:px-8 py-2"
-                        >
-                          <div className="relative w-full h-full shadow-md">
-                            <Image
-                              src={lvl.image}
-                              alt={lvl.name}
-                              fill
-                              className="object-contain"
-                            />
-                          </div>
-                        </motion.div>
-                      ) : (
-                        <motion.div
-                          key="geometric-mark"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="w-full h-full flex items-center justify-center opacity-[0.03] select-none pointer-events-none"
-                        >
-                          <span className="text-[12rem] font-bold tracking-tighter text-[#111622] font-mono leading-none">
-                            {lvl.name.charAt(0)}
-                          </span>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Right Column: Giant Display Title */}
-                  <div className="md:col-span-5 flex justify-start md:justify-end items-center mt-6 md:mt-0">
-                    <h3 className="text-[3rem] md:text-[4.5rem] lg:text-[6rem] font-medium tracking-tight text-[#111622] leading-none">
-                      {lvl.name}
-                    </h3>
-                  </div>
-
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Bottom Closing Callout Card */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-0 border border-gray-200">
-
-          {/* Left Image */}
-          <div className="md:col-span-6 min-h-[400px] md:min-h-[550px] relative bg-gray-100">
-            <Image
-              src={hero1}
-              alt="ANTERA Engineering Field"
-              fill
-              className="object-cover"
-            />
+              );
+            })}
           </div>
+        </div>
 
-          {/* Right Callout Block */}
-          <div className="md:col-span-6 p-10 md:p-16 flex flex-col justify-center items-start bg-white">
-            <h3 className="text-3xl md:text-5xl font-medium tracking-tight text-[#111622] mb-6">
-              Ready to accelerate your data strategy?
-            </h3>
-            <p className="text-[17px] text-gray-700 leading-relaxed max-w-md mb-10">
-              Consult with our lead data architects to evaluate your data ecosystem and build custom analytics systems.
-            </p>
-            <Link
-              href="https://wa.me/255760984921"
-              target="_blank"
-              className="px-5 py-2.5 border border-gray-300 text-[11px] font-mono uppercase tracking-widest text-gray-600 hover:border-gray-900 hover:text-[#111622] transition-colors"
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
+          <header className="max-w-[1400px] mx-auto text-center mb-24">
+            <motion.h2
+              className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              CONTACT DATA ADVISORY
-            </Link>
-          </div>
+              <span className="block text-black">Solutions we</span>
+              <span className="block text-[#3E9C8F]">build for you</span>
+            </motion.h2>
+          </header>
 
+          <motion.div
+            variants={gridVariants} initial="hidden" whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-3"
+          >
+            {capabilities.map((card, i) => (
+              <motion.div
+                key={i}
+                variants={cardVariants}
+                className={`group relative overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text} ${card.span} ${card.height}`}
+              >
+                <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 ${card.imgClass}`}>
+                  <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
+                </div>
+
+                <div className="relative z-20 max-w-[85%]">
+                  <h3 className="text-3xl md:text-4xl lg:text-[44px] font-bold tracking-[-0.02em] leading-[1.05]">
+                    {card.title}
+                  </h3>
+
+                  <div className="overflow-hidden">
+                    <div className="max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                      <p className={`text-2xl md:text-3xl ${card.subText} mt-5 leading-[1.3] max-w-lg`}>
+                        {card.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-      </div>
 
-    </main>
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
+          <header className="max-w-[1400px] mx-auto text-center mb-24">
+            <motion.h2
+              className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              <span className="block text-black">Analytics maturity</span>
+              <span className="block text-[#3E9C8F]">from data to decisions</span>
+            </motion.h2>
+          </header>
+
+          <motion.div
+            variants={gridVariants} initial="hidden" whileInView="visible"
+            viewport={{ once: true, amount: 0.05 }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-3"
+          >
+            {maturityLevels.map((card, i) => (
+              <motion.div
+                key={i}
+                variants={cardVariants}
+                className={`group relative overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text} ${card.span} ${card.height}`}
+              >
+                <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 ${card.imgClass}`}>
+                  <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
+                </div>
+
+                <div className="relative z-20 max-w-[85%]">
+                  <h3 className="text-3xl md:text-4xl lg:text-[44px] font-bold tracking-[-0.02em] leading-[1.05]">
+                    {card.title}
+                  </h3>
+
+                  <div className="overflow-hidden">
+                    <div className="max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                      <p className={`text-2xl md:text-3xl ${card.subText} mt-5 leading-[1.3] max-w-lg`}>
+                        {card.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
+          <header className="max-w-[1400px] mx-auto text-center">
+            <motion.h2
+              className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              <span className="block text-black">Ready to accelerate</span>
+              <span className="block text-[#3E9C8F]">your data strategy</span>
+            </motion.h2>
+
+            <motion.p
+              className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-12 max-w-2xl mx-auto"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+              transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Consult with our lead data architects to evaluate your data ecosystem and build custom analytics systems.
+            </motion.p>
+
+            <motion.div
+              className="mt-12"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+              transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Link
+                href="https://wa.me/255760984921"
+                target="_blank"
+                className="inline-flex items-center gap-4 text-base md:text-lg font-medium border-b-2 border-black pb-0.5 hover:opacity-60 transition-opacity"
+              >
+                Contact Data Advisory
+              </Link>
+            </motion.div>
+          </header>
+        </div>
+
+      </section>
+    </MotionWrapper>
   );
 }

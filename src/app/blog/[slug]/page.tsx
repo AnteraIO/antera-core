@@ -239,33 +239,31 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </div>
 
         {relatedPosts.length > 0 && (
-          <section className="pt-24 border-t border-neutral-200 max-w-5xl mx-auto">
-            <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-12">Recommended Posts</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-neutral-200 bg-white">
-              {relatedPosts.map((rp, i) => (
-                <Link 
-                  key={rp.slug} 
-                  href={`/blog/${rp.slug}`} 
-                  className={`group block p-8 md:p-12 min-h-[360px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors ${i % 3 !== 2 ? 'md:border-r' : ''} border-b md:border-b-0 border-neutral-200`}
-                >
-                  {rp.featured_image && (
-                    <div className="aspect-[16/10] relative mb-6 overflow-hidden bg-neutral-100 border border-neutral-200">
-                      <Image src={rp.featured_image} alt={rp.title} fill className="object-cover" />
-                    </div>
-                  )}
-                  <div className="mt-auto">
-                    <h4 className="text-xl md:text-2xl font-medium tracking-tight mb-4 group-hover:text-[#FA520F] transition-colors">
-                      {rp.title}
-                    </h4>
-                    <div className="mt-auto pt-4 border-t border-neutral-200 flex items-center justify-between">
-                      <span className="text-[10px] font-bold tracking-widest uppercase text-neutral-400">Read Article</span>
-                      <span className="text-neutral-900 font-mono text-sm">→</span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
+       <section className="pt-24 border-t border-neutral-200 max-w-5xl mx-auto">
+  <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-12">Recommended Posts</h3>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+    {relatedPosts.map((rp, i) => {
+      const patterns = [
+        { bg: 'bg-[#E8ECEF]', text: 'text-black', sub: 'text-black/70' },
+        { bg: 'bg-[#0A0A0A]', text: 'text-white', sub: 'text-white/70' },
+        { bg: 'bg-[#0D2A6B]', text: 'text-white', sub: 'text-white/70' },
+      ];
+      const pattern = patterns[i % patterns.length];
+
+      return (
+        <Link
+          key={rp.slug}
+          href={`/blog/${rp.slug}`}
+          className={`group relative overflow-hidden flex flex-col justify-between p-8 md:p-10 min-h-[360px] cursor-pointer ${pattern.bg} ${pattern.text}`}
+        >
+          <h4 className="text-2xl md:text-3xl font-bold tracking-[-0.02em] leading-[1.05]">
+            {rp.title}
+          </h4>
+        </Link>
+      );
+    })}
+  </div>
+</section>
         )}
       </div>
     </article>
