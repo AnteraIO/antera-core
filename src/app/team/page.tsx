@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import shadrackovskyImage from '@/assets/shadrackovsky.jpeg';
 import anteraLogoImage from '@/assets/antera-logo.jpeg';
+import { useLanguage } from '@/context/LanguageContext';
 
 // Custom SVG Icons
 const TwitterIcon = () => (
@@ -31,12 +32,14 @@ export default function TeamPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+  const { language } = useLanguage();
+  const isSw = language === 'sw';
 
   const team = [
     {
       name: 'Shadrackovsky',
       role: 'CEO & Founder',
-      bio: 'Leading the agency in building the next generation of neural technologies and enterprise infrastructure.',
+      bio: isSw ? 'Anaongoza kampuni katika kujenga kizazi kijacho cha teknolojia za neva na miundombinu ya biashara.' : 'Leading the agency in building the next generation of neural technologies and enterprise infrastructure.',
       image: shadrackovskyImage,
       socials: {
         twitter: 'https://twitter.com/shadrackovsky',
@@ -45,8 +48,8 @@ export default function TeamPage() {
     },
     {
       name: 'Josia O Mosses',
-      role: 'Team',
-      bio: 'Directing strategic partnerships and core architectural development across Antera\'s global service layers.',
+      role: isSw ? 'Timu' : 'Team',
+      bio: isSw ? 'Anaongoza ushirikiano wa kimkakati na maendeleo ya usanifu wa msingi katika huduma za Antera.' : 'Directing strategic partnerships and core architectural development across Antera\'s global service layers.',
       image: anteraLogoImage,
       socials: {
         linkedin: 'https://linkedin.com/',
@@ -75,7 +78,7 @@ export default function TeamPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            Our Team.
+            {isSw ? 'Timu Yetu.' : 'Our Team.'}
           </motion.h1>
           <motion.p 
             className="text-lg md:text-xl max-w-2xl leading-relaxed text-gray-600 mt-4"
@@ -83,8 +86,9 @@ export default function TeamPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, duration: 0.6 }}
           >
-            We're a team of passionate innovators building cutting-edge AI solutions that help organizations streamline their operations and boost productivity. 
-            Our mission is to create software that not only solves today's problems but anticipates tomorrow's challenges.
+            {isSw
+              ? 'Sisi ni timu ya wabunifu wenye shauku wanaojenga suluhisho za kisasa za AI zinazosaidia mashirika kurahisisha operesheni na kuongeza tija.'
+              : "We're a team of passionate innovators building cutting-edge AI solutions that help organizations streamline their operations and boost productivity. Our mission is to create software that not only solves today's problems but anticipates tomorrow's challenges."}
           </motion.p>
         </header>
 
@@ -180,16 +184,18 @@ export default function TeamPage() {
           transition={{ delay: 0.2, duration: 0.7 }}
         >
           <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[#171321] mb-4">
-            Joining the team
+            {isSw ? 'Kujiunga na timu' : 'Joining the team'}
           </h3>
           <p className="text-lg text-gray-700 leading-relaxed mb-8 max-w-xl">
-            We are always looking for exceptional geeks, engineers and researchers to help us scale digital infrastructure. Email us your CV and a cover letter about why you want to join the team.
+            {isSw
+              ? 'Kila wakati tunatafuta wahandisi na watafiti wenye uwezo wa juu kusaidia kukuza miundombinu ya kidijitali. Tutumie CV na barua ya maombi kupitia barua pepe.'
+              : 'We are always looking for exceptional geeks, engineers and researchers to help us scale digital infrastructure. Email us your CV and a cover letter about why you want to join the team.'}
           </p>
           <a 
             href="mailto:sheldoncodesdaily@gmail.com" 
             className="inline-flex items-center gap-2 px-8 py-4 bg-[#171321] text-white font-medium hover:bg-[#2a2438] transition-all rounded-[2rem] text-base hover:-translate-y-1 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.2)]"
           >
-            Join Us <ArrowUpRight className="w-4 h-4" />
+            {isSw ? 'Jiunge Nasi' : 'Join Us'} <ArrowUpRight className="w-4 h-4" />
           </a>
         </motion.div>
 

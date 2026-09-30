@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 import hero1 from '@/assets/intelligence.jpg';
 import hero2 from '@/assets/data-architecture.jpg';
@@ -13,7 +14,6 @@ import appliedAI from '@/assets/ai-applied.jpg';
 import Audit from '@/assets/system-audit.jpg';
 import orchestration from '@/assets/orchestration.jpg';
 import SDK from '@/assets/sdk.jpg';
-import architecture from '@/assets/data-architecture.jpg';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="never">{children}</MotionConfig>
@@ -38,22 +38,60 @@ export const ProductsPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+  const { language, t } = useLanguage();
+  const isSw = language === 'sw';
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [progressKey, setProgressKey] = useState(0);
 
   const sliderItems = [
-    { id: 'Infrastructure Audit', label: 'SECURITY', title: 'Systematic Mapping and Security Auditing of Distributed Digital Assets', image: hero2 },
-    { id: 'Cloud Orchestration', label: 'INFRASTRUCTURE', title: 'Auto-Scaling Deployments Optimized for Latency Across the African Continent', image: hero3 },
-    { id: 'Custom SDKs', label: 'INTEGRATION', title: 'Tailored Integration Kits for Rapid Deployment in Mobile and Web Environments', image: hero4 },
-    { id: 'Applied AI Services', label: 'APPLIED AI', title: 'End-to-End AI Solutions for Enterprise Transformation', image: hero5 },
+    {
+      id: isSw ? 'Ukaguzi wa Miundombinu' : 'Infrastructure Audit',
+      label: isSw ? 'USALAMA' : 'SECURITY',
+      title: isSw ? 'Ramani ya Mfumo na Ukaguzi wa Usalama wa Rasilimali za Kidijitali' : 'Systematic Mapping and Security Auditing of Distributed Digital Assets',
+      image: hero2
+    },
+    {
+      id: isSw ? 'Uratibu wa Wingu' : 'Cloud Orchestration',
+      label: isSw ? 'MIUNDOMBINU' : 'INFRASTRUCTURE',
+      title: isSw ? 'Deployments za Wingu Zilizoboreshwa kwa Afrika Mashariki na Barani' : 'Auto-Scaling Deployments Optimized for Latency Across the African Continent',
+      image: hero3
+    },
+    {
+      id: isSw ? 'SDK Maalum' : 'Custom SDKs',
+      label: isSw ? 'UJUMUISHAI' : 'INTEGRATION',
+      title: isSw ? 'Zana Maalum za Ujumuishaji kwa Programu za Simu na Wavuti' : 'Tailored Integration Kits for Rapid Deployment in Mobile and Web Environments',
+      image: hero4
+    },
+    {
+      id: isSw ? 'Huduma za AI Inayotumika' : 'Applied AI Services',
+      label: isSw ? 'AI INAYOTUMIKA' : 'APPLIED AI',
+      title: isSw ? 'Suluhisho Kamili za AI kwa Mabadiliko ya Biashara' : 'End-to-End AI Solutions for Enterprise Transformation',
+      image: hero5
+    },
   ];
 
   const capabilities = [
-    { title: 'Audit', description: 'Systematic mapping and security auditing of distributed digital assets across your entire infrastructure.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: Audit, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Cloud', description: 'Auto-scaling deployments optimized for latency across the African continent, built to handle peak loads.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: appliedAI, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'SDKs', description: 'Tailored integration kits for rapid deployment in mobile and web environments with native bindings.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: SDK, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Orchestration', description: 'Integrating and orchestrating existing AI models within secure data platforms with custom governance and workflows.', color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70', image: orchestration, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl' },
+    {
+      title: isSw ? 'Ukaguzi' : 'Audit',
+      description: isSw ? 'Ramani na ukaguzi wa usalama wa rasilimali za kidijitali katika miundombinu yako yote.' : 'Systematic mapping and security auditing of distributed digital assets across your entire infrastructure.',
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: Audit, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl'
+    },
+    {
+      title: isSw ? 'Wingu' : 'Cloud',
+      description: isSw ? 'Upelekaji wa wingu unaokua kiotomatiki ulioboreshwa kwa ajili ya kasi kote barani Afrika.' : 'Auto-scaling deployments optimized for latency across the African continent, built to handle peak loads.',
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: appliedAI, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl'
+    },
+    {
+      title: isSw ? 'SDKs' : 'SDKs',
+      description: isSw ? 'Zana maalum za ujumuishaji wa haraka kwenye mazingira ya simu na wavuti.' : 'Tailored integration kits for rapid deployment in mobile and web environments with native bindings.',
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: SDK, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl'
+    },
+    {
+      title: isSw ? 'Uratibu' : 'Orchestration',
+      description: isSw ? 'Kuunganisha na kuratibu mifumo ya AI iliyopo ndani ya majukwaa salama ya data.' : 'Integrating and orchestrating existing AI models within secure data platforms with custom governance and workflows.',
+      color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70', image: orchestration, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl'
+    },
   ];
 
   const goToSlide = (idx: number) => {
@@ -85,8 +123,12 @@ export const ProductsPage = () => {
               className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">Our products power</span>
-              <span className="block text-[#3E9C8F]">real-time decisions</span>
+              <span className="block text-black">
+                {isSw ? 'Bidhaa zetu zinaendesha' : 'Our products power'}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {isSw ? 'maamuzi ya muda halisi' : 'real-time decisions'}
+              </span>
             </motion.h1>
 
             <motion.p
@@ -94,7 +136,9 @@ export const ProductsPage = () => {
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
-              Our products power real-time, AI-driven decisions in critical commercial enterprises in East Africa, from the factory floors to the front lines.
+              {isSw
+                ? 'Bidhaa zetu zinaendesha maamuzi ya muda halisi, ya kuongozwa na AI katika biashara muhimu za Afrika Mashariki.'
+                : 'Our products power real-time, AI-driven decisions in critical commercial enterprises in East Africa, from the factory floors to the front lines.'}
             </motion.p>
           </header>
         </div>
@@ -130,7 +174,7 @@ export const ProductsPage = () => {
 
             <div className="ml-auto pl-4 flex-shrink-0">
               <button className="px-4 py-2 text-[14px] text-[#111622] bg-white border border-[#111622] hover:bg-[#111622] hover:text-white transition-colors whitespace-nowrap rounded-[3px]">
-                SEE ALL
+                {t('hero.see_all') || (isSw ? 'TAZAMA ZOTE' : 'SEE ALL')}
               </button>
             </div>
           </div>
@@ -184,8 +228,12 @@ export const ProductsPage = () => {
               className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">Products we</span>
-              <span className="block text-[#3E9C8F]">build for you</span>
+              <span className="block text-black">
+                {isSw ? 'Bidhaa tunazo' : 'Products we'}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {isSw ? 'jenga kwa ajili yako' : 'build for you'}
+              </span>
             </motion.h2>
           </header>
 
@@ -228,8 +276,12 @@ export const ProductsPage = () => {
               className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">There is so much</span>
-              <span className="block text-[#3E9C8F]">left to build</span>
+              <span className="block text-black">
+                {isSw ? 'Kuna mengi sana' : 'There is so much'}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {isSw ? 'yaliyobaki kujenga' : 'left to build'}
+              </span>
             </motion.h2>
 
             <motion.p
@@ -237,7 +289,9 @@ export const ProductsPage = () => {
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
-              ANTERA engineers deliver mission-critical outcomes for East Africa's most important institutions.
+              {isSw
+                ? 'Wahandisi wa ANTERA wanatoa matokeo yenye tija kwa taasisi muhimu za Afrika Mashariki.'
+                : 'ANTERA engineers deliver mission-critical outcomes for East Africa\'s most important institutions.'}
             </motion.p>
 
             <motion.div
@@ -250,7 +304,7 @@ export const ProductsPage = () => {
                 target="_blank"
                 className="inline-flex items-center gap-4 text-base md:text-lg font-medium border-b-2 border-black pb-0.5 hover:opacity-60 transition-opacity"
               >
-                Learn More
+                {t('common.learn_more') || (isSw ? 'Jifunze Zaidi' : 'Learn More')}
               </Link>
             </motion.div>
           </header>

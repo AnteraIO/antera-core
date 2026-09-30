@@ -3,14 +3,13 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import { Play } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 import banner1 from '../assets/banner-1.png';
 import banner2 from '../assets/banner-2.png';
 import banner3 from '../assets/banner-3.png';
 import banner4 from '../assets/banner-4.png';
 import banner5 from '../assets/banner-5.png';
-
-import heroVideo from '../assets/antera-video.mp4';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="never">{children}</MotionConfig>
@@ -36,19 +35,21 @@ export const TrustSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+  const { language, t } = useLanguage();
+  const isSw = language === 'sw';
 
   const trustCards = [
     {
-      title: "We're Always Prepared",
-      description: "Be ready for any security issue with faster response times and clear recovery plans.",
+      title: t('trust.card1_title') || (isSw ? 'Tuko Tayari Siku Zote' : "We're Always Prepared"),
+      description: t('trust.card1_desc') || (isSw ? 'Kaa tayari kwa suala lolote la usalama na muda wa haraka wa majibu na mipango ya kufufua.' : 'Be ready for any security issue with faster response times and clear recovery plans.'),
       image: banner1,
       color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70',
       span: 'md:col-span-7', height: 'h-[560px]',
       imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl',
     },
     {
-      title: "Data Ownership",
-      description: "Protect your data with strong identity management and best practices.",
+      title: t('trust.card2_title') || (isSw ? 'Ukimiliki wa Data' : 'Data Ownership'),
+      description: t('trust.card2_desc') || (isSw ? 'Linda data yako kwa usimamizi thabiti wa utambulisho na mbinu bora.' : 'Protect your data with strong identity management and best practices.'),
       image: banner2,
       color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
       span: 'md:col-span-5', height: 'h-[560px]',
@@ -68,8 +69,12 @@ export const TrustSection = () => {
               className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">Reduce risk that</span>
-              <span className="block text-[#3E9C8F]">strengthen security</span>
+              <span className="block text-black">
+                {t('trust.title_line1') || (isSw ? 'Punguza hatari zinazo' : 'Reduce risk that')}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {t('trust.title_line2') || (isSw ? 'imarisha usalama' : 'strengthen security')}
+              </span>
             </motion.h1>
 
             <motion.p
@@ -77,7 +82,7 @@ export const TrustSection = () => {
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
-              We help you prepare for incidents and keep your digital platforms safe from cyber threats.
+              {t('trust.desc') || (isSw ? 'Tunakusaidia kujiandaa na matukio na kuweka majukwaa yako ya kidijitali salama dhidi ya tishio la mtandao.' : 'We help you prepare for incidents and keep your digital platforms safe from cyber threats.')}
             </motion.p>
 
             <motion.a
@@ -90,7 +95,7 @@ export const TrustSection = () => {
                 <Play className="w-4 h-4 fill-black group-hover:fill-white transition-colors duration-300" />
               </span>
               <span className="text-base md:text-lg font-medium border-b-2 border-black pb-0.5">
-                Watch our showreel
+                {t('common.watch_showreel') || (isSw ? 'Tazama video yetu' : 'Watch our showreel')}
               </span>
             </motion.a>
           </header>
@@ -136,50 +141,53 @@ export const TrustSection = () => {
 // SERVICES SECTION — matching the masonry aesthetic
 // ==========================================
 export const ServicesSection = () => {
+  const { language, t } = useLanguage();
+  const isSw = language === 'sw';
+
   const serviceCards = [
     {
-      title: "AI Chatbots",
-      description: "Automate customer and internal support to improve response times and staff productivity.",
+      title: t('services.card1_title') || (isSw ? 'Wakala wa Mazungumzo wa AI' : 'AI Chatbots'),
+      description: t('services.card1_desc') || (isSw ? 'Fanya huduma kwa wateja na ya ndani kuwa otomatiki ili kuboresha muda wa majibu na tija.' : 'Automate customer and internal support to improve response times and staff productivity.'),
       image: banner3,
       color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70',
       span: 'md:col-span-7', height: 'h-[560px]',
       imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl',
     },
     {
-      title: "Workflow Automation",
-      description: "Eliminate manual and repetitive tasks with practical AI solutions that expand your business.",
+      title: t('services.card2_title') || (isSw ? 'Otomatiki ya Mtiririko wa Kazi' : 'Workflow Automation'),
+      description: t('services.card2_desc') || (isSw ? 'Ondoa kazi za mikono na zinazojirudia kwa kutumia suluhisho za vitendo za AI zinazokuza biashara yako.' : 'Eliminate manual and repetitive tasks with practical AI solutions that expand your business.'),
       image: banner4,
       color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
       span: 'md:col-span-5', height: 'h-[560px]',
       imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
     },
     {
-      title: "Secure AI Copilots",
-      description: "Turn your documents into insights while keeping your systems secure and governed.",
+      title: t('services.card3_title') || (isSw ? 'Wasaidizi Salama wa AI' : 'Secure AI Copilots'),
+      description: t('services.card3_desc') || (isSw ? 'Badilisha nyaraka zako kuwa maarifa huku ukiweka mifumo yako salama na inayosimamiwa.' : 'Turn your documents into insights while keeping your systems secure and governed.'),
       image: banner5,
       color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70',
       span: 'md:col-span-5', height: 'h-[520px]',
       imgClass: 'absolute -bottom-20 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl',
     },
     {
-      title: "Data Analytics",
-      description: "Clean pipelines and dashboards that turn raw operational data into decisions you can act on.",
+      title: t('services.card4_title') || (isSw ? 'Uchambuzi wa Data' : 'Data Analytics'),
+      description: t('services.card4_desc') || (isSw ? 'Mifumo safi ya data na dashibodi zinazogeuza data ghafi kuwa maamuzi ya kuchukua hatua.' : 'Clean pipelines and dashboards that turn raw operational data into decisions you can act on.'),
       image: banner3,
       color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70',
       span: 'md:col-span-7', height: 'h-[520px]',
       imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl',
     },
     {
-      title: "Security Infrastructures",
-      description: "Layered defenses, access control, and monitoring to keep your data and operations safe.",
+      title: t('services.card5_title') || (isSw ? 'Miundombinu ya Usalama' : 'Security Infrastructures'),
+      description: t('services.card5_desc') || (isSw ? 'Ulinzi wa tabaka, udhibiti wa ufikiaji, na ufuatiliaji ili kuweka data na operesheni zako salama.' : 'Layered defenses, access control, and monitoring to keep your data and operations safe.'),
       image: banner1,
       color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70',
       span: 'md:col-span-6', height: 'h-[480px]',
       imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl',
     },
     {
-      title: "System Integrations",
-      description: "Connect your tools, CRMs, and data sources so information flows without friction.",
+      title: t('services.card6_title') || (isSw ? 'Ujumuishaji wa Mifumo' : 'System Integrations'),
+      description: t('services.card6_desc') || (isSw ? 'Unganisha zana zako, CRM, na vyanzo vya data ili taarifa itiririke bila vikwazo.' : 'Connect your tools, CRMs, and data sources so information flows without friction.'),
       image: banner2,
       color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
       span: 'md:col-span-6', height: 'h-[480px]',
@@ -197,8 +205,12 @@ export const ServicesSection = () => {
               className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">Automate smarter that</span>
-              <span className="block text-[#3E9C8F]">scale faster</span>
+              <span className="block text-black">
+                {t('services.title_line1') || (isSw ? 'Kurahisisha kwa akili zaidi' : 'Automate smarter that')}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {t('services.title_line2') || (isSw ? 'kukuza haraka zaidi' : 'scale faster')}
+              </span>
             </motion.h1>
 
             <motion.p
@@ -206,7 +218,7 @@ export const ServicesSection = () => {
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
-              We implement practical AI solutions that reduce repetitive work while keeping systems secure and governed.
+              {t('services.desc') || (isSw ? 'Tunatekeleza suluhisho za vitendo za AI zinazopunguza kazi zinazojirudia huku tukiweka mifumo salama na inayosimamiwa.' : 'We implement practical AI solutions that reduce repetitive work while keeping systems secure and governed.')}
             </motion.p>
 
             <motion.a
@@ -219,7 +231,7 @@ export const ServicesSection = () => {
                 <Play className="w-4 h-4 fill-black group-hover:fill-white transition-colors duration-300" />
               </span>
               <span className="text-base md:text-lg font-medium border-b-2 border-black pb-0.5">
-                Watch our showreel
+                {t('common.watch_showreel') || (isSw ? 'Tazama video yetu' : 'Watch our showreel')}
               </span>
             </motion.a>
           </header>

@@ -65,6 +65,7 @@ const FooterLink = ({ href, children }: { href: string; children: React.ReactNod
 
 export const FinalCTAAndFooter = () => {
   const { language, setLanguage, t } = useLanguage();
+  const isSw = language === 'sw';
 
   return (
     <footer className="relative w-full bg-[#FAFAF8] text-black font-sans antialiased border-t border-neutral-200 overflow-hidden">
@@ -85,10 +86,10 @@ export const FinalCTAAndFooter = () => {
         {/* Get in Touch Header */}
         <header className="mb-24 md:mb-40 text-center">
           <h1 className="text-7xl md:text-9xl lg:text-[10rem] font-normal tracking-[-0.03em] leading-[0.95] text-black">
-            Get in Touch.
+            {t('footer.get_in_touch') || (isSw ? 'Wasiliana Nasi.' : 'Get in Touch.')}
           </h1>
           <p className="text-lg md:text-xl lg:text-2xl max-w-3xl leading-relaxed text-[#1F1F1F] mx-auto mt-8 font-medium">
-            Ready to transform your business? Reach out and let's build something extraordinary together.
+            {t('footer.get_in_touch_desc') || (isSw ? 'Uko tayari kubadilisha biashara yako? Wasiliana nasi na tujenge kitu cha kushangaza pamoja.' : "Ready to transform your business? Reach out and let's build something extraordinary together.")}
           </p>
         </header>
 
@@ -120,13 +121,15 @@ export const FinalCTAAndFooter = () => {
                 </li>
                 <li className="flex items-center gap-3 text-[#1F1F1F] group/link font-medium">
                   <MessageCircle className="w-4 h-4 text-neutral-500 shrink-0"/>
-                  <a href="https://wa.me/255760984921" target="_blank" rel="noopener noreferrer" className="text-sm font-mono group-hover/link:text-black transition-colors">WhatsApp Support</a>
+                  <a href="https://wa.me/255760984921" target="_blank" rel="noopener noreferrer" className="text-sm font-mono group-hover/link:text-black transition-colors">
+                    {t('footer.whatsapp_support') || (isSw ? 'Msaada wa WhatsApp' : 'WhatsApp Support')}
+                  </a>
                 </li>
               </ul>
             </div>
             
             <div className="text-[13px] text-neutral-500 font-medium mt-12">
-              © {new Date().getFullYear()} Antera Technologies Inc.<br />All rights reserved.
+              © {new Date().getFullYear()} Antera Technologies Inc.<br />{t('footer.rights_reserved') || (isSw ? 'Haki zote zimehifadhiwa.' : 'All rights reserved.')}
             </div>
           </div>
 
@@ -137,40 +140,44 @@ export const FinalCTAAndFooter = () => {
               <FooterLink href="https://kava.co.tz/">Kava</FooterLink>
               <FooterLink href="https://aibruno.vercel.app/">AI Bruno</FooterLink>
               <FooterLink href="https://swahiba.vercel.app/">Swahiba</FooterLink>
-              <FooterLink href="/data-analytics">Data Analytics</FooterLink>
-              <FooterLink href="/solutions">AI Solutions</FooterLink>
-              <FooterLink href="/models">Data Science</FooterLink>
-              <FooterLink href="/solutions">Business Automation</FooterLink>
+              <FooterLink href="/data-analytics">{isSw ? 'Uchambuzi wa Data' : 'Data Analytics'}</FooterLink>
+              <FooterLink href="/solutions">{isSw ? 'Suluhisho za AI' : 'AI Solutions'}</FooterLink>
+              <FooterLink href="/models">{isSw ? 'Sayansi ya Data' : 'Data Science'}</FooterLink>
+              <FooterLink href="/solutions">{isSw ? 'Otomatiki ya Biashara' : 'Business Automation'}</FooterLink>
             </ul>
           </div>
 
           {/* Column 3: Impact */}
           <div className="group p-8 md:p-12 min-h-[280px] flex flex-col hover:bg-neutral-50/50 transition-colors border-r border-b border-neutral-200">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6 font-mono">Impact</h3>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6 font-mono">
+              {t('footer.impact') || (isSw ? 'Athari' : 'Impact')}
+            </h3>
             <ul className="space-y-3">
-              <FooterLink href="/customers">Enterprise</FooterLink>
-              <FooterLink href="/customers">Financial Services</FooterLink>
-              <FooterLink href="/customers">Government</FooterLink>
-              <FooterLink href="/customers">Healthcare</FooterLink>
-              <FooterLink href="/customers">Retail & Commerce</FooterLink>
-              <FooterLink href="/customers">NGOs & Non-Profit</FooterLink>
-              <FooterLink href="/customers">Telecommunications</FooterLink>
-              <FooterLink href="/customers">Supply Chain</FooterLink>
+              <FooterLink href="/customers">{isSw ? 'Biashara Kubwa' : 'Enterprise'}</FooterLink>
+              <FooterLink href="/customers">{isSw ? 'Huduma za Fedha' : 'Financial Services'}</FooterLink>
+              <FooterLink href="/customers">{isSw ? 'Serikali' : 'Government'}</FooterLink>
+              <FooterLink href="/customers">{isSw ? 'Sekta ya Afya' : 'Healthcare'}</FooterLink>
+              <FooterLink href="/customers">{isSw ? 'Biashara & Rejareja' : 'Retail & Commerce'}</FooterLink>
+              <FooterLink href="/customers">{isSw ? 'Mashirika Yasiyo ya Kiserekali' : 'NGOs & Non-Profit'}</FooterLink>
+              <FooterLink href="/customers">{isSw ? 'Mawasiliano' : 'Telecommunications'}</FooterLink>
+              <FooterLink href="/customers">{isSw ? 'Mnyororo wa Upatikanaji' : 'Supply Chain'}</FooterLink>
             </ul>
           </div>
 
           {/* Column 4: Capabilities */}
           <div className="group p-8 md:p-12 min-h-[280px] flex flex-col hover:bg-neutral-50/50 transition-colors border-r border-b border-neutral-200">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6 font-mono">Capabilities</h3>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6 font-mono">
+              {t('footer.capabilities') || (isSw ? 'Uwezo' : 'Capabilities')}
+            </h3>
             <ul className="space-y-3">
               <FooterLink href="/solutions">AI + ML</FooterLink>
-              <FooterLink href="/solutions">Data Integration</FooterLink>
+              <FooterLink href="/solutions">{isSw ? 'Ujumuishaji wa Data' : 'Data Integration'}</FooterLink>
               <FooterLink href="/solutions">Digital Twin</FooterLink>
               <FooterLink href="/solutions">Edge AI</FooterLink>
               <FooterLink href="/solutions">Marketplace</FooterLink>
-              <FooterLink href="/solutions">Pipeline Builder</FooterLink>
-              <FooterLink href="/solutions">Process Mining</FooterLink>
-              <FooterLink href="/solutions">Real-Time Alerting</FooterLink>
+              <FooterLink href="/solutions">{isSw ? 'Ujenzi wa Mtiririko' : 'Pipeline Builder'}</FooterLink>
+              <FooterLink href="/solutions">{isSw ? 'Uchimbaji wa Michakato' : 'Process Mining'}</FooterLink>
+              <FooterLink href="/solutions">{isSw ? 'Taarifa za Muda Halisi' : 'Real-Time Alerting'}</FooterLink>
             </ul>
           </div>
 
@@ -179,13 +186,13 @@ export const FinalCTAAndFooter = () => {
             <div>
               <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6 font-mono">{t('nav.company')}</h3>
               <ul className="space-y-3">
-                <FooterLink href="/company">About Us</FooterLink>
-                <FooterLink href="/team">Team</FooterLink>
-                <FooterLink href="/office">Office</FooterLink>
-                <FooterLink href="/blog">Blog</FooterLink>
-                <FooterLink href="/solutions">Solutions</FooterLink>
-                <FooterLink href="/data-analytics">Data Analytics</FooterLink>
-                <FooterLink href="/models">Models</FooterLink>
+                <FooterLink href="/company">{isSw ? 'Kuhusu Sisi' : 'About Us'}</FooterLink>
+                <FooterLink href="/team">{isSw ? 'Timu Yetu' : 'Team'}</FooterLink>
+                <FooterLink href="/office">{isSw ? 'Ofisi' : 'Office'}</FooterLink>
+                <FooterLink href="/blog">{isSw ? 'Blogu' : 'Blog'}</FooterLink>
+                <FooterLink href="/solutions">{isSw ? 'Suluhisho' : 'Solutions'}</FooterLink>
+                <FooterLink href="/data-analytics">{isSw ? 'Uchambuzi wa Data' : 'Data Analytics'}</FooterLink>
+                <FooterLink href="/models">{isSw ? 'Mifumo' : 'Models'}</FooterLink>
               </ul>
             </div>
             
@@ -205,7 +212,7 @@ export const FinalCTAAndFooter = () => {
                     <button
                       key={lang}
                       onClick={() => setLanguage(lang as any)}
-                      className={`px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest whitespace-nowrap rounded-[3px] border transition-colors duration-200 ${
+                      className={`px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest whitespace-nowrap rounded-[3px] border transition-colors duration-200 cursor-pointer ${
                         isActive
                           ? 'bg-[#1F1F1F] border-[#1F1F1F] text-white'
                           : 'bg-white border-neutral-200 text-neutral-500 hover:text-[#111622] hover:border-neutral-300'

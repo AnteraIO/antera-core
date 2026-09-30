@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import { Play } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 import mobileAppImage from '../assets/mobile-app.png';
 import webCommandImage from '../assets/web-command.png';
@@ -12,8 +13,6 @@ import realTimeDashboardsImage from '../assets/Real-Time-Dashboards.png';
 import customerInsightsImage from '../assets/Customer-Insights.png';
 import performanceMonitoringImage from '../assets/Performance-Monitoring.png';
 import decisionSupportSystemsImage from '../assets/Decision-Support-Systems.png';
-
-import heroVideo from '../assets/antera-video.mp4';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="never">{children}</MotionConfig>
@@ -36,21 +35,63 @@ export const CompanyPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+  const { language, t } = useLanguage();
+  const isSw = language === 'sw';
 
   const workCards = [
-    { title: 'Assess', description: 'Understand business goals, systems, and risks before any work begins.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: businessIntelligenceImage, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Design', description: 'Create secure, scalable, and practical architectures.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: mobileAppImage, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Deliver', description: 'Implement solutions in clear phases and milestones.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: realTimeDashboardsImage, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Optimize', description: 'Measure impact and continuously improve performance.', color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70', image: predictiveAnalyticsImage, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl' },
+    {
+      title: isSw ? 'Tathmini' : 'Assess',
+      description: isSw ? 'Kuelewa malengo ya biashara, mifumo, na hatari kabla ya kazi yoyote kuanza.' : 'Understand business goals, systems, and risks before any work begins.',
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: businessIntelligenceImage, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl'
+    },
+    {
+      title: isSw ? 'Sanifu' : 'Design',
+      description: isSw ? 'Tengeneza usanifu salama, unaoweza kukua na wa vitendo.' : 'Create secure, scalable, and practical architectures.',
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: mobileAppImage, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl'
+    },
+    {
+      title: isSw ? 'Tekeleza' : 'Deliver',
+      description: isSw ? 'Tekeleza suluhisho katika awamu zilizowazi na hatua maalum.' : 'Implement solutions in clear phases and milestones.',
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: realTimeDashboardsImage, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl'
+    },
+    {
+      title: isSw ? 'Boresha' : 'Optimize',
+      description: isSw ? 'Pima matokeo na kuendelea kuboresha utendaji kazi.' : 'Measure impact and continuously improve performance.',
+      color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70', image: predictiveAnalyticsImage, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl'
+    },
   ];
 
   const valueCards = [
-    { title: 'Security first', description: 'Every solution starts with protecting your data and systems.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: performanceMonitoringImage, span: 'md:col-span-7', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Outcome driven', description: 'Practical solutions that deliver real business results.', color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70', image: customerInsightsImage, span: 'md:col-span-5', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-20 w-[90%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Transparency', description: 'Clear communication and accountability at every step.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: decisionSupportSystemsImage, span: 'md:col-span-5', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Continuous learning', description: 'Always improving and staying ahead of technology trends.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: webCommandImage, span: 'md:col-span-7', height: 'h-[480px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Our expertise', description: 'Strong technical skills paired with practical business understanding across cloud, AI, data, and cybersecurity.', color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70', image: businessIntelligenceImage, span: 'md:col-span-8', height: 'h-[440px]', imgClass: 'absolute -bottom-24 -right-20 w-[70%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Accountability', description: 'We take ownership of outcomes and stand by our work.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: mobileAppImage, span: 'md:col-span-4', height: 'h-[440px]', imgClass: 'absolute -bottom-20 -right-16 w-[100%] h-auto object-contain drop-shadow-2xl' },
+    {
+      title: isSw ? 'Usalama Kwanza' : 'Security first',
+      description: isSw ? 'Kila suluhisho huanza na kulinda data na mifumo yako.' : 'Every solution starts with protecting your data and systems.',
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: performanceMonitoringImage, span: 'md:col-span-7', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl'
+    },
+    {
+      title: isSw ? 'Inayolenga Matokeo' : 'Outcome driven',
+      description: isSw ? 'Suluhisho za vitendo zinazotoa matokeo halisi ya kibiashara.' : 'Practical solutions that deliver real business results.',
+      color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70', image: customerInsightsImage, span: 'md:col-span-5', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-20 w-[90%] h-auto object-contain drop-shadow-2xl'
+    },
+    {
+      title: isSw ? 'Uuwazi' : 'Transparency',
+      description: isSw ? 'Mawasiliano wazi na uwajibikaji katika kila hatua.' : 'Clear communication and accountability at every step.',
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: decisionSupportSystemsImage, span: 'md:col-span-5', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl'
+    },
+    {
+      title: isSw ? 'Ujifunzaji wa Muendelezo' : 'Continuous learning',
+      description: isSw ? 'Kila wakati tunaboresha na kukaa mbele ya mwenendo wa teknolojia.' : 'Always improving and staying ahead of technology trends.',
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/80', image: webCommandImage, span: 'md:col-span-7', height: 'h-[480px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl'
+    },
+    {
+      title: isSw ? 'Ujuzi Wetu' : 'Our expertise',
+      description: isSw ? 'Ujuzi thabiti wa kiufundi uliooanishwa na uelewa wa vitendo wa kibiashara katika wingu, AI, data na usalama wa mtandao.' : 'Strong technical skills paired with practical business understanding across cloud, AI, data, and cybersecurity.',
+      color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/80', image: businessIntelligenceImage, span: 'md:col-span-8', height: 'h-[440px]', imgClass: 'absolute -bottom-24 -right-20 w-[70%] h-auto object-contain drop-shadow-2xl'
+    },
+    {
+      title: isSw ? 'Uwajibikaji' : 'Accountability',
+      description: isSw ? 'Tunawajibika kwa matokeo na kusimamia kazi zetu kwa uaminifu.' : 'We take ownership of outcomes and stand by our work.',
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: mobileAppImage, span: 'md:col-span-4', height: 'h-[440px]', imgClass: 'absolute -bottom-20 -right-16 w-[100%] h-auto object-contain drop-shadow-2xl'
+    },
   ];
 
   return (
@@ -67,15 +108,19 @@ export const CompanyPage = () => {
               className="text-xs md:text-sm font-medium tracking-[0.25em]  text-neutral-500 mb-8"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              About Antera Technologies.
+              {isSw ? 'Kuhusu Antera Technologies.' : 'About Antera Technologies.'}
             </motion.p>
 
             <motion.h1
               className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">A technology partner</span>
-              <span className="block text-[#3E9C8F]">working from Africa for the world</span>
+              <span className="block text-black">
+                {isSw ? 'Mshirika wa teknolojia' : 'A technology partner'}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {isSw ? 'anaefanya kazi kutoka Afrika kwa ulimwengu' : 'working from Africa for the world'}
+              </span>
             </motion.h1>
 
             <motion.p
@@ -83,10 +128,11 @@ export const CompanyPage = () => {
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
-              Welcome to Antera. We started out as a specialist software and systems engineering team, crafting bespoke digital platforms for premium clients across Africa. That is still the core of the business, but we now offer a range of services across cloud, AI, data, and cybersecurity.
+              {isSw
+                ? 'Karibu Antera. Talianza kama timu ya wahandisi wa programu na mifumo, tukiunda majukwaa ya kidijitali kwa wateja barani Afrika. Hiyo bado ni msingi wa biashara yetu, lakini sasa tunatoa huduma za wingu, AI, data na usalama wa mtandao.'
+                : 'Welcome to Antera. We started out as a specialist software and systems engineering team, crafting bespoke digital platforms for premium clients across Africa. That is still the core of the business, but we now offer a range of services across cloud, AI, data, and cybersecurity.'}
             </motion.p>
 
-            {/* Fixed: scrolls to the Work section below */}
             <motion.a
               href="#how-we-work"
               className="inline-flex items-center gap-4 mt-12 group cursor-pointer"
@@ -97,14 +143,14 @@ export const CompanyPage = () => {
                 <Play className="w-4 h-4 fill-black group-hover:fill-white transition-colors duration-300" />
               </span>
               <span className="text-base md:text-lg font-medium border-b-2 border-black pb-0.5">
-                Watch our showreel
+                {t('common.watch_showreel') || (isSw ? 'Tazama video yetu' : 'Watch our showreel')}
               </span>
             </motion.a>
           </header>
         </div>
 
         {/* ==========================================
-            HOW WE WORK — this is where showreel scrolls to
+            HOW WE WORK
         ========================================== */}
         <div id="how-we-work" className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32 scroll-mt-24">
           <header className="max-w-5xl mx-auto text-center mb-24">
@@ -112,8 +158,12 @@ export const CompanyPage = () => {
               className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">Four steps from</span>
-              <span className="block text-[#3E9C8F]">problem to outcome</span>
+              <span className="block text-black">
+                {isSw ? 'Hatua nne kutoka' : 'Four steps from'}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {isSw ? 'tatizo hadi matokeo' : 'problem to outcome'}
+              </span>
             </motion.h2>
           </header>
 
@@ -159,8 +209,12 @@ export const CompanyPage = () => {
               className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">Principles that</span>
-              <span className="block text-[#3E9C8F]">guide every project</span>
+              <span className="block text-black">
+                {isSw ? 'Misingi inayoongoza' : 'Principles that'}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {isSw ? 'kila mradi wetu' : 'guide every project'}
+              </span>
             </motion.h2>
           </header>
 
@@ -206,8 +260,12 @@ export const CompanyPage = () => {
               className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">Do it all</span>
-              <span className="block text-[#3E9C8F]">with Antera</span>
+              <span className="block text-black">
+                {isSw ? 'Fanya yote' : 'Do it all'}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {isSw ? 'pamoja na Antera' : 'with Antera'}
+              </span>
             </motion.h2>
           </header>
         </div>

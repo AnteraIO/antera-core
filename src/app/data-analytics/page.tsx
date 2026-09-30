@@ -3,15 +3,14 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 import hero1 from '@/assets/intelligence.jpg';
 import hero2 from '@/assets/data-architecture.jpg';
 import hero3 from '@/assets/banner-3.png';
 import hero4 from '@/assets/hero-4.jpg';
-import hero5 from '@/assets/hero-5.jpg';
 import appliedAI from '@/assets/ai-applied.jpg';
 import predictiveAnalytics from '@/assets/applied-ai.jpg';
-import orchestration from '@/assets/orchestration.jpg';
 import businessIntelligence from '@/assets/intelligence.jpg';
 import architecture from '@/assets/data-architecture.jpg';
 import descriptiveAnalytics from '@/assets/descriptive-analytics.png';
@@ -42,29 +41,31 @@ export default function DataAnalyticsPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+  const { language, t } = useLanguage();
+  const isSw = language === 'sw';
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [progressKey, setProgressKey] = useState(0);
 
   const sliderItems = [
-    { id: 'Data Architecture', label: 'ENGINEERING', title: 'Building the Data Stack, the Foundation Behind Systems That Work at Scale', image: hero1 },
-    { id: 'Business Intelligence', label: 'DASHBOARDS', title: 'Real-Time Telemetry Turning Raw Enterprise Data into Action', image: hero2 },
-    { id: 'Predictive Analytics', label: 'PREDICTIVE AI', title: 'Forecasting Market Dynamics with High-Fidelity Machine Learning', image: hero3 },
-    { id: 'Data Governance', label: 'GOVERNANCE', title: 'Frameworks Compliant with Regional Regulations, Ensuring Security and Trust', image: hero4 },
+    { id: isSw ? 'Usanifu wa Data' : 'Data Architecture', label: isSw ? 'UHANDISI' : 'ENGINEERING', title: isSw ? 'Ujenzi wa Miundombinu ya Data Nyuma ya Mifumo Inayofanya Kazi kwa Ukubwa' : 'Building the Data Stack, the Foundation Behind Systems That Work at Scale', image: hero1 },
+    { id: isSw ? 'Akili ya Biashara' : 'Business Intelligence', label: isSw ? 'DASHIBODI' : 'DASHBOARDS', title: isSw ? 'Takwimu za Muda Halisi Zinazogeuza Data Ghafi kuwa Hatua' : 'Real-Time Telemetry Turning Raw Enterprise Data into Action', image: hero2 },
+    { id: isSw ? 'Uchambuzi wa Kutabiri' : 'Predictive Analytics', label: isSw ? 'AI YA KUTABIRI' : 'PREDICTIVE AI', title: isSw ? 'Kutabiri Mwenendo wa Soko kwa Ujifunzaji Mashine' : 'Forecasting Market Dynamics with High-Fidelity Machine Learning', image: hero3 },
+    { id: isSw ? 'Usimamizi wa Data' : 'Data Governance', label: isSw ? 'USIMAMIZI' : 'GOVERNANCE', title: isSw ? 'Mifumo Inayofuata Sheria za Eneo na Kuhakikisha Usalama na Uaminifu' : 'Frameworks Compliant with Regional Regulations, Ensuring Security and Trust', image: hero4 },
   ];
 
   const capabilities = [
-    { title: 'Architecture', description: 'Build scalable, secure data pipelines and data warehouses that integrate fragmented enterprise sources into a single source of truth.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: architecture, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Intelligence', description: 'Real-time executive dashboards and interactive reports designed to translate raw data into instant, actionable decision-making tools.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: businessIntelligence, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Predictive', description: 'Deploy custom ML models that forecast customer demand, detect operational anomalies, and optimize resource allocation automatically.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: predictiveAnalytics, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Governance', description: 'Frameworks compliant with regional regulations, ensuring security, transparency, privacy, and trustworthy AI adoption.', color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70', image: appliedAI, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl' },
+    { title: isSw ? 'Usanifu' : 'Architecture', description: isSw ? 'Jenga njia madhubuti na salama za data na ghala za data zinazounganisha vyanzo vilivyotawanyika kuwa chanzo kimoja cha ukweli.' : 'Build scalable, secure data pipelines and data warehouses that integrate fragmented enterprise sources into a single source of truth.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: architecture, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl' },
+    { title: isSw ? 'Akili' : 'Intelligence', description: isSw ? 'Dashibodi za watendaji za muda halisi na ripoti zilizoundwa kutafsiri data ghafi kuwa zana za maamuzi.' : 'Real-time executive dashboards and interactive reports designed to translate raw data into instant, actionable decision-making tools.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: businessIntelligence, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl' },
+    { title: isSw ? 'Utabiri' : 'Predictive', description: isSw ? 'Weka mifumo ya ML inayotabiri mahitaji ya wateja, kubaini kasoro za operesheni na kuboresha mgawanyo wa rasilimali.' : 'Deploy custom ML models that forecast customer demand, detect operational anomalies, and optimize resource allocation automatically.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: predictiveAnalytics, span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl' },
+    { title: isSw ? 'Usimamizi' : 'Governance', description: isSw ? 'Mifumo inayofuata sheria za kikanda, ikihakikisha usalama, uwazi, faragha na kupitishwa kwa AI kwa uaminifu.' : 'Frameworks Compliant with regional regulations, ensuring security, transparency, privacy, and trustworthy AI adoption.', color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70', image: appliedAI, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl' },
   ];
 
   const maturityLevels = [
-    { title: 'Descriptive', description: 'Consolidating historical records into structured databases and standard reports.', color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70', image: descriptiveAnalytics, span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Diagnostic', description: 'Deep-dive root cause analysis using correlation, segmentation, and drill-down metrics.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: diagnosticAnalytics, span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Predictive', description: 'Leveraging statistical models and machine learning to forecast future market shifts.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: predictiveAnalyticsImg, span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl' },
-    { title: 'Prescriptive', description: 'AI-driven decision engines that recommend optimal strategy and automate execution.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: prescriptiveAnalytics, span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl' },
+    { title: isSw ? 'Ufafanuzi' : 'Descriptive', description: isSw ? 'Kuunganisha kumbukumbu za kihistoria katika kanzidata na ripoti zilizopangwa.' : 'Consolidating historical records into structured databases and standard reports.', color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70', image: descriptiveAnalytics, span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl' },
+    { title: isSw ? 'Utambuzi' : 'Diagnostic', description: isSw ? 'Uchambuzi wa kina wa chanzo cha tatizo kwa kutumia uwiano na vipimo.' : 'Deep-dive root cause analysis using correlation, segmentation, and drill-down metrics.', color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', image: diagnosticAnalytics, span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl' },
+    { title: isSw ? 'Utabiri' : 'Predictive', description: isSw ? 'Kutumia mifumo ya takwimu na ujifunzaji mashine kutabiri mabadiliko ya baadaye ya soko.' : 'Leveraging statistical models and machine learning to forecast future market shifts.', color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: predictiveAnalyticsImg, span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl' },
+    { title: isSw ? 'Elekezi' : 'Prescriptive', description: isSw ? 'Mifumo ya maamuzi inayotokana na AI inayopendekeza mkakati bora na kutekeleza.' : 'AI-driven decision engines that recommend optimal strategy and automate execution.', color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: prescriptiveAnalytics, span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl' },
   ];
 
   const goToSlide = (idx: number) => {
@@ -96,8 +97,12 @@ export default function DataAnalyticsPage() {
               className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">Our analytics power</span>
-              <span className="block text-[#3E9C8F]">real-time decisions</span>
+              <span className="block text-black">
+                {isSw ? 'Uchambuzi wetu unaendesha' : 'Our analytics power'}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {isSw ? 'maamuzi ya muda halisi' : 'real-time decisions'}
+              </span>
             </motion.h1>
 
             <motion.p
@@ -105,7 +110,9 @@ export default function DataAnalyticsPage() {
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
-              Our analytics power real-time, AI-driven decisions in critical commercial enterprises in East Africa, from the factory floors to the front lines.
+              {isSw
+                ? 'Uchambuzi wetu unaendesha maamuzi ya muda halisi, ya kuongozwa na AI katika biashara muhimu za Afrika Mashariki.'
+                : 'Our analytics power real-time, AI-driven decisions in critical commercial enterprises in East Africa, from the factory floors to the front lines.'}
             </motion.p>
           </header>
         </div>
@@ -141,7 +148,7 @@ export default function DataAnalyticsPage() {
 
             <div className="ml-auto pl-4 flex-shrink-0">
               <button className="px-4 py-2 text-[14px] text-[#111622] bg-white border border-[#111622] hover:bg-[#111622] hover:text-white transition-colors whitespace-nowrap rounded-[3px]">
-                SEE ALL
+                {t('hero.see_all') || (isSw ? 'TAZAMA ZOTE' : 'SEE ALL')}
               </button>
             </div>
           </div>
@@ -195,8 +202,12 @@ export default function DataAnalyticsPage() {
               className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">Solutions we</span>
-              <span className="block text-[#3E9C8F]">build for you</span>
+              <span className="block text-black">
+                {isSw ? 'Suluhisho tunazo' : 'Solutions we'}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {isSw ? 'jenga kwa ajili yako' : 'build for you'}
+              </span>
             </motion.h2>
           </header>
 
@@ -239,8 +250,12 @@ export default function DataAnalyticsPage() {
               className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">Analytics maturity</span>
-              <span className="block text-[#3E9C8F]">from data to decisions</span>
+              <span className="block text-black">
+                {isSw ? 'Ukomavu wa uchambuzi' : 'Analytics maturity'}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {isSw ? 'kutoka data hadi maamuzi' : 'from data to decisions'}
+              </span>
             </motion.h2>
           </header>
 
@@ -283,8 +298,12 @@ export default function DataAnalyticsPage() {
               className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
-              <span className="block text-black">Ready to accelerate</span>
-              <span className="block text-[#3E9C8F]">your data strategy</span>
+              <span className="block text-black">
+                {isSw ? 'Uko tayari kuharakisha' : 'Ready to accelerate'}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {isSw ? 'mkakati wako wa data' : 'your data strategy'}
+              </span>
             </motion.h2>
 
             <motion.p
@@ -292,7 +311,9 @@ export default function DataAnalyticsPage() {
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
-              Consult with our lead data architects to evaluate your data ecosystem and build custom analytics systems.
+              {isSw
+                ? 'Wasiliana na wasanifu wetu wakuu wa data ili kutathmini mfumo wako na kujenga mifumo ya uchambuzi.'
+                : 'Consult with our lead data architects to evaluate your data ecosystem and build custom analytics systems.'}
             </motion.p>
 
             <motion.div
@@ -305,7 +326,7 @@ export default function DataAnalyticsPage() {
                 target="_blank"
                 className="inline-flex items-center gap-4 text-base md:text-lg font-medium border-b-2 border-black pb-0.5 hover:opacity-60 transition-opacity"
               >
-                Contact Data Advisory
+                {isSw ? 'Wasiliana na Mshauri wa Data' : 'Contact Data Advisory'}
               </Link>
             </motion.div>
           </header>
