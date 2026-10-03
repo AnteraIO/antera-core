@@ -37,6 +37,129 @@ const textVariants = {
 };
 
 // ==========================================
+// SECTION 0 — Web Design & Development ("INSPIRING ENGAGING")
+// ==========================================
+export const WebServicesSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { language, t } = useLanguage();
+  const isSw = language === 'sw';
+
+  const webCards = [
+    {
+      title: t('web.visual_design_title') || (isSw ? 'Ubunifu wa Muonekano' : 'Visual Design'),
+      description: t('web.visual_design_desc') || 'We design templates that are appealing and creative and best represent your brand, impress your customers and provide easy site experience.',
+      image: mobileAppImage,
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/80',
+      span: 'md:col-span-7', height: 'h-[520px]',
+      imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl',
+    },
+    {
+      title: t('web.landing_pages_title') || (isSw ? 'Kurasa za Kutua' : 'Landing Pages'),
+      description: t('web.landing_pages_desc') || 'Watch the magic happen when our digital team crafts landing pages for specific campaigns/ offers and make it a success with convincing call to action options.',
+      image: SystemIntegration,
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/80',
+      span: 'md:col-span-5', height: 'h-[520px]',
+      imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
+    },
+    {
+      title: t('web.development_title') || (isSw ? 'Ujenzi wa Tovuti' : 'Development'),
+      description: t('web.development_desc') || 'We design and integrate your web design with smart plugins and capabilities that are compatible across browsers. We focus on providing a flawless user experience.',
+      image: Workflow,
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/80',
+      span: 'md:col-span-5', height: 'h-[520px]',
+      imgClass: 'absolute -bottom-20 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl',
+    },
+    {
+      title: t('web.redesign_title') || (isSw ? 'Huduma za Kuboresha Upya' : 'Redesign Services'),
+      description: t('web.redesign_desc') || 'Did you know a poor web design can impact your leads and sales? From an outdated website move to a trendy, visually pleasing one that helps boost your sales conversions.',
+      image: ExecutiveDashboards,
+      color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/80',
+      span: 'md:col-span-7', height: 'h-[520px]',
+      imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl',
+    },
+    {
+      title: t('web.cms_title') || (isSw ? 'Ubunifu wa CMS' : 'CMS Design'),
+      description: t('web.cms_desc') || 'Depending on your requirement, we enable content management system(CMS) that work best for your objectives.',
+      image: SecurityInfrastructure,
+      color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/80',
+      span: 'md:col-span-6', height: 'h-[480px]',
+      imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl',
+    },
+    {
+      title: t('web.maintenance_title') || (isSw ? 'Huduma za Matengenezo' : 'Maintenance Services'),
+      description: t('web.maintenance_desc') || 'Bug fixing, troubleshooting, site monitoring, security updates, installation of version upgrades, we can help you keep your online presence up-to-date.',
+      image: BrandCredibility,
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/80',
+      span: 'md:col-span-6', height: 'h-[480px]',
+      imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
+    },
+  ];
+
+  return (
+    <MotionWrapper>
+      <section ref={containerRef} className="bg-white text-black font-sans w-full pt-20 pb-32">
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
+          <header className="max-w-5xl mx-auto text-center mb-20">
+            <motion.h1
+              className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+            >
+              <span className="block text-black">
+                {t('web.title_line1') || 'INSPIRING'}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {t('web.title_line2') || 'ENGAGING'}
+              </span>
+            </motion.h1>
+
+            <motion.p
+              className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-10 max-w-3xl mx-auto"
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
+              transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {t('web.desc') || 'We craft visually appealing and high-converting websites and landing pages tailored for your brand.'}
+            </motion.p>
+          </header>
+
+          <motion.div
+            variants={gridVariants} initial="hidden" whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-3"
+          >
+            {webCards.map((card, i) => (
+              <motion.div
+                key={i}
+                variants={cardVariants}
+                whileHover={{ y: -8, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }}
+                className={`group relative overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text} ${card.span} ${card.height}`}
+              >
+                <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 ${card.imgClass}`}>
+                  <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
+                </div>
+
+                <div className="relative z-20 max-w-[85%]">
+                  <h3 className="text-3xl md:text-4xl lg:text-[40px] font-bold tracking-[-0.02em] leading-[1.05]">
+                    {card.title}
+                  </h3>
+
+                  <div className="overflow-hidden">
+                    <div className="max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                      <p className={`text-xl md:text-2xl ${card.subText} mt-5 leading-[1.3] max-w-lg`}>
+                        {card.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+    </MotionWrapper>
+  );
+};
+
+// ==========================================
 // SECTION 1 — Communication
 // ==========================================
 export const CommunicationSection = () => {

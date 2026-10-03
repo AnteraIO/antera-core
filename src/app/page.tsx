@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 const TrustSection = dynamic(() => import('@/components/MainSections').then(mod => mod.TrustSection));
 const ServicesSection = dynamic(() => import('@/components/MainSections').then(mod => mod.ServicesSection));
 const PartnersSection = dynamic(() => import('@/components/Partners').then(mod => mod.PartnersSection));
+const WebServicesSection = dynamic(() => import('@/components/MiddleSections').then(mod => mod.WebServicesSection));
 const CommunicationSection = dynamic(() => import('@/components/MiddleSections').then(mod => mod.CommunicationSection));
 const ApplicationSection = dynamic(() => import('@/components/MiddleSections').then(mod => mod.ApplicationSection));
 const DataIntelligenceSection = dynamic(() => import('@/components/MiddleSections').then(mod => mod.DataIntelligenceSection));
@@ -18,6 +19,7 @@ export default function Home() {
       <PartnersSection />
       <TrustSection />
       <ServicesSection />
+      <WebServicesSection />
       <CommunicationSection />
       <ApplicationSection />
       <DataIntelligenceSection />

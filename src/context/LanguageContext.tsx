@@ -90,6 +90,23 @@ const translations: Record<Language, Record<string, string>> = {
     'services.card9_title': 'Resume Writing',
     'services.card9_desc': 'Professional executive CVs, cover letters, and LinkedIn profile optimization written in clear, persuasive language that gets candidates hired faster.',
 
+    // Web Design & Development Section
+    'web.title_line1': 'INSPIRING',
+    'web.title_line2': 'ENGAGING',
+    'web.desc': 'We craft visually appealing and high-converting websites and landing pages tailored for your brand.',
+    'web.visual_design_title': 'Visual Design',
+    'web.visual_design_desc': 'We design templates that are appealing and creative and best represent your brand, impress your customers and provide easy site experience.',
+    'web.landing_pages_title': 'Landing Pages',
+    'web.landing_pages_desc': 'Watch the magic happen when our digital team crafts landing pages for specific campaigns/ offers and make it a success with convincing call to action options.',
+    'web.development_title': 'Development',
+    'web.development_desc': 'We design and integrate your web design with smart plugins and capabilities that are compatible across browsers. We focus on providing a flawless user experience.',
+    'web.redesign_title': 'Redesign Services',
+    'web.redesign_desc': 'Did you know a poor web design can impact your leads and sales? From an outdated website move to a trendy, visually pleasing one that helps boost your sales conversions.',
+    'web.cms_title': 'CMS Design',
+    'web.cms_desc': 'Depending on your requirement, we enable content management system(CMS) that work best for your objectives.',
+    'web.maintenance_title': 'Maintenance Services',
+    'web.maintenance_desc': 'Bug fixing, troubleshooting, site monitoring, security updates, installation of version upgrades, we can help you keep your online presence up-to-date.',
+
     // Communication Section
     'comm.title_line1': 'Automate work that',
     'comm.title_line2': 'excite and inspire',
@@ -264,6 +281,23 @@ const translations: Record<Language, Record<string, string>> = {
     'services.card8_desc': 'Matangazo yaliyolengwa mtandaoni, usimamizi wa mitandao ya kijamii, na mbinu za kuongeza wateja halisi wanaonunua bidhaa zako.',
     'services.card9_title': 'Uandishi wa Wasifu (Resume Writing)',
     'services.card9_desc': 'Uandishi wa kitaalamu wa CV, barua za maombi ya kazi, na maelezo ya LinkedIn yanayoeleza uwezo wako kwa lugha iliyo wazi ili kupata kazi haraka.',
+
+    // Web Design & Development Section
+    'web.title_line1': 'INAYOVUTIA',
+    'web.title_line2': 'INAYOSHIRIKISHA',
+    'web.desc': 'Tunatengeneza tovuti na kurasa za kutua zilizobuniwa kwa ustadi ili kuwakilisha vyema chapa yako na kuongeza mauzo.',
+    'web.visual_design_title': 'Ubunifu wa Muonekano (Visual Design)',
+    'web.visual_design_desc': 'Tunatengeneza violezo vinavyovutia na vya kibunifu vinavyowakilisha vyema chapa yako, kuwavutia wateja wako na kutoa uzoefu rahisi wa kutumia tovuti.',
+    'web.landing_pages_title': 'Kurasa za Kutua (Landing Pages)',
+    'web.landing_pages_desc': 'Tazama miujiza ikitokea wakati timu yetu ya kidijitali inapotengeneza kurasa maalum za kutua kwa ajili ya kampeni na matoleo fulani na kuifanya ifanikiwe kwa wito madhubuti wa kuchukua hatua.',
+    'web.development_title': 'Ujenzi wa Tovuti (Development)',
+    'web.development_desc': 'Tunabuni na kuunganisha muundo wako wa wavuti na zana au plagi za kisasa zinazofanya kazi vizuri kwenye vivinjari vyote. Tunalenga kutoa uzoefu kamili na usio na dosari kwa mtumiaji.',
+    'web.redesign_title': 'Huduma za Kuboresha Upya (Redesign)',
+    'web.redesign_desc': 'Je, unajua kuwa muundo mbaya wa wavuti unaweza kuathiri wateja wako na mauzo? Badilisha kutoka kwenye tovuti iliyopitwa na wakati na uhamie kwenye tovuti ya kisasa inayovutia na kuongeza mauzo yako.',
+    'web.cms_title': 'Ubunifu wa CMS (CMS Design)',
+    'web.cms_desc': 'Kulingana na mahitaji yako, tunakuwekea mfumo wa usimamizi wa maudhui (CMS) unaofanya kazi vyema zaidi kwa ajili ya malengo yako.',
+    'web.maintenance_title': 'Huduma za Matengenezo (Maintenance)',
+    'web.maintenance_desc': 'Kurekebisha makosa, kutatua changamoto, ufuatiliaji wa tovuti, sasisho za usalama, na kusakinisha maboresho mapya, tunakusaidia kuweka uwepo wako mtandaoni ukiwa wa kisasa kabisa.',
 
     // Communication Section
     'comm.title_line1': 'Kurahisisha kazi zinazo',
