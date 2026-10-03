@@ -111,15 +111,6 @@ export const SolutionsPage = () => {
       span: 'md:col-span-5', height: 'h-[520px]',
       imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl',
     },
-    {
-      title: isSw ? 'Picha Mjongeo za Kiwango cha Juu' : 'High-Quality Motion Graphics',
-      description: isSw ? 'Video za katuni za 2D/3D na picha mjongeo za studio zinazoeleza huduma na bidhaa zako kwa njia rahisi na yenye kuvutia sana.' : 'Designer-level 2D/3D motion graphics, animated explainer videos, and high-impact visual animations that make complex business ideas fun and simple.',
-      isVideo: true,
-      videoSrc: '/src/assets/graphics/folder-video.mp4',
-      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
-      span: 'md:col-span-12', height: 'h-[520px]',
-      imgClass: 'absolute -bottom-10 -right-10 w-[70%] md:w-[50%] h-auto object-contain drop-shadow-2xl rounded-2xl overflow-hidden',
-    },
   ];
 
   return (
@@ -164,18 +155,7 @@ export const SolutionsPage = () => {
                 className={`group relative overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text} ${card.span} ${card.height}`}
               >
                 <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 ${card.imgClass}`}>
-                  {card.isVideo ? (
-                    <video
-                      src={card.videoSrc}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-auto object-cover rounded-xl shadow-2xl"
-                    />
-                  ) : card.image ? (
-                    <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
-                  ) : null}
+                  <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
                 </div>
 
                 <div className="relative z-20 max-w-[85%]">

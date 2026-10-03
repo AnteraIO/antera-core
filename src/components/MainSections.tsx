@@ -218,19 +218,11 @@ export const ServicesSection = () => {
     {
       title: t('services.card9_title') || (isSw ? 'Uandishi wa Wasifu' : 'Resume Writing'),
       description: t('services.card9_desc') || (isSw ? 'Uandishi wa kitaalamu wa CV na barua za maombi zinazokupa ajira haraka.' : 'Professional executive CVs, cover letters, and LinkedIn profile optimization written in clear, persuasive language.'),
-      image: bannerResume,
+      isVideo: true,
+      videoSrc: '/src/assets/graphics/alert.mp4',
       color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70',
       span: 'md:col-span-5', height: 'h-[520px]',
-      imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl',
-    },
-    {
-      title: t('services.card10_title') || (isSw ? 'Picha Mjongeo za Kiwango cha Juu' : 'High-Quality Motion Graphics'),
-      description: t('services.card10_desc') || (isSw ? 'Video za katuni za 2D/3D na picha mjongeo za studio zinazoeleza biashara yako kwa urahisi.' : 'Designer-level 2D/3D animated videos, explainer clips, and studio-grade visual effects that explain complex products simply.'),
-      isVideo: true,
-      videoSrc: '/src/assets/graphics/folder-video.mp4',
-      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
-      span: 'md:col-span-12', height: 'h-[520px]',
-      imgClass: 'absolute -bottom-10 -right-10 w-[70%] md:w-[50%] h-auto object-contain drop-shadow-2xl rounded-2xl overflow-hidden',
+      imgClass: 'absolute -bottom-10 -right-10 w-[80%] h-auto object-cover rounded-xl shadow-2xl overflow-hidden opacity-90',
     },
   ];
 

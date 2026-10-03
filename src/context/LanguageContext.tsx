@@ -89,8 +89,6 @@ const translations: Record<Language, Record<string, string>> = {
     'services.card8_desc': 'Targeted online advertisement campaigns, social media management, and search engine strategies that get your products in front of real paying customers.',
     'services.card9_title': 'Resume Writing',
     'services.card9_desc': 'Professional executive CVs, cover letters, and LinkedIn profile optimization written in clear, persuasive language that gets candidates hired faster.',
-    'services.card10_title': 'High-Quality Motion Graphics',
-    'services.card10_desc': 'Designer-level 2D/3D animated videos, explainer clips, and studio-grade visual effects that explain complex products simply and boost social engagement.',
 
     // Communication Section
     'comm.title_line1': 'Automate work that',
@@ -266,8 +264,6 @@ const translations: Record<Language, Record<string, string>> = {
     'services.card8_desc': 'Matangazo yaliyolengwa mtandaoni, usimamizi wa mitandao ya kijamii, na mbinu za kuongeza wateja halisi wanaonunua bidhaa zako.',
     'services.card9_title': 'Uandishi wa Wasifu (Resume Writing)',
     'services.card9_desc': 'Uandishi wa kitaalamu wa CV, barua za maombi ya kazi, na maelezo ya LinkedIn yanayoeleza uwezo wako kwa lugha iliyo wazi ili kupata kazi haraka.',
-    'services.card10_title': 'Picha Mjongeo (Motion Graphics)',
-    'services.card10_desc': 'Video za katuni za 2D/3D na madoido ya picha mjongeo za kiwango cha juu zinazoeleza bidhaa au huduma zako kwa njia rahisi na inayosisimua.',
 
     // Communication Section
     'comm.title_line1': 'Kurahisisha kazi zinazo',

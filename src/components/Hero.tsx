@@ -18,6 +18,8 @@ import hero11 from '../assets/hero-11.jpg';
 import hero12 from '../assets/intelligence.jpg';
 
 import heroVideo from '../assets/antera-video.mp4';
+import folderVideo from '../assets/graphics/folder-video.mp4';
+import alertVideo from '../assets/graphics/alert.mp4';
 
 const SLIDE_DURATION = 6000;
 
@@ -33,13 +35,13 @@ export const Hero = () => {
       id: isSw ? 'Wavuti' : 'Web Apps',
       label: isSw ? 'BIASHARA 1' : 'ENTERPRISE 1',
       title: isSw ? 'Programu za Wavuti za Biashara kwa Ukuzaji ↗' : 'Enterprise Web Applications for Scale ↗',
-      image: hero1
+      video: folderVideo
     },
     {
       id: isSw ? 'Mifumo ya Simu' : 'Mobile Systems',
       label: isSw ? 'MIFUMO YA SIMU 2' : 'CROSS-PLATFORM 2',
       title: isSw ? 'Programu za Simu za Majukwaa Mbalimbali kwa Afrika Mashariki ↗' : 'Cross-Platform Mobile Solutions for East Africa ↗',
-      image: hero2
+      video: alertVideo
     },
     {
       id: isSw ? 'Wakala wa AI' : 'AI Agents',
@@ -218,14 +220,25 @@ export const Hero = () => {
                       isActive ? 'opacity-100 scale-100' : 'opacity-40 scale-[0.98]'
                     }`}
                   >
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      sizes="85vw"
-                      className="object-cover"
-                      priority={idx === 0}
-                    />
+                    {item.video ? (
+                      <video
+                        src={item.video}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover"
+                      />
+                    ) : item.image ? (
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        sizes="85vw"
+                        className="object-cover"
+                        priority={idx === 0}
+                      />
+                    ) : null}
 
                     {/* Overlay Box */}
                     <div
