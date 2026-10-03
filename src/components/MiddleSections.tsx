@@ -4,17 +4,20 @@ import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import { Play } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import mobileAppImage from '../assets/graphics/93.png';
+import SystemIntegration from '../assets/graphics/91.png';
+import ExecutiveDashboards  from '../assets/graphics/115.png';
+import Workflow from '../assets/graphics/81.png';
+import DataAnalytics from '../assets/graphics/23.png';
+import customerInsightsImage from '../assets/graphics/36.png';
+import SecurityInfrastructure from '../assets/graphics/54.png';
+import decisionSupportSystemsImage from '../assets/graphics/106.png';
+import predictiveAnalyticsImage from '../assets/graphics/97.png';
+import dataGovernanceImage from '../assets/graphics/89.png';
+import SecureScalable from '../assets/graphics/110.png';
+import BrandCredibility from '../assets/graphics/77.png';
 
-import mobileAppImage from '../assets/mobile-app.png';
-import webCommandImage from '../assets/web-command.png';
-import businessIntelligenceImage from '../assets/Business-Intelligence.png';
-import predictiveAnalyticsImage from '../assets/Predictive-Analytics.png';
-import realTimeDashboardsImage from '../assets/Real-Time-Dashboards.png';
-import customerInsightsImage from '../assets/Customer-Insights.png';
-import performanceMonitoringImage from '../assets/Performance-Monitoring.png';
-import decisionSupportSystemsImage from '../assets/Decision-Support-Systems.png';
-
-import heroVideo from '../assets/antera-video.mp4';
+import heroVideo from '../assets/graphics/alert.mp4';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="never">{children}</MotionConfig>
@@ -47,7 +50,7 @@ export const CommunicationSection = () => {
     {
       isVideo: true,
       title: isSw ? 'Wakala wa Mazungumzo wa AI' : 'AI Chatbots',
-      description: isSw ? 'Wakala wenye akili wanaochuja fursa, kujibu maswali ya wateja, na kupanga miadi saa 24/7.' : 'Intelligent conversational agents that qualify leads, answer support queries, and book appointments around the clock.',
+      description: isSw ? 'Wakala wenye akili wanaochuja fursa, kujibu maswali ya wateja, na kupanga miadi saa 24/7.' : 'Never miss a customer again. Our AI chatbots greet every visitor the moment they arrive, answer questions clearly, qualify leads, and follow up while interest is still high. When someone is ready to buy, book, or speak to a person, your team is notified right away so nothing slips through. Every message gets a reply, at every hour, and your business always feels present and attentive.',
       color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70',
       span: 'md:col-span-7', height: 'h-[560px]',
     },
@@ -63,7 +66,7 @@ export const CommunicationSection = () => {
       title: isSw ? 'Uchambuzi wa Data' : 'Data Analytics',
       description: isSw ? 'Mifumo safi ya data na dashibodi zinazogeuza data za operesheni kuwa maamuzi ya kuchukua hatua.' : 'Clean pipelines and dashboards that turn raw operational data into decisions you can actually act on.',
       color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70',
-      image: realTimeDashboardsImage,
+      image: DataAnalytics,
       span: 'md:col-span-5', height: 'h-[520px]',
       imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl',
     },
@@ -71,7 +74,7 @@ export const CommunicationSection = () => {
       title: isSw ? 'Otomatiki ya Mtiririko wa Kazi' : 'Workflow Automation',
       description: isSw ? 'Ondoa hatua zinazojirudia za mikono katika biashara yako na uache mifumo ifanye kazi zake.' : 'Remove repetitive manual steps across your business and let systems do the work they were meant to.',
       color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70',
-      image: predictiveAnalyticsImage,
+      image: Workflow,
       span: 'md:col-span-7', height: 'h-[520px]',
       imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl',
     },
@@ -79,7 +82,7 @@ export const CommunicationSection = () => {
       title: isSw ? 'Miundombinu ya Usalama' : 'Security Infrastructures',
       description: isSw ? 'Ulinzi wa tabaka, udhibiti wa ufikiaji, na ufuatiliaji ili kuweka data na operesheni zako salama.' : 'Layered defenses, access control, and monitoring to keep your data and operations safe.',
       color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70',
-      image: performanceMonitoringImage,
+      image: SecurityInfrastructure,
       span: 'md:col-span-6', height: 'h-[480px]',
       imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl',
     },
@@ -87,7 +90,7 @@ export const CommunicationSection = () => {
       title: isSw ? 'Ujumuishaji wa Mifumo' : 'System Integrations',
       description: isSw ? 'Unganisha zana zako, CRM, na vyanzo vya data ili taarifa itiririke bila vikwazo.' : 'Connect your tools, CRMs, and data sources so information flows where it needs to without friction.',
       color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
-      image: webCommandImage,
+      image: SystemIntegration,
       span: 'md:col-span-6', height: 'h-[480px]',
       imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
     },
@@ -196,14 +199,14 @@ export const ApplicationSection = () => {
     {
       title: isSw ? 'Majukwaa salama na yanayokua ya kidijitali.' : 'Secure, scalable digital platforms.',
       description: isSw ? 'Saidia ukuaji na uboreshe uzoefu wa mtumiaji kwenye vifaa vyote. Imejengwa kwa ajili ya utendaji bora na udumu.' : 'Support growth and improve user experience across all devices. Built for performance and longevity.',
-      image: mobileAppImage,
+      image: SecureScalable,
       bg: 'bg-[#E8ECEF]', text: 'text-black', sub: 'text-black/70',
       imgClass: 'absolute -bottom-32 -right-32 w-[80%] md:w-[70%] h-auto object-contain drop-shadow-2xl',
     },
     {
       title: isSw ? 'Imarisha uaminifu wa chapa yako.' : 'Improve brand credibility.',
       description: isSw ? 'Mifumo iliyounganishwa ya biashara na mbinu salama za ujenzi kwa ajili ya uwepo thabiti wa kidijitali.' : 'Integrated business systems and secure development practices for a stronger digital presence.',
-      image: webCommandImage,
+      image: BrandCredibility,
       bg: 'bg-[#0A0A0A]', text: 'text-white', sub: 'text-white/70',
       imgClass: 'absolute -bottom-32 -right-32 w-[85%] md:w-[75%] h-auto object-contain drop-shadow-2xl',
     },
@@ -292,7 +295,7 @@ export const DataIntelligenceSection = () => {
     {
       title: isSw ? 'Dashibodi za Watendaji' : 'Executive Dashboards',
       description: isSw ? 'Taswira moja na wazi ya takwimu zinazoongoza maamuzi, kutoka mapato hadi operesheni, zikihuishwa mubashara.' : 'A single, clear view of the metrics that drive decisions, from revenue to operations, updated live.',
-      image: businessIntelligenceImage, color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', span: 'md:col-span-7', height: 'h-[560px]', imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl'
+      image: ExecutiveDashboards, color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', span: 'md:col-span-7', height: 'h-[560px]', imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl'
     },
     {
       title: isSw ? 'Uchambuzi wa Kutabiri' : 'Predictive Analytics',
@@ -302,7 +305,7 @@ export const DataIntelligenceSection = () => {
     {
       title: isSw ? 'Mifumo ya Njia za Data' : 'Data Pipelines',
       description: isSw ? 'Mtiririko wa otomatiki unaokusanya, kusafisha na kuunganisha data kutoka kila mfumo unautumia.' : 'Automated flows that collect, clean, and centralize data from every system you use.',
-      image: realTimeDashboardsImage, color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl'
+      image: DataAnalytics, color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl'
     },
     {
       title: isSw ? 'Chanzo Moja cha Ukweli' : 'Single Source of Truth',
@@ -312,7 +315,7 @@ export const DataIntelligenceSection = () => {
     {
       title: isSw ? 'Usimamizi wa Data' : 'Data Governance',
       description: isSw ? 'Sera, mtiririko na udhibiti wa ufikiaji ili data yako ibaki sahihi, inayofuata sheria na inayokagulika.' : 'Policies, lineage, and access controls so your data stays accurate, compliant, and auditable.',
-      image: performanceMonitoringImage, color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70', span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl'
+      image: dataGovernanceImage, color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70', span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl'
     },
     {
       title: isSw ? 'Ufahamu wa Utabiri' : 'Forecasting Insights',
