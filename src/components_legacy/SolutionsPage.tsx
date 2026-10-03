@@ -12,7 +12,7 @@ import realTimeDashboardsImage from '../assets/Real-Time-Dashboards.png';
 import performanceMonitoringImage from '../assets/Performance-Monitoring.png';
 import bannerGraphics from '../assets/graphics/117.png';
 import bannerMarketing from '../assets/graphics/110.png';
-import bannerResume from '../assets/graphics/103.png';
+import bannerResume from '../assets/graphics/resume.png';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="never">{children}</MotionConfig>
