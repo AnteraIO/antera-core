@@ -4,14 +4,18 @@ import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image, { type StaticImageData } from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 
-import banner1 from '../assets/banner-1.png';
-import banner2 from '../assets/banner-2.png';
-import banner3 from '../assets/banner-3.png';
-import banner4 from '../assets/banner-4.png';
-import banner5 from '../assets/banner-5.png';
-import mobileAppImage from '../assets/mobile-app.png';
-import webCommandImage from '../assets/web-command.png';
-
+import banner1 from '../assets/graphics/141.png';
+import banner2 from '../assets/graphics/118.png';
+import banner3 from '../assets/graphics/140.png';
+import banner4 from '../assets/graphics/130.png';
+import banner5 from '../assets/graphics/128.png';
+import secureScalable from '../assets/graphics/102.png';
+import deliverSolutions from '../assets/graphics/113.png';
+import Optimize from '../assets/graphics/64.png';
+import security from '../assets/graphics/138.png';
+import cost from '../assets/graphics/155.png';
+import cloud from '../assets/graphics/139.png';
+import Wingu from '../assets/graphics/156.png';
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="never">{children}</MotionConfig>
 );
@@ -81,20 +85,20 @@ export const OperationSection = () => {
       type: 'text', label: '02',
       title: isSw ? 'Sanifu.' : 'Design.',
       desc: isSw ? 'Kutengeneza usanifu salama, unaokua kulingana na mahitaji yako halisi.' : 'Create secure, scalable architectures tailored to your needs.',
-      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: mobileAppImage, span: 'md:col-span-2', height: 'h-[400px]'
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: secureScalable, span: 'md:col-span-2', height: 'h-[400px]'
     },
-    { type: 'image', image: mobileAppImage, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: secureScalable, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
     {
       type: 'text', label: '03',
       title: isSw ? 'Tekeleza.' : 'Deliver.',
       desc: isSw ? 'Kutekeleza suluhisho katika awamu na hatua zilizowazi.' : 'Implement solutions in clear phases and milestones.',
-      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: webCommandImage, span: 'md:col-span-2', height: 'h-[400px]'
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: deliverSolutions, span: 'md:col-span-2', height: 'h-[400px]'
     },
     {
       type: 'text', label: '04',
       title: isSw ? 'Boresha.' : 'Optimize.',
       desc: isSw ? 'Kupima matokeo na kuendelea kuboresha kwa muendelezo.' : 'Measure impact and continuously improve.',
-      color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/85', bgImage: banner3, span: 'md:col-span-2', height: 'h-[400px]'
+      color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/85', bgImage: Optimize, span: 'md:col-span-2', height: 'h-[400px]'
     },
   ];
 
@@ -189,32 +193,32 @@ export const DataScienceSection = () => {
       type: 'text', label: '01',
       title: isSw ? 'Uboreshaji wa Wingu.' : 'Cloud Modernization.',
       desc: isSw ? 'Hamisha na endesha mifumo ya wingu na mwonekano wa juu na usalama.' : 'Migrate and operate cloud systems with high visibility and security.',
-      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: banner5, span: 'md:col-span-3', height: 'h-[360px]'
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: Wingu, span: 'md:col-span-3', height: 'h-[360px]'
     },
     { type: 'image', image: banner5, span: 'md:col-span-3', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
-    { type: 'image', image: mobileAppImage, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: secureScalable, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
     {
       type: 'text', label: '02',
       title: isSw ? 'Otomatiki ya DevOps.' : 'DevOps Automation.',
       desc: isSw ? 'Matoleo ya haraka na mitiririko ya otomatiki ya CI/CD.' : 'Faster releases with automated CI/CD pipelines.',
-      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: webCommandImage, span: 'md:col-span-2', height: 'h-[360px]'
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: deliverSolutions, span: 'md:col-span-2', height: 'h-[360px]'
     },
-    { type: 'image', image: webCommandImage, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: deliverSolutions, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
 
     // Row 2
-    { type: 'image', image: banner1, span: 'md:col-span-4', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: cloud, span: 'md:col-span-4', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
     {
       type: 'text', label: '03',
       title: isSw ? 'Uboreshaji wa Gharama.' : 'Cost Optimization.',
       desc: isSw ? 'Gharama za wingu zinazotabirika na usimamizi bora.' : 'Predictable cloud costs and better governance.',
-      color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/85', bgImage: banner2, span: 'md:col-span-2', height: 'h-[400px]'
+      color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/85', bgImage: cost, span: 'md:col-span-2', height: 'h-[400px]'
     },
-    { type: 'image', image: banner2, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: cost, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
     {
       type: 'text', label: '04',
       title: isSw ? 'Ukaguzi wa Usalama.' : 'Security Audits.',
       desc: isSw ? 'Baini hatari muhimu za usalama katika mazingira yako.' : 'Identify critical security risks in your environment.',
-      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/85', bgImage: banner3, span: 'md:col-span-2', height: 'h-[400px]'
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/85', bgImage: security, span: 'md:col-span-2', height: 'h-[400px]'
     },
     { type: 'image', image: banner3, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
   ];
@@ -319,7 +323,7 @@ export const WhySection = () => {
     { type: 'image', image: banner5, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
 
     // Row 2
-    { type: 'image', image: webCommandImage, span: 'md:col-span-3', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: deliverSolutions, span: 'md:col-span-3', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
     {
       type: 'text', label: '03',
       title: isSw ? 'Uzingativu wa Soko la Afrika.' : 'African Market Focus.',
@@ -337,7 +341,7 @@ export const WhySection = () => {
       type: 'text', label: '05',
       title: isSw ? 'Inayolenga Matokeo.' : 'Outcome Driven.',
       desc: isSw ? 'Inazingatia kutoa thamani halisi ya kibiashara.' : 'Focused on delivering real business value.',
-      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/85', bgImage: mobileAppImage, span: 'md:col-span-2', height: 'h-[400px]'
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/85', bgImage: secureScalable, span: 'md:col-span-2', height: 'h-[400px]'
     },
   ];
 
