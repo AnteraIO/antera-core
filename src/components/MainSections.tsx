@@ -1,6 +1,6 @@
 'use client';
 import React, { useRef } from 'react';
-import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import { Play } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -115,8 +115,20 @@ export const TrustSection = () => {
               <motion.div
                 key={i}
                 variants={cardVariants}
+                whileHover={{ y: -8, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }}
                 className={`group relative overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text} ${card.span} ${card.height}`}
               >
+                {/* Floating scroll motion graphic element */}
+                <motion.div
+                  className="absolute top-6 right-6 z-30 pointer-events-none opacity-80"
+                  animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
+                  transition={{ duration: 4 + i, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <span className="inline-block px-3 py-1 text-xs font-mono tracking-widest rounded-full bg-black/10 backdrop-blur-md border border-white/20">
+                    MOTION AI
+                  </span>
+                </motion.div>
+
                 <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 ${card.imgClass}`}>
                   <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
                 </div>
@@ -218,11 +230,10 @@ export const ServicesSection = () => {
     {
       title: t('services.card9_title') || (isSw ? 'Uandishi wa Wasifu' : 'Resume Writing'),
       description: t('services.card9_desc') || (isSw ? 'Uandishi wa kitaalamu wa CV na barua za maombi zinazokupa ajira haraka.' : 'Professional executive CVs, cover letters, and LinkedIn profile optimization written in clear, persuasive language.'),
-      isVideo: true,
-      videoSrc: '/src/assets/graphics/alert.mp4',
+      image: bannerResume,
       color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70',
       span: 'md:col-span-5', height: 'h-[520px]',
-      imgClass: 'absolute -bottom-10 -right-10 w-[80%] h-auto object-cover rounded-xl shadow-2xl overflow-hidden opacity-90',
+      imgClass: 'absolute -bottom-20 -right-20 w-[90%] h-auto object-contain drop-shadow-2xl',
     },
   ];
 
@@ -276,21 +287,22 @@ export const ServicesSection = () => {
               <motion.div
                 key={i}
                 variants={cardVariants}
+                whileHover={{ y: -8, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }}
                 className={`group relative overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text} ${card.span} ${card.height}`}
               >
+                {/* Floating motion badge */}
+                <motion.div
+                  className="absolute top-6 right-6 z-30 pointer-events-none opacity-80"
+                  animate={{ y: [0, -8, 0], scale: [1, 1.05, 1] }}
+                  transition={{ duration: 3 + (i % 3), repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <span className="inline-block px-3 py-1 text-xs font-mono tracking-widest rounded-full bg-white/10 backdrop-blur-md border border-black/10">
+                    0{i + 1}
+                  </span>
+                </motion.div>
+
                 <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 ${card.imgClass}`}>
-                  {card.isVideo ? (
-                    <video
-                      src={card.videoSrc}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-auto object-cover rounded-xl shadow-2xl"
-                    />
-                  ) : card.image ? (
-                    <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
-                  ) : null}
+                  <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
                 </div>
 
                 <div className="relative z-20 max-w-[85%]">

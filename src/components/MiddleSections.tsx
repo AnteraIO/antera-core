@@ -148,6 +148,7 @@ export const CommunicationSection = () => {
               <motion.div
                 key={i}
                 variants={cardVariants}
+                whileHover={{ y: -8, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }}
                 id={card.isVideo ? 'showreel' : undefined}
                 className={`group relative overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer scroll-mt-32 ${card.color} ${card.text} ${card.span} ${card.height}`}
               >
@@ -373,6 +374,7 @@ export const DataIntelligenceSection = () => {
               <motion.div
                 key={i}
                 variants={cardVariants}
+                whileHover={{ y: -8, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }}
                 className={`group relative overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${feature.color} ${feature.text} ${feature.span} ${feature.height}`}
               >
                 <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 ${feature.imgClass}`}>
