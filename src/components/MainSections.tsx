@@ -5,11 +5,14 @@ import Image from 'next/image';
 import { Play } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-import banner1 from '../assets/banner-1.png';
-import banner2 from '../assets/banner-2.png';
-import banner3 from '../assets/banner-3.png';
-import banner4 from '../assets/banner-4.png';
-import banner5 from '../assets/banner-5.png';
+import banner1 from '../assets/graphics/33.png';
+import banner2 from '../assets/graphics/90.png';
+import banner3 from '../assets/graphics/87.png';
+import banner4 from '../assets/graphics/92.png';
+import banner5 from '../assets/graphics/48.png';
+import banner6 from '../assets/graphics/tatu.png';
+import banner7 from '../assets/graphics/mbili.png';
+import banner8 from '../assets/graphics/79.png';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="never">{children}</MotionConfig>
@@ -172,7 +175,7 @@ export const ServicesSection = () => {
     {
       title: t('services.card4_title') || (isSw ? 'Uchambuzi wa Data' : 'Data Analytics'),
       description: t('services.card4_desc') || (isSw ? 'Mifumo safi ya data na dashibodi zinazogeuza data ghafi kuwa maamuzi ya kuchukua hatua.' : 'Clean pipelines and dashboards that turn raw operational data into decisions you can act on.'),
-      image: banner3,
+      image: banner6,
       color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70',
       span: 'md:col-span-7', height: 'h-[520px]',
       imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl',
@@ -180,7 +183,7 @@ export const ServicesSection = () => {
     {
       title: t('services.card5_title') || (isSw ? 'Miundombinu ya Usalama' : 'Security Infrastructures'),
       description: t('services.card5_desc') || (isSw ? 'Ulinzi wa tabaka, udhibiti wa ufikiaji, na ufuatiliaji ili kuweka data na operesheni zako salama.' : 'Layered defenses, access control, and monitoring to keep your data and operations safe.'),
-      image: banner1,
+      image: banner7,
       color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70',
       span: 'md:col-span-6', height: 'h-[480px]',
       imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl',
@@ -188,7 +191,7 @@ export const ServicesSection = () => {
     {
       title: t('services.card6_title') || (isSw ? 'Ujumuishaji wa Mifumo' : 'System Integrations'),
       description: t('services.card6_desc') || (isSw ? 'Unganisha zana zako, CRM, na vyanzo vya data ili taarifa itiririke bila vikwazo.' : 'Connect your tools, CRMs, and data sources so information flows without friction.'),
-      image: banner2,
+      image: banner8,
       color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
       span: 'md:col-span-6', height: 'h-[480px]',
       imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
