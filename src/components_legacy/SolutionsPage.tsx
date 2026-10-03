@@ -10,6 +10,9 @@ import businessIntelligenceImage from '../assets/Business-Intelligence.png';
 import predictiveAnalyticsImage from '../assets/Predictive-Analytics.png';
 import realTimeDashboardsImage from '../assets/Real-Time-Dashboards.png';
 import performanceMonitoringImage from '../assets/Performance-Monitoring.png';
+import bannerGraphics from '../assets/graphics/117.png';
+import bannerMarketing from '../assets/graphics/110.png';
+import bannerResume from '../assets/graphics/103.png';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="never">{children}</MotionConfig>
@@ -84,6 +87,39 @@ export const SolutionsPage = () => {
       span: 'md:col-span-6', height: 'h-[480px]',
       imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
     },
+    {
+      title: isSw ? 'Ubunifu wa Picha' : 'Graphics Design',
+      description: isSw ? 'Picha, nembo za kibiashara, na mabango yenye muonekano maridadi na wa kuvutia mno yanayofanya biashara yako ionekane ya kipekee na ya kuaminika.' : 'Eye-catching visual designs, logos, social media posters, and brand guidelines created in clean, bold styles that capture customer interest instantly.',
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70',
+      image: bannerGraphics,
+      span: 'md:col-span-6', height: 'h-[480px]',
+      imgClass: 'absolute -bottom-20 -right-20 w-[85%] h-auto object-contain drop-shadow-2xl',
+    },
+    {
+      title: isSw ? 'Masoko ya Kidijitali' : 'Digital Marketing',
+      description: isSw ? 'Matangazo madhubuti ya mtandaoni na usimamizi wa mitandao ya kijamii yanayokuletea wateja halisi na kuongeza mauzo ya bidhaa zako.' : 'Targeted online advertisement campaigns, social media management, and search marketing strategies designed to convert viewers into paying customers.',
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70',
+      image: bannerMarketing,
+      span: 'md:col-span-7', height: 'h-[520px]',
+      imgClass: 'absolute -bottom-20 -right-20 w-[90%] h-auto object-contain drop-shadow-2xl',
+    },
+    {
+      title: isSw ? 'Uandishi wa Wasifu' : 'Resume Writing',
+      description: isSw ? 'Uandishi wa kitaalamu wa CV, barua za maombi, na maelezo ya LinkedIn yanayoeleza mafanikio yako kwa lugha inayoshawishi waajiri.' : 'Professional executive CVs, cover letters, and LinkedIn profile rewrites crafted in clear, compelling language to help professionals secure job offers faster.',
+      color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70',
+      image: bannerResume,
+      span: 'md:col-span-5', height: 'h-[520px]',
+      imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl',
+    },
+    {
+      title: isSw ? 'Picha Mjongeo za Kiwango cha Juu' : 'High-Quality Motion Graphics',
+      description: isSw ? 'Video za katuni za 2D/3D na picha mjongeo za studio zinazoeleza huduma na bidhaa zako kwa njia rahisi na yenye kuvutia sana.' : 'Designer-level 2D/3D motion graphics, animated explainer videos, and high-impact visual animations that make complex business ideas fun and simple.',
+      isVideo: true,
+      videoSrc: '/src/assets/graphics/folder-video.mp4',
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
+      span: 'md:col-span-12', height: 'h-[520px]',
+      imgClass: 'absolute -bottom-10 -right-10 w-[70%] md:w-[50%] h-auto object-contain drop-shadow-2xl rounded-2xl overflow-hidden',
+    },
   ];
 
   return (
@@ -128,7 +164,18 @@ export const SolutionsPage = () => {
                 className={`group relative overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text} ${card.span} ${card.height}`}
               >
                 <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 ${card.imgClass}`}>
-                  <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
+                  {card.isVideo ? (
+                    <video
+                      src={card.videoSrc}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-auto object-cover rounded-xl shadow-2xl"
+                    />
+                  ) : card.image ? (
+                    <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
+                  ) : null}
                 </div>
 
                 <div className="relative z-20 max-w-[85%]">

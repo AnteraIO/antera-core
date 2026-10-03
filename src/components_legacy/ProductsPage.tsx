@@ -14,6 +14,9 @@ import appliedAI from '@/assets/ai-applied.jpg';
 import Audit from '@/assets/system-audit.jpg';
 import orchestration from '@/assets/orchestration.jpg';
 import SDK from '@/assets/sdk.jpg';
+import bannerGraphics from '@/assets/graphics/117.png';
+import bannerMarketing from '@/assets/graphics/110.png';
+import bannerResume from '@/assets/graphics/103.png';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="never">{children}</MotionConfig>
@@ -91,6 +94,21 @@ export const ProductsPage = () => {
       title: isSw ? 'Uratibu' : 'Orchestration',
       description: isSw ? 'Kuunganisha na kuratibu mifumo ya AI iliyopo ndani ya majukwaa salama ya data.' : 'Integrating and orchestrating existing AI models within secure data platforms with custom governance and workflows.',
       color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70', image: orchestration, span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl'
+    },
+    {
+      title: isSw ? 'Ubunifu wa Picha' : 'Graphics Design',
+      description: isSw ? 'Picha, nembo, na mabango ya biashara yaliyoandaliwa kwa ubora wa juu yanayovutia wateja mara moja.' : 'Professional graphic designs, branding guidelines, and visual identity materials crafted in bold, modern styles.',
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', image: bannerGraphics, span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-20 w-[85%] h-auto object-contain drop-shadow-2xl'
+    },
+    {
+      title: isSw ? 'Masoko ya Kidijitali' : 'Digital Marketing',
+      description: isSw ? 'Matangazo yaliyolengwa mtandaoni na mbinu za mitandao ya kijamii zinazoongeza wateja na mauzo halisi.' : 'High-ROI digital marketing campaigns, social media management, and search engine optimization built for revenue growth.',
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', image: bannerMarketing, span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-20 w-[90%] h-auto object-contain drop-shadow-2xl'
+    },
+    {
+      title: isSw ? 'Uandishi wa Wasifu' : 'Resume Writing',
+      description: isSw ? 'CV na barua za maombi ya kazi za kitaalamu zinazokusaidia kupata fursa bora za ajira kwa haraka.' : 'Persuasive executive CVs, cover letters, and professional portfolio writing that help candidates stand out.',
+      color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70', image: bannerResume, span: 'md:col-span-12', height: 'h-[480px]', imgClass: 'absolute -bottom-24 -right-20 w-[60%] h-auto object-contain drop-shadow-2xl'
     },
   ];
 

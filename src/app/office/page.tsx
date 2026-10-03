@@ -10,7 +10,7 @@ import {
   Phone,
   ArrowUpRight
 } from 'lucide-react';
-import officeBg from '@/assets/hero-2.jpg';
+import officeBg from '@/assets/hero-1.jpg';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function OfficePage() {
