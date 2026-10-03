@@ -173,7 +173,6 @@ export const Hero = () => {
                       : 'bg-white border-gray-200 text-gray-500 hover:text-[#111622] hover:border-gray-300'
                   }`}
                 >
-                  {/* Progress fill darkens the pill background from left to right */}
                   {isActive && (
                     <motion.span
                       key={progressKey}
@@ -185,13 +184,11 @@ export const Hero = () => {
                     />
                   )}
 
-                  {/* Label sits above the progress fill */}
                   <span className="relative z-10">{item.id}</span>
                 </button>
               );
             })}
 
-            {/* SEE ALL */}
             <div className="ml-auto pl-4 flex-shrink-0">
               <button className="px-4 py-2 text-[14px] text-[#111622] bg-white border border-[#111622] hover:bg-[#111622] hover:text-white transition-colors whitespace-nowrap rounded-[3px]">
                 {t('hero.see_all') || (isSw ? 'TAZAMA ZOTE' : 'SEE ALL')}
@@ -214,7 +211,6 @@ export const Hero = () => {
                   className="w-[85vw] flex-shrink-0 px-2 relative"
                   onClick={() => !isActive && goToSlide(idx)}
                 >
-                  {/* Height*/}
                   <div
                     className={`relative w-full h-[550px] md:h-[850px] bg-[#111] overflow-hidden transition-all duration-700 cursor-pointer ${
                       isActive ? 'opacity-100 scale-100' : 'opacity-40 scale-[0.98]'
@@ -240,7 +236,6 @@ export const Hero = () => {
                       />
                     ) : null}
 
-                    {/* Overlay Box */}
                     <div
                       className={`absolute top-6 left-6 md:top-10 md:left-10 max-w-[340px] md:max-w-[460px] bg-[#22252a]/95 p-6 md:p-9 text-white shadow-2xl transition-opacity duration-500 delay-100 ${
                         isActive ? 'opacity-100' : 'opacity-0'
@@ -254,7 +249,6 @@ export const Hero = () => {
                       </h3>
                     </div>
 
-                    {/* Navigation Arrows */}
                     {isActive && (
                       <>
                         <button
