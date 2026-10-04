@@ -86,7 +86,7 @@ export const PartnersSection = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            {t('partners.desc') || (isSw ? 'Tunatumia miundombinu ya kiwango cha kimataifa kutoa suluhisho zinazoweza kukua na zenye utendaji wa juu.' : 'We are leveraging world-class infrastructure to deliver scalable, high-performance solutions.')}
+            {t('partners.desc') || (isSw ? 'Tunatumia miundombinu ya kiwango cha kimataifa kutoa suluhisho zinazoweza kukua na zenye utendaji wa juu.' : 'We are using top-quality computer systems and powerful technology to build fast, reliable services that can easily grow right along with your needs, no matter how large your business becomes.')}
           </motion.p>
         </header>
 

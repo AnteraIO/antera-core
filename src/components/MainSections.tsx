@@ -432,7 +432,7 @@ export const TrustSection = () => {
   const trustCards = [
     {
       title: t('trust.card1_title') || (isSw ? 'Tuko Tayari Siku Zote' : "We're Always Prepared"),
-      description: t('trust.card1_desc') || (isSw ? 'Kaa tayari kwa suala lolote la usalama na muda wa haraka wa majibu na mipango ya kufufua.' : 'Be ready for any security issue with faster response times and clear recovery plans.'),
+      description: t('trust.card1_desc') || (isSw ? 'Kaa tayari kwa suala lolote la usalama na muda wa haraka wa majibu na mipango ya kufufua.' : 'Be ready for any security issue with faster response times and clear recovery plans, ensuring your team can act quickly and get back on track without losing valuable time.'),
       image: banner1,
       paletteKey: 'light' as Palette,
       span: 'md:col-span-7',
@@ -441,7 +441,7 @@ export const TrustSection = () => {
     },
     {
       title: t('trust.card2_title') || (isSw ? 'Ukimiliki wa Data' : 'Data Ownership'),
-      description: t('trust.card2_desc') || (isSw ? 'Linda data yako kwa usimamizi thabiti wa utambulisho na mbinu bora.' : 'Protect your data with strong identity management and best practices.'),
+      description: t('trust.card2_desc') || (isSw ? 'Linda data yako kwa usimamizi thabiti wa utambulisho na mbinu bora.' : 'Protect your data with strong identity management and best practice security methods, making sure only the right people can access your files while keeping everything safe from outsiders.s.'),
       image: banner2,
       paletteKey: 'dark' as Palette,
       span: 'md:col-span-5',
@@ -475,7 +475,7 @@ export const TrustSection = () => {
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] as const }}
             >
-              {t('trust.desc') || (isSw ? 'Tunakusaidia kujiandaa na matukio na kuweka majukwaa yako ya kidijitali salama dhidi ya tishio la mtandao.' : 'We help you prepare for incidents and keep your digital platforms safe from cyber threats.')}
+              {t('trust.desc') || (isSw ? 'Tunakusaidia kujiandaa na matukio na kuweka majukwaa yako ya kidijitali salama dhidi ya tishio la mtandao.' : 'We help you prepare for emergencies and keep your websites and apps safe from hackers, while also guiding you through every step to ensure your entire digital presence remains fully protected and secure.')}
             </motion.p>
 
             <ShowreelLink label={t('common.watch_showreel') || (isSw ? 'Tazama video yetu' : 'Watch our showreel')} />

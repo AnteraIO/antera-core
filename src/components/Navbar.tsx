@@ -138,7 +138,7 @@ export const Navbar = () => {
             <div className="bg-[#1f1e24] text-white text-[12px] md:text-[13px] py-2.5 px-10 md:px-14 flex justify-center items-center w-full relative border-b border-white/10">
               <Link href="/blog" className="flex items-center hover:text-gray-300 transition-colors text-center">
                 <span className="underline underline-offset-4 decoration-white/50 hover:decoration-white">
-                  {t('nav.banner') || 'We Build AI Solutions and Intelligent Systems for Tanzanian and African Markets | Call Us: +255 774 174 921 | WhatsApp: +255 760 984 921'}
+                  {t('nav.banner') || 'We make smart computer programs for Tanzania and Africa. Call: +255 774 174 921 | WhatsApp: +255 760 984 921'}
                 </span>
               </Link>
               <button
