@@ -1,15 +1,15 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Mail, Phone, MessageCircle, Menu } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '../context/LanguageContext';
 
-const LANGUAGE_ICON = 'https://cdn-icons-png.flaticon.com/128/2200/2200326.png';
-const CLOSE_ICON = 'https://cdn-icons-png.flaticon.com/128/594/594598.png';
+const LANGUAGE_ICON = 'https://cdn-icons-png.flaticon.com/128/4673/4673025.png';
+const CLOSE_ICON = 'https://cdn-icons-png.flaticon.com/128/3906/3906839.png';
+const MENU_ICON = 'https://cdn-icons-png.flaticon.com/128/3906/3906840.png';
 
 const InstagramIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -37,9 +37,8 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isBannerVisible, setIsBannerVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
-
-  const { language, setLanguage, t } = useLanguage();
   const pathname = usePathname();
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -63,55 +62,6 @@ export const Navbar = () => {
     { name: t('nav.company') || 'Company', href: '/company' },
   ];
 
-  const [blogLatestPosts, setBlogLatestPosts] = useState([
-    {
-      title: 'Antera Group Office',
-      href: '/office',
-      desc: t('nav.office_desc') || 'Enterprise Webs, Mobile Apps, Organization Sites and Digital Platform Development',
-    },
-    {
-      title: 'Introducing Search Toolkit',
-      href: '/blog',
-      desc: t('nav.search_desc') || 'Modern Data Science and Model Implementations for Tanzanian Markets',
-    },
-  ]);
-
-  useEffect(() => {
-    async function fetchLatestPosts() {
-      try {
-        const res = await fetch('/api/blog/posts?status=published&limit=2');
-        if (res.ok) {
-          const data = await res.json();
-          if (Array.isArray(data) && data.length > 0) {
-            const mapped = data.map((post) => ({
-              title: post.title,
-              href: `/blog/${post.slug}`,
-              desc:
-                post.excerpt ||
-                post.description ||
-                'Read our latest update and technical deep-dive on this topic.',
-            }));
-            if (mapped.length === 1) {
-              setBlogLatestPosts([
-                mapped[0],
-                {
-                  title: 'Introducing Search Toolkit',
-                  href: '/blog',
-                  desc: t('nav.search_desc') || 'Modern Data Science and Model Implementations for Tanzanian Markets',
-                },
-              ]);
-            } else {
-              setBlogLatestPosts(mapped);
-            }
-          }
-        }
-      } catch (err) {
-        console.error('Failed to fetch latest posts for navbar:', err);
-      }
-    }
-    fetchLatestPosts();
-  }, [t]);
-
   const glassBase = scrolled
     ? 'bg-white/60 backdrop-blur-2xl backdrop-saturate-180 border border-black/10 text-[#111622]'
     : 'bg-black/40 backdrop-blur-2xl backdrop-saturate-150 border border-white/15 text-white';
@@ -119,10 +69,6 @@ export const Navbar = () => {
   const glassShadow = scrolled
     ? 'shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)]'
     : 'shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.12)]';
-
-  const iconBtn = scrolled
-    ? 'bg-black/[0.06] hover:bg-black/[0.12] text-[#111622] border border-black/10'
-    : 'bg-white/10 hover:bg-white/20 text-white border border-white/20';
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 font-sans pointer-events-none">
@@ -159,12 +105,12 @@ export const Navbar = () => {
             w-full flex items-center justify-between h-[64px] md:h-[72px] px-4 md:px-8
             rounded-md transition-all duration-300
             ${isOpen
-              ? 'bg-[#18181b]/95 backdrop-blur-2xl backdrop-saturate-150 border border-white/10 text-white shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)]'
+              ? 'bg-white border border-black/10 text-[#111111] shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)]'
               : `${glassBase} ${glassShadow}`}
           `}
         >
           <Link href="/" className="flex items-center gap-2 flex-shrink-0 z-50">
-            <div className="relative w-6 h-6 rounded-full overflow-hidden grayscale brightness-200">
+            <div className="relative w-12 h-12 rounded-full overflow-hidden">
               <Image
                 src="/antera-logo.jpeg"
                 alt="Antera Logo"
@@ -174,7 +120,7 @@ export const Navbar = () => {
               />
             </div>
             <span
-              className={`text-[18px] md:text-[19px] font-medium tracking-tight transition-colors ${
+              className={`text-[22px] md:text-[24px] font-medium tracking-tight transition-colors ${
                 isOpen || !scrolled ? 'text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]' : 'text-[#111622]'
               }`}
             >
@@ -182,47 +128,56 @@ export const Navbar = () => {
             </span>
           </Link>
 
-          <div className="flex items-center gap-2 md:gap-3 z-50">
-            <Link
-              href="/solutions"
-              className={`
-                hidden md:flex items-center justify-center h-[44px] px-6 text-[14px] font-medium
-                transition-colors rounded-sm
-                ${isOpen || !scrolled
-                  ? 'bg-white text-black hover:bg-gray-100 shadow-[0_2px_12px_rgba(255,255,255,0.15)]'
-                  : 'bg-[#111622] text-white hover:bg-[#1a2030] shadow-[0_2px_12px_rgba(0,0,0,0.15)]'}
-              `}
-            >
-              {t('nav.get_started') || 'Get Started'}
-            </Link>
+          <nav className="hidden lg:flex items-center gap-6">
+            {navLinks.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`text-lg font-medium transition-colors flex items-center gap-1 ${
+                  isOpen
+                    ? 'text-[#111111] hover:text-black'
+                    : scrolled
+                    ? 'text-[#111622] hover:text-black'
+                    : 'text-white/90 hover:text-white'
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
 
-            <button
-              onClick={() => setLanguage(language === 'en' ? 'sw' : 'en')}
-              aria-label="Switch language"
-              title={language === 'en' ? 'Kubadili kwenda Kiswahili' : 'Switch to English'}
-              className={`
-                flex items-center justify-center w-[44px] h-[44px] backdrop-blur-md
-                transition-all rounded-sm cursor-pointer select-none
-                ${isOpen ? 'bg-white/10 hover:bg-white/20 border border-white/20' : iconBtn}
-              `}
-            >
-              <img src={LANGUAGE_ICON} alt="Language" width={22} height={22} />
-            </button>
+          <div className="flex items-center gap-2 md:gap-3 z-50">
+            <div className="hidden lg:flex items-center gap-3">
+              <button
+                onClick={() => setLanguage(language === 'en' ? 'sw' : 'en')}
+                aria-label="Switch language"
+                title={language === 'en' ? 'Kubadili kwenda Kiswahili' : 'Switch to English'}
+                className="flex items-center justify-center w-[44px] h-[44px] cursor-pointer select-none"
+              >
+                <img src={LANGUAGE_ICON} alt="Language" width={28} height={28} />
+              </button>
+
+              <div className="relative p-[2px] rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500">
+                <Link
+                  href="/contact"
+                  className="block text-sm font-medium px-5 py-2 rounded-full transition-all text-white bg-[#111111] hover:bg-black"
+                >
+                  {t('nav.contact_sales') || 'Contact sales'}
+                </Link>
+              </div>
+            </div>
 
             <button
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
               onClick={() => setIsOpen(!isOpen)}
-              className={`
-                flex items-center justify-center w-[44px] h-[44px] backdrop-blur-md
-                transition-colors rounded-sm
-                ${isOpen ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' : iconBtn}
-              `}
+              className="flex items-center justify-center w-[44px] h-[44px] cursor-pointer"
             >
-              {isOpen ? (
-                <img src={CLOSE_ICON} alt="Close" width={22} height={22} />
-              ) : (
-                <Menu className="w-5 h-5" strokeWidth={2} />
-              )}
+              <img 
+                src={isOpen ? CLOSE_ICON : MENU_ICON} 
+                alt={isOpen ? 'Close' : 'Menu'} 
+                width={32} 
+                height={32}
+              />
             </button>
           </div>
         </div>
@@ -236,26 +191,26 @@ export const Navbar = () => {
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="
                 mt-2 w-full rounded-md overflow-y-auto max-h-[calc(100vh-140px)]
-                bg-[#0e0e12]/95 backdrop-blur-2xl backdrop-saturate-150
-                border border-white/10
-                shadow-[0_20px_60px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.08)]
-                text-white
+                bg-white border border-black/10
+                shadow-[0_20px_60px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.8)]
+                text-[#111111] pointer-events-auto
               "
             >
               <div className="max-w-[1600px] mx-auto px-6 md:px-10 py-12 md:py-16">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                  
                   <div className="lg:col-span-5">
-                    <ul className="flex flex-col gap-4 text-[32px] md:text-[40px] lg:text-[44px] font-light leading-tight">
-                      {navLinks.slice(0, 3).map((link) => (
-                        <li key={link.href}>
+                    <ul className="flex flex-col gap-4 text-[40px] md:text-[48px] lg:text-[52px] font-light leading-tight">
+                      {navLinks.slice(0, 3).map((item) => (
+                        <li key={item.name}>
                           <Link
-                            href={link.href}
+                            href={item.href}
                             onClick={() => setIsOpen(false)}
-                            className={`transition-colors ${
-                              pathname === link.href ? 'text-[#FA520F]' : 'hover:text-[#FA520F] text-white'
+                            className={`transition-colors text-left ${
+                              pathname === item.href ? 'text-[#FA520F]' : 'hover:text-[#7DD3B0] text-[#111111]'
                             }`}
                           >
-                            {link.name}
+                            {item.name}
                           </Link>
                         </li>
                       ))}
@@ -263,17 +218,17 @@ export const Navbar = () => {
                   </div>
 
                   <div className="lg:col-span-4">
-                    <ul className="flex flex-col gap-4 text-[32px] md:text-[40px] lg:text-[44px] font-light leading-tight">
-                      {navLinks.slice(3).map((link) => (
-                        <li key={link.href}>
+                    <ul className="flex flex-col gap-4 text-[40px] md:text-[48px] lg:text-[52px] font-light leading-tight">
+                      {navLinks.slice(3).map((item) => (
+                        <li key={item.name}>
                           <Link
-                            href={link.href}
+                            href={item.href}
                             onClick={() => setIsOpen(false)}
-                            className={`transition-colors ${
-                              pathname === link.href ? 'text-[#FA520F]' : 'hover:text-[#FA520F] text-white'
+                            className={`transition-colors text-left ${
+                              pathname === item.href ? 'text-[#FA520F]' : 'hover:text-[#7DD3B0] text-[#111111]'
                             }`}
                           >
-                            {link.name}
+                            {item.name}
                           </Link>
                         </li>
                       ))}
@@ -281,59 +236,44 @@ export const Navbar = () => {
                   </div>
 
                   <div className="lg:col-span-3">
-                    <div className="bg-white text-[#111622] rounded-sm p-8 md:p-10 min-h-[360px] flex flex-col items-center text-center justify-between relative overflow-hidden">
-                      <div className="absolute top-0 left-0 right-0 h-16 flex items-center justify-center pointer-events-none opacity-90">
-                        <svg viewBox="0 0 300 60" className="w-full h-full">
-                          <path d="M150 20 C140 5, 120 0, 110 10 C115 20, 130 22, 150 20 Z" fill="#7BAE4B" />
-                          <path d="M150 20 C160 5, 180 0, 190 10 C185 20, 170 22, 150 20 Z" fill="#4A90E2" />
-                          <ellipse cx="130" cy="12" rx="6" ry="9" fill="#F4B63F" transform="rotate(-20 130 12)" />
-                          <ellipse cx="170" cy="12" rx="6" ry="9" fill="#E85A28" transform="rotate(20 170 12)" />
-                          <ellipse cx="150" cy="8" rx="6" ry="9" fill="#7BAE4B" />
-                        </svg>
-                      </div>
-
+                    <div className="bg-[#1A365D] text-white rounded-md p-8 md:p-10 min-h-[360px] flex flex-col items-center text-center justify-between relative overflow-hidden">
                       <div className="pt-10">
-                        <h3 className="text-[32px] md:text-[38px] font-normal leading-[1.1] text-black">
+                        <h3 className="text-[32px] md:text-[38px] font-normal leading-[1.1] text-white whitespace-pre-line">
                           Talk to<br />Antera
                         </h3>
-                        <p className="text-[14px] md:text-[15px] text-[#3a3a3a] leading-relaxed mt-4">
+                        <p className="text-[14px] md:text-[15px] text-white/80 leading-relaxed mt-4">
                           Let's build something great together. Get in touch and see how we can help.
                         </p>
                       </div>
 
-                      <Link
-                        href="/solutions"
-                        onClick={() => setIsOpen(false)}
-                        className="mt-6 inline-flex items-center gap-2 bg-black hover:bg-[#1a1a1a] text-white text-[15px] font-semibold px-6 py-3.5 rounded-sm transition-colors"
-                      >
-                        <MessageCircle className="w-4 h-4" />
-                        Get Started
-                      </Link>
+                      <div className="relative p-[2px] rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500 mt-6">
+                        <Link
+                          href="/solutions"
+                          onClick={() => setIsOpen(false)}
+                          className="block w-full text-sm font-semibold px-6 py-3.5 rounded-full transition-colors text-white bg-[#111111] hover:bg-black"
+                        >
+                          Get Started
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-14 pt-10 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                  <ul className="flex flex-col gap-4 text-[32px] md:text-[40px] lg:text-[44px] font-light leading-tight">
-                    <li>
-                      <Link href="/company" onClick={() => setIsOpen(false)} className="hover:text-[#FA520F] transition-colors text-white">About Us</Link>
-                    </li>
-                    <li>
-                      <Link href="/blog" onClick={() => setIsOpen(false)} className="hover:text-[#FA520F] transition-colors text-white">Media</Link>
-                    </li>
-                    <li>
-                      <Link href="/company" onClick={() => setIsOpen(false)} className="hover:text-[#FA520F] transition-colors text-white">Contact</Link>
-                    </li>
-                  </ul>
+                <div className="mt-14 pt-10 border-t border-black/10 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                  <div className="flex items-center gap-6 text-[14px] text-[#111111]/80">
+                    <Link href="/company" onClick={() => setIsOpen(false)} className="hover:text-[#111111] transition-colors">About Us</Link>
+                    <Link href="/blog" onClick={() => setIsOpen(false)} className="hover:text-[#111111] transition-colors">Media</Link>
+                    <Link href="/company" onClick={() => setIsOpen(false)} className="hover:text-[#111111] transition-colors">Contact</Link>
+                  </div>
 
                   <div className="flex items-center gap-3 md:justify-end">
-                    <a href="https://instagram.com/antera_tz" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 rounded-full border border-white/25 flex items-center justify-center text-white/80 hover:text-white hover:border-white transition-colors">
+                    <a href="https://instagram.com/antera_tz" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 rounded-full border border-black/25 flex items-center justify-center text-[#111111]/80 hover:text-[#111111] hover:border-[#111111] transition-colors">
                       <InstagramIcon />
                     </a>
-                    <a href="https://twitter.com/antera_tz" target="_blank" rel="noopener noreferrer" aria-label="X" className="w-10 h-10 rounded-full border border-white/25 flex items-center justify-center text-white/80 hover:text-white hover:border-white transition-colors">
+                    <a href="https://twitter.com/antera_tz" target="_blank" rel="noopener noreferrer" aria-label="X" className="w-10 h-10 rounded-full border border-black/25 flex items-center justify-center text-[#111111]/80 hover:text-[#111111] hover:border-[#111111] transition-colors">
                       <XIcon />
                     </a>
-                    <a href="https://linkedin.com/company/antera_tz" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-10 h-10 rounded-full border border-white/25 flex items-center justify-center text-white/80 hover:text-white hover:border-white transition-colors">
+                    <a href="https://linkedin.com/company/antera_tz" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-10 h-10 rounded-full border border-black/25 flex items-center justify-center text-[#111111]/80 hover:text-[#111111] hover:border-[#111111] transition-colors">
                       <LinkedinIcon />
                     </a>
                   </div>
@@ -344,7 +284,7 @@ export const Navbar = () => {
                     onClick={() => setIsOpen(false)}
                     aria-label="Close menu"
                   >
-                    <img src={CLOSE_ICON} alt="Close" width={72} height={72} />
+                    <img src={CLOSE_ICON} alt="Close" width={56} height={56} />
                   </button>
                 </div>
               </div>
