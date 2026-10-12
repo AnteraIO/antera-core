@@ -386,12 +386,6 @@ const ServiceCard = ({
       <MagneticCard
         className={`relative w-full h-full overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${p.color} ${p.text}`}
       >
-        <MacroGrid color={p.gridColor} />
-        <FineGrid color={p.gridColor} />
-        <DotMatrix color={p.gridColor} />
-        <CornerCrosses color={p.gridColor} />
-        <HolePunches color={p.gridColor} />
-        <WhiteScratches />
         <Shimmer />
 
         <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 z-[4] ${imgClass}`}>

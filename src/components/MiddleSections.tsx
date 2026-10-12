@@ -453,12 +453,6 @@ export const WebServicesSection = () => {
                   <MagneticCard
                     className={`relative w-full h-full overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text}`}
                   >
-                    <MacroGrid color={gridColor} />
-                    <FineGrid color={gridColor} />
-                    <DotMatrix color={gridColor} />
-                    <CornerCrosses color={gridColor} />
-                    <HolePunches color={gridColor} />
-                    <WhiteScratches />
                     <Shimmer />
 
                     <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 z-[4] ${card.imgClass}`}>
@@ -601,12 +595,6 @@ export const CommunicationSection = () => {
                   <MagneticCard
                     className={`relative w-full h-full overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text}`}
                   >
-                    <MacroGrid color={gridColor} />
-                    <FineGrid color={gridColor} />
-                    <DotMatrix color={gridColor} />
-                    <CornerCrosses color={gridColor} />
-                    <HolePunches color={gridColor} />
-                    <WhiteScratches />
                     <Shimmer />
 
                     {card.isVideo ? (
@@ -717,12 +705,6 @@ export const ApplicationSection = () => {
                   <MagneticCard
                     className={`relative overflow-hidden ${card.bg} ${card.text} min-h-[640px] lg:min-h-[820px] p-8 md:p-14 flex flex-col justify-start cursor-pointer`}
                   >
-                    <MacroGrid color={gridColor} />
-                    <FineGrid color={gridColor} />
-                    <DotMatrix color={gridColor} />
-                    <CornerCrosses color={gridColor} />
-                    <HolePunches color={gridColor} />
-                    <WhiteScratches />
                     <Shimmer />
 
                     <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 z-[4] ${card.imgClass}`}>
@@ -835,12 +817,6 @@ export const DataIntelligenceSection = () => {
                   <MagneticCard
                     className={`relative w-full h-full overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${feature.color} ${feature.text}`}
                   >
-                    <MacroGrid color={gridColor} />
-                    <FineGrid color={gridColor} />
-                    <DotMatrix color={gridColor} />
-                    <CornerCrosses color={gridColor} />
-                    <HolePunches color={gridColor} />
-                    <WhiteScratches />
                     <Shimmer />
 
                     <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 z-[4] ${feature.imgClass}`}>
