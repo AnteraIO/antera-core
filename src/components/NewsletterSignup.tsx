@@ -32,7 +32,7 @@ export const NewsletterSignup = () => {
         <input
           type="email"
           placeholder="Email"
-          className="flex-1 p-3 border-2 border-black outline-none focus:shadow-[4px_4px_0px_0px_#FA520F] transition-all font-mono text-sm"
+          className="flex-1 p-3 border-2 border-black outline-none focus:shadow-[4px_4px_0px_0px_#000000] transition-all font-mono text-sm"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -40,7 +40,7 @@ export const NewsletterSignup = () => {
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="bg-black text-white px-6 font-bold uppercase hover:bg-[#FA520F] transition-colors disabled:opacity-50"
+          className="bg-black text-white px-6 font-bold uppercase hover:bg-neutral-800 transition-colors disabled:opacity-50"
         >
           {status === 'loading' ? '...' : t('blog.subscribe_button')}
         </button>

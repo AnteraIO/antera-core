@@ -14,7 +14,7 @@ export default async function AdminSubscribers() {
   const subscribers = await getSubscribers();
 
   return (
-    <div className="bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+    <div className="bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-black/10">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         
         <header className="mb-24 md:mb-40 text-center">

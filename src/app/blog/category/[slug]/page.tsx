@@ -31,12 +31,12 @@ export default async function CategoryPage({ params }: { params: { slug: string 
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {posts.map((post) => (
-          <Link key={post.id} href={`/blog/${post.slug}`} className="group border-2 border-black hover:shadow-[8px_8px_0px_0px_#FA520F] transition-all flex flex-col">
+          <Link key={post.id} href={`/blog/${post.slug}`} className="group border-2 border-black hover:shadow-[8px_8px_0px_0px_#000000] transition-all flex flex-col">
             <div className="aspect-video relative border-b-2 border-black overflow-hidden">
                 {post.featured_image && <Image src={post.featured_image} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />}
             </div>
             <div className="p-6 flex-1 flex flex-col">
-              <h2 className="text-2xl font-black uppercase tracking-tight mb-3 group-hover:text-[#FA520F] transition-colors">{post.title}</h2>
+              <h2 className="text-2xl font-black uppercase tracking-tight mb-3 group-hover:text-neutral-700 transition-colors">{post.title}</h2>
               <p className="text-neutral-600 text-sm mb-6 line-clamp-3">{post.excerpt}</p>
             </div>
           </Link>

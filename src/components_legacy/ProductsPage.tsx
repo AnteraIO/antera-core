@@ -161,7 +161,7 @@ export const ProductsPage = () => {
           </header>
         </div>
 
-        <div className="w-full px-6 md:px-12 mb-6 max-w-[1600px] mx-auto">
+        <div className="hidden md:block w-full px-6 md:px-12 mb-6 max-w-[1600px] mx-auto">
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
             {sliderItems.map((item, idx) => {
               const isActive = currentSlide === idx;

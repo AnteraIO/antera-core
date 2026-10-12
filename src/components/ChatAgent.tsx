@@ -40,7 +40,7 @@ const TypingDots = () => (
       <motion.div
         key={i}
         className="w-[7px] h-[7px] rounded-full"
-        style={{ background: '#FA520F' }}
+        style={{ background: '#111111' }}
         animate={{ y: [0, -5, 0], opacity: [0.4, 1, 0.4] }}
         transition={{ repeat: Infinity, duration: 0.9, delay: i * 0.15, ease: 'easeInOut' }}
       />
@@ -52,7 +52,7 @@ const Avatar = ({ size = 36 }: { size?: number }) => (
   <div className="relative shrink-0" style={{ width: size, height: size }}>
     <motion.div
       className="absolute inset-0 rounded-full"
-      style={{ background: 'conic-gradient(from 0deg, #000000 0%, rgba(250,82,15,0.5) 50%, #000000 100%)' }}
+      style={{ background: 'conic-gradient(from 0deg, #000000 0%, rgba(0,0,0,0.5) 50%, #000000 100%)' }}
       animate={{ rotate: 360 }}
       transition={{ repeat: Infinity, duration: 4, ease: 'linear' }}
     />
@@ -169,7 +169,7 @@ const Bubble = ({ msg, isLast, isStreaming }: { msg: Msg; isLast: boolean; isStr
           style={
             isUser
               ? {
-                  background: '#FA520F',
+                  background: '#111111',
                   color: 'white',
                   borderRadius: '18px',
                   border: '1px solid rgba(255,255,255,0.15)',
@@ -193,7 +193,7 @@ const Bubble = ({ msg, isLast, isStreaming }: { msg: Msg; isLast: boolean; isStr
                 animate={{ opacity: [0, 1, 0] }}
                 transition={{ repeat: Infinity, duration: 0.8 }}
                 className="inline-block ml-1"
-                style={{ color: '#FA520F' }}
+                style={{ color: '#111111' }}
               >
                 |
               </motion.span>
@@ -207,7 +207,7 @@ const Bubble = ({ msg, isLast, isStreaming }: { msg: Msg; isLast: boolean; isStr
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="text-[10px] text-[#FA520F]"
+              className="text-[10px] text-[#111111]"
             >✓✓</motion.span>
           )}
         </div>
@@ -380,7 +380,7 @@ const ChatAgent = () => {
               `}</style>
 
               <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ borderRadius: 'inherit', zIndex: 0 }}>
-                <div className="absolute -top-10 -left-10 w-48 h-48 rounded-full opacity-15" style={{ background: '#FA520F', filter: 'blur(50px)' }} />
+                <div className="absolute -top-10 -left-10 w-48 h-48 rounded-full opacity-15" style={{ background: '#111111', filter: 'blur(50px)' }} />
                 <div className="absolute -bottom-10 -right-10 w-56 h-56 rounded-full opacity-10" style={{ background: '#000000', filter: 'blur(60px)' }} />
               </div>
 

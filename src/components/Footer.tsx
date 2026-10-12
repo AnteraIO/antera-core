@@ -46,7 +46,7 @@ const FooterLink = ({ href, children }: { href: string; children: React.ReactNod
           href={href} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="text-sm font-semibold text-[#1F1F1F] hover:text-[#FA520F] transition-colors block"
+          className="text-sm font-semibold text-[#1F1F1F] hover:text-black transition-colors block"
         >
           {children}
         </a>
@@ -56,7 +56,7 @@ const FooterLink = ({ href, children }: { href: string; children: React.ReactNod
 
   return (
     <li>
-      <Link href={href} className="text-sm font-semibold text-[#1F1F1F] hover:text-[#FA520F] transition-colors block">
+      <Link href={href} className="text-sm font-semibold text-[#1F1F1F] hover:text-black transition-colors block">
         {children}
       </Link>
     </li>
@@ -78,7 +78,7 @@ export const FinalCTAAndFooter = () => {
           fill 
         />
         <div className="absolute inset-0 bg-gradient-to-br from-[#FAFAF8]/70 via-[#FAFAF8]/60 to-[#FAFAF8]/70" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-[#FA520F]/10 via-transparent to-[#FCD34D]/10" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-black/5 via-transparent to-neutral-200/10" />
       </div>
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32 w-full">
@@ -198,10 +198,10 @@ export const FinalCTAAndFooter = () => {
             
             <div className="mt-8 pt-8 border-t border-neutral-200 flex flex-col gap-6">
               <div className="flex items-center gap-4 text-neutral-400">
-                <a href="https://youtube.com/@antera_tz" target="_blank" rel="noopener noreferrer" className="hover:text-[#FA520F] transition-colors"><YoutubeIcon/></a>
-                <a href="https://instagram.com/antera_tz" target="_blank" rel="noopener noreferrer" className="hover:text-[#FA520F] transition-colors"><InstagramIcon/></a>
-                <a href="https://x.com/antera_tz" target="_blank" rel="noopener noreferrer" className="hover:text-[#FA520F] transition-colors"><XIcon/></a>
-                <a href="https://linkedin.com/company/antera_tz" target="_blank" rel="noopener noreferrer" className="hover:text-[#FA520F] transition-colors"><LinkedinIcon/></a>
+                <a href="https://youtube.com/@antera_tz" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors"><YoutubeIcon/></a>
+                <a href="https://instagram.com/antera_tz" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors"><InstagramIcon/></a>
+                <a href="https://x.com/antera_tz" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors"><XIcon/></a>
+                <a href="https://linkedin.com/company/antera_tz" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors"><LinkedinIcon/></a>
               </div>
 
               {/* Language Pills */}

@@ -50,7 +50,7 @@ export default function BroadcastPage() {
   };
 
   return (
-    <div ref={containerRef} className="bg-[#FAFAF8] text-black min-h-screen pt-16 md:pt-20 lg:pt-24 selection:bg-[#FA520F] selection:text-white">
+    <div ref={containerRef} className="bg-[#FAFAF8] text-black min-h-screen pt-16 md:pt-20 lg:pt-24 selection:bg-black/10">
       <GrainOverlay />
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
@@ -58,7 +58,7 @@ export default function BroadcastPage() {
         
         <header className="text-center py-12">
           <div className="flex justify-center items-center mb-6">
-            <div className="w-12 h-12 bg-[#FA520F] rounded-sm flex items-center justify-center">
+            <div className="w-12 h-12 bg-black rounded-sm flex items-center justify-center">
               <Megaphone size={24} className="text-white" />
             </div>
           </div>
@@ -89,7 +89,7 @@ export default function BroadcastPage() {
                 type="submit"
                 form="broadcast-form"
                 disabled={status === 'loading'}
-                className="w-full bg-[#FA520F] text-white py-3 font-medium text-sm flex items-center justify-center gap-2 hover:bg-black transition-colors disabled:opacity-50"
+                className="w-full bg-black text-white py-3 font-medium text-sm flex items-center justify-center gap-2 hover:bg-neutral-800 transition-colors disabled:opacity-50"
               >
                 {status === 'loading' ? (
                   <>

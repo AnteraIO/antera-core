@@ -18,7 +18,7 @@ export default async function AdminPostsList() {
   const posts = await getPosts();
 
   return (
-    <div className="bg-[#FAFAF8] text-black min-h-screen pt-16 md:pt-20 lg:pt-24 selection:bg-[#FA520F] selection:text-white">
+    <div className="bg-[#FAFAF8] text-black min-h-screen pt-16 md:pt-20 lg:pt-24 selection:bg-black/10">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32">
         
         <header className="mb-24 md:mb-40 text-center">
@@ -50,7 +50,7 @@ export default async function AdminPostsList() {
                       <td className="p-6">
                         <span className={`text-[10px] font-mono font-bold uppercase px-2 py-1 ${
                           post.status === 'published' 
-                            ? 'bg-[#FA520F] text-white' 
+                            ? 'bg-black text-white'
                             : 'bg-neutral-100 text-neutral-500'
                         }`}>
                           {post.status}
@@ -63,13 +63,13 @@ export default async function AdminPostsList() {
                           <Link 
                             href={`/blog/${post.slug}`} 
                             target="_blank" 
-                            className="p-2 border-2 border-neutral-200 hover:border-[#FA520F] hover:text-[#FA520F] transition-colors"
+                            className="p-2 border-2 border-neutral-200 hover:border-black hover:text-black transition-colors"
                           >
                             <ExternalLink size={14} />
                           </Link>
                           <Link 
                             href={`/admin/posts/edit/${post.id}`} 
-                            className="p-2 border-2 border-neutral-200 hover:border-[#FA520F] hover:text-[#FA520F] transition-colors"
+                            className="p-2 border-2 border-neutral-200 hover:border-black hover:text-black transition-colors"
                           >
                             <Edit2 size={14} />
                           </Link>
@@ -86,7 +86,7 @@ export default async function AdminPostsList() {
           <div className="mt-8 flex justify-end">
             <Link 
               href="/admin/posts/new" 
-              className="inline-flex items-center gap-2 bg-[#FA520F] text-white px-6 py-3 text-sm font-medium hover:bg-black transition-colors"
+                className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 text-sm font-medium hover:bg-neutral-800 transition-colors"
             >
               <Plus className="w-4 h-4" />
               Create New

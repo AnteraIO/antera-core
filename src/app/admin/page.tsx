@@ -53,19 +53,19 @@ export default function AdminLogin() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-4 border-2 border-black outline-none focus:shadow-[4px_4px_0px_0px_#FA520F] transition-all font-mono"
+              className="w-full p-4 border-2 border-black outline-none focus:shadow-[4px_4px_0px_0px_#000000] transition-all font-mono"
               required
               disabled={isLoading}
               placeholder="Enter admin password"
             />
           </div>
           {error && (
-            <p className="text-[#FA520F] font-mono text-xs font-bold">{error}</p>
+            <p className="text-red-600 font-mono text-xs font-bold">{error}</p>
           )}
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-black text-white font-bold py-4 uppercase hover:bg-[#FA520F] transition-colors shadow-[4px_4px_0px_0px_#FA520F] disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-black text-white font-bold py-4 uppercase hover:bg-neutral-800 transition-colors shadow-[4px_4px_0px_0px_#000000] disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? 'Authenticating...' : 'Login'}
           </button>

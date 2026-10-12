@@ -207,7 +207,7 @@ export const Navbar = () => {
                             href={item.href}
                             onClick={() => setIsOpen(false)}
                             className={`transition-colors text-left ${
-                              pathname === item.href ? 'text-[#FA520F]' : 'hover:text-[#7DD3B0] text-[#111111]'
+                              pathname === item.href ? 'text-black font-medium' : 'hover:text-[#7DD3B0] text-[#111111]'
                             }`}
                           >
                             {item.name}
@@ -225,7 +225,7 @@ export const Navbar = () => {
                             href={item.href}
                             onClick={() => setIsOpen(false)}
                             className={`transition-colors text-left ${
-                              pathname === item.href ? 'text-[#FA520F]' : 'hover:text-[#7DD3B0] text-[#111111]'
+                              pathname === item.href ? 'text-black font-medium' : 'hover:text-[#7DD3B0] text-[#111111]'
                             }`}
                           >
                             {item.name}

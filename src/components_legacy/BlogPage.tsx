@@ -31,9 +31,9 @@ export const BlogPage = () => {
           
           <h1 className="text-4xl md:text-6xl font-normal uppercase tracking-tighter text-white font-mono leading-none">
             {isSw ? (
-              <>Makala <span className="text-[#FA520F] font-bold">Zetu.</span></>
+              <>Makala <span className="text-black font-bold">Zetu.</span></>
             ) : (
-              <>Our <span className="text-[#FA520F] font-bold">Insights.</span></>
+              <>Our <span className="text-black font-bold">Insights.</span></>
             )}
           </h1>
         </div>
@@ -53,20 +53,20 @@ export const BlogPage = () => {
                 <span className="absolute inset-0 border-b-2 border-r-2 border-neutral-200 pointer-events-none" />
                 
                 <div className="max-w-2xl relative z-10">
-                  <div className="flex items-center gap-3 text-[10px] font-mono font-bold uppercase text-[#FA520F] mb-3">
+                  <div className="flex items-center gap-3 text-[10px] font-mono font-bold uppercase text-black mb-3">
                     <span className="bg-black text-white px-1.5 py-0.5">{post.category}</span>
                     <span className="text-neutral-400 font-normal font-sans">//</span>
                     <span className="text-neutral-500">{post.date}</span>
                   </div>
                   
-                  <h2 className="text-xl md:text-2xl font-bold uppercase tracking-tight group-hover:text-[#FA520F] transition-colors font-mono">
+                  <h2 className="text-xl md:text-2xl font-bold uppercase tracking-tight group-hover:text-neutral-600 transition-colors font-mono">
                     {post.title}
                   </h2>
                 </div>
 
                 <div className="flex items-center gap-2 bg-neutral-50 border-2 border-black group-hover:bg-black group-hover:text-white p-3 font-mono text-xs font-bold uppercase tracking-wider transition-colors shrink-0">
                   <span>{isSw ? 'Soma Makala' : 'Read Post'}</span>
-                  <ArrowRight className="w-4 h-4 stroke-[2.5px] text-[#FA520F]" />
+                  <ArrowRight className="w-4 h-4 stroke-[2.5px] text-black" />
                 </div>
               </motion.article>
             ))}

@@ -51,7 +51,7 @@ export default async function AdminDashboard() {
   const stats = await getStats();
 
   return (
-    <div className="bg-[#FAFAF8] text-black min-h-screen pt-16 md:pt-20 lg:pt-24 selection:bg-[#FA520F] selection:text-white">
+    <div className="bg-[#FAFAF8] text-black min-h-screen pt-16 md:pt-20 lg:pt-24 selection:bg-black/10">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32">
         
         <header className="mb-24 md:mb-40 text-center">
@@ -72,7 +72,7 @@ export default async function AdminDashboard() {
                 <div className="w-8 h-8 bg-[#3B82F6] flex items-center justify-center">
                   <FileText size={16} className="text-white" />
                 </div>
-                <span className="text-2xl md:text-3xl font-normal tracking-tight text-black group-hover:text-[#FA520F] transition-colors">{stats.postsCount}</span>
+                <span className="text-2xl md:text-3xl font-normal tracking-tight text-black group-hover:text-neutral-600 transition-colors">{stats.postsCount}</span>
               </div>
               <div>
                 <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-500">Total Posts</p>
@@ -84,7 +84,7 @@ export default async function AdminDashboard() {
                 <div className="w-8 h-8 bg-[#10B981] flex items-center justify-center">
                   <Users size={16} className="text-white" />
                 </div>
-                <span className="text-2xl md:text-3xl font-normal tracking-tight text-black group-hover:text-[#FA520F] transition-colors">{stats.subCount}</span>
+                <span className="text-2xl md:text-3xl font-normal tracking-tight text-black group-hover:text-neutral-600 transition-colors">{stats.subCount}</span>
               </div>
               <div>
                 <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-500">Subscribers</p>
@@ -93,10 +93,10 @@ export default async function AdminDashboard() {
 
             <div className="bg-[#F5F5F5] p-6 md:p-8 min-h-[150px] flex flex-col justify-between group hover:bg-[#EAEAEA] transition-colors">
               <div className="flex items-center justify-between mb-3">
-                <div className="w-8 h-8 bg-[#FA520F] flex items-center justify-center">
+                <div className="w-8 h-8 bg-black flex items-center justify-center">
                   <Eye size={16} className="text-white" />
                 </div>
-                <span className="text-2xl md:text-3xl font-normal tracking-tight text-black group-hover:text-[#FA520F] transition-colors">{stats.totalViews}</span>
+                <span className="text-2xl md:text-3xl font-normal tracking-tight text-black group-hover:text-neutral-600 transition-colors">{stats.totalViews}</span>
               </div>
               <div>
                 <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-500">Total Views</p>
@@ -108,7 +108,7 @@ export default async function AdminDashboard() {
                 <div className="w-8 h-8 bg-[#8B5CF6] flex items-center justify-center">
                   <TrendingUp size={16} className="text-white" />
                 </div>
-                <span className="text-2xl md:text-3xl font-normal tracking-tight text-black group-hover:text-[#FA520F] transition-colors">{stats.engagementRate}%</span>
+                <span className="text-2xl md:text-3xl font-normal tracking-tight text-black group-hover:text-neutral-600 transition-colors">{stats.engagementRate}%</span>
               </div>
               <div>
                 <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-neutral-500">Engagement Rate</p>
@@ -123,28 +123,28 @@ export default async function AdminDashboard() {
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3">
           <Link 
             href="/admin/posts" 
-            className="bg-[#F5F5F5] px-4 py-3 flex items-center justify-center gap-2 hover:bg-[#EAEAEA] transition-colors text-xs font-mono font-bold uppercase tracking-wider text-black hover:text-[#FA520F]"
+            className="bg-[#F5F5F5] px-4 py-3 flex items-center justify-center gap-2 hover:bg-[#EAEAEA] transition-colors text-xs font-mono font-bold uppercase tracking-wider text-black hover:text-neutral-600"
           >
             <BookOpen className="w-3.5 h-3.5" />
             Manage Posts
           </Link>
           <Link 
             href="/admin/subscribers" 
-            className="bg-[#F5F5F5] px-4 py-3 flex items-center justify-center gap-2 hover:bg-[#EAEAEA] transition-colors text-xs font-mono font-bold uppercase tracking-wider text-black hover:text-[#FA520F]"
+            className="bg-[#F5F5F5] px-4 py-3 flex items-center justify-center gap-2 hover:bg-[#EAEAEA] transition-colors text-xs font-mono font-bold uppercase tracking-wider text-black hover:text-neutral-600"
           >
             <Users className="w-3.5 h-3.5" />
             Subscribers
           </Link>
           <Link 
             href="/admin/broadcast" 
-            className="bg-[#F5F5F5] px-4 py-3 flex items-center justify-center gap-2 hover:bg-[#EAEAEA] transition-colors text-xs font-mono font-bold uppercase tracking-wider text-black hover:text-[#FA520F]"
+            className="bg-[#F5F5F5] px-4 py-3 flex items-center justify-center gap-2 hover:bg-[#EAEAEA] transition-colors text-xs font-mono font-bold uppercase tracking-wider text-black hover:text-neutral-600"
           >
             <Send className="w-3.5 h-3.5" />
             Broadcast
           </Link>
           <Link 
             href="/admin/posts/new" 
-            className="bg-[#FA520F] px-4 py-3 flex items-center justify-center gap-2 hover:bg-black transition-colors text-xs font-mono font-bold uppercase tracking-wider text-white"
+            className="bg-black px-4 py-3 flex items-center justify-center gap-2 hover:bg-neutral-800 transition-colors text-xs font-mono font-bold uppercase tracking-wider text-white"
           >
             <Plus className="w-3.5 h-3.5" />
             New Post

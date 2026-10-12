@@ -48,7 +48,7 @@ const Editor = ({ content, onChange }: { content: string, onChange: (html: strin
     <button
       type="button"
       onClick={onClick}
-      className={`p-2 border border-black shadow-[1px_1px_0px_0px_#000000] hover:bg-[#FA520F] hover:text-white transition-colors ${isActive ? 'bg-[#FA520F] text-white' : 'bg-white'}`}
+      className={`p-2 border border-black shadow-[1px_1px_0px_0px_#000000] hover:bg-black hover:text-white transition-colors ${isActive ? 'bg-black text-white' : 'bg-white'}`}
     >
       {children}
     </button>

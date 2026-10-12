@@ -40,7 +40,7 @@ export default async function BlogListing() {
   ];
 
   return (
-    <div className="bg-white text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+    <div className="bg-white text-black min-h-screen py-24 md:py-32 selection:bg-black/10">
       <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3">

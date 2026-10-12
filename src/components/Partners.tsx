@@ -34,12 +34,12 @@ export const PartnersSection = () => {
   return (
     <section
       ref={containerRef}
-      className="text-black font-sans w-full overflow-hidden relative selection:bg-[#FA520F] selection:text-white"
+      className="text-black font-sans w-full overflow-hidden relative selection:bg-black/10"
       style={{ backgroundColor: '#F9FAFB' }}
     >
       <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-[800px] h-[800px] bg-blue-100/40 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-orange-100/30 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3" />
+        <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-neutral-100/30 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3" />
       </div>
 
       <div className="w-full py-20 md:py-28 relative z-10">

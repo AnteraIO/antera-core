@@ -127,7 +127,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   };
 
   return (
-    <article className="bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-[#FA520F] selection:text-white">
+    <article className="bg-[#FAFAF8] text-black min-h-screen py-24 md:py-32 selection:bg-black/10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -173,7 +173,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 <ul className="space-y-4">
                   {toc.length > 0 ? toc.map((item, idx) => (
                     <li key={idx} className={`text-[10px] font-bold uppercase tracking-tight ${item.level === 3 ? 'ml-4 opacity-60' : ''}`}>
-                      <a href={`#${item.id}`} className="hover:text-[#FA520F] transition-colors line-clamp-2 leading-tight">
+                      <a href={`#${item.id}`} className="hover:text-black font-semibold transition-colors line-clamp-2 leading-tight">
                         {item.text}
                       </a>
                     </li>

@@ -92,7 +92,7 @@ export default function NewPost() {
   };
 
   return (
-    <div ref={containerRef} className="bg-[#FAFAF8] text-black min-h-screen pt-16 md:pt-20 lg:pt-24 selection:bg-[#FA520F] selection:text-white">
+    <div ref={containerRef} className="bg-[#FAFAF8] text-black min-h-screen pt-16 md:pt-20 lg:pt-24 selection:bg-black/10">
       <GrainOverlay />
       <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
@@ -125,7 +125,7 @@ export default function NewPost() {
               <button
                 onClick={() => handleSubmit('published')}
                 disabled={isSaving}
-                className="bg-[#FA520F] px-4 py-2 text-sm font-medium text-white hover:bg-black transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="bg-black px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800 transition-colors disabled:opacity-50 flex items-center gap-2"
               >
                 <Send size={14} />
                 Publish Now
@@ -148,7 +148,7 @@ export default function NewPost() {
                   <button
                     onClick={handleAIByTitle}
                     disabled={isGenerating}
-                    className="px-4 bg-black text-white border border-black hover:bg-[#FA520F] hover:border-[#FA520F] transition-colors disabled:opacity-50 flex items-center justify-center"
+                    className="px-4 bg-black text-white border border-black hover:bg-neutral-800 hover:border-neutral-800 transition-colors disabled:opacity-50 flex items-center justify-center"
                   >
                     <Wand2 size={18} className={isGenerating ? 'animate-spin' : ''} />
                   </button>

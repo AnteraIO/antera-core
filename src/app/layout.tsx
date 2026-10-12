@@ -126,7 +126,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <LanguageProvider>
-          <div className="min-h-screen bg-white text-[#1F1F1F] selection:bg-[#FA520F]/30">
+          <div className="min-h-screen bg-white text-[#1F1F1F] selection:bg-black/10">
             <Navbar />
             <LayoutContent>{children}</LayoutContent>
             <FinalCTAAndFooter />
