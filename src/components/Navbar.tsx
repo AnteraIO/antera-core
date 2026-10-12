@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '../context/LanguageContext';
+import logo from '../assets/logo.png';
 
 const LANGUAGE_ICON = 'https://cdn-icons-png.flaticon.com/128/4673/4673025.png';
 const CLOSE_ICON = 'https://cdn-icons-png.flaticon.com/128/3906/3906839.png';
@@ -109,23 +110,16 @@ export const Navbar = () => {
               : `${glassBase} ${glassShadow}`}
           `}
         >
-          <Link href="/" className="flex items-center gap-2 flex-shrink-0 z-50">
-            <div className="relative w-12 h-12 rounded-full overflow-hidden">
+          <Link href="/" className="flex items-center flex-shrink-0 z-50">
+            <div className="relative h-12 md:h-16 w-[200px] md:w-[280px]">
               <Image
-                src="/antera-logo.jpeg"
-                alt="Antera Logo"
+                src={logo}
+                alt="Antera Technologies"
                 fill
-                className="object-cover"
+                className="object-contain object-left"
                 priority
               />
             </div>
-            <span
-              className={`text-[22px] md:text-[24px] font-medium tracking-tight transition-colors ${
-                isOpen || !scrolled ? 'text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]' : 'text-[#111622]'
-              }`}
-            >
-              Antera Technologies
-            </span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-6">
