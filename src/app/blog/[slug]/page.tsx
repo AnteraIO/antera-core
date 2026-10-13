@@ -113,14 +113,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     author: {
       '@type': 'Organization',
       name: 'Antera Team',
-      logo: 'https://antera.co.tz/antera-logo.jpeg',
+      logo: 'https://antera.co.tz/logo.png',
     },
     publisher: {
       '@type': 'Organization',
       name: 'ANTERA',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://antera.co.tz/antera-logo.jpeg',
+        url: 'https://antera.co.tz/logo.png',
       },
     },
     description: post.excerpt,
@@ -149,7 +149,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           <div className="flex items-center justify-center gap-4">
             <div className="relative w-12 h-12 bg-neutral-200 overflow-hidden border border-neutral-300">
               <Image
-                src={post.blog_authors?.avatar_url || '/antera-logo.jpeg'}
+                src={post.blog_authors?.avatar_url || '/logo.png'}
                 alt={post.blog_authors?.name || 'Antera Team'}
                 fill
                 className="object-cover"

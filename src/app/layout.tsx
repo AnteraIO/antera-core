@@ -24,7 +24,6 @@ const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
 });
 
-// Williwaw Book font - path from src/app to root public folder
 const williwaw = localFont({
   src: "../../public/fonts/Williwaw-Book.otf",
   variable: "--font-williwaw",
@@ -57,7 +56,7 @@ export const metadata: Metadata = {
     siteName: 'ANTERA',
     images: [
       {
-        url: '/antera-logo.jpeg',
+        url: '/logo.png',
         width: 1200,
         height: 630,
         alt: 'ANTERA Logo',
@@ -70,7 +69,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'ANTERA | AI & Engineering Research',
     description: 'Advanced Neural Technologies & Engineering Research Agency',
-    images: ['/antera-logo.jpeg'],
+    images: ['/logo.png'],
   },
   robots: {
     index: true,
@@ -84,9 +83,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/antera-logo.jpeg",
-    shortcut: "/antera-logo.jpeg",
-    apple: "/antera-logo.jpeg",
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
   },
   manifest: '/manifest.json',
 };
@@ -102,7 +101,7 @@ export default function RootLayout({
     name: 'ANTERA',
     alternateName: 'Advanced Neural Technologies & Engineering Research Agency',
     url: 'https://antera.co.tz',
-    logo: 'https://antera.co.tz/antera-logo.jpeg',
+    logo: 'https://antera.co.tz/logo.png',
     sameAs: [
       'https://twitter.com/antera_tz',
       'https://instagram.com/antera_tz',
@@ -118,6 +117,11 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/logo.png" type="image/png" />
+        <link rel="shortcut icon" href="/logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
+      </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} ${williwaw.variable} antialiased`}
       >

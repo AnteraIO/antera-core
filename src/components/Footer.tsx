@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Mail, Phone, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import hero9 from '@/assets/hero-4.jpg';
+import logo from '@/assets/logo.png';
 
 const YoutubeIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -69,7 +70,6 @@ export const FinalCTAAndFooter = () => {
 
   return (
     <footer className="relative w-full bg-[#FAFAF8] text-black font-sans antialiased border-t border-neutral-200 overflow-hidden">
-      {/* Background Image Layer */}
       <div className="absolute inset-0 z-0">
         <Image 
           src={hero9}
@@ -83,7 +83,6 @@ export const FinalCTAAndFooter = () => {
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 py-24 md:py-32 w-full">
         
-        {/* Get in Touch Header */}
         <header className="mb-24 md:mb-40 text-center">
           <h1 className="text-7xl md:text-9xl lg:text-[10rem] font-normal tracking-[-0.03em] leading-[0.95] text-black">
             {t('footer.get_in_touch') || (isSw ? 'Wasiliana Nasi.' : 'Get in Touch.')}
@@ -93,17 +92,16 @@ export const FinalCTAAndFooter = () => {
           </p>
         </header>
 
-        {/* Glassmorphism Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 border-l border-t border-neutral-200 bg-white/70 backdrop-blur-sm">
           
-          {/* Column 1: Brand & Contact */}
           <div className="group p-8 md:p-12 min-h-[280px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors border-r border-b border-neutral-200">
             <div>
               <div className="flex items-center gap-3 mb-8">
-                <div className="relative w-8 h-8 rounded-full overflow-hidden border border-neutral-200 bg-white flex items-center justify-center shrink-0">
-                  <Image src="/antera-logo.jpeg" alt="Antera Logo" className="object-cover" fill priority />
-                </div>
-                <span className="text-lg font-semibold tracking-tight text-black">Antera Technologies</span>
+                <img 
+                  src={logo.src} 
+                  alt="Antera Logo" 
+                  className="h-10 w-auto object-contain"
+                />
               </div>
               
               <ul className="space-y-4">
@@ -133,7 +131,6 @@ export const FinalCTAAndFooter = () => {
             </div>
           </div>
 
-          {/* Column 2: Products */}
           <div className="group p-8 md:p-12 min-h-[280px] flex flex-col hover:bg-neutral-50/50 transition-colors border-r border-b border-neutral-200">
             <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6 font-mono">{t('nav.products')}</h3>
             <ul className="space-y-3">
@@ -147,7 +144,6 @@ export const FinalCTAAndFooter = () => {
             </ul>
           </div>
 
-          {/* Column 3: Impact */}
           <div className="group p-8 md:p-12 min-h-[280px] flex flex-col hover:bg-neutral-50/50 transition-colors border-r border-b border-neutral-200">
             <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6 font-mono">
               {t('footer.impact') || (isSw ? 'Athari' : 'Impact')}
@@ -164,7 +160,6 @@ export const FinalCTAAndFooter = () => {
             </ul>
           </div>
 
-          {/* Column 4: Capabilities */}
           <div className="group p-8 md:p-12 min-h-[280px] flex flex-col hover:bg-neutral-50/50 transition-colors border-r border-b border-neutral-200">
             <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6 font-mono">
               {t('footer.capabilities') || (isSw ? 'Uwezo' : 'Capabilities')}
@@ -181,7 +176,6 @@ export const FinalCTAAndFooter = () => {
             </ul>
           </div>
 
-          {/* Column 5: Company & Socials */}
           <div className="group p-8 md:p-12 min-h-[280px] flex flex-col justify-between hover:bg-neutral-50/50 transition-colors border-r border-b border-neutral-200">
             <div>
               <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-600 mb-6 font-mono">{t('nav.company')}</h3>
@@ -204,7 +198,6 @@ export const FinalCTAAndFooter = () => {
                 <a href="https://linkedin.com/company/antera_tz" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors"><LinkedinIcon/></a>
               </div>
 
-              {/* Language Pills */}
               <div className="flex items-center gap-2">
                 {['en', 'sw'].map((lang) => {
                   const isActive = language === lang;

@@ -4,7 +4,7 @@ import { motion, useScroll, useSpring } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import shadrackovskyImage from '@/assets/shadrackovsky.jpeg';
-import anteraLogoImage from '@/assets/antera-logo.jpeg';
+import anteraLogoImage from '@/assets/logo.png';
 import { useLanguage } from '@/context/LanguageContext';
 
 // Custom SVG Icons

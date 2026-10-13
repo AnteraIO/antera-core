@@ -2,7 +2,7 @@ import { supabase } from './supabase';
 
 
 function getLogoUrl() {
-  return 'https://www.antera.co.tz/antera-logo.jpeg';
+  return 'https://www.antera.co.tz/logo.png';
 }
 
 // Sends a welcome email to newly registered subscribers
