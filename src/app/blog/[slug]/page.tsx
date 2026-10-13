@@ -147,14 +147,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             {post.title}
           </h1>
           <div className="flex items-center justify-center gap-4">
-            <div className="relative w-12 h-12 bg-neutral-200 overflow-hidden border border-neutral-300">
-              <Image
-                src={post.blog_authors?.avatar_url || '/logo.png'}
-                alt={post.blog_authors?.name || 'Antera Team'}
-                fill
-                className="object-cover"
-              />
-            </div>
+           <div className="relative w-12 h-12 overflow-hidden">
+  <Image
+    src={post.blog_authors?.avatar_url || '/logo.png'}
+    alt={post.blog_authors?.name || 'Antera Team'}
+    fill
+    className="object-contain"
+  />
+</div>
             <p className="text-sm font-bold uppercase tracking-wide">{post.blog_authors?.name || 'Antera Team'}</p>
           </div>
         </header>
