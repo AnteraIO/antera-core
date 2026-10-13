@@ -6,10 +6,14 @@ import { Metadata } from 'next';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import { Share2, Mail, ExternalLink, Eye } from 'lucide-react';
+import { Eye } from 'lucide-react';
 import ViewCounter from '@/components/blog/ViewCounter';
 
 export const dynamic = 'force-dynamic';
+
+const SHARE_X = 'https://cdn-icons-png.flaticon.com/128/5968/5968830.png';
+const SHARE_MAIL = 'https://cdn-icons-png.flaticon.com/128/732/732200.png';
+const SHARE_LINK = 'https://cdn-icons-png.flaticon.com/128/2958/2958794.png';
 
 async function getPost(slug: string) {
   const { data } = await supabase
@@ -147,14 +151,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             {post.title}
           </h1>
           <div className="flex items-center justify-center gap-4">
-           <div className="relative w-12 h-12 overflow-hidden">
-  <Image
-    src={post.blog_authors?.avatar_url || '/logo.png'}
-    alt={post.blog_authors?.name || 'Antera Team'}
-    fill
-    className="object-contain"
-  />
-</div>
+            <div className="relative w-12 h-12 overflow-hidden">
+              <Image
+                src={post.blog_authors?.avatar_url || '/logo.png'}
+                alt={post.blog_authors?.name || 'Antera Team'}
+                fill
+                className="object-contain"
+              />
+            </div>
             <p className="text-sm font-bold uppercase tracking-wide">{post.blog_authors?.name || 'Antera Team'}</p>
           </div>
         </header>
@@ -225,45 +229,45 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           </div>
         </div>
 
-        <div className="max-w-5xl mx-auto flex items-center justify-center gap-4 mb-24">
+        <div className="max-w-5xl mx-auto flex items-center justify-center gap-6 mb-24">
           <span className="text-[10px] font-mono font-bold uppercase text-neutral-400">Share post:</span>
-          <a href={`https://twitter.com/intent/tweet?url=${shareUrl}&text=${encodeURIComponent(post.title)}`} target="_blank" rel="noopener noreferrer" className="p-3 border border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all">
-            <Share2 size={14} />
+          <a href={`https://twitter.com/intent/tweet?url=${shareUrl}&text=${encodeURIComponent(post.title)}`} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+            <img src={SHARE_X} alt="Share on X" width={22} height={22} />
           </a>
-          <a href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${shareUrl}`} className="p-3 border border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all">
-            <Mail size={14} />
+          <a href={`mailto:?subject=${encodeURIComponent(post.title)}&body=${shareUrl}`} className="hover:opacity-70 transition-opacity">
+            <img src={SHARE_MAIL} alt="Share via Email" width={22} height={22} />
           </a>
-          <a href={shareUrl} target="_blank" rel="noopener noreferrer" className="p-3 border border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all">
-            <ExternalLink size={14} />
+          <a href={shareUrl} target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
+            <img src={SHARE_LINK} alt="Copy link" width={22} height={22} />
           </a>
         </div>
 
         {relatedPosts.length > 0 && (
-       <section className="pt-24 border-t border-neutral-200 max-w-5xl mx-auto">
-  <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-12">Recommended Posts</h3>
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-    {relatedPosts.map((rp, i) => {
-      const patterns = [
-        { bg: 'bg-[#E8ECEF]', text: 'text-black', sub: 'text-black/70' },
-        { bg: 'bg-[#0A0A0A]', text: 'text-white', sub: 'text-white/70' },
-        { bg: 'bg-[#0D2A6B]', text: 'text-white', sub: 'text-white/70' },
-      ];
-      const pattern = patterns[i % patterns.length];
+          <section className="pt-24 border-t border-neutral-200 max-w-5xl mx-auto">
+            <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-12">Recommended Posts</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              {relatedPosts.map((rp, i) => {
+                const patterns = [
+                  { bg: 'bg-[#E8ECEF]', text: 'text-black', sub: 'text-black/70' },
+                  { bg: 'bg-[#0A0A0A]', text: 'text-white', sub: 'text-white/70' },
+                  { bg: 'bg-[#0D2A6B]', text: 'text-white', sub: 'text-white/70' },
+                ];
+                const pattern = patterns[i % patterns.length];
 
-      return (
-        <Link
-          key={rp.slug}
-          href={`/blog/${rp.slug}`}
-          className={`group relative overflow-hidden flex flex-col justify-between p-8 md:p-10 min-h-[360px] cursor-pointer ${pattern.bg} ${pattern.text}`}
-        >
-          <h4 className="text-2xl md:text-3xl font-bold tracking-[-0.02em] leading-[1.05]">
-            {rp.title}
-          </h4>
-        </Link>
-      );
-    })}
-  </div>
-</section>
+                return (
+                  <Link
+                    key={rp.slug}
+                    href={`/blog/${rp.slug}`}
+                    className={`group relative overflow-hidden flex flex-col justify-between p-8 md:p-10 min-h-[360px] cursor-pointer ${pattern.bg} ${pattern.text}`}
+                  >
+                    <h4 className="text-2xl md:text-3xl font-bold tracking-[-0.02em] leading-[1.05]">
+                      {rp.title}
+                    </h4>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
         )}
       </div>
     </article>
