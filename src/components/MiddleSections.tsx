@@ -432,7 +432,7 @@ export const WebServicesSection = () => {
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] as const }}
             >
-              {t('web.desc') || 'We craft visually appealing and high-converting websites and landing pages tailored for your brand.'}
+              {t('web.desc') || 'We craft visually appealing, high-converting websites and landing pages tailored just for your brand and taste.'}
             </motion.p>
           </header>
 
@@ -685,7 +685,7 @@ export const ApplicationSection = () => {
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] as const }}
             >
-              {t('app.desc') || (isSw ? 'Tunaingiza na kutengeneza wavuti na programu za kisasa ambazo ni salama, za kuaminika, na zinazoenda na mahitaji halisi ya biashara.' : 'We design and develop modern websites and applications that are secure, reliable, and aligned with real business needs.')}
+              {t('app.desc') || (isSw ? 'Tunaingiza na kutengeneza wavuti na programu za kisasa ambazo ni salama, za kuaminika, na zinazoenda na mahitaji halisi ya biashara.' : 'We design and develop modern web systems and applications that are secure, reliable, and aligned with your real business needs.')}
             </motion.p>
 
             <ShowreelCTA label={t('common.watch_showreel') || (isSw ? 'Tazama video yetu' : 'Watch our showreel')} />
