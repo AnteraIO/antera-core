@@ -93,7 +93,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Web Design & Development Section
     'web.title_line1': 'INSPIRING',
     'web.title_line2': 'ENGAGING',
-    'web.desc': 'We craft visually appealing and high-converting websites and landing pages tailored for your brand.',
+    'web.desc': 'We craft visually appealing, high-converting websites and landing pages tailored just for your brand and taste.',
     'web.visual_design_title': 'Visual Design',
     'web.visual_design_desc': 'We design templates that are appealing and creative and best represent your brand, impress your customers and provide easy site experience.',
     'web.landing_pages_title': 'Landing Pages',
@@ -115,7 +115,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Application Section
     'app.title_line1': 'Built for growth that',
     'app.title_line2': 'designed for people',
-    'app.desc': 'We design and develop modern websites and applications that are secure, reliable, and aligned with real business needs.',
+    'app.desc': 'We design and develop modern web systems and applications that are secure, reliable, and aligned with your real business needs.',
 
     // Data Intelligence Section
     'data.title_line1': 'Turn data into decisions that',
