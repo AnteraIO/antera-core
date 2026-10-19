@@ -7,32 +7,32 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '../context/LanguageContext';
 import logo from '../assets/logo.png';
+import menuBgImg from '@/assets/gritty-blue.png';
 
-const LANGUAGE_ICON = 'https://cdn-icons-png.flaticon.com/128/4673/4673025.png';
-const CLOSE_ICON = 'https://cdn-icons-png.flaticon.com/128/3906/3906839.png';
-const MENU_ICON = 'https://cdn-icons-png.flaticon.com/128/3906/3906840.png';
+const SWAHILI_ICON = 'https://cdn-icons-png.flaticon.com/128/303/303200.png';
+const ENGLISH_ICON = 'https://cdn-icons-png.flaticon.com/128/10452/10452489.png';
+const CLOSE_ICON = 'https://cdn-icons-png.flaticon.com/128/12822/12822503.png';
+const MENU_ICON = 'https://cdn-icons-png.flaticon.com/128/1161/1161695.png';
 
-const InstagramIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-  </svg>
-);
+const NAV_ICONS = [
+  'https://cdn-icons-png.flaticon.com/128/35/35787.png',
+  'https://cdn-icons-png.flaticon.com/128/35/35580.png',
+  'https://cdn-icons-png.flaticon.com/128/57/57276.png',
+  'https://cdn-icons-png.flaticon.com/128/57/57223.png',
+  'https://cdn-icons-png.flaticon.com/128/16074/16074286.png',
+  'https://cdn-icons-png.flaticon.com/128/16068/16068124.png',
+  'https://cdn-icons-png.flaticon.com/128/16074/16074196.png',
+  'https://cdn-icons-png.flaticon.com/128/16074/16074239.png',
+  'https://cdn-icons-png.flaticon.com/128/58/58300.png',
+  'https://cdn-icons-png.flaticon.com/128/16836/16836758.png',
+];
 
-const XIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
-
-const LinkedinIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-    <rect x="2" y="9" width="4" height="12"></rect>
-    <circle cx="4" cy="4" r="2"></circle>
-  </svg>
-);
+const SOCIALS = [
+  { name: 'Facebook',  href: 'https://facebook.com/antera_tz', icon: 'https://cdn-icons-png.flaticon.com/128/174/174848.png' },
+  { name: 'Instagram', href: 'https://instagram.com/antera_tz', icon: 'https://cdn-icons-png.flaticon.com/128/1409/1409946.png' },
+  { name: 'LinkedIn',  href: 'https://linkedin.com/company/antera_tz', icon: 'https://cdn-icons-png.flaticon.com/128/3536/3536505.png' },
+  { name: 'X',         href: 'https://twitter.com/antera_tz', icon: 'https://cdn-icons-png.flaticon.com/128/5968/5968830.png' },
+];
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,6 +40,8 @@ export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const { language, setLanguage, t } = useLanguage();
+
+  const isEnglish = language === 'en';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -54,13 +56,16 @@ export const Navbar = () => {
   }, [isOpen]);
 
   const navLinks = [
-    { name: t('nav.products') || 'Products', href: '/products' },
-    { name: t('nav.solutions') || 'Solutions', href: '/solutions' },
-    { name: t('nav.data_analytics') || 'Data Analytics', href: '/data-analytics' },
-    { name: t('nav.models') || 'Models', href: '/models' },
-    { name: t('nav.blog') || 'Blog', href: '/blog' },
-    { name: t('nav.customers') || 'Customers', href: '/customers' },
-    { name: t('nav.company') || 'Company', href: '/company' },
+    { name: t('nav.products') || 'Products', href: '/products', icon: NAV_ICONS[0] },
+    { name: t('nav.solutions') || 'Solutions', href: '/solutions', icon: NAV_ICONS[1] },
+    { name: t('nav.data_analytics') || 'Data Analytics', href: '/data-analytics', icon: NAV_ICONS[2] },
+    { name: t('nav.models') || 'Models', href: '/models', icon: NAV_ICONS[3] },
+    { name: t('nav.blog') || 'Blog', href: '/blog', icon: NAV_ICONS[4] },
+    { name: t('nav.customers') || 'Customers', href: '/customers', icon: NAV_ICONS[5] },
+    { name: t('nav.company') || 'Company', href: '/company', icon: NAV_ICONS[6] },
+    { name: 'About Us', href: '/company', icon: NAV_ICONS[7] },
+    { name: 'Media', href: '/blog', icon: NAV_ICONS[8] },
+    { name: 'Contact', href: '/company', icon: NAV_ICONS[9] },
   ];
 
   const glassBase = scrolled
@@ -70,6 +75,9 @@ export const Navbar = () => {
   const glassShadow = scrolled
     ? 'shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.6)]'
     : 'shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.12)]';
+
+  const isDarkSurface = !scrolled && !isOpen;
+  const menuIconFilter = isDarkSurface ? 'brightness-0 invert' : '';
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 font-sans pointer-events-none">
@@ -93,7 +101,7 @@ export const Navbar = () => {
                 aria-label="Close banner"
                 className="absolute right-4 md:right-6"
               >
-                <img src={CLOSE_ICON} alt="Close" width={16} height={16} />
+                <img src={CLOSE_ICON} alt="Close" width={16} height={16} className="brightness-0 invert" />
               </button>
             </div>
           </motion.div>
@@ -123,7 +131,7 @@ export const Navbar = () => {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-6">
-            {navLinks.map((item) => (
+            {navLinks.slice(0, 7).map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
@@ -143,12 +151,62 @@ export const Navbar = () => {
           <div className="flex items-center gap-2 md:gap-3 z-50">
             <div className="hidden lg:flex items-center gap-3">
               <button
-                onClick={() => setLanguage(language === 'en' ? 'sw' : 'en')}
+                onClick={() => setLanguage(isEnglish ? 'sw' : 'en')}
                 aria-label="Switch language"
-                title={language === 'en' ? 'Kubadili kwenda Kiswahili' : 'Switch to English'}
-                className="flex items-center justify-center w-[44px] h-[44px] cursor-pointer select-none"
+                title={isEnglish ? 'Kubadili kwenda Kiswahili' : 'Switch to English'}
+                className="relative flex items-center cursor-pointer select-none p-1 rounded-lg overflow-hidden"
+                style={{
+                  background: 'linear-gradient(140deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.20) 45%, rgba(255,255,255,0.40) 100%)',
+                  backdropFilter: 'blur(30px) saturate(200%) brightness(1.05)',
+                  WebkitBackdropFilter: 'blur(30px) saturate(200%) brightness(1.05)',
+                  border: '1px solid rgba(255,255,255,0.5)',
+                  boxShadow: `
+                    0 8px 24px rgba(0,0,0,0.12),
+                    inset 0 1px 0 rgba(255,255,255,0.9),
+                    inset 0 -1px 0 rgba(255,255,255,0.25)
+                  `,
+                }}
               >
-                <img src={LANGUAGE_ICON} alt="Language" width={28} height={28} />
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-1 top-[1px] h-1/2 rounded-md bg-gradient-to-b from-white/60 to-transparent"
+                />
+
+                <motion.span
+                  aria-hidden
+                  initial={false}
+                  animate={{ x: isEnglish ? 38 : 0 }}
+                  transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                  className="pointer-events-none absolute top-1 left-1 w-9 h-9 rounded-md"
+                  style={{
+                    background: 'linear-gradient(140deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 100%)',
+                    boxShadow: `
+                      0 4px 12px rgba(0,0,0,0.18),
+                      inset 0 1px 0 rgba(255,255,255,1),
+                      inset 0 -1px 0 rgba(0,0,0,0.05)
+                    `,
+                  }}
+                />
+
+                <span className="relative z-10 flex items-center justify-center w-9 h-9">
+                  <img
+                    src={SWAHILI_ICON}
+                    alt="Swahili"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 object-contain"
+                  />
+                </span>
+
+                <span className="relative z-10 flex items-center justify-center w-9 h-9 ml-[2px]">
+                  <img
+                    src={ENGLISH_ICON}
+                    alt="English"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6 object-contain"
+                  />
+                </span>
               </button>
 
               <div className="relative p-[2px] rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500">
@@ -171,6 +229,7 @@ export const Navbar = () => {
                 alt={isOpen ? 'Close' : 'Menu'} 
                 width={32} 
                 height={32}
+                className={`w-8 h-8 object-contain ${menuIconFilter}`}
               />
             </button>
           </div>
@@ -184,92 +243,122 @@ export const Navbar = () => {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="
-                mt-2 w-full rounded-md overflow-y-auto max-h-[calc(100vh-140px)]
+                relative mt-2 w-full rounded-md overflow-y-auto max-h-[calc(100vh-140px)]
                 bg-white border border-black/10
                 shadow-[0_20px_60px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.8)]
                 text-[#111111] pointer-events-auto
               "
             >
-              <div className="max-w-[1600px] mx-auto px-6 md:px-10 py-12 md:py-16">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+              <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
+                <Image
+                  src={menuBgImg}
+                  alt="Menu Background"
+                  fill
+                  className="object-cover object-center"
+                />
+              </div>
+
+              <div className="absolute inset-0 z-0 bg-white/80 pointer-events-none" />
+
+              <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-10 py-12 md:py-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                   
-                  <div className="lg:col-span-5">
-                    <ul className="flex flex-col gap-4 text-[40px] md:text-[48px] lg:text-[52px] font-light leading-tight">
+                  <div>
+                    <ul className="flex flex-col gap-3 text-[32px] md:text-[38px] lg:text-[42px] font-light leading-tight">
                       {navLinks.slice(0, 3).map((item) => (
                         <li key={item.name}>
                           <Link
                             href={item.href}
                             onClick={() => setIsOpen(false)}
-                            className={`transition-colors text-left ${
+                            className={`group flex items-center gap-3 transition-colors text-left ${
                               pathname === item.href ? 'text-black font-medium' : 'hover:text-[#7DD3B0] text-[#111111]'
                             }`}
                           >
-                            {item.name}
+                            <img
+                              src={item.icon}
+                              alt=""
+                              className="w-8 h-8 md:w-9 md:h-9 object-contain opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300"
+                            />
+                            <span>{item.name}</span>
                           </Link>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="lg:col-span-4">
-                    <ul className="flex flex-col gap-4 text-[40px] md:text-[48px] lg:text-[52px] font-light leading-tight">
-                      {navLinks.slice(3).map((item) => (
+                  <div>
+                    <ul className="flex flex-col gap-3 text-[32px] md:text-[38px] lg:text-[42px] font-light leading-tight">
+                      {navLinks.slice(3, 7).map((item) => (
                         <li key={item.name}>
                           <Link
                             href={item.href}
                             onClick={() => setIsOpen(false)}
-                            className={`transition-colors text-left ${
+                            className={`group flex items-center gap-3 transition-colors text-left ${
                               pathname === item.href ? 'text-black font-medium' : 'hover:text-[#7DD3B0] text-[#111111]'
                             }`}
                           >
-                            {item.name}
+                            <img
+                              src={item.icon}
+                              alt=""
+                              className="w-8 h-8 md:w-9 md:h-9 object-contain opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300"
+                            />
+                            <span>{item.name}</span>
                           </Link>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="lg:col-span-3">
-                    <div className="bg-[#1A365D] text-white rounded-md p-8 md:p-10 min-h-[360px] flex flex-col items-center text-center justify-between relative overflow-hidden">
-                      <div className="pt-10">
-                        <h3 className="text-[32px] md:text-[38px] font-normal leading-[1.1] text-white whitespace-pre-line">
-                          Talk to<br />Antera
-                        </h3>
-                        <p className="text-[14px] md:text-[15px] text-white/80 leading-relaxed mt-4">
-                          Let's build something great together. Get in touch and see how we can help.
-                        </p>
-                      </div>
-
-                      <div className="relative p-[2px] rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500 mt-6">
-                        <Link
-                          href="/solutions"
-                          onClick={() => setIsOpen(false)}
-                          className="block w-full text-sm font-semibold px-6 py-3.5 rounded-full transition-colors text-white bg-[#111111] hover:bg-black"
-                        >
-                          Get Started
-                        </Link>
-                      </div>
-                    </div>
+                  <div>
+                    <ul className="flex flex-col gap-3 text-[32px] md:text-[38px] lg:text-[42px] font-light leading-tight">
+                      {navLinks.slice(7).map((item) => (
+                        <li key={item.name}>
+                          <Link
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className={`group flex items-center gap-3 transition-colors text-left ${
+                              pathname === item.href ? 'text-black font-medium' : 'hover:text-[#7DD3B0] text-[#111111]'
+                            }`}
+                          >
+                            <img
+                              src={item.icon}
+                              alt=""
+                              className="w-8 h-8 md:w-9 md:h-9 object-contain opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300"
+                            />
+                            <span>{item.name}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
+
                 </div>
 
-                <div className="mt-14 pt-10 border-t border-black/10 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                  <div className="flex items-center gap-6 text-[14px] text-[#111111]/80">
-                    <Link href="/company" onClick={() => setIsOpen(false)} className="hover:text-[#111111] transition-colors">About Us</Link>
-                    <Link href="/blog" onClick={() => setIsOpen(false)} className="hover:text-[#111111] transition-colors">Media</Link>
-                    <Link href="/company" onClick={() => setIsOpen(false)} className="hover:text-[#111111] transition-colors">Contact</Link>
+                <div className="mt-14 pt-10 border-t border-black/10 flex flex-col md:flex-row md:justify-between gap-10 items-center">
+                  <div className="text-[14px] text-[#111111]/80">
+                    © {new Date().getFullYear()} Antera Technologies. All rights reserved.
                   </div>
 
-                  <div className="flex items-center gap-3 md:justify-end">
-                    <a href="https://instagram.com/antera_tz" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-10 h-10 rounded-full border border-black/25 flex items-center justify-center text-[#111111]/80 hover:text-[#111111] hover:border-[#111111] transition-colors">
-                      <InstagramIcon />
-                    </a>
-                    <a href="https://twitter.com/antera_tz" target="_blank" rel="noopener noreferrer" aria-label="X" className="w-10 h-10 rounded-full border border-black/25 flex items-center justify-center text-[#111111]/80 hover:text-[#111111] hover:border-[#111111] transition-colors">
-                      <XIcon />
-                    </a>
-                    <a href="https://linkedin.com/company/antera_tz" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-10 h-10 rounded-full border border-black/25 flex items-center justify-center text-[#111111]/80 hover:text-[#111111] hover:border-[#111111] transition-colors">
-                      <LinkedinIcon />
-                    </a>
+                  <div className="flex items-center gap-5 md:justify-end">
+                    {SOCIALS.map((s) => (
+                      <a
+                        key={s.name}
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={s.name}
+                        title={s.name}
+                        className="flex items-center justify-center hover:scale-125 transition-transform duration-300"
+                      >
+                        <img
+                          src={s.icon}
+                          alt={s.name}
+                          width={40}
+                          height={40}
+                          className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                        />
+                      </a>
+                    ))}
                   </div>
                 </div>
 
