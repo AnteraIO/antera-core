@@ -197,9 +197,6 @@ const TileRenderer = ({ tile }: { tile: Tile }) => (
             </>
           )}
 
-          <span className="absolute top-4 left-4 w-6 h-6 border-t border-l border-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20" />
-          <span className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20" />
-
           <div className="relative z-20">
             <p className="text-[10px] font-medium uppercase tracking-[0.25em] opacity-70 mb-4">
               <AnimatedLabel value={tile.label} />
@@ -224,14 +221,6 @@ const TileRenderer = ({ tile }: { tile: Tile }) => (
           >
             {tile.desc}
           </motion.p>
-
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: 40 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="absolute bottom-0 left-0 h-[3px] bg-current opacity-40 group-hover:w-full group-hover:opacity-90 transition-all duration-700"
-          />
         </>
       )}
 
@@ -240,9 +229,6 @@ const TileRenderer = ({ tile }: { tile: Tile }) => (
   </motion.div>
 );
 
-// ==========================================
-// OPERATION SECTION
-// ==========================================
 export const OperationSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
@@ -307,15 +293,8 @@ export const OperationSection = () => {
               <motion.span variants={headlineLineVariants} className="block text-black">
                 {t('ops.title_line1') || (isSw ? 'Jinsi tunavyofanya kazi' : 'How we operate')}
               </motion.span>
-              <motion.span variants={headlineLineVariants} className="block text-[#3E9C8F] relative">
+              <motion.span variants={headlineLineVariants} className="block text-[#3E9C8F]">
                 {t('ops.title_line2') || (isSw ? 'mtawalia kukuhudumia' : 'to serve you')}
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.4, delay: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
-                  className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-[3px] w-32 bg-[#3E9C8F] origin-left"
-                />
               </motion.span>
             </motion.h1>
           </header>
@@ -335,9 +314,6 @@ export const OperationSection = () => {
   );
 };
 
-// ==========================================
-// DATA SCIENCE / INFRASTRUCTURE SECTION
-// ==========================================
 export const DataScienceSection = () => {
   const { language, t } = useLanguage();
   const isSw = language === 'sw';
@@ -392,15 +368,8 @@ export const DataScienceSection = () => {
               <motion.span variants={headlineLineVariants} className="block text-black">
                 {t('infra.title_line1') || (isSw ? 'Miundombinu' : 'Infrastructure')}
               </motion.span>
-              <motion.span variants={headlineLineVariants} className="block text-[#3E9C8F] relative">
+              <motion.span variants={headlineLineVariants} className="block text-[#3E9C8F]">
                 {t('infra.title_line2') || (isSw ? 'na operesheni' : 'and operations')}
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.4, delay: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
-                  className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-[3px] w-32 bg-[#3E9C8F] origin-left"
-                />
               </motion.span>
             </motion.h1>
           </header>
@@ -420,9 +389,6 @@ export const DataScienceSection = () => {
   );
 };
 
-// ==========================================
-// WHY SECTION
-// ==========================================
 export const WhySection = () => {
   const { language, t } = useLanguage();
   const isSw = language === 'sw';
@@ -482,15 +448,8 @@ export const WhySection = () => {
               <motion.span variants={headlineLineVariants} className="block text-black">
                 {t('why.title_line1') || (isSw ? 'Kinachotutofautisha' : 'What makes us different')}
               </motion.span>
-              <motion.span variants={headlineLineVariants} className="block text-[#3E9C8F] relative">
+              <motion.span variants={headlineLineVariants} className="block text-[#3E9C8F]">
                 {t('why.title_line2') || (isSw ? 'na wengine' : 'from others')}
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.4, delay: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
-                  className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-[3px] w-32 bg-[#3E9C8F] origin-left"
-                />
               </motion.span>
             </motion.h1>
           </header>
