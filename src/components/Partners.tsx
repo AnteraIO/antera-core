@@ -14,6 +14,11 @@ import kaziboksiLogo from '../assets/kaziboksi.jpg';
 import sekelaPosLogo from '../assets/sekela-pos.png';
 import brevoLogo from '../assets/Brevo.png';
 
+import leftImage from '../assets/graphics/17.png';
+import rightImage from '../assets/graphics/104.png';
+import topImage from '../assets/graphics/40.png';
+import bottomImage from '../assets/graphics/33.png';
+
 const partners = [
   { name: 'Digital Ocean', logo: digitalOceanLogo },
   { name: 'AWS', logo: awsLogo },
@@ -29,13 +34,15 @@ export const PartnersSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { language, t } = useLanguage();
   const isSw = language === 'sw';
-  const tripledPartners = [...partners, ...partners, ...partners];
+
+  const row1 = [...partners, ...partners, ...partners, ...partners];
+  const row2 = [...partners, ...partners, ...partners, ...partners];
 
   return (
     <section
       ref={containerRef}
       className="text-black font-sans w-full overflow-hidden relative selection:bg-black/10"
-      style={{ backgroundColor: '#F9FAFB' }}
+      style={{ backgroundColor: '#FFFFFF' }}
     >
       <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-[800px] h-[800px] bg-blue-100/40 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
@@ -44,43 +51,68 @@ export const PartnersSection = () => {
 
       <div className="w-full py-20 md:py-28 relative z-10">
 
-        {/* HEADER — centered two-tone + rotated side text */}
-        <header className="relative max-w-5xl mx-auto text-center mb-20 px-6 md:px-10">
+        <header className="relative max-w-5xl mx-auto text-center mb-16 px-6 md:px-10 flex flex-col items-center">
+          
+          {/* TOP IMAGE */}
           <motion.div
-            className="absolute right-0 top-0 hidden lg:flex items-start justify-center h-full pointer-events-none"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: 0.4, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <span
-              className="text-sm md:text-base font-medium tracking-[0.2em] uppercase text-black whitespace-nowrap"
-              style={{
-                writingMode: 'vertical-rl',
-                transform: 'rotate(180deg)',
-              }}
-            >
-              {t('partners.side_tag') || (isSw ? 'Mawazo Bora ya Waundaji wa Programu Tanzania.' : 'Tanzanian Best Software Engineers.')}
-            </span>
-          </motion.div>
-
-          <motion.h1
-            className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
-            initial={{ opacity: 0, y: 30 }}
+            className="w-full flex justify-center pointer-events-none relative z-10 mb-[-4rem]"
+            initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 0.1, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="block text-black">
-              {t('partners.title_line1') || (isSw ? 'Imeundwa na walio bora' : 'Engineered with the best')}
-            </span>
-            <span className="block text-[#3E9C8F]">
-              {t('partners.title_line2') || (isSw ? 'inaendeshwa na walio bora' : 'powered by the best')}
-            </span>
-          </motion.h1>
+            <Image src={topImage} alt="" className="w-64 md:w-80 lg:w-[400px] h-auto object-contain opacity-50 -translate-y-8" />
+          </motion.div>
+
+          <div className="relative w-full">
+            {/* LEFT IMAGE */}
+            <motion.div
+              className="absolute left-0 lg:-left-40 xl:-left-64 top-1/2 -translate-y-1/2 hidden lg:block w-48 xl:w-80 pointer-events-none z-0"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: 0.2, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Image src={leftImage} alt="" className="w-full h-auto object-contain" />
+            </motion.div>
+
+            {/* RIGHT IMAGE & ROTATED TEXT */}
+            <motion.div
+              className="absolute right-0 lg:-right-40 xl:-right-64 top-0 h-full hidden lg:flex items-start justify-end gap-4 pointer-events-none z-0"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: 0.4, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="w-48 xl:w-80 mt-4">
+                 <Image src={rightImage} alt="" className="w-full h-auto object-contain" />
+              </div>
+              <span
+                className="text-sm md:text-base font-medium tracking-[0.2em] uppercase text-black whitespace-nowrap mt-12 mr-4"
+                style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+              >
+                {t('partners.side_tag') || (isSw ? 'Mawazo Bora ya Waundaji wa Programu Tanzania.' : 'Tanzanian Best Software Engineers.')}
+              </span>
+            </motion.div>
+
+            <motion.h1
+              className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98] relative z-10 pt-4"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <span className="block text-black">
+                {t('partners.title_line1') || (isSw ? 'Imeundwa na walio bora' : 'Engineered with the best')}
+              </span>
+              <span className="block text-[#3E9C8F]">
+                {t('partners.title_line2') || (isSw ? 'inaendeshwa na walio bora' : 'powered by the best')}
+              </span>
+            </motion.h1>
+          </div>
 
           <motion.p
-            className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-10 max-w-2xl mx-auto"
+            className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-8 max-w-2xl mx-auto relative z-10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -88,36 +120,63 @@ export const PartnersSection = () => {
           >
             {t('partners.desc') || (isSw ? 'Tunatumia miundombinu ya kiwango cha kimataifa kutoa suluhisho zinazoweza kukua na zenye utendaji wa juu.' : 'We are using top-quality computer systems and powerful technology to build fast, reliable services that can easily grow right along with your needs, no matter how large your business becomes.')}
           </motion.p>
+
+          {/* BOTTOM IMAGE */}
+          <motion.div
+            className="w-full flex justify-center mt-6 pointer-events-none relative z-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ delay: 0.2, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <Image src={bottomImage} alt="" className="w-32 md:w-44 lg:w-56 h-auto object-contain opacity-50 -translate-y-4" />
+          </motion.div>
         </header>
 
-        <div className="relative w-full overflow-hidden border-y border-neutral-200/50 py-16">
-          <div className="absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-[#F9FAFB] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-[#F9FAFB] to-transparent z-10 pointer-events-none" />
+        {/* TWO ROWS OF CONNECTED LOGOS */}
+        <div className="relative w-full overflow-hidden flex flex-col gap-6 md:gap-10 py-10">
+          
+          <div className="absolute left-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-r from-[#F9FAFB] via-[#F9FAFB]/80 to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-l from-[#F9FAFB] via-[#F9FAFB]/80 to-transparent z-20 pointer-events-none" />
 
+          {/* ROW 1 */}
           <motion.div
-            className="flex gap-20 md:gap-32 items-center"
-            animate={{ x: [0, -2400] }}
-            transition={{ duration: 25, ease: "linear", repeat: Infinity, repeatType: "loop" }}
-            style={{ width: "max-content" }}
+            className="flex items-center w-max"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 40, ease: "linear", repeat: Infinity }}
           >
-            {tripledPartners.map((partner, index) => (
-              <motion.div
-                key={index}
-                className="flex items-center justify-center flex-shrink-0"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Image
-                  src={partner.logo}
-                  alt={partner.name}
-                  className="h-16 md:h-20 lg:h-24 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
-                />
-              </motion.div>
+            {row1.map((partner, index) => (
+              <React.Fragment key={`row1-${index}`}>
+                <div className="flex-shrink-0 flex items-center justify-center bg-[#F2F2F1] rounded-[2rem] md:rounded-[2.5rem] w-24 h-24 md:w-36 md:h-36 z-10">
+                  <div className="relative w-[80%] h-[80%]">
+                    <Image src={partner.logo} alt={partner.name} fill className="object-contain" />
+                  </div>
+                </div>
+                <div className="w-6 md:w-10 h-10 md:h-16 bg-[#F2F2F1] -mx-2 md:-mx-4 z-0" />
+              </React.Fragment>
+            ))}
+          </motion.div>
+
+          {/* ROW 2 */}
+          <motion.div
+            className="flex items-center w-max"
+            animate={{ x: ["-50%", "0%"] }}
+            transition={{ duration: 45, ease: "linear", repeat: Infinity }}
+          >
+            {row2.map((partner, index) => (
+              <React.Fragment key={`row2-${index}`}>
+                <div className="flex-shrink-0 flex items-center justify-center bg-[#F2F2F1] rounded-[2rem] md:rounded-[2.5rem] w-24 h-24 md:w-36 md:h-36 z-10">
+                  <div className="relative w-[80%] h-[80%]">
+                    <Image src={partner.logo} alt={partner.name} fill className="object-contain" />
+                  </div>
+                </div>
+                <div className="w-6 md:w-10 h-10 md:h-16 bg-[#F2F2F1] -mx-2 md:-mx-4 z-0" />
+              </React.Fragment>
             ))}
           </motion.div>
         </div>
 
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 mt-20 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 mt-16 md:mt-20 grid grid-cols-1 md:grid-cols-2 gap-6">
           <a
             href="https://wa.me/255760984921"
             target="_blank"
