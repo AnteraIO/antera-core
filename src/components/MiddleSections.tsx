@@ -4,6 +4,7 @@ import { motion, useScroll, useSpring, MotionConfig, useMotionValue, useTransfor
 import Image from 'next/image';
 import { Play } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+
 import mobileAppImage from '../assets/graphics/93.png';
 import SystemIntegration from '../assets/graphics/91.png';
 import ExecutiveDashboards from '../assets/graphics/115.png';
@@ -16,7 +17,6 @@ import predictiveAnalyticsImage from '../assets/graphics/97.png';
 import dataGovernanceImage from '../assets/graphics/89.png';
 import SecureScalable from '../assets/graphics/110.png';
 import BrandCredibility from '../assets/graphics/77.png';
-
 import heroVideo from '../assets/graphics/alert.mp4';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
@@ -128,15 +128,8 @@ const AnimatedHeading = ({
     <motion.span variants={headlineLineVariants} className="block text-black">
       {line1}
     </motion.span>
-    <motion.span variants={headlineLineVariants} className="block text-[#3E9C8F] relative">
+    <motion.span variants={headlineLineVariants} className="block text-[#3E9C8F]">
       {line2}
-      <motion.span
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.4, delay: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
-        className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-[3px] w-32 bg-[#3E9C8F] origin-left"
-      />
     </motion.span>
   </motion.h1>
 );
@@ -150,155 +143,6 @@ const GrainOverlay = () => (
         "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E\")",
     }}
   />
-);
-
-const FineGrid = ({ color = 'currentColor' }: { color?: string }) => (
-  <svg
-    aria-hidden
-    className="pointer-events-none absolute inset-0 w-full h-full z-[2] opacity-[0.25] group-hover:opacity-[0.45] transition-opacity duration-700"
-    preserveAspectRatio="none"
-    viewBox="0 0 400 400"
-  >
-    <defs>
-      <pattern id={`fine-${color.replace('#', '')}`} x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
-        <line x1="0" y1="0" x2="0" y2="8" stroke={color} strokeWidth="0.25" />
-        <line x1="0" y1="0" x2="8" y2="0" stroke={color} strokeWidth="0.25" />
-      </pattern>
-    </defs>
-    <rect width="400" height="400" fill={`url(#fine-${color.replace('#', '')})`} />
-  </svg>
-);
-
-const MacroGrid = ({ color = 'currentColor' }: { color?: string }) => (
-  <svg
-    aria-hidden
-    className="pointer-events-none absolute inset-0 w-full h-full z-[2] opacity-[0.18] group-hover:opacity-[0.35] transition-opacity duration-700"
-    preserveAspectRatio="none"
-    viewBox="0 0 400 400"
-  >
-    <defs>
-      <pattern id={`macro-${color.replace('#', '')}`} x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse">
-        <line x1="0" y1="0" x2="0" y2="64" stroke={color} strokeWidth="0.6" />
-        <line x1="0" y1="0" x2="64" y2="0" stroke={color} strokeWidth="0.6" />
-      </pattern>
-    </defs>
-    <rect width="400" height="400" fill={`url(#macro-${color.replace('#', '')})`} />
-  </svg>
-);
-
-const DotMatrix = ({ color = 'currentColor' }: { color?: string }) => (
-  <svg
-    aria-hidden
-    className="pointer-events-none absolute inset-0 w-full h-full z-[2] opacity-[0.28] group-hover:opacity-[0.5] transition-opacity duration-700"
-    preserveAspectRatio="none"
-    viewBox="0 0 400 400"
-  >
-    <defs>
-      <pattern id={`dot-${color.replace('#', '')}`} x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse">
-        <circle cx="6" cy="6" r="0.9" fill={color} />
-      </pattern>
-    </defs>
-    <rect width="400" height="400" fill={`url(#dot-${color.replace('#', '')})`} />
-  </svg>
-);
-
-const HolePunches = ({ color = 'currentColor' }: { color?: string }) => (
-  <svg
-    aria-hidden
-    className="pointer-events-none absolute inset-0 w-full h-full z-[3] opacity-[0.4] group-hover:opacity-[0.7] transition-opacity duration-700"
-    preserveAspectRatio="none"
-    viewBox="0 0 400 400"
-  >
-    <defs>
-      <pattern id={`punch-${color.replace('#', '')}`} x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
-        <circle cx="24" cy="24" r="6" fill={color} fillOpacity="0.35" />
-        <circle cx="24" cy="24" r="6" fill="none" stroke={color} strokeWidth="0.4" strokeOpacity="0.9" />
-      </pattern>
-    </defs>
-    <rect width="400" height="400" fill={`url(#punch-${color.replace('#', '')})`} />
-  </svg>
-);
-
-const WhiteScratches = () => (
-  <svg
-    aria-hidden
-    className="pointer-events-none absolute inset-0 w-full h-full z-[5] opacity-[0.55] group-hover:opacity-[0.85] transition-opacity duration-700 mix-blend-screen"
-    preserveAspectRatio="none"
-    viewBox="0 0 400 400"
-  >
-    <motion.path
-      d="M -10 40 Q 120 90 200 60 T 420 110"
-      stroke="#FFFFFF"
-      strokeWidth="0.7"
-      fill="none"
-      strokeLinecap="round"
-      initial={{ pathLength: 0 }}
-      whileInView={{ pathLength: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] as const }}
-    />
-    <motion.path
-      d="M 20 360 Q 140 300 240 340 T 420 300"
-      stroke="#FFFFFF"
-      strokeWidth="0.6"
-      fill="none"
-      strokeLinecap="round"
-      initial={{ pathLength: 0 }}
-      whileInView={{ pathLength: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 2, delay: 0.15, ease: [0.16, 1, 0.3, 1] as const }}
-    />
-    <motion.path
-      d="M 60 0 Q 90 160 40 250 T 80 400"
-      stroke="#FFFFFF"
-      strokeWidth="0.5"
-      fill="none"
-      strokeLinecap="round"
-      initial={{ pathLength: 0 }}
-      whileInView={{ pathLength: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 2.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
-    />
-    <motion.path
-      d="M 340 10 Q 320 140 380 220 T 350 400"
-      stroke="#FFFFFF"
-      strokeWidth="0.5"
-      fill="none"
-      strokeLinecap="round"
-      initial={{ pathLength: 0 }}
-      whileInView={{ pathLength: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 2.2, delay: 0.45, ease: [0.16, 1, 0.3, 1] as const }}
-    />
-    <motion.path
-      d="M 0 200 L 400 190"
-      stroke="#FFFFFF"
-      strokeWidth="0.35"
-      fill="none"
-      strokeLinecap="round"
-      initial={{ pathLength: 0 }}
-      whileInView={{ pathLength: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
-    />
-  </svg>
-);
-
-const CornerCrosses = ({ color = 'currentColor' }: { color?: string }) => (
-  <svg
-    aria-hidden
-    className="pointer-events-none absolute inset-0 w-full h-full z-[3] opacity-[0.35] group-hover:opacity-[0.7] transition-opacity duration-700"
-    preserveAspectRatio="none"
-    viewBox="0 0 400 400"
-  >
-    <defs>
-      <pattern id={`cross-${color.replace('#', '')}`} x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse">
-        <line x1="32" y1="28" x2="32" y2="36" stroke={color} strokeWidth="0.5" />
-        <line x1="28" y1="32" x2="36" y2="32" stroke={color} strokeWidth="0.5" />
-      </pattern>
-    </defs>
-    <rect width="400" height="400" fill={`url(#cross-${color.replace('#', '')})`} />
-  </svg>
 );
 
 const Shimmer = () => (
@@ -355,9 +199,62 @@ const SectionBackdrop = () => (
   </svg>
 );
 
-// ==========================================
-// SECTION 0 — Web Design & Development
-// ==========================================
+const ServiceCard = ({
+  title,
+  description,
+  image,
+  color,
+  text,
+  subText,
+  span,
+  height,
+  imgClass,
+  isVideo,
+}: any) => {
+  return (
+    <motion.div variants={cardVariants} className={`${span} ${height} group relative`}>
+      <MagneticCard
+        className={`relative w-full h-full overflow-hidden rounded-2xl flex flex-col justify-start p-8 md:p-10 cursor-pointer ${color} ${text}`}
+      >
+        <Shimmer />
+
+        {isVideo ? (
+          <motion.video
+            src={heroVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            initial={{ scale: 1.25, opacity: 0 }}
+            whileInView={{ scale: 1.15, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] as const }}
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-60 z-[4]"
+          />
+        ) : (
+          <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 z-[4] ${imgClass}`}>
+            <Image src={image} alt={title} className="w-full h-auto object-contain drop-shadow-2xl" />
+          </div>
+        )}
+
+        <div className="relative z-20 max-w-[85%]">
+          <h3 className="text-3xl md:text-4xl lg:text-[44px] font-bold tracking-[-0.02em] leading-[1.05]">
+            {title}
+          </h3>
+          <div className="mt-5">
+            <p className={`text-xl md:text-2xl lg:text-3xl ${subText} leading-[1.3] max-w-lg`}>
+              {description}
+            </p>
+          </div>
+        </div>
+
+        <AccentLine />
+        <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F] transition-all duration-500 pointer-events-none z-30 rounded-2xl" />
+      </MagneticCard>
+    </motion.div>
+  );
+};
+
 export const WebServicesSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { language, t } = useLanguage();
@@ -441,44 +338,9 @@ export const WebServicesSection = () => {
             viewport={{ once: true, amount: 0.1 }}
             className="grid grid-cols-1 md:grid-cols-12 gap-3 [perspective:1400px]"
           >
-            {webCards.map((card, i) => {
-              const isLight = card.text === 'text-black';
-              const gridColor = isLight ? '#000000' : '#FFFFFF';
-              return (
-                <motion.div
-                  key={i}
-                  variants={cardVariants}
-                  className={`${card.span} ${card.height} group relative`}
-                >
-                  <MagneticCard
-                    className={`relative w-full h-full overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text}`}
-                  >
-                    <Shimmer />
-
-                    <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 z-[4] ${card.imgClass}`}>
-                      <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
-                    </div>
-
-                    <div className="relative z-20 max-w-[85%]">
-                      <h3 className="text-3xl md:text-4xl lg:text-[40px] font-bold tracking-[-0.02em] leading-[1.05]">
-                        {card.title}
-                      </h3>
-
-                      <div className="overflow-hidden">
-                        <div className="max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                          <p className={`text-xl md:text-2xl ${card.subText} mt-5 leading-[1.3] max-w-lg`}>
-                            {card.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <AccentLine />
-                    <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F] transition-all duration-500 pointer-events-none z-30" />
-                  </MagneticCard>
-                </motion.div>
-              );
-            })}
+            {webCards.map((card, i) => (
+              <ServiceCard key={i} {...card} />
+            ))}
           </motion.div>
         </div>
       </section>
@@ -486,9 +348,6 @@ export const WebServicesSection = () => {
   );
 };
 
-// ==========================================
-// SECTION 1 — Communication
-// ==========================================
 export const CommunicationSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
@@ -582,60 +441,9 @@ export const CommunicationSection = () => {
             viewport={{ once: true, amount: 0.1 }}
             className="grid grid-cols-1 md:grid-cols-12 gap-3 [perspective:1400px]"
           >
-            {cards.map((card, i) => {
-              const isLight = card.text === 'text-black';
-              const gridColor = isLight ? '#000000' : '#FFFFFF';
-              return (
-                <motion.div
-                  key={i}
-                  variants={cardVariants}
-                  id={card.isVideo ? 'showreel' : undefined}
-                  className={`${card.span} ${card.height} group relative scroll-mt-32`}
-                >
-                  <MagneticCard
-                    className={`relative w-full h-full overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${card.color} ${card.text}`}
-                  >
-                    <Shimmer />
-
-                    {card.isVideo ? (
-                      <motion.video
-                        src={heroVideo}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        initial={{ scale: 1.25, opacity: 0 }}
-                        whileInView={{ scale: 1.15, opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] as const }}
-                        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-60 z-[4]"
-                      />
-                    ) : (
-                      <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 z-[4] ${card.imgClass}`}>
-                        <Image src={card.image!} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
-                      </div>
-                    )}
-
-                    <div className="relative z-20 max-w-[85%]">
-                      <h3 className="text-3xl md:text-4xl lg:text-[44px] font-bold tracking-[-0.02em] leading-[1.05]">
-                        {card.title}
-                      </h3>
-
-                      <div className="overflow-hidden">
-                        <div className="max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                          <p className={`text-2xl md:text-3xl ${card.subText} mt-5 leading-[1.3] max-w-lg`}>
-                            {card.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <AccentLine />
-                    <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F] transition-all duration-500 pointer-events-none z-30" />
-                  </MagneticCard>
-                </motion.div>
-              );
-            })}
+            {cards.map((card, i) => (
+              <ServiceCard key={i} {...card} />
+            ))}
           </motion.div>
         </div>
       </section>
@@ -643,9 +451,6 @@ export const CommunicationSection = () => {
   );
 };
 
-// ==========================================
-// SECTION 2 — Application
-// ==========================================
 export const ApplicationSection = () => {
   const { language, t } = useLanguage();
   const isSw = language === 'sw';
@@ -655,14 +460,14 @@ export const ApplicationSection = () => {
       title: isSw ? 'Majukwaa salama na yanayokua ya kidijitali.' : 'Secure, scalable digital platforms.',
       description: isSw ? 'Saidia ukuaji na uboreshe uzoefu wa mtumiaji kwenye vifaa vyote. Imejengwa kwa ajili ya utendaji bora na udumu.' : 'Support growth and improve user experience across all devices. Built for performance and longevity.',
       image: SecureScalable,
-      bg: 'bg-[#E8ECEF]', text: 'text-black', sub: 'text-black/70',
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70',
       imgClass: 'absolute -bottom-32 -right-32 w-[80%] md:w-[70%] h-auto object-contain drop-shadow-2xl',
     },
     {
       title: isSw ? 'Imarisha uaminifu wa chapa yako.' : 'Improve brand credibility.',
       description: isSw ? 'Mifumo iliyounganishwa ya biashara na mbinu salama za ujenzi kwa ajili ya uwepo thabiti wa kidijitali.' : 'Integrated business systems and secure development practices for a stronger digital presence.',
       image: BrandCredibility,
-      bg: 'bg-[#0A0A0A]', text: 'text-white', sub: 'text-white/70',
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
       imgClass: 'absolute -bottom-32 -right-32 w-[85%] md:w-[75%] h-auto object-contain drop-shadow-2xl',
     },
   ];
@@ -692,43 +497,37 @@ export const ApplicationSection = () => {
           </header>
 
           <div className="flex flex-col gap-3 [perspective:1600px]">
-            {cards.map((card, i) => {
-              const isLight = card.text === 'text-black';
-              const gridColor = isLight ? '#000000' : '#FFFFFF';
-              return (
-                <motion.div
-                  key={i}
-                  initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }}
-                  variants={cardVariants}
-                  className="group relative"
+            {cards.map((card, i) => (
+              <motion.div
+                key={i}
+                initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }}
+                variants={cardVariants}
+                className="group relative"
+              >
+                <MagneticCard
+                  className={`relative overflow-hidden ${card.color} ${card.text} min-h-[640px] lg:min-h-[820px] p-8 md:p-14 flex flex-col justify-start cursor-pointer rounded-2xl`}
                 >
-                  <MagneticCard
-                    className={`relative overflow-hidden ${card.bg} ${card.text} min-h-[640px] lg:min-h-[820px] p-8 md:p-14 flex flex-col justify-start cursor-pointer`}
-                  >
-                    <Shimmer />
+                  <Shimmer />
 
-                    <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 z-[4] ${card.imgClass}`}>
-                      <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
+                  <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 z-[4] ${card.imgClass}`}>
+                    <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
+                  </div>
+
+                  <div className="relative z-20 max-w-3xl">
+                    <h3 className="text-4xl md:text-5xl lg:text-[64px] font-bold tracking-[-0.03em] leading-[1.02]">{card.title}</h3>
+
+                    <div className="mt-6">
+                      <p className={`text-3xl md:text-4xl ${card.subText} leading-[1.25] max-w-2xl`}>
+                        {card.description}
+                      </p>
                     </div>
+                  </div>
 
-                    <div className="relative z-20 max-w-3xl">
-                      <h3 className="text-4xl md:text-5xl lg:text-[64px] font-bold tracking-[-0.03em] leading-[1.02]">{card.title}</h3>
-
-                      <div className="overflow-hidden">
-                        <div className="max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                          <p className={`text-3xl md:text-4xl ${card.sub} mt-6 leading-[1.25] max-w-2xl`}>
-                            {card.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <AccentLine />
-                    <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F] transition-all duration-500 pointer-events-none z-30" />
-                  </MagneticCard>
-                </motion.div>
-              );
-            })}
+                  <AccentLine />
+                  <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F] transition-all duration-500 pointer-events-none z-30 rounded-2xl" />
+                </MagneticCard>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -736,9 +535,6 @@ export const ApplicationSection = () => {
   );
 };
 
-// ==========================================
-// SECTION 3 — Data Intelligence
-// ==========================================
 export const DataIntelligenceSection = () => {
   const { language, t } = useLanguage();
   const isSw = language === 'sw';
@@ -805,44 +601,9 @@ export const DataIntelligenceSection = () => {
             viewport={{ once: true, amount: 0.1 }}
             className="grid grid-cols-1 md:grid-cols-12 gap-3 [perspective:1400px]"
           >
-            {features.map((feature, i) => {
-              const isLight = feature.text === 'text-black';
-              const gridColor = isLight ? '#000000' : '#FFFFFF';
-              return (
-                <motion.div
-                  key={i}
-                  variants={cardVariants}
-                  className={`${feature.span} ${feature.height} group relative`}
-                >
-                  <MagneticCard
-                    className={`relative w-full h-full overflow-hidden flex flex-col justify-start p-8 md:p-10 cursor-pointer ${feature.color} ${feature.text}`}
-                  >
-                    <Shimmer />
-
-                    <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 z-[4] ${feature.imgClass}`}>
-                      <Image src={feature.image} alt={feature.title} className="w-full h-auto object-contain drop-shadow-2xl" />
-                    </div>
-
-                    <div className="relative z-20 max-w-[85%]">
-                      <h3 className="text-3xl md:text-4xl lg:text-[44px] font-bold tracking-[-0.02em] leading-[1.05]">
-                        {feature.title}
-                      </h3>
-
-                      <div className="overflow-hidden">
-                        <div className="max-h-0 opacity-0 group-hover:max-h-[400px] group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                          <p className={`text-2xl md:text-3xl ${feature.subText} mt-5 leading-[1.3] max-w-lg`}>
-                            {feature.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <AccentLine />
-                    <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F] transition-all duration-500 pointer-events-none z-30" />
-                  </MagneticCard>
-                </motion.div>
-              );
-            })}
+            {features.map((feature, i) => (
+              <ServiceCard key={i} {...feature} />
+            ))}
           </motion.div>
         </div>
       </section>
