@@ -68,7 +68,7 @@ const translations: Record<Language, Record<string, string>> = {
     'trust.card2_desc': 'Protect your data with strong identity management and best practice security methods, making sure only the right people can access your files while keeping everything safe from outsiders.s.',
 
     // Services Section
-    'services.title_line1': 'Automate smarter that',
+    'services.title_line1': 'At Antera you will automate smarter and',
     'services.title_line2': 'scale faster',
     'services.desc': 'We implement practical AI, software, design, and digital solutions that take repetitive work off your hands, elevate your brand, and help your business grow smoothly, ensuring you save valuable time and achieve long-term success.',
     'services.card1_title': 'AI Chatbots',
@@ -260,12 +260,12 @@ const translations: Record<Language, Record<string, string>> = {
     'trust.card2_desc': 'Linda data yako kwa usimamizi thabiti wa utambulisho na mbinu bora.',
 
     // Services Section
-    'services.title_line1': 'Kurahisisha kwa akili zaidi',
-    'services.title_line2': 'kukuza haraka zaidi',
-    'services.desc': 'Tunatekeleza suluhisho za vitendo za AI, programu, ubunifu wa picha na masoko ya kidijitali zinazopunguza kazi za mikono na kukuza biashara yako kwa urahisi.',
-    'services.card1_title': 'Wakala wa Mazungumzo wa AI',
-    'services.card1_desc': 'Wasaidizi wa kidijitali wanaojibu maswali ya wateja wako masaa 24/7 kwenye WhatsApp na tovuti bila kuchelewa, wakipa wafanyakazi wako muda wa kufanya kazi zingine.',
-    'services.card2_title': 'Otomatiki ya Mtiririko wa Kazi',
+    'services.title_line1': 'Ukiwa na Antera utarahisisha kazi zinazojirudia na',
+    'services.title_line2': 'Utakuza haraka zaidi',
+    'services.desc': 'Tunatatua matatizo kwa kutumia Akili mnemba, programu, ubunifu wa picha na masoko ya kidijitali zinazopunguza kazi za mikono na kukuza biashara yako kwa urahisi mno.',
+    'services.card1_title': 'Chatbot za AI',
+    'services.card1_desc': 'Wasaidizi wa kidijitali wanaojibu maswali ya wateja wako masaa 24/7 kwenye WhatsApp na tovuti bila kuchelewa, na kuwapatia wafanyakazi wako muda wa kufanya kazi zingine.',
+    'services.card2_title': 'Mtiririko wa Kazi zako Kiotomatiki',
     'services.card2_desc': 'Unganisha michakato ya kila siku ya biashara yako ili ankara, maagizo, barua pepe, na kuingiza data vifanyike vyenyewe bila makosa ya kibinadamu.',
     'services.card3_title': 'Wasaidizi Salama wa AI',
     'services.card3_desc': 'Mifumo maalum ya AI inayofundishwa kwa nyaraka za kampuni yako ili kutafuta na kutoa muhtasari wa taarifa papo hapo kwa usalama mkubwa.',
