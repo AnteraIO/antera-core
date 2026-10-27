@@ -360,7 +360,7 @@ export const CommunicationSection = () => {
       isVideo: true,
       title: isSw ? 'Wakala wa Mazungumzo wa AI' : 'AI Chatbots',
       description: isSw ? 'Wakala wenye akili wanaochuja fursa, kujibu maswali ya wateja, na kupanga miadi saa 24/7.' : 'Never miss a customer again. Our AI chatbots greet every visitor the moment they arrive, answer questions clearly, qualify leads, and follow up while interest is still high. When someone is ready to buy, book, or speak to a person, your team is notified right away so nothing slips through. Every message gets a reply, at every hour, and your business always feels present and attentive.',
-      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70',
+      color: 'bg-[#E8ECEF]', text: 'text-white/80', subText: 'text-white/80',
       span: 'md:col-span-7', height: 'h-[560px]',
     },
     {

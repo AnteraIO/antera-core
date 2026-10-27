@@ -11,8 +11,8 @@ import menuBgImg from '@/assets/gritty-blue.png';
 
 const SWAHILI_ICON = 'https://cdn-icons-png.flaticon.com/128/303/303200.png';
 const ENGLISH_ICON = 'https://cdn-icons-png.flaticon.com/128/10452/10452489.png';
-const CLOSE_ICON = 'https://cdn-icons-png.flaticon.com/128/12822/12822503.png';
-const MENU_ICON = 'https://cdn-icons-png.flaticon.com/128/1161/1161695.png';
+const CLOSE_ICON = 'https://cdn-icons-png.flaticon.com/128/12274/12274954.png';
+const MENU_ICON = 'https://cdn-icons-png.flaticon.com/128/2099/2099089.png';
 
 const NAV_ICONS = [
   'https://cdn-icons-png.flaticon.com/128/35/35787.png',
@@ -150,6 +150,7 @@ export const Navbar = () => {
 
           <div className="flex items-center gap-2 md:gap-3 z-50">
             <div className="hidden lg:flex items-center gap-3">
+              {/*
               <button
                 onClick={() => setLanguage(isEnglish ? 'sw' : 'en')}
                 aria-label="Switch language"
@@ -208,6 +209,7 @@ export const Navbar = () => {
                   />
                 </span>
               </button>
+              */}
 
               <div className="relative p-[2px] rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500">
                 <Link

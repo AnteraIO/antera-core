@@ -15,100 +15,107 @@ import hero10 from '../assets/hero-10.jpg';
 import hero11 from '../assets/hero-11.jpg';
 import hero12 from '../assets/intelligence.jpg';
 
-import heroVideo from '../assets/antera-video.mp4';
+import heroVideo0 from '../assets/antera-video.mp4';
+import heroVideo1 from '../assets/antera-video-1.mp4';
+import heroVideo2 from '../assets/antera-video-2.mp4';
+import heroVideo3 from '../assets/antera-video-3.mp4';
+import heroVideo4 from '../assets/antera-video-4.mp4';
+import heroVideo5 from '../assets/antera-video-5.mp4';
+
 import folderVideo from '../assets/graphics/folder-video.mp4';
 import alertVideo from '../assets/graphics/alert.mp4';
 
 const SLIDE_DURATION = 6000;
 
+const HERO_VIDEOS = [
+  heroVideo0,
+  heroVideo1,
+  heroVideo2,
+  heroVideo3,
+  heroVideo4,
+  heroVideo5,
+];
+
 export const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [progressKey, setProgressKey] = useState(0);
+  const [currentHeroVideo, setCurrentHeroVideo] = useState(0);
   const { language, t } = useLanguage();
 
   const isSw = language === 'sw';
 
+  const handleHeroVideoEnd = () => {
+    setCurrentHeroVideo((prev) => (prev + 1) % HERO_VIDEOS.length);
+  };
+
   const sliderItems = [
     {
-      id: isSw ? 'Wavuti' : 'Web Apps',
-      label: isSw ? 'Wavuti' : 'Web Apps', // FIX: Added missing label
+      name: isSw ? 'Wavuti' : 'Web Apps',
       title: isSw ? 'Programu za Wavuti za Biashara kwa Ukuzaji ↗' : 'Enterprise Web Applications for Scale ↗',
       video: folderVideo
     },
     {
-      id: isSw ? 'Mifumo ya Simu' : 'Mobile Systems',
-      label: isSw ? 'Mifumo ya Simu' : 'Mobile Systems', // FIX: Added missing label
+      name: isSw ? 'Mifumo ya Simu' : 'Mobile Systems',
       title: isSw ? 'Programu za Simu za Majukwaa Mbalimbali kwa Afrika Mashariki ↗' : 'Cross-Platform Mobile Solutions for East Africa ↗',
       video: alertVideo
     },
     {
-      id: isSw ? 'Wakala wa AI' : 'AI Agents',
-      label: isSw ? 'Wakala wa AI' : 'AI Agents',
+      name: isSw ? 'Wakala wa AI' : 'AI Agents',
       title: isSw ? 'Wakala wa Mazungumzo na Mifumo ya Akili Bandia ↗' : 'Autonomous Chatbots and Intelligent Agents ↗',
       image: hero3
     },
     {
-      id: isSw ? 'Uchambuzi wa Data' : 'Data Analytics',
-      label: isSw ? 'Uchambuzi wa Data' : 'Data Analytics',
+      name: isSw ? 'Uchambuzi wa Data' : 'Data Analytics',
       title: isSw ? 'Mifumo ya Kutabiri na Majukwaa ya Data ↗' : 'Predictive Models and Data Ecosystems ↗',
       image: hero4
     },
     {
-      id: isSw ? 'Dashibodi' : 'Dashboards',
-      label: isSw ? 'Dashibodi' : 'Dashboards',
+      name: isSw ? 'Dashibodi' : 'Dashboards',
       title: isSw ? 'Takwimu za Muda Halisi & Akili ya Biashara ↗' : 'Real-Time Telemetry & Business Intelligence ↗',
       image: hero5
     },
     {
-      id: isSw ? 'Ujumuishaji' : 'Integration',
-      label: isSw ? 'Ujumuishaji' : 'Integration',
+      name: isSw ? 'Ujumuishaji' : 'Integration',
       title: isSw ? 'Njia Salama za API na Usanifu wa Mifumo ↗' : 'Secure API Gateways and System Architecture ↗',
       image: hero6
     },
     {
-      id: isSw ? 'Wingu' : 'Cloud',
-      label: isSw ? 'Wingu' : 'Cloud',
+      name: isSw ? 'Wingu' : 'Cloud',
       title: isSw ? 'Miundombinu Inayokua & Deployments za Wingu ↗' : 'Scalable Infrastructure & Cloud Deployments ↗',
       image: hero7
     },
     {
-      id: isSw ? 'Usalama' : 'Security',
-      label: isSw ? 'Usalama' : 'Security',
+      name: isSw ? 'Usalama' : 'Security',
       title: isSw ? 'Ukimiliki wa Kidijitali & Ulinzi wa Data ↗' : 'Digital Sovereignty & Data Protection ↗',
       image: hero8
     },
     {
-      id: isSw ? 'Tovuti' : 'Portals',
-      label: isSw ? 'Tovuti' : 'Portals',
+      name: isSw ? 'Tovuti' : 'Portals',
       title: isSw ? 'Tovuti Maalum za Usimamizi kwa Mashirika ↗' : 'Custom Management Portals for NGOs ↗',
       image: hero9
     },
     {
-      id: isSw ? 'Kazi Otomatiki' : 'Automation',
-      label: isSw ? 'Kazi Otomatiki' : 'Automation',
+      name: isSw ? 'Kazi Otomatiki' : 'Automation',
       title: isSw ? 'Kurahisisha Mtiririko wa Kazi kwa Timu Ndogo ↗' : 'Workflow Automation for Small Teams ↗',
       image: hero10
     },
     {
-      id: isSw ? 'Suluhisho za IoT' : 'IoT Solutions',
-      label: isSw ? 'Suluhisho za IoT' : 'IoT Solutions',
+      name: isSw ? 'Suluhisho za IoT' : 'IoT Solutions',
       title: isSw ? 'Kuunganisha Vifaa na Uchambuzi wa Wingu ↗' : 'Connecting Hardware to Cloud Analytics ↗',
       image: hero11
     },
     {
-      id: isSw ? 'Ujifunzaji Mashine' : 'Machine Learning',
-      label: isSw ? 'Ujifunzaji Mashine' : 'Machine Learning',
+      name: isSw ? 'Ujifunzaji Mashine' : 'Machine Learning',
       title: isSw ? 'Tengeneza Suluhisho za AI kwa Masoko ya Tanzania ↗' : 'Build Solutions around frontier AI models for Tanzanian Markets ↗',
       image: hero12
     },
   ];
 
-  // FIX: Added progress reset to manual navigation
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % sliderItems.length);
     setProgressKey((k) => k + 1);
   };
-  
+
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + sliderItems.length) % sliderItems.length);
     setProgressKey((k) => k + 1);
@@ -130,16 +137,17 @@ export const Hero = () => {
   return (
     <div className="w-full relative flex flex-col bg-white overflow-hidden">
 
-      {/* 1. Full Screen Video Hero Section */}
       <section className="relative h-[100svh] w-full flex flex-col justify-center items-center">
         <div className="absolute inset-0 w-full h-full bg-black">
           <video
+            key={currentHeroVideo}
             autoPlay
-            loop
             muted
             playsInline
+            preload="auto"
+            onEnded={handleHeroVideoEnd}
             className="w-full h-full object-cover opacity-65"
-            src={heroVideo}
+            src={HERO_VIDEOS[currentHeroVideo]}
           />
         </div>
 
@@ -161,10 +169,8 @@ export const Hero = () => {
         </motion.div>
       </section>
 
-      {/* 2. Slider Section */}
       <section className="w-full pt-16 pb-24 bg-white">
 
-        {/* Pills / Tabs Navigation */}
         <div className="hidden md:block w-full px-6 md:px-12 mb-6 max-w-[1600px] mx-auto">
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
             {sliderItems.map((item, idx) => {
@@ -190,7 +196,7 @@ export const Hero = () => {
                     />
                   )}
 
-                  <span className="relative z-10">{item.id}</span>
+                  <span className="relative z-10">{item.name}</span>
                 </button>
               );
             })}
@@ -203,7 +209,6 @@ export const Hero = () => {
           </div>
         </div>
 
-        {/* Full-width Carousel Slider */}
         <div className="w-full overflow-hidden relative">
           <div
             className="flex transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
@@ -247,9 +252,6 @@ export const Hero = () => {
                         isActive ? 'opacity-100' : 'opacity-0'
                       }`}
                     >
-                      <p className="text-[11px] font-mono text-gray-400 uppercase tracking-widest mb-3 md:mb-4">
-                        {item.label}
-                      </p>
                       <h3 className="text-lg md:text-[26px] font-normal leading-snug">
                         {item.title}
                       </h3>
@@ -259,15 +261,17 @@ export const Hero = () => {
                       <>
                         <button
                           onClick={(e) => { e.stopPropagation(); prevSlide(); }}
-                          className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 md:w-14 md:h-14 bg-[#111]/60 hover:bg-[#111] text-white flex items-center justify-center transition-colors"
+                          aria-label="Previous slide"
+                          className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 w-14 h-8 md:w-16 md:h-9 bg-[#111]/60 hover:bg-[#111] text-white flex items-center justify-center transition-colors"
                         >
-                          <span className="text-lg md:text-xl">←</span>
+                          <span className="text-sm md:text-base leading-none">←</span>
                         </button>
                         <button
                           onClick={(e) => { e.stopPropagation(); nextSlide(); }}
-                          className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 md:w-14 md:h-14 bg-[#111]/60 hover:bg-[#111] text-white flex items-center justify-center transition-colors"
+                          aria-label="Next slide"
+                          className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 w-14 h-8 md:w-16 md:h-9 bg-[#111]/60 hover:bg-[#111] text-white flex items-center justify-center transition-colors"
                         >
-                          <span className="text-lg md:text-xl">→</span>
+                          <span className="text-sm md:text-base leading-none">→</span>
                         </button>
                       </>
                     )}

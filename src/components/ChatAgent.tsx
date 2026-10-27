@@ -8,7 +8,7 @@ import { getAnteraResponseStream } from '@/lib/deepseek';
 
 type Msg = { role: 'user' | 'model'; text: string; time: string };
 
-const BRUNO_ICON = 'https://cdn-icons-png.flaticon.com/128/3135/3135768.png';
+const BRUNO_ICON = 'https://cdn-icons-png.flaticon.com/128/1326/1326377.png';
 
 const getTime = () => new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
