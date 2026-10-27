@@ -24,9 +24,9 @@ const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
 });
 
-const williwaw = localFont({
-  src: "../../public/fonts/Williwaw-Book.otf",
-  variable: "--font-williwaw",
+const degarism = localFont({
+  src: "../../public/fonts/degarism-studio-alliance-no-2-light.otf",
+  variable: "--font-degarism",
   display: "swap",
 });
 
@@ -123,7 +123,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/logo.png" />
       </head>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} ${williwaw.variable} antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable} ${degarism.variable} antialiased`}
       >
         <script
           type="application/ld+json"
