@@ -31,10 +31,11 @@ export default {
         border: "rgba(31, 31, 31, 0.1)",
       },
       fontFamily: {
-        sans: ['var(--font-williwaw)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-degarism)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-jetbrains-mono)', 'Menlo', 'monospace'],
         serif: ['var(--font-instrument-serif)', 'serif'],
         inter: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        degarism: ['var(--font-degarism)', 'sans-serif'],
       },
       backgroundImage: {
         'grid-pattern': "linear-gradient(to right, rgba(250, 82, 15, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(250, 82, 15, 0.08) 1px, transparent 1px)",
