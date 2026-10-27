@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 
-import hero1 from '../assets/hero-1.jpg';
-import hero2 from '../assets/imac.jpg';
 import hero3 from '../assets/bot.jpg';
 import hero4 from '../assets/hero-4.jpg';
 import hero5 from '../assets/hero-5.jpg';
@@ -33,80 +31,88 @@ export const Hero = () => {
   const sliderItems = [
     {
       id: isSw ? 'Wavuti' : 'Web Apps',
-      label: isSw ? 'BIASHARA 1' : 'ENTERPRISE 1',
+      label: isSw ? 'Wavuti' : 'Web Apps', // FIX: Added missing label
       title: isSw ? 'Programu za Wavuti za Biashara kwa Ukuzaji ↗' : 'Enterprise Web Applications for Scale ↗',
       video: folderVideo
     },
     {
       id: isSw ? 'Mifumo ya Simu' : 'Mobile Systems',
-      label: isSw ? 'MIFUMO YA SIMU 2' : 'CROSS-PLATFORM 2',
+      label: isSw ? 'Mifumo ya Simu' : 'Mobile Systems', // FIX: Added missing label
       title: isSw ? 'Programu za Simu za Majukwaa Mbalimbali kwa Afrika Mashariki ↗' : 'Cross-Platform Mobile Solutions for East Africa ↗',
       video: alertVideo
     },
     {
       id: isSw ? 'Wakala wa AI' : 'AI Agents',
-      label: isSw ? 'AKILI BANDIA 3' : 'INTELLIGENCE 3',
+      label: isSw ? 'Wakala wa AI' : 'AI Agents',
       title: isSw ? 'Wakala wa Mazungumzo na Mifumo ya Akili Bandia ↗' : 'Autonomous Chatbots and Intelligent Agents ↗',
       image: hero3
     },
     {
       id: isSw ? 'Uchambuzi wa Data' : 'Data Analytics',
-      label: isSw ? 'UCHAMBUZI 4' : 'PREDICTIVE 4',
+      label: isSw ? 'Uchambuzi wa Data' : 'Data Analytics',
       title: isSw ? 'Mifumo ya Kutabiri na Majukwaa ya Data ↗' : 'Predictive Models and Data Ecosystems ↗',
       image: hero4
     },
     {
       id: isSw ? 'Dashibodi' : 'Dashboards',
-      label: isSw ? 'TAKWIMU 5' : 'TELEMETRY 5',
+      label: isSw ? 'Dashibodi' : 'Dashboards',
       title: isSw ? 'Takwimu za Muda Halisi & Akili ya Biashara ↗' : 'Real-Time Telemetry & Business Intelligence ↗',
       image: hero5
     },
     {
       id: isSw ? 'Ujumuishaji' : 'Integration',
-      label: isSw ? 'USANIFU 6' : 'ARCHITECTURE 6',
+      label: isSw ? 'Ujumuishaji' : 'Integration',
       title: isSw ? 'Njia Salama za API na Usanifu wa Mifumo ↗' : 'Secure API Gateways and System Architecture ↗',
       image: hero6
     },
     {
       id: isSw ? 'Wingu' : 'Cloud',
-      label: isSw ? 'MIUNDOMBINU 7' : 'INFRASTRUCTURE 7',
+      label: isSw ? 'Wingu' : 'Cloud',
       title: isSw ? 'Miundombinu Inayokua & Deployments za Wingu ↗' : 'Scalable Infrastructure & Cloud Deployments ↗',
       image: hero7
     },
     {
       id: isSw ? 'Usalama' : 'Security',
-      label: isSw ? 'ULINZI WA DATA 8' : 'SOVEREIGNTY 8',
+      label: isSw ? 'Usalama' : 'Security',
       title: isSw ? 'Ukimiliki wa Kidijitali & Ulinzi wa Data ↗' : 'Digital Sovereignty & Data Protection ↗',
       image: hero8
     },
     {
       id: isSw ? 'Tovuti' : 'Portals',
-      label: isSw ? 'USIMAMIZI 9' : 'MANAGEMENT 9',
+      label: isSw ? 'Tovuti' : 'Portals',
       title: isSw ? 'Tovuti Maalum za Usimamizi kwa Mashirika ↗' : 'Custom Management Portals for NGOs ↗',
       image: hero9
     },
     {
       id: isSw ? 'Kazi Otomatiki' : 'Automation',
-      label: isSw ? 'MTIRIRIKO 10' : 'WORKFLOW 10',
+      label: isSw ? 'Kazi Otomatiki' : 'Automation',
       title: isSw ? 'Kurahisisha Mtiririko wa Kazi kwa Timu Ndogo ↗' : 'Workflow Automation for Small Teams ↗',
       image: hero10
     },
     {
       id: isSw ? 'Suluhisho za IoT' : 'IoT Solutions',
-      label: isSw ? 'VIFAA 11' : 'HARDWARE 11',
+      label: isSw ? 'Suluhisho za IoT' : 'IoT Solutions',
       title: isSw ? 'Kuunganisha Vifaa na Uchambuzi wa Wingu ↗' : 'Connecting Hardware to Cloud Analytics ↗',
       image: hero11
     },
     {
       id: isSw ? 'Ujifunzaji Mashine' : 'Machine Learning',
-      label: isSw ? 'MIFUMO 12' : 'MODELS 12',
-      title: isSw ? 'Mifumo ya LLMs Maalum kwa Masoko ya Tanzania ↗' : 'Custom LLMs tailored for Tanzanian Markets ↗',
+      label: isSw ? 'Ujifunzaji Mashine' : 'Machine Learning',
+      title: isSw ? 'Tengeneza Suluhisho za AI kwa Masoko ya Tanzania ↗' : 'Build Solutions around frontier AI models for Tanzanian Markets ↗',
       image: hero12
     },
   ];
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % sliderItems.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + sliderItems.length) % sliderItems.length);
+  // FIX: Added progress reset to manual navigation
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % sliderItems.length);
+    setProgressKey((k) => k + 1);
+  };
+  
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + sliderItems.length) % sliderItems.length);
+    setProgressKey((k) => k + 1);
+  };
 
   const goToSlide = (idx: number) => {
     setCurrentSlide(idx);
@@ -119,7 +125,7 @@ export const Hero = () => {
       setProgressKey((k) => k + 1);
     }, SLIDE_DURATION);
     return () => clearInterval(timer);
-  }, [currentSlide, sliderItems.length]);
+  }, [sliderItems.length]);
 
   return (
     <div className="w-full relative flex flex-col bg-white overflow-hidden">
