@@ -38,7 +38,6 @@ const HERO_VIDEOS = [
 
 export const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [progressKey, setProgressKey] = useState(0);
   const [currentHeroVideo, setCurrentHeroVideo] = useState(0);
   const { language, t } = useLanguage();
 
@@ -113,23 +112,19 @@ export const Hero = () => {
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % sliderItems.length);
-    setProgressKey((k) => k + 1);
   };
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + sliderItems.length) % sliderItems.length);
-    setProgressKey((k) => k + 1);
   };
 
   const goToSlide = (idx: number) => {
     setCurrentSlide(idx);
-    setProgressKey((k) => k + 1);
   };
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % sliderItems.length);
-      setProgressKey((k) => k + 1);
     }, SLIDE_DURATION);
     return () => clearInterval(timer);
   }, [sliderItems.length]);
@@ -151,7 +146,7 @@ export const Hero = () => {
           />
         </div>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/20" />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -172,7 +167,10 @@ export const Hero = () => {
       <section className="w-full pt-10 md:pt-16 pb-16 md:pb-24 bg-white">
 
         <div className="w-full px-4 md:px-12 mb-4 md:mb-6 max-w-[1600px] mx-auto">
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+          <div
+            className="flex items-center gap-2 overflow-x-auto pb-2"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
             {sliderItems.map((item, idx) => {
               const isActive = currentSlide === idx;
               return (
@@ -185,17 +183,6 @@ export const Hero = () => {
                       : 'bg-white border-gray-200 text-gray-500 hover:text-[#111622] hover:border-gray-300'
                   }`}
                 >
-                  {isActive && (
-                    <motion.span
-                      key={progressKey}
-                      initial={{ scaleX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ duration: SLIDE_DURATION / 1000, ease: 'linear' }}
-                      className="absolute inset-0 bg-[#C4C4C4] origin-left"
-                      aria-hidden
-                    />
-                  )}
-
                   <span className="relative z-10">{item.name}</span>
                 </button>
               );

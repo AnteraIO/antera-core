@@ -27,16 +27,17 @@ function stripPrefix(str: string) {
 export default async function BlogListing() {
   const posts = await getPosts();
 
+  // One single color for every card
   const patterns = [
-    { span: 'md:col-span-8', height: 'h-[520px]', bg: 'bg-[#E8ECEF]', text: 'text-black', sub: 'text-black/70' },
-    { span: 'md:col-span-4', height: 'h-[520px]', bg: 'bg-[#0A0A0A]', text: 'text-white', sub: 'text-white/70' },
-    { span: 'md:col-span-4', height: 'h-[460px]', bg: 'bg-[#0D2A6B]', text: 'text-white', sub: 'text-white/70' },
-    { span: 'md:col-span-4', height: 'h-[460px]', bg: 'bg-[#E6007E]', text: 'text-white', sub: 'text-white/70' },
-    { span: 'md:col-span-4', height: 'h-[460px]', bg: 'bg-[#FFC72C]', text: 'text-black', sub: 'text-black/70' },
-    { span: 'md:col-span-6', height: 'h-[480px]', bg: 'bg-[#0A0A0A]', text: 'text-white', sub: 'text-white/70' },
-    { span: 'md:col-span-6', height: 'h-[480px]', bg: 'bg-[#E8ECEF]', text: 'text-black', sub: 'text-black/70' },
-    { span: 'md:col-span-5', height: 'h-[480px]', bg: 'bg-[#0D2A6B]', text: 'text-white', sub: 'text-white/70' },
-    { span: 'md:col-span-7', height: 'h-[480px]', bg: 'bg-[#E6007E]', text: 'text-white', sub: 'text-white/70' },
+    { span: 'md:col-span-8', height: 'h-[520px]' },
+    { span: 'md:col-span-4', height: 'h-[520px]' },
+    { span: 'md:col-span-4', height: 'h-[460px]' },
+    { span: 'md:col-span-4', height: 'h-[460px]' },
+    { span: 'md:col-span-4', height: 'h-[460px]' },
+    { span: 'md:col-span-6', height: 'h-[480px]' },
+    { span: 'md:col-span-6', height: 'h-[480px]' },
+    { span: 'md:col-span-5', height: 'h-[480px]' },
+    { span: 'md:col-span-7', height: 'h-[480px]' },
   ];
 
   return (
@@ -54,13 +55,13 @@ export default async function BlogListing() {
               <Link
                 key={post.id}
                 href={`/blog/${post.slug}`}
-                className={`group relative overflow-hidden flex flex-col justify-between p-8 md:p-10 cursor-pointer ${pattern.bg} ${pattern.text} ${pattern.span} ${pattern.height}`}
+                className={`group relative overflow-hidden flex flex-col justify-between p-8 md:p-10 cursor-pointer bg-gray-200 text-black ${pattern.span} ${pattern.height}`}
               >
                 <h2 className="text-3xl md:text-4xl lg:text-[44px] font-bold tracking-[-0.02em] leading-[1.05] max-w-[90%]">
                   {post.title}
                 </h2>
 
-                <p className={`text-lg md:text-xl ${pattern.sub} leading-snug max-w-lg`}>
+                <p className="text-lg md:text-xl text-black/70 leading-snug max-w-lg">
                   {excerpt}
                 </p>
               </Link>
@@ -69,8 +70,8 @@ export default async function BlogListing() {
         </div>
 
         {posts.length === 0 && (
-          <div className="text-center py-20 bg-[#E8ECEF]">
-            <p className="font-medium text-neutral-500">No articles found at the moment.</p>
+          <div className="text-center py-20 bg-gray-200">
+            <p className="font-medium text-black/70">No articles found at the moment.</p>
           </div>
         )}
 

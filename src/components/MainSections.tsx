@@ -9,13 +9,13 @@ import banner1 from '../assets/graphics/33.png';
 import banner2 from '../assets/graphics/90.png';
 import banner3 from '../assets/graphics/87.png';
 import banner4 from '../assets/graphics/92.png';
-import banner5 from '../assets/graphics/48.png';
-import banner6 from '../assets/graphics/tatu.png';
+import banner5 from '../assets/automatic-ai.png';
+import banner6 from '../assets/ai-applied.png';
 import banner7 from '../assets/graphics/mbili.png';
 import banner8 from '../assets/graphics/79.png';
-import bannerGraphics from '../assets/graphics/117.png';
+import bannerGraphics from '../assets/GRAPHICS.png';
 import bannerMarketing from '../assets/graphics/110.png';
-import bannerResume from '../assets/graphics/resume.png';
+import bannerResume from '../assets/RESUME.png';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="never">{children}</MotionConfig>

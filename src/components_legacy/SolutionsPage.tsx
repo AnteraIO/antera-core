@@ -4,15 +4,15 @@ import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 
-import mobileAppImage from '../assets/mobile-app.png';
-import webCommandImage from '../assets/web-command.png';
-import businessIntelligenceImage from '../assets/Business-Intelligence.png';
-import predictiveAnalyticsImage from '../assets/Predictive-Analytics.png';
-import realTimeDashboardsImage from '../assets/Real-Time-Dashboards.png';
-import performanceMonitoringImage from '../assets/Performance-Monitoring.png';
-import bannerGraphics from '../assets/graphics/117.png';
-import bannerMarketing from '../assets/graphics/110.png';
-import bannerResume from '../assets/graphics/resume.png';
+import modernInfra from '../assets/modernInfra.png';
+import Digital from '../assets/Digital.png';
+import AutomaticAI from '../assets/automatic-ai.png';
+import DATA from '../assets/DATA.png';
+import IT from '../assets/IT.png';
+import Risk from '../assets/Risk.png';
+import GRAPHICS from '../assets/GRAPHICS.png';
+import MARKETING from '../assets/MARKETING.png';
+import RESUME from '../assets/RESUME.png';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="never">{children}</MotionConfig>
@@ -43,7 +43,7 @@ export const SolutionsPage = () => {
       title: isSw ? 'AI na Kazi Otomatiki' : 'Practical AI & Automation',
       description: isSw ? 'Fikiria wakala msaidizi anayejibu wateja wako, kupanga barua pepe, na kupanga miadi yako ukiwa umelala. Hivyo ndivyo tunavyojenga.' : 'Imagine a helpful robot that answers your customers, sorts your emails, and books your meetings while you sleep. That is what we build. It saves you hours every day and never gets tired.',
       color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70',
-      image: businessIntelligenceImage,
+      image: AutomaticAI,
       span: 'md:col-span-7', height: 'h-[520px]',
       imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl',
     },
@@ -51,7 +51,7 @@ export const SolutionsPage = () => {
       title: isSw ? 'Miundombinu ya Kisasa' : 'Modern Infrastructure',
       description: isSw ? 'Msingi thabiti wa mifumo yako. Tunahakikisha programu na tovuti zako zinafanya kazi kwa kasi na hazianguki.' : 'Think of this as the strong foundation under a house. We make sure your apps and websites run fast, never crash, and cost less to keep alive every month.',
       color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
-      image: mobileAppImage,
+      image: modernInfra,
       span: 'md:col-span-5', height: 'h-[520px]',
       imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
     },
@@ -59,7 +59,7 @@ export const SolutionsPage = () => {
       title: isSw ? 'Usalama na Hatari' : 'Security & Risk',
       description: isSw ? 'Tunaweka ulinzi thabiti kwa biashara yako ya kidijitali. Ikiwa yeyote atajaribu kuingilia, tuna mpango wa kumkabili mara moja.' : 'We put locks on every door and windows on every wall of your digital business. If someone tries to break in, we already have a plan to stop them and fix it fast.',
       color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70',
-      image: performanceMonitoringImage,
+      image: Risk,
       span: 'md:col-span-5', height: 'h-[520px]',
       imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl',
     },
@@ -67,7 +67,7 @@ export const SolutionsPage = () => {
       title: isSw ? 'Majukwaa ya Kidijitali' : 'Digital Platforms',
       description: isSw ? 'Tovuti, programu za simu, na mifumo ya biashara inayofanya kazi kikamilifu. Wateja wako wanaweza kukupata kutoka mahali popote duniani.' : 'Websites, mobile apps, and business systems that just work. Your customers can find you, buy from you, and trust you, on any device, from anywhere in the world.',
       color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70',
-      image: webCommandImage,
+      image: Digital,
       span: 'md:col-span-7', height: 'h-[520px]',
       imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl',
     },
@@ -75,7 +75,7 @@ export const SolutionsPage = () => {
       title: isSw ? 'Msaada wa IT' : 'Managed IT Support',
       description: isSw ? 'Tunatunza kompyuta na programu zote za biashara yako. Chochote kikiharibika, tunakirekebisha haraka ili uelekeze akili kwenye biashara yako.' : 'We watch over your computers, printers, and software like a security guard watches a building. If anything breaks, we fix it before you even notice. You focus on your business, we handle the tech.',
       color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70',
-      image: realTimeDashboardsImage,
+      image: IT,
       span: 'md:col-span-6', height: 'h-[480px]',
       imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl',
     },
@@ -83,7 +83,7 @@ export const SolutionsPage = () => {
       title: isSw ? 'Data na Uchambuzi' : 'Data & Analytics',
       description: isSw ? 'Tunabadilisha namba zako kuwa chati rahisi na zenye rangi. Kwa mtazamo mmoja unaweza kuona kinachofanya kazi na hatua inayofuata.' : 'We turn the piles of numbers you already have into clear, colourful pictures and simple charts. At a glance you can see what is working, what is not, and what to do next. No maths required.',
       color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
-      image: predictiveAnalyticsImage,
+      image: DATA,
       span: 'md:col-span-6', height: 'h-[480px]',
       imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
     },
@@ -91,7 +91,7 @@ export const SolutionsPage = () => {
       title: isSw ? 'Ubunifu wa Picha' : 'Graphics Design',
       description: isSw ? 'Picha, nembo za kibiashara, na mabango yenye muonekano maridadi na wa kuvutia mno yanayofanya biashara yako ionekane ya kipekee na ya kuaminika.' : 'Eye-catching visual designs, logos, social media posters, and brand guidelines created in clean, bold styles that capture customer interest instantly.',
       color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70',
-      image: bannerGraphics,
+      image: GRAPHICS,
       span: 'md:col-span-6', height: 'h-[480px]',
       imgClass: 'absolute -bottom-20 -right-20 w-[85%] h-auto object-contain drop-shadow-2xl',
     },
@@ -99,7 +99,7 @@ export const SolutionsPage = () => {
       title: isSw ? 'Masoko ya Kidijitali' : 'Digital Marketing',
       description: isSw ? 'Matangazo madhubuti ya mtandaoni na usimamizi wa mitandao ya kijamii yanayokuletea wateja halisi na kuongeza mauzo ya bidhaa zako.' : 'Targeted online advertisement campaigns, social media management, and search marketing strategies designed to convert viewers into paying customers.',
       color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70',
-      image: bannerMarketing,
+      image: MARKETING,
       span: 'md:col-span-7', height: 'h-[520px]',
       imgClass: 'absolute -bottom-20 -right-20 w-[90%] h-auto object-contain drop-shadow-2xl',
     },
@@ -107,7 +107,7 @@ export const SolutionsPage = () => {
       title: isSw ? 'Uandishi wa Wasifu' : 'Resume Writing',
       description: isSw ? 'Uandishi wa kitaalamu wa CV, barua za maombi, na maelezo ya LinkedIn yanayoeleza mafanikio yako kwa lugha inayoshawishi waajiri.' : 'Professional executive CVs, cover letters, and LinkedIn profile rewrites crafted in clear, compelling language to help professionals secure job offers faster.',
       color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/70',
-      image: bannerResume,
+      image: RESUME,
       span: 'md:col-span-5', height: 'h-[520px]',
       imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl',
     },

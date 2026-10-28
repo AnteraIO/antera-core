@@ -33,8 +33,8 @@ export const CustomersPage = () => {
   const clients = [
     { client: 'Blacksand Adventures', image: blacksand1 },
     { client: 'Travel Nest Africa', image: nest1 },
-    { client: 'Sekela POS', image: sekelaweb1 },
-    { client: 'Nawwi Wellness', image: nawwi1 },
+    // { client: 'Sekela POS', image: sekelaweb1 },
+    // { client: 'Nawwi Wellness', image: nawwi1 },
   ];
 
   const activeClient = clients[currentClient];

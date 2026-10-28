@@ -9,13 +9,13 @@ import hero1 from '@/assets/intelligence.jpg';
 import hero2 from '@/assets/data-architecture.jpg';
 import hero3 from '@/assets/banner-3.png';
 import hero4 from '@/assets/hero-4.jpg';
-import appliedAI from '@/assets/ai-applied.jpg';
-import predictiveAnalytics from '@/assets/applied-ai.jpg';
-import businessIntelligence from '@/assets/intelligence.jpg';
-import architecture from '@/assets/data-architecture.jpg';
+import appliedAI from '@/assets/ai-applied.png';
+import predictiveAnalytics from '@/assets/CUSTOM.png';
+import businessIntelligence from '@/assets/INTELLIGENCE.png';
+import architecture from '@/assets/WAREHOUSE.png';
 import descriptiveAnalytics from '@/assets/descriptive-analytics.png';
 import diagnosticAnalytics from '@/assets/diagnostic-analytics.png';
-import predictiveAnalyticsImg from '@/assets/predictiveanalytics.png';
+import predictiveAnalyticsImg from '@/assets/data-woman.png';
 import prescriptiveAnalytics from '@/assets/prescriptive-analytics.png';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (

@@ -56,16 +56,16 @@ export const Navbar = () => {
   }, [isOpen]);
 
   const navLinks = [
-    { name: t('nav.products') || 'Products', href: '/products', icon: NAV_ICONS[0] },
+    // { name: t('nav.products') || 'Products', href: '/products', icon: NAV_ICONS[0] },
     { name: t('nav.solutions') || 'Solutions', href: '/solutions', icon: NAV_ICONS[1] },
     { name: t('nav.data_analytics') || 'Data Analytics', href: '/data-analytics', icon: NAV_ICONS[2] },
-    { name: t('nav.models') || 'Models', href: '/models', icon: NAV_ICONS[3] },
+    // { name: t('nav.models') || 'Models', href: '/models', icon: NAV_ICONS[3] },
     { name: t('nav.blog') || 'Blog', href: '/blog', icon: NAV_ICONS[4] },
     { name: t('nav.customers') || 'Customers', href: '/customers', icon: NAV_ICONS[5] },
-    { name: t('nav.company') || 'Company', href: '/company', icon: NAV_ICONS[6] },
-    { name: 'About Us', href: '/company', icon: NAV_ICONS[7] },
-    { name: 'Media', href: '/blog', icon: NAV_ICONS[8] },
-    { name: 'Contact', href: '/company', icon: NAV_ICONS[9] },
+    // { name: t('nav.company') || 'Company', href: '/company', icon: NAV_ICONS[6] },
+    // { name: 'About Us', href: '/company', icon: NAV_ICONS[7] },
+    // { name: 'Media', href: '/blog', icon: NAV_ICONS[8] },
+    // { name: 'Contact', href: '/company', icon: NAV_ICONS[9] },
   ];
 
   const glassBase = scrolled
@@ -131,7 +131,7 @@ export const Navbar = () => {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-6">
-            {navLinks.slice(0, 7).map((item) => (
+            {navLinks.slice(0, 5).map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
@@ -290,30 +290,7 @@ export const Navbar = () => {
 
                   <div>
                     <ul className="flex flex-col gap-3 text-[32px] md:text-[38px] lg:text-[42px] font-light leading-tight">
-                      {navLinks.slice(3, 7).map((item) => (
-                        <li key={item.name}>
-                          <Link
-                            href={item.href}
-                            onClick={() => setIsOpen(false)}
-                            className={`group flex items-center gap-3 transition-colors text-left ${
-                              pathname === item.href ? 'text-black font-medium' : 'hover:text-[#7DD3B0] text-[#111111]'
-                            }`}
-                          >
-                            <img
-                              src={item.icon}
-                              alt=""
-                              className="w-8 h-8 md:w-9 md:h-9 object-contain opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300"
-                            />
-                            <span>{item.name}</span>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <ul className="flex flex-col gap-3 text-[32px] md:text-[38px] lg:text-[42px] font-light leading-tight">
-                      {navLinks.slice(7).map((item) => (
+                      {navLinks.slice(3, 5).map((item) => (
                         <li key={item.name}>
                           <Link
                             href={item.href}
