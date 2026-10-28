@@ -137,7 +137,7 @@ export const Hero = () => {
   return (
     <div className="w-full relative flex flex-col bg-white overflow-hidden">
 
-      <section className="relative h-[100svh] w-full flex flex-col justify-center items-center">
+      <section className="relative min-h-[100svh] w-full flex flex-col justify-center items-center py-24 md:py-0 px-4 sm:px-6">
         <div className="absolute inset-0 w-full h-full bg-black">
           <video
             key={currentHeroVideo}
@@ -157,29 +157,29 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
-          className="relative z-10 flex flex-col items-center justify-center px-6 mt-16 text-center"
+          className="relative z-10 flex flex-col items-center justify-center px-2 sm:px-6 mt-12 md:mt-16 text-center"
         >
-          <h1 className="text-[42px] md:text-[64px] lg:text-[85px] font-medium leading-[1.05] tracking-tight text-white max-w-5xl">
+          <h1 className="text-[26px] sm:text-[40px] md:text-[64px] lg:text-[85px] font-medium leading-[1.15] md:leading-[1.05] tracking-tight text-white max-w-5xl">
             {isSw ? (
-              <>Tunajenga Mifumo Huru ya AI<br />kwa Kila Maamuzi</>
+              <>Tunajenga Mifumo Huru ya AI<br className="hidden sm:inline" /> kwa Kila Maamuzi</>
             ) : (
-              <>We Build Sovereign AI Systems<br />for Every Decision</>
+              <>We Build Sovereign AI Systems<br className="hidden sm:inline" /> for Every Decision</>
             )}
           </h1>
         </motion.div>
       </section>
 
-      <section className="w-full pt-16 pb-24 bg-white">
+      <section className="w-full pt-10 md:pt-16 pb-16 md:pb-24 bg-white">
 
-        <div className="hidden md:block w-full px-6 md:px-12 mb-6 max-w-[1600px] mx-auto">
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+        <div className="w-full px-4 md:px-12 mb-4 md:mb-6 max-w-[1600px] mx-auto">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
             {sliderItems.map((item, idx) => {
               const isActive = currentSlide === idx;
               return (
                 <button
                   key={idx}
                   onClick={() => goToSlide(idx)}
-                  className={`relative overflow-hidden px-4 py-2 text-[14px] whitespace-nowrap rounded-[3px] border transition-colors duration-200 ${
+                  className={`relative overflow-hidden px-3 py-1.5 md:px-4 md:py-2 text-[12px] md:text-[14px] whitespace-nowrap rounded-[3px] border transition-colors duration-200 flex-shrink-0 ${
                     isActive
                       ? 'bg-[#D9D9D9] border-[#D9D9D9] text-[#111622]'
                       : 'bg-white border-gray-200 text-gray-500 hover:text-[#111622] hover:border-gray-300'
@@ -201,8 +201,8 @@ export const Hero = () => {
               );
             })}
 
-            <div className="ml-auto pl-4 flex-shrink-0">
-              <button className="px-4 py-2 text-[14px] text-[#111622] bg-white border border-[#111622] hover:bg-[#111622] hover:text-white transition-colors whitespace-nowrap rounded-[3px]">
+            <div className="ml-auto pl-2 md:pl-4 flex-shrink-0 hidden sm:block">
+              <button className="px-3 py-1.5 md:px-4 md:py-2 text-[12px] md:text-[14px] text-[#111622] bg-white border border-[#111622] hover:bg-[#111622] hover:text-white transition-colors whitespace-nowrap rounded-[3px]">
                 {t('hero.see_all') || (isSw ? 'TAZAMA ZOTE' : 'SEE ALL')}
               </button>
             </div>
@@ -219,11 +219,11 @@ export const Hero = () => {
               return (
                 <div
                   key={idx}
-                  className="w-[85vw] flex-shrink-0 px-2 relative"
+                  className="w-[85vw] flex-shrink-0 px-1 sm:px-2 relative"
                   onClick={() => !isActive && goToSlide(idx)}
                 >
                   <div
-                    className={`relative w-full h-[550px] md:h-[850px] bg-[#111] overflow-hidden transition-all duration-700 cursor-pointer ${
+                    className={`relative w-full h-[320px] sm:h-[480px] md:h-[750px] lg:h-[850px] bg-[#111] overflow-hidden transition-all duration-700 cursor-pointer rounded-sm ${
                       isActive ? 'opacity-100 scale-100' : 'opacity-40 scale-[0.98]'
                     }`}
                   >
@@ -248,28 +248,45 @@ export const Hero = () => {
                     ) : null}
 
                     <div
-                      className={`absolute top-6 left-6 md:top-10 md:left-10 max-w-[340px] md:max-w-[460px] bg-[#22252a]/95 p-6 md:p-9 text-white shadow-2xl transition-opacity duration-500 delay-100 ${
+                      className={`absolute top-3 left-3 right-3 md:right-auto md:top-10 md:left-10 max-w-none md:max-w-[460px] bg-[#22252a]/95 p-3.5 sm:p-5 md:p-9 text-white shadow-2xl transition-opacity duration-500 delay-100 ${
                         isActive ? 'opacity-100' : 'opacity-0'
                       }`}
                     >
-                      <h3 className="text-lg md:text-[26px] font-normal leading-snug">
+                      <h3 className="text-sm sm:text-base md:text-[26px] font-normal leading-snug">
                         {item.title}
                       </h3>
                     </div>
 
                     {isActive && (
                       <>
+                        <div className="absolute bottom-3 right-3 flex md:hidden items-center gap-1.5 z-20">
+                          <button
+                            onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+                            aria-label="Previous slide"
+                            className="w-10 h-8 bg-[#111]/80 hover:bg-[#111] text-white flex items-center justify-center transition-colors rounded-sm"
+                          >
+                            <span className="text-sm leading-none">←</span>
+                          </button>
+                          <button
+                            onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+                            aria-label="Next slide"
+                            className="w-10 h-8 bg-[#111]/80 hover:bg-[#111] text-white flex items-center justify-center transition-colors rounded-sm"
+                          >
+                            <span className="text-sm leading-none">→</span>
+                          </button>
+                        </div>
+
                         <button
                           onClick={(e) => { e.stopPropagation(); prevSlide(); }}
                           aria-label="Previous slide"
-                          className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 w-14 h-8 md:w-16 md:h-9 bg-[#111]/60 hover:bg-[#111] text-white flex items-center justify-center transition-colors"
+                          className="hidden md:flex absolute left-4 md:left-6 top-1/2 -translate-y-1/2 w-14 h-8 md:w-16 md:h-9 bg-[#111]/60 hover:bg-[#111] text-white items-center justify-center transition-colors"
                         >
                           <span className="text-sm md:text-base leading-none">←</span>
                         </button>
                         <button
                           onClick={(e) => { e.stopPropagation(); nextSlide(); }}
                           aria-label="Next slide"
-                          className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 w-14 h-8 md:w-16 md:h-9 bg-[#111]/60 hover:bg-[#111] text-white flex items-center justify-center transition-colors"
+                          className="hidden md:flex absolute right-4 md:right-6 top-1/2 -translate-y-1/2 w-14 h-8 md:w-16 md:h-9 bg-[#111]/60 hover:bg-[#111] text-white items-center justify-center transition-colors"
                         >
                           <span className="text-sm md:text-base leading-none">→</span>
                         </button>

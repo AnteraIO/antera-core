@@ -138,15 +138,15 @@ export const ModelsPage = () => {
           </header>
         </div>
 
-        <div className="hidden md:block w-full px-6 md:px-12 mb-6 max-w-[1600px] mx-auto">
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+        <div className="w-full px-4 md:px-12 mb-6 max-w-[1600px] mx-auto">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
             {sliderItems.map((item, idx) => {
               const isActive = currentSlide === idx;
               return (
                 <button
                   key={idx}
                   onClick={() => goToSlide(idx)}
-                  className={`relative overflow-hidden px-4 py-2 text-[14px] whitespace-nowrap rounded-[3px] border transition-colors duration-200 ${
+                  className={`relative overflow-hidden px-3 py-1.5 md:px-4 md:py-2 text-[12px] md:text-[14px] whitespace-nowrap rounded-[3px] border transition-colors duration-200 flex-shrink-0 ${
                     isActive
                       ? 'bg-[#D9D9D9] border-[#D9D9D9] text-[#111622]'
                       : 'bg-white border-gray-200 text-gray-500 hover:text-[#111622] hover:border-gray-300'
@@ -167,7 +167,7 @@ export const ModelsPage = () => {
               );
             })}
 
-            <div className="ml-auto pl-4 flex-shrink-0">
+            <div className="ml-auto pl-4 flex-shrink-0 hidden sm:block">
               <button className="px-4 py-2 text-[14px] text-[#111622] bg-white border border-[#111622] hover:bg-[#111622] hover:text-white transition-colors whitespace-nowrap rounded-[3px]">
                 {t('hero.see_all') || (isSw ? 'TAZAMA ZOTE' : 'SEE ALL')}
               </button>
@@ -175,8 +175,8 @@ export const ModelsPage = () => {
           </div>
         </div>
 
-        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
-          <div className="relative w-full h-[500px] md:h-[700px] overflow-hidden bg-[#0A0A0A]">
+        <div className="w-full max-w-[1600px] mx-auto px-4 md:px-10 mb-20 md:mb-32">
+          <div className="relative w-full h-[340px] sm:h-[500px] md:h-[700px] overflow-hidden bg-[#0A0A0A] rounded-sm">
             {sliderItems.map((item, idx) => {
               const isActive = currentSlide === idx;
               return (
@@ -200,9 +200,9 @@ export const ModelsPage = () => {
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-                  <div className="absolute bottom-8 left-8 md:bottom-14 md:left-14 max-w-3xl text-white">
-                    <p className="text-[11px] font-medium uppercase tracking-[0.25em] opacity-70 mb-6">{item.label}</p>
-                    <h3 className="text-3xl md:text-5xl lg:text-[64px] font-bold tracking-[-0.03em] leading-[1.02]">
+                  <div className="absolute bottom-4 left-4 right-4 md:bottom-14 md:left-14 max-w-3xl text-white">
+                    <p className="text-[10px] md:text-[11px] font-medium uppercase tracking-[0.25em] opacity-70 mb-2 md:mb-6">{item.label}</p>
+                    <h3 className="text-xl sm:text-3xl md:text-5xl lg:text-[64px] font-bold tracking-[-0.03em] leading-[1.1] md:leading-[1.02]">
                       {item.title}
                     </h3>
                   </div>
@@ -211,13 +211,13 @@ export const ModelsPage = () => {
                     <>
                       <button
                         onClick={(e) => { e.stopPropagation(); prevSlide(); }}
-                        className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white hover:text-black text-white flex items-center justify-center transition-colors duration-300"
+                        className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white/10 hover:bg-white hover:text-black text-white flex items-center justify-center transition-colors duration-300 rounded-sm"
                       >
                         ←
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); nextSlide(); }}
-                        className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white hover:text-black text-white flex items-center justify-center transition-colors duration-300"
+                        className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white/10 hover:bg-white hover:text-black text-white flex items-center justify-center transition-colors duration-300 rounded-sm"
                       >
                         →
                       </button>
