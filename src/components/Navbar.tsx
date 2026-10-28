@@ -56,14 +56,14 @@ export const Navbar = () => {
   }, [isOpen]);
 
   const navLinks = [
-    { name: t('nav.products') || 'Products', href: '/products', icon: NAV_ICONS[0] },
-    { name: t('nav.solutions') || 'Solutions', href: '/solutions', icon: NAV_ICONS[1] },
-    { name: t('nav.data_analytics') || 'Data Analytics', href: '/data-analytics', icon: NAV_ICONS[2] },
-    { name: t('nav.models') || 'Models', href: '/models', icon: NAV_ICONS[3] },
-    { name: t('nav.blog') || 'Blog', href: '/blog', icon: NAV_ICONS[4] },
-    { name: t('nav.customers') || 'Customers', href: '/customers', icon: NAV_ICONS[5] },
-    { name: t('nav.company') || 'Company', href: '/company', icon: NAV_ICONS[6] },
-    { name: 'About Us', href: '/company', icon: NAV_ICONS[7] },
+    { name: t('nav.sauti_connect') || 'Sauti Connect', href: '/sauti-connect', icon: NAV_ICONS[0] },
+    { name: t('nav.products') || 'Products', href: '/products', icon: NAV_ICONS[1] },
+    { name: t('nav.solutions') || 'Solutions', href: '/solutions', icon: NAV_ICONS[2] },
+    { name: t('nav.data_analytics') || 'Data Analytics', href: '/data-analytics', icon: NAV_ICONS[3] },
+    { name: t('nav.models') || 'Models', href: '/models', icon: NAV_ICONS[4] },
+    { name: t('nav.blog') || 'Blog', href: '/blog', icon: NAV_ICONS[5] },
+    { name: t('nav.customers') || 'Customers', href: '/customers', icon: NAV_ICONS[6] },
+    { name: t('nav.company') || 'Company', href: '/company', icon: NAV_ICONS[7] },
     { name: 'Media', href: '/blog', icon: NAV_ICONS[8] },
     { name: 'Contact', href: '/company', icon: NAV_ICONS[9] },
   ];
@@ -91,7 +91,7 @@ export const Navbar = () => {
             className="overflow-hidden pointer-events-auto"
           >
             <div className="bg-[#1f1e24] text-white text-[12px] md:text-[13px] py-2.5 px-10 md:px-14 flex justify-center items-center w-full relative border-b border-white/10">
-              <Link href="/blog" className="flex items-center hover:text-gray-300 transition-colors text-center">
+              <Link href="/sauti-connect" className="flex items-center hover:text-gray-300 transition-colors text-center">
                 <span className="underline underline-offset-4 decoration-white/50 hover:decoration-white">
                   {t('nav.banner') || 'We make smart computer programs for Tanzania and Africa. Call: +255 774 174 921 | WhatsApp: +255 760 984 921'}
                 </span>
@@ -150,73 +150,12 @@ export const Navbar = () => {
 
           <div className="flex items-center gap-2 md:gap-3 z-50">
             <div className="hidden lg:flex items-center gap-3">
-              {/*
-              <button
-                onClick={() => setLanguage(isEnglish ? 'sw' : 'en')}
-                aria-label="Switch language"
-                title={isEnglish ? 'Kubadili kwenda Kiswahili' : 'Switch to English'}
-                className="relative flex items-center cursor-pointer select-none p-1 rounded-lg overflow-hidden"
-                style={{
-                  background: 'linear-gradient(140deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.20) 45%, rgba(255,255,255,0.40) 100%)',
-                  backdropFilter: 'blur(30px) saturate(200%) brightness(1.05)',
-                  WebkitBackdropFilter: 'blur(30px) saturate(200%) brightness(1.05)',
-                  border: '1px solid rgba(255,255,255,0.5)',
-                  boxShadow: `
-                    0 8px 24px rgba(0,0,0,0.12),
-                    inset 0 1px 0 rgba(255,255,255,0.9),
-                    inset 0 -1px 0 rgba(255,255,255,0.25)
-                  `,
-                }}
-              >
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-x-1 top-[1px] h-1/2 rounded-md bg-gradient-to-b from-white/60 to-transparent"
-                />
-
-                <motion.span
-                  aria-hidden
-                  initial={false}
-                  animate={{ x: isEnglish ? 38 : 0 }}
-                  transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                  className="pointer-events-none absolute top-1 left-1 w-9 h-9 rounded-md"
-                  style={{
-                    background: 'linear-gradient(140deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 100%)',
-                    boxShadow: `
-                      0 4px 12px rgba(0,0,0,0.18),
-                      inset 0 1px 0 rgba(255,255,255,1),
-                      inset 0 -1px 0 rgba(0,0,0,0.05)
-                    `,
-                  }}
-                />
-
-                <span className="relative z-10 flex items-center justify-center w-9 h-9">
-                  <img
-                    src={SWAHILI_ICON}
-                    alt="Swahili"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6 object-contain"
-                  />
-                </span>
-
-                <span className="relative z-10 flex items-center justify-center w-9 h-9 ml-[2px]">
-                  <img
-                    src={ENGLISH_ICON}
-                    alt="English"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6 object-contain"
-                  />
-                </span>
-              </button>
-              */}
-
               <div className="relative p-[2px] rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500">
                 <Link
-                  href="/contact"
+                  href="/sauti-connect"
                   className="block text-sm font-medium px-5 py-2 rounded-full transition-all text-white bg-[#111111] hover:bg-black"
                 >
-                  {t('nav.contact_sales') || 'Contact sales'}
+                  {t('nav.sauti_connect') || 'Sauti Connect'}
                 </Link>
               </div>
             </div>

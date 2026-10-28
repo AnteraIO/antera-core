@@ -191,6 +191,7 @@ export const FinalCTAAndFooter = () => {
                 {t('nav.products') || (isSw ? 'Bidhaa' : 'Products')}
               </h3>
               <ul className="space-y-0">
+                <FooterLink href="/sauti-connect">Sauti Connect</FooterLink>
                 <FooterLink href="https://kava.co.tz/">Kava</FooterLink>
                 <FooterLink href="https://aibruno.vercel.app/">AI Bruno</FooterLink>
                 <FooterLink href="https://swahiba.vercel.app/">Swahiba</FooterLink>

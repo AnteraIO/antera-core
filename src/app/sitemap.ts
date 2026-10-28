@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://antera.co.tz'
 
-    {/* Fetch blog posts for dynamic routes*/}
+  {/* Fetch blog posts for dynamic routes*/}
   const { data: posts } = await supabase
     .from('blog_posts')
     .select('slug, updated_at')
@@ -19,6 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticUrls = [
     '',
+    '/sauti-connect',
     '/products',
     '/solutions',
     '/data-analytics',

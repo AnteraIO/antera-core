@@ -12,6 +12,7 @@ interface LanguageContextType {
 const translations: Record<Language, Record<string, string>> = {
   en: {
     // Navigation
+    'nav.sauti_connect': 'Sauti Connect',
     'nav.products': 'Products',
     'nav.solutions': 'Solutions',
     'nav.data_analytics': 'Data Analytics',
@@ -204,6 +205,7 @@ const translations: Record<Language, Record<string, string>> = {
   },
   sw: {
     // Navigation
+    'nav.sauti_connect': 'Sauti Connect',
     'nav.products': 'Bidhaa',
     'nav.solutions': 'Suluhisho',
     'nav.data_analytics': 'Uchambuzi wa Data',
@@ -356,7 +358,7 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.whatsapp_support': 'Msaada wa WhatsApp',
     'footer.rights_reserved': 'Haki zote zimehifadhiwa.',
     'footer.impact': 'Athari',
-    'footer.capabilities': 'Uwezo',
+    'footer.capabilities': 'Capabilities',
 
     // Dropdowns
     'dropdown.featured': 'Imeangaziwa',
