@@ -284,7 +284,7 @@ export const OperationSection = () => {
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 relative z-[2]">
           <header className="max-w-5xl mx-auto text-center mb-20">
             <motion.h1
-              className="text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[0.98]"
+              className="text-[26px] sm:text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[1.15] md:leading-[0.98] text-balance"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
@@ -359,7 +359,7 @@ export const DataScienceSection = () => {
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 relative z-[2]">
           <header className="max-w-5xl mx-auto text-center mb-20">
             <motion.h1
-              className="text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[0.98]"
+              className="text-[26px] sm:text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[1.15] md:leading-[0.98] text-balance"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
@@ -439,7 +439,7 @@ export const WhySection = () => {
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 relative z-[2]">
           <header className="max-w-5xl mx-auto text-center mb-20">
             <motion.h1
-              className="text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[0.98]"
+              className="text-[26px] sm:text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[1.15] md:leading-[0.98] text-balance"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}

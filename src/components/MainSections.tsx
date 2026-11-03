@@ -114,8 +114,8 @@ const AnimatedHeading = ({
   <motion.h1
     className={
       size === 'large'
-        ? 'text-5xl md:text-7xl lg:text-[96px] font-bold tracking-[-0.04em] leading-[0.98]'
-        : 'text-4xl md:text-6xl lg:text-[72px] font-bold tracking-[-0.04em] leading-[0.98]'
+        ? 'text-[28px] sm:text-5xl md:text-7xl lg:text-[96px] font-bold tracking-[-0.04em] leading-[1.05] md:leading-[0.98] text-balance'
+        : 'text-[26px] sm:text-4xl md:text-6xl lg:text-[72px] font-bold tracking-[-0.04em] leading-[1.1] md:leading-[0.98] text-balance'
     }
     initial="hidden"
     whileInView="visible"

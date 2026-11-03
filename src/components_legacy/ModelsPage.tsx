@@ -15,7 +15,7 @@ import orchestration from '@/assets/orchestration.jpg';
 import businessIntelligence from '@/assets/intelligence.jpg';
 import architecture from '@/assets/data-architecture.jpg';
 
-import heroVideo from '@/assets/antera-video.mp4';
+const heroVideo = '/videos/antera-video.mp4';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="never">{children}</MotionConfig>

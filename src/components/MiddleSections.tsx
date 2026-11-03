@@ -17,7 +17,7 @@ import predictiveAnalyticsImage from '../assets/graphics/97.png';
 import dataGovernanceImage from '../assets/graphics/89.png';
 import SecureScalable from '../assets/graphics/110.png';
 import BrandCredibility from '../assets/graphics/77.png';
-import heroVideo from '../assets/graphics/alert.mp4';
+const heroVideo = '/videos/alert.mp4';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="never">{children}</MotionConfig>
@@ -117,8 +117,8 @@ const AnimatedHeading = ({
   <motion.h1
     className={
       size === 'large'
-        ? 'text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]'
-        : 'text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[0.98]'
+        ? 'text-[28px] sm:text-5xl md:text-6xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[1.1] md:leading-[0.98] text-balance'
+        : 'text-[26px] sm:text-4xl md:text-6xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[1.15] md:leading-[0.98] text-balance'
     }
     initial="hidden"
     whileInView="visible"
@@ -221,6 +221,7 @@ const ServiceCard = ({
         {isVideo ? (
           <motion.video
             src={heroVideo}
+            poster="/videos/posters/alert.jpg"
             autoPlay
             muted
             loop
@@ -514,7 +515,7 @@ export const ApplicationSection = () => {
                   </div>
 
                   <div className="relative z-20 max-w-3xl">
-                    <h3 className="text-4xl md:text-5xl lg:text-[64px] font-bold tracking-[-0.03em] leading-[1.02]">{card.title}</h3>
+                    <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-[64px] font-bold tracking-[-0.03em] leading-[1.1] md:leading-[1.02]">{card.title}</h3>
 
                     <div className="mt-6">
                       <p className={`text-3xl md:text-4xl ${card.subText} leading-[1.25] max-w-2xl`}>

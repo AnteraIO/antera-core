@@ -9,11 +9,12 @@ import rehypeRaw from 'rehype-raw';
 import { Eye } from 'lucide-react';
 import ViewCounter from '@/components/blog/ViewCounter';
 
-export const dynamic = 'force-dynamic';
-
 const SHARE_X = 'https://cdn-icons-png.flaticon.com/128/5968/5968830.png';
 const SHARE_MAIL = 'https://cdn-icons-png.flaticon.com/128/732/732200.png';
 const SHARE_LINK = 'https://cdn-icons-png.flaticon.com/128/2958/2958794.png';
+
+export const dynamic = 'force-dynamic';
+
 
 async function getPost(slug: string) {
   const { data } = await supabase
@@ -147,7 +148,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             <span>•</span>
             <span className="flex items-center gap-1"><Eye size={12} /> {post.views || 0}</span>
           </div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-normal tracking-[-0.03em] leading-[0.95] mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-normal tracking-[-0.03em] leading-[1.0] md:leading-[0.95] mb-8 text-balance">
             {post.title}
           </h1>
           <div className="flex items-center justify-center gap-4">

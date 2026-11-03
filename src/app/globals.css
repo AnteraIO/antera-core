@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  @media (max-width: 640px) {
+    h1, h2, h3 {
+      overflow-wrap: break-word;
+    }
+  }
+
   body {
     background-color: #fffaeb;
     color: #1F1F1F;

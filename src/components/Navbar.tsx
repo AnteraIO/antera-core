@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '../context/LanguageContext';
 import logo from '../assets/logo.png';
-import menuBgImg from '@/assets/gritty-blue.png';
+import menuBgImg from '@/assets/gritty-blue.jpg';
 
 const SWAHILI_ICON = 'https://cdn-icons-png.flaticon.com/128/303/303200.png';
 const ENGLISH_ICON = 'https://cdn-icons-png.flaticon.com/128/10452/10452489.png';
@@ -43,6 +43,7 @@ export const Navbar = () => {
 
   const isEnglish = language === 'en';
 
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
@@ -61,7 +62,7 @@ export const Navbar = () => {
     { name: t('nav.data_analytics') || 'Data Analytics', href: '/data-analytics', icon: NAV_ICONS[2] },
     // { name: t('nav.models') || 'Models', href: '/models', icon: NAV_ICONS[3] },
     { name: t('nav.blog') || 'Blog', href: '/blog', icon: NAV_ICONS[4] },
-    { name: t('nav.customers') || 'Customers', href: '/customers', icon: NAV_ICONS[5] },
+    // { name: t('nav.customers') || 'Customers', href: '/customers', icon: NAV_ICONS[5] },
     // { name: t('nav.company') || 'Company', href: '/company', icon: NAV_ICONS[6] },
     // { name: 'About Us', href: '/company', icon: NAV_ICONS[7] },
     // { name: 'Media', href: '/blog', icon: NAV_ICONS[8] },
@@ -90,7 +91,7 @@ export const Navbar = () => {
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden pointer-events-auto"
           >
-            <div className="bg-[#1f1e24] text-white text-[12px] md:text-[13px] py-2.5 px-10 md:px-14 flex justify-center items-center w-full relative border-b border-white/10">
+            <div className="bg-[#1f1e24] text-white text-[11px] md:text-[13px] leading-snug py-2 md:py-2.5 px-9 md:px-14 flex justify-center items-center w-full relative border-b border-white/10">
               <Link href="/blog" className="flex items-center hover:text-gray-300 transition-colors text-center">
                 <span className="underline underline-offset-4 decoration-white/50 hover:decoration-white">
                   {t('nav.banner') || 'We make smart computer programs for Tanzania and Africa. Call: +255 774 174 921 | WhatsApp: +255 760 984 921'}
@@ -135,7 +136,7 @@ export const Navbar = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-lg font-medium transition-colors flex items-center gap-1 ${
+                className={`text-lg font-medium transition-colors flex items-center gap-2 ${
                   isOpen
                     ? 'text-[#111111] hover:text-black'
                     : scrolled
@@ -143,6 +144,13 @@ export const Navbar = () => {
                     : 'text-white/90 hover:text-white'
                 }`}
               >
+                <img
+                  src={item.icon}
+                  alt=""
+                  width={22}
+                  height={22}
+                  className={`w-5 h-5 object-contain ${isDarkSurface ? 'brightness-0 invert opacity-90' : ''}`}
+                />
                 {item.name}
               </Link>
             ))}
@@ -226,10 +234,10 @@ export const Navbar = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="flex items-center justify-center w-[44px] h-[44px] cursor-pointer"
             >
-              <img 
-                src={isOpen ? CLOSE_ICON : MENU_ICON} 
-                alt={isOpen ? 'Close' : 'Menu'} 
-                width={32} 
+              <img
+                src={isOpen ? CLOSE_ICON : MENU_ICON}
+                alt={isOpen ? 'Close' : 'Menu'}
+                width={32}
                 height={32}
                 className={`w-8 h-8 object-contain ${menuIconFilter}`}
               />
@@ -267,7 +275,7 @@ export const Navbar = () => {
                   
                   <div>
                     <ul className="flex flex-col gap-3 text-[32px] md:text-[38px] lg:text-[42px] font-light leading-tight">
-                      {navLinks.slice(0, 3).map((item) => (
+                      {navLinks.slice(0, 2).map((item) => (
                         <li key={item.name}>
                           <Link
                             href={item.href}
@@ -290,7 +298,7 @@ export const Navbar = () => {
 
                   <div>
                     <ul className="flex flex-col gap-3 text-[32px] md:text-[38px] lg:text-[42px] font-light leading-tight">
-                      {navLinks.slice(3, 5).map((item) => (
+                      {navLinks.slice(2).map((item) => (
                         <li key={item.name}>
                           <Link
                             href={item.href}

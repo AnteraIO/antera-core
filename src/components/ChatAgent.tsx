@@ -6,9 +6,10 @@ import { Send, Mic, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getAnteraResponseStream } from '@/lib/deepseek';
 
+const BRUNO_ICON = 'https://cdn-icons-png.flaticon.com/128/1326/1326377.png';
+
 type Msg = { role: 'user' | 'model'; text: string; time: string };
 
-const BRUNO_ICON = 'https://cdn-icons-png.flaticon.com/128/1326/1326377.png';
 
 const getTime = () => new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
@@ -214,10 +215,16 @@ const Bubble = ({ msg, isLast, isStreaming }: { msg: Msg; isLast: boolean; isStr
       </div>
       {isUser && (
         <div
-          className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-[12px]"
+          className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 overflow-hidden"
           style={{ background: 'rgba(0,0,0,0.08)', border: '1px solid rgba(0,0,0,0.1)' }}
         >
-          👤
+          <img
+            src="https://cdn-icons-png.flaticon.com/128/847/847969.png"
+            alt="You"
+            width={18}
+            height={18}
+            className="w-4 h-4 object-contain opacity-80"
+          />
         </div>
       )}
     </motion.div>
@@ -225,12 +232,12 @@ const Bubble = ({ msg, isLast, isStreaming }: { msg: Msg; isLast: boolean; isStr
 };
 
 const quickPrompts = [
-  { emoji: '🤖', label: 'How can AI help me?' },
-  { emoji: '💻', label: 'Can you build my website?' },
-  { emoji: '⚙️', label: 'How do you modernize tech?' },
-  { emoji: '🛡️', label: 'How do you keep my business secure?' },
-  { emoji: '📊', label: 'How do you turn data into insights?' },
-  { emoji: '💰', label: 'What does it cost?' },
+  { label: 'How can AI help me?' },
+  { label: 'Can you build my website?' },
+  { label: 'How do you modernize tech?' },
+  { label: 'How do you keep my business secure?' },
+  { label: 'How do you turn data into insights?' },
+  { label: 'What does it cost?' },
 ];
 
 const ChatAgent = () => {
@@ -346,8 +353,8 @@ const ChatAgent = () => {
               style={{
                 width: '100%',
                 maxWidth: '100%',
-                height: '85vh',
-                maxHeight: '85vh',
+                height: '78vh',
+                maxHeight: '78vh',
                 borderRadius: '24px 24px 0 0',
                 boxShadow: '0 -20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.08) inset',
                 background: 'rgba(255,255,255,0.7)',
@@ -359,12 +366,12 @@ const ChatAgent = () => {
               <style>{`
                 @media (min-width: 768px) {
                   .chat-window {
-                    width: 390px !important;
-                    max-width: 390px !important;
-                    height: min(780px, calc(100vh - 7rem)) !important;
-                    max-height: min(780px, calc(100vh - 7rem)) !important;
-                    border-radius: 52px !important;
-                    border: 10px solid #0F0F0F !important;
+                    width: 330px !important;
+                    max-width: 330px !important;
+                    height: min(640px, calc(100vh - 8rem)) !important;
+                    max-height: min(640px, calc(100vh - 8rem)) !important;
+                    border-radius: 44px !important;
+                    border: 8px solid #0F0F0F !important;
                     box-shadow:
                       0 0 0 1px rgba(255,255,255,0.08) inset,
                       0 50px 120px rgba(0,0,0,0.6),
@@ -414,7 +421,7 @@ const ChatAgent = () => {
                   >
                     <Avatar size={64} />
                     <div className="text-center space-y-1.5">
-                      <p className="font-bold text-[17px]" style={{ color: '#000000' }}>Hello, I'm Bruno. 🤖</p>
+                      <p className="font-bold text-[17px]" style={{ color: '#000000' }}>Hello, I'm Bruno.</p>
                       <p className="text-[12.5px] leading-relaxed max-w-[280px] mx-auto" style={{ color: 'rgba(0,0,0,0.45)' }}>
                         I'm your AI intelligent assistant for Antera. I can help you. Ask me anything!
                       </p>
@@ -441,34 +448,25 @@ const ChatAgent = () => {
                           padding: '4px 4px 4px 0',
                         }}
                       >
-                        Karibu Sana! What can I help you with today? 🚀
+                        Karibu Sana! What can I help you with today?
                       </div>
                     </motion.div>
 
-                    <div className="grid grid-cols-2 gap-2 w-full">
+                    <div className="grid grid-cols-2 gap-2 w-full auto-rows-fr">
                       {quickPrompts.map((q, i) => (
-                        <motion.button
-                          key={i}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.55 + i * 0.06 }}
-                          whileHover={{ scale: 1.03, y: -1 }}
-                          whileTap={{ scale: 0.97 }}
-                          onClick={() => handleSend(q.label)}
-                          className="flex items-center gap-2 px-3 py-2.5 text-left text-[11.5px] font-medium transition-all"
-                          style={{
-                            background: 'rgba(255,255,255,0.7)',
-                            backdropFilter: 'blur(12px)',
-                            WebkitBackdropFilter: 'blur(12px)',
-                            borderRadius: 14,
-                            border: '1px solid rgba(0,0,0,0.09)',
-                            color: '#000000',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-                          }}
-                        >
-                          <span className="text-[16px]">{q.emoji}</span>
-                          <span className="leading-tight">{q.label}</span>
-                        </motion.button>
+                        <div key={i} className="relative p-[2px] rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500 h-full">
+                          <motion.button
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.55 + i * 0.06 }}
+                            whileHover={{ scale: 1.03, y: -1 }}
+                            whileTap={{ scale: 0.97 }}
+                            onClick={() => handleSend(q.label)}
+                            className="flex items-center justify-center w-full h-full min-h-[44px] px-3 py-1.5 text-center text-[10px] font-medium leading-snug transition-all rounded-full text-white bg-[#111111] hover:bg-black"
+                          >
+                            <span className="leading-tight">{q.label}</span>
+                          </motion.button>
+                        </div>
                       ))}
                     </div>
                   </motion.div>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
-import hero9 from '@/assets/gritty-blue.png';
+import hero9 from '@/assets/gritty-blue.jpg';
 import logo from '@/assets/logo.png';
 
 const CHECK_ICON = 'https://cdn-icons-png.flaticon.com/128/3916/3916581.png';
@@ -88,7 +88,6 @@ export const FinalCTAAndFooter = () => {
           alt="Footer Background"
           className="object-cover object-center opacity-70"
           fill
-          priority
         />
       </div>
       <div className="absolute inset-0 z-0 bg-white/85 pointer-events-none" aria-hidden="true" />
@@ -111,7 +110,7 @@ export const FinalCTAAndFooter = () => {
             variants={fadeUp}
             className="mb-16 md:mb-20 text-center"
           >
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.95] text-black drop-shadow-sm">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] leading-[1.0] md:leading-[0.95] text-black drop-shadow-sm text-balance">
               {t('footer.get_in_touch') || (isSw ? 'Wasiliana Nasi.' : 'Get in Touch.')}
             </h1>
             <p className="text-base md:text-xl max-w-3xl leading-relaxed text-black mx-auto mt-6 font-medium">

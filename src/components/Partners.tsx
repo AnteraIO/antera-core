@@ -96,7 +96,7 @@ export const PartnersSection = () => {
             </motion.div>
 
             <motion.h1
-              className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98] relative z-10 pt-4"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[1.05] sm:leading-[0.98] relative z-10 pt-4 text-balance"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}

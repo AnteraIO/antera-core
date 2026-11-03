@@ -15,25 +15,15 @@ import hero10 from '../assets/hero-10.jpg';
 import hero11 from '../assets/hero-11.jpg';
 import hero12 from '../assets/intelligence.jpg';
 
-import heroVideo0 from '../assets/antera-video.mp4';
-import heroVideo1 from '../assets/antera-video-1.mp4';
-import heroVideo2 from '../assets/antera-video-2.mp4';
-import heroVideo3 from '../assets/antera-video-3.mp4';
-import heroVideo4 from '../assets/antera-video-4.mp4';
-import heroVideo5 from '../assets/antera-video-5.mp4';
-
-import folderVideo from '../assets/graphics/folder-video.mp4';
-import alertVideo from '../assets/graphics/alert.mp4';
-
 const SLIDE_DURATION = 6000;
 
 const HERO_VIDEOS = [
-  heroVideo0,
-  heroVideo1,
-  heroVideo2,
-  heroVideo3,
-  heroVideo4,
-  heroVideo5,
+  { src: '/videos/antera-video.mp4', poster: '/videos/posters/antera-video.jpg' },
+  { src: '/videos/antera-1.mp4', poster: '/videos/posters/antera-1.jpg' },
+  { src: '/videos/antera-2.mp4', poster: '/videos/posters/antera-2.jpg' },
+  { src: '/videos/antera-3.mp4', poster: '/videos/posters/antera-3.jpg' },
+  { src: '/videos/antera-4.mp4', poster: '/videos/posters/antera-4.jpg' },
+  { src: '/videos/antera-5.mp4', poster: '/videos/posters/antera-5.jpg' },
 ];
 
 export const Hero = () => {
@@ -51,12 +41,12 @@ export const Hero = () => {
     {
       name: isSw ? 'Wavuti' : 'Web Apps',
       title: isSw ? 'Programu za Wavuti za Biashara kwa Ukuzaji ↗' : 'Enterprise Web Applications for Scale ↗',
-      video: folderVideo
+      video: '/videos/folder-video.mp4'
     },
     {
       name: isSw ? 'Mifumo ya Simu' : 'Mobile Systems',
       title: isSw ? 'Programu za Simu za Majukwaa Mbalimbali kwa Afrika Mashariki ↗' : 'Cross-Platform Mobile Solutions for East Africa ↗',
-      video: alertVideo
+      video: '/videos/alert.mp4'
     },
     {
       name: isSw ? 'Wakala wa AI' : 'AI Agents',
@@ -132,17 +122,18 @@ export const Hero = () => {
   return (
     <div className="w-full relative flex flex-col bg-white overflow-hidden">
 
-      <section className="relative min-h-[100svh] w-full flex flex-col justify-center items-center py-24 md:py-0 px-4 sm:px-6">
+      <section className="relative min-h-[100svh] w-full flex flex-col justify-center items-center pt-28 pb-16 sm:py-24 md:py-0 px-4 sm:px-6">
         <div className="absolute inset-0 w-full h-full bg-black">
           <video
             key={currentHeroVideo}
             autoPlay
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
+            poster={HERO_VIDEOS[currentHeroVideo].poster}
             onEnded={handleHeroVideoEnd}
             className="w-full h-full object-cover opacity-65"
-            src={HERO_VIDEOS[currentHeroVideo]}
+            src={HERO_VIDEOS[currentHeroVideo].src}
           />
         </div>
 
@@ -152,9 +143,9 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
-          className="relative z-10 flex flex-col items-center justify-center px-2 sm:px-6 mt-12 md:mt-16 text-center"
+          className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 mt-12 md:mt-16 text-center w-full"
         >
-          <h1 className="text-[26px] sm:text-[40px] md:text-[64px] lg:text-[85px] font-medium leading-[1.15] md:leading-[1.05] tracking-tight text-white max-w-5xl">
+          <h1 className="text-[24px] sm:text-[40px] md:text-[64px] lg:text-[85px] font-medium leading-[1.2] md:leading-[1.05] tracking-tight text-white max-w-5xl w-full text-balance">
             {isSw ? (
               <>Tunajenga Mifumo Huru ya AI<br className="hidden sm:inline" /> kwa Kila Maamuzi</>
             ) : (
