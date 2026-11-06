@@ -238,6 +238,7 @@ const ServiceCard = ({
   height,
   imgClass,
   isVideo,
+  index,
 }: any) => {
   return (
     <motion.div variants={cardVariants} className={`${span} ${height} group relative`}>
@@ -266,19 +267,26 @@ const ServiceCard = ({
           </div>
         )}
 
-        <div className="relative z-20 max-w-[85%]">
-          <h3 className="text-3xl md:text-4xl lg:text-[44px] font-bold tracking-[-0.02em] leading-[1.05]">
+        {typeof index === 'number' && (
+          <span
+            aria-hidden
+            className="absolute top-6 right-6 md:top-8 md:right-8 z-30 flex h-9 min-w-9 items-center justify-center rounded-full border border-current px-3 text-[10px] font-semibold tracking-[0.16em] opacity-40 transition-all duration-500 group-hover:opacity-80"
+          >
+            {String(index + 1).padStart(2, '0')}
+          </span>
+        )}
+
+        <div className="relative z-20 max-w-[85%] pr-8">
+          <h3 className="text-[26px] md:text-3xl lg:text-[40px] font-bold tracking-[-0.03em] leading-[1.05]">
             {title}
           </h3>
-          <div className="mt-5">
-            <p className={`text-xl md:text-2xl lg:text-3xl ${subText} leading-[1.3] max-w-lg`}>
-              {description}
-            </p>
-          </div>
+          <p className={`mt-4 text-base md:text-lg lg:text-xl ${subText} leading-[1.6] max-w-lg`}>
+            {description}
+          </p>
         </div>
 
         <AccentLine />
-        <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F] transition-all duration-500 pointer-events-none z-30 rounded-2xl" />
+        <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F]/60 transition-all duration-500 pointer-events-none z-30 rounded-2xl" />
       </MagneticCard>
     </motion.div>
   );
