@@ -2,7 +2,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring, MotionConfig, useMotionValue, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import { Play } from 'lucide-react';
+import { Play, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 import mobileAppImage from '../assets/graphics/93.png';
@@ -108,30 +108,58 @@ const MagneticCard = ({
 const AnimatedHeading = ({
   line1,
   line2,
+  eyebrow,
   size = 'default',
 }: {
   line1: string;
   line2: string;
+  eyebrow?: string;
   size?: 'default' | 'large';
 }) => (
-  <motion.h1
-    className={
-      size === 'large'
-        ? 'text-[28px] sm:text-5xl md:text-6xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[1.1] md:leading-[0.98] text-balance'
-        : 'text-[26px] sm:text-4xl md:text-6xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[1.15] md:leading-[0.98] text-balance'
-    }
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true, amount: 0.3 }}
-    variants={headlineVariants}
-  >
-    <motion.span variants={headlineLineVariants} className="block text-black">
-      {line1}
-    </motion.span>
-    <motion.span variants={headlineLineVariants} className="block text-[#3E9C8F]">
-      {line2}
-    </motion.span>
-  </motion.h1>
+  <div className="flex flex-col items-center">
+    {eyebrow && (
+      <motion.span
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+        className="mb-6 md:mb-8 inline-flex items-center gap-2.5 rounded-full border border-black/[0.08] bg-black/[0.025] px-4 py-2 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-neutral-500"
+      >
+        <span className="relative flex h-1.5 w-1.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3E9C8F] opacity-60" />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#3E9C8F]" />
+        </span>
+        {eyebrow}
+      </motion.span>
+    )}
+
+    <motion.h1
+      className={`${
+        size === 'large'
+          ? 'text-[clamp(2.5rem,7.5vw,7rem)]'
+          : 'text-[clamp(2.25rem,6.5vw,6rem)]'
+      } font-bold tracking-[-0.045em] leading-[0.95] text-balance`}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      variants={headlineVariants}
+    >
+      <motion.span variants={headlineLineVariants} className="block text-black">
+        {line1}
+      </motion.span>
+      <motion.span variants={headlineLineVariants} className="relative block pb-3 md:pb-4 text-[#3E9C8F]">
+        {line2}
+        <motion.span
+          aria-hidden
+          initial={{ width: 0, opacity: 0 }}
+          whileInView={{ width: '42%', opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.1, delay: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
+          className="absolute bottom-0 left-1/2 h-[3px] -translate-x-1/2 rounded-full bg-gradient-to-r from-[#3E9C8F]/0 via-[#3E9C8F] to-[#3E9C8F]/0"
+        />
+      </motion.span>
+    </motion.h1>
+  </div>
 );
 
 const GrainOverlay = () => (
