@@ -311,24 +311,50 @@ const ChatAgent = () => {
     <>
       <AnimatePresence>
         {!isOpen && (
-          <motion.button
+          <motion.div
             key="fab"
+            className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 group"
             initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            animate={{ scale: 1, opacity: 1, y: [0, -6, 0] }}
             exit={{ scale: 0, opacity: 0 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsOpen(true)}
-            aria-label="Chat with Bruno"
-            className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 flex items-center justify-center rounded-full shadow-xl bg-white hover:bg-gray-50 transition-all"
-            style={{ width: 96, height: 96 }}
+            transition={{
+              scale: { type: 'spring', damping: 18, stiffness: 260 },
+              opacity: { duration: 0.2 },
+              y: { repeat: Infinity, duration: 3.4, ease: 'easeInOut' },
+            }}
           >
-            <img
-              src={BRUNO_ICON}
-              alt="Bruno"
-              style={{ width: 96, height: 96, objectFit: 'contain' }}
+            {/* soft pulsing halo */}
+            <motion.span
+              aria-hidden
+              className="absolute inset-0 rounded-full pointer-events-none"
+              style={{ background: 'radial-gradient(circle, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 70%)' }}
+              animate={{ scale: [1, 1.45, 1], opacity: [0.55, 0, 0.55] }}
+              transition={{ repeat: Infinity, duration: 3.4, ease: 'easeInOut' }}
             />
-          </motion.button>
+
+            {/* hover label */}
+            <span className="hidden md:block absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-1.5 rounded-full bg-[#111111] text-white text-[11px] font-medium whitespace-nowrap opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 pointer-events-none shadow-lg">
+              Chat with Bruno
+            </span>
+
+            <motion.button
+              whileHover={{ scale: 1.08, rotate: -4 }}
+              whileTap={{ scale: 0.92, rotate: 0 }}
+              transition={{ type: 'spring', stiffness: 380, damping: 14 }}
+              onClick={() => setIsOpen(true)}
+              aria-label="Chat with Bruno"
+              className="relative flex items-center justify-center rounded-full shadow-xl bg-white hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2"
+              style={{ width: 78, height: 78 }}
+            >
+              <motion.img
+                src={BRUNO_ICON}
+                alt="Bruno"
+                animate={{ y: [0, -2, 0] }}
+                transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
+                style={{ width: 66, height: 66, objectFit: 'contain' }}
+              />
+            </motion.button>
+          </motion.div>
         )}
       </AnimatePresence>
 

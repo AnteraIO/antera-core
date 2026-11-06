@@ -91,8 +91,8 @@ const translations: Record<Language, Record<string, string>> = {
     'services.card9_desc': 'Professional executive CVs, cover letters, and LinkedIn profile optimization written in clear, persuasive language that gets candidates hired faster.',
 
     // Web Design & Development Section
-    'web.title_line1': 'INSPIRING',
-    'web.title_line2': 'ENGAGING',
+    'web.title_line1': 'Create new value',
+    'web.title_line2': 'and maintain your competitive edge.',
     'web.desc': 'We craft visually appealing, high-converting websites and landing pages tailored just for your brand and taste.',
     'web.visual_design_title': 'Visual Design',
     'web.visual_design_desc': 'We design templates that are appealing and creative and best represent your brand, impress your customers and provide easy site experience.',

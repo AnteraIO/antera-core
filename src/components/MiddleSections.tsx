@@ -321,8 +321,8 @@ export const WebServicesSection = () => {
           <header className="max-w-5xl mx-auto text-center mb-20">
             <AnimatedHeading
               size="large"
-              line1={t('web.title_line1') || 'INSPIRING'}
-              line2={t('web.title_line2') || 'ENGAGING'}
+              line1={t('web.title_line1') || 'Create new value'}
+              line2={t('web.title_line2') || 'and maintain your competitive edge.'}
             />
 
             <motion.p
