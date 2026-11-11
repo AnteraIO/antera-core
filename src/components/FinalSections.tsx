@@ -1,6 +1,6 @@
 'use client';
 import React, { useRef } from 'react';
-import { motion, useScroll, useSpring, MotionConfig, useMotionValue, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useSpring, MotionConfig, useMotionValue, useTransform } from 'framer-motion';
 import Image, { type StaticImageData } from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -63,7 +63,6 @@ const headlineLineVariants = {
 
 type TextTile = {
   type: 'text';
-  label: string;
   title: string;
   desc: string;
   color: string;
@@ -72,6 +71,7 @@ type TextTile = {
   bgImage: StaticImageData;
   span: string;
   height: string;
+  sizes?: string;
 };
 
 type ImageTile = {
@@ -80,6 +80,7 @@ type ImageTile = {
   span: string;
   height: string;
   imgClass: string;
+  sizes?: string;
 };
 
 type Tile = TextTile | ImageTile;
@@ -126,24 +127,7 @@ const MagneticTile = ({
   );
 };
 
-const AnimatedLabel = ({ value }: { value: string }) => {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
-  return (
-    <span ref={ref} className="inline-block overflow-hidden">
-      <motion.span
-        initial={{ y: '110%', opacity: 0 }}
-        animate={inView ? { y: '0%', opacity: 1 } : {}}
-        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as const }}
-        className="inline-block"
-      >
-        {value}
-      </motion.span>
-    </span>
-  );
-};
-
-const CinematicImage = ({ src, imgClass }: { src: StaticImageData; imgClass: string }) => (
+const CinematicImage = ({ src, imgClass, sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw' }: { src: StaticImageData; imgClass: string; sizes?: string }) => (
   <>
     <motion.div
       initial={{ scale: 1.15, opacity: 0 }}
@@ -152,7 +136,7 @@ const CinematicImage = ({ src, imgClass }: { src: StaticImageData; imgClass: str
       transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] as const }}
       className="absolute inset-0"
     >
-      <Image src={src} alt="" fill className={imgClass} />
+      <Image src={src} alt="" fill className={imgClass} sizes={sizes} placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
     </motion.div>
     <div className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] bg-gradient-to-r from-transparent via-white/20 to-transparent z-10" />
     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-700 pointer-events-none" />
@@ -174,7 +158,7 @@ const GrainOverlay = () => (
 const TileRenderer = ({ tile }: { tile: Tile }) => (
   <motion.div variants={tileVariants} className={`${tile.span} ${tile.height} group relative`}>
     <MagneticTile
-      className={`relative w-full h-full overflow-hidden cursor-pointer ${
+      className={`relative w-full h-full overflow-hidden rounded-sm cursor-pointer ${
         tile.type === 'text'
           ? `${tile.color} ${tile.text} flex flex-col justify-between p-6 md:p-8`
           : ''
@@ -191,16 +175,13 @@ const TileRenderer = ({ tile }: { tile: Tile }) => (
                 transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] as const }}
                 className="absolute inset-0"
               >
-                <Image src={tile.bgImage} alt="" fill className="object-cover" />
+                <Image src={tile.bgImage} alt="" fill className="object-cover" sizes={tile.sizes || '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'} placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
               </motion.div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
             </>
           )}
 
           <div className="relative z-20">
-            <p className="text-[10px] font-medium uppercase tracking-[0.25em] opacity-70 mb-4">
-              <AnimatedLabel value={tile.label} />
-            </p>
             <motion.h3
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -224,7 +205,7 @@ const TileRenderer = ({ tile }: { tile: Tile }) => (
         </>
       )}
 
-      {tile.type === 'image' && <CinematicImage src={tile.image} imgClass={tile.imgClass} />}
+      {tile.type === 'image' && <CinematicImage src={tile.image} imgClass={tile.imgClass} sizes={tile.sizes || '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'} />}
     </MagneticTile>
   </motion.div>
 );
@@ -238,35 +219,39 @@ export const OperationSection = () => {
 
   const tiles: Tile[] = [
     {
-      type: 'text', label: '01',
+      type: 'text',
       title: isSw ? 'Tathmini.' : 'Assess.',
       desc: isSw ? 'Kuelewa malengo, mifumo na hatari za biashara yako ili kupata njia bora ya kusonga mbele.' : 'Understand your business goals, systems, and risks to find the best way forward.',
-      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/80', bgImage: banner1, span: 'md:col-span-2', height: 'h-[340px]'
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/80', bgImage: banner1, span: 'md:col-span-2', height: 'h-[340px]',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw',
     },
-    { type: 'image', image: banner1, span: 'md:col-span-3', height: 'h-[340px]', imgClass: 'w-full h-full object-cover' },
-    { type: 'image', image: banner2, span: 'md:col-span-3', height: 'h-[340px]', imgClass: 'w-full h-full object-cover' },
-    { type: 'image', image: banner3, span: 'md:col-span-2', height: 'h-[340px]', imgClass: 'w-full h-full object-cover' },
-    { type: 'image', image: banner4, span: 'md:col-span-2', height: 'h-[340px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: banner1, span: 'md:col-span-3', height: 'h-[340px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 25vw' },
+    { type: 'image', image: banner2, span: 'md:col-span-3', height: 'h-[340px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 25vw' },
+    { type: 'image', image: banner3, span: 'md:col-span-2', height: 'h-[340px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw' },
+    { type: 'image', image: banner4, span: 'md:col-span-2', height: 'h-[340px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw' },
 
-    { type: 'image', image: banner5, span: 'md:col-span-4', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: banner5, span: 'md:col-span-4', height: 'h-[400px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 33.33vw, 33.33vw' },
     {
-      type: 'text', label: '02',
+      type: 'text',
       title: isSw ? 'Sanifu.' : 'Design.',
       desc: isSw ? 'Kutengeneza usanifu salama, unaokua kulingana na mahitaji yako halisi.' : 'Create secure, scalable architectures tailored to your needs.',
-      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: secureScalable, span: 'md:col-span-2', height: 'h-[400px]'
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: secureScalable, span: 'md:col-span-2', height: 'h-[400px]',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw',
     },
-    { type: 'image', image: secureScalable, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: secureScalable, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw' },
     {
-      type: 'text', label: '03',
+      type: 'text',
       title: isSw ? 'Tekeleza.' : 'Deliver.',
       desc: isSw ? 'Kutekeleza suluhisho katika awamu na hatua zilizowazi.' : 'Implement solutions in clear phases and milestones.',
-      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: deliverSolutions, span: 'md:col-span-2', height: 'h-[400px]'
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: deliverSolutions, span: 'md:col-span-2', height: 'h-[400px]',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw',
     },
     {
-      type: 'text', label: '04',
+      type: 'text',
       title: isSw ? 'Boresha.' : 'Optimize.',
       desc: isSw ? 'Kupima matokeo na kuendelea kuboresha kwa muendelezo.' : 'Measure impact and continuously improve.',
-      color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/85', bgImage: Optimize, span: 'md:col-span-2', height: 'h-[400px]'
+      color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/85', bgImage: Optimize, span: 'md:col-span-2', height: 'h-[400px]',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw',
     },
   ];
 
@@ -320,36 +305,40 @@ export const DataScienceSection = () => {
 
   const tiles: Tile[] = [
     {
-      type: 'text', label: '01',
+      type: 'text',
       title: isSw ? 'Uboreshaji wa Wingu.' : 'Cloud Modernization.',
       desc: isSw ? 'Hamisha na endesha mifumo ya wingu na mwonekano wa juu na usalama.' : 'Migrate and operate cloud systems with high visibility and security.',
-      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: Wingu, span: 'md:col-span-3', height: 'h-[360px]'
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: Wingu, span: 'md:col-span-3', height: 'h-[360px]',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 25vw',
     },
-    { type: 'image', image: banner5, span: 'md:col-span-3', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
-    { type: 'image', image: secureScalable, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: banner5, span: 'md:col-span-3', height: 'h-[360px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 25vw' },
+    { type: 'image', image: secureScalable, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw' },
     {
-      type: 'text', label: '02',
+      type: 'text',
       title: isSw ? 'Otomatiki ya DevOps.' : 'DevOps Automation.',
       desc: isSw ? 'Matoleo ya haraka na mitiririko ya otomatiki ya CI/CD.' : 'Faster releases with automated CI/CD pipelines.',
-      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: deliverSolutions, span: 'md:col-span-2', height: 'h-[360px]'
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: deliverSolutions, span: 'md:col-span-2', height: 'h-[360px]',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw',
     },
-    { type: 'image', image: deliverSolutions, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: deliverSolutions, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw' },
 
-    { type: 'image', image: cloud, span: 'md:col-span-4', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: cloud, span: 'md:col-span-4', height: 'h-[400px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 33.33vw, 33.33vw' },
     {
-      type: 'text', label: '03',
+      type: 'text',
       title: isSw ? 'Uboreshaji wa Gharama.' : 'Cost Optimization.',
       desc: isSw ? 'Gharama za wingu zinazotabirika na usimamizi bora.' : 'Predictable cloud costs and better governance.',
-      color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/85', bgImage: cost, span: 'md:col-span-2', height: 'h-[400px]'
+      color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/85', bgImage: cost, span: 'md:col-span-2', height: 'h-[400px]',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw',
     },
-    { type: 'image', image: cost, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: cost, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw' },
     {
-      type: 'text', label: '04',
+      type: 'text',
       title: isSw ? 'Ukaguzi wa Usalama.' : 'Security Audits.',
       desc: isSw ? 'Baini hatari muhimu za usalama katika mazingira yako.' : 'Identify critical security risks in your environment.',
-      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/85', bgImage: security, span: 'md:col-span-2', height: 'h-[400px]'
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/85', bgImage: security, span: 'md:col-span-2', height: 'h-[400px]',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw',
     },
-    { type: 'image', image: banner3, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: banner3, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw' },
   ];
 
   return (
@@ -395,40 +384,45 @@ export const WhySection = () => {
 
   const tiles: Tile[] = [
     {
-      type: 'text', label: '01',
+      type: 'text',
       title: isSw ? 'Uzoefu wa Biashara Kubwa.' : 'Enterprise Experience.',
       desc: isSw ? 'Imejengwa na wahandisi wenye uzoefu katika mazingira ya kiwango cha juu.' : 'Built by engineers with experience in high-level environments.',
-      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: banner4, span: 'md:col-span-3', height: 'h-[360px]'
+      color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/85', bgImage: banner4, span: 'md:col-span-3', height: 'h-[360px]',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 25vw',
     },
-    { type: 'image', image: banner4, span: 'md:col-span-3', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: banner4, span: 'md:col-span-3', height: 'h-[360px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 25vw' },
     {
-      type: 'text', label: '02',
+      type: 'text',
       title: isSw ? 'Usalama wa Msingi.' : 'Embedded Security.',
       desc: isSw ? 'Usalama umejumuishwa katika kila suluhisho tunalojenga.' : 'Security is embedded in every solution.',
-      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: banner2, span: 'md:col-span-2', height: 'h-[360px]'
+      color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/85', bgImage: banner2, span: 'md:col-span-2', height: 'h-[360px]',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw',
     },
-    { type: 'image', image: banner2, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
-    { type: 'image', image: banner5, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: banner2, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw' },
+    { type: 'image', image: banner5, span: 'md:col-span-2', height: 'h-[360px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw' },
 
-    { type: 'image', image: deliverSolutions, span: 'md:col-span-3', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: deliverSolutions, span: 'md:col-span-3', height: 'h-[400px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 25vw' },
     {
-      type: 'text', label: '03',
+      type: 'text',
       title: isSw ? 'Uzingativu wa Soko la Afrika.' : 'African Market Focus.',
       desc: isSw ? 'Suluhisho za vitendo zinazoendana na masoko ya Afrika.' : 'Practical solutions aligned to African markets.',
-      color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/85', bgImage: banner3, span: 'md:col-span-3', height: 'h-[400px]'
+      color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/85', bgImage: banner3, span: 'md:col-span-3', height: 'h-[400px]',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 25vw',
     },
     {
-      type: 'text', label: '04',
+      type: 'text',
       title: isSw ? 'Uwekaji Kumbukumbu Wazi.' : 'Clear Documentation.',
       desc: isSw ? 'Upeo kamili, hatua za utekelezaji na nyaraka wazi.' : 'Full scope, milestones, and documentation.',
-      color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/85', bgImage: banner1, span: 'md:col-span-2', height: 'h-[400px]'
+      color: 'bg-[#E6007E]', text: 'text-white', subText: 'text-white/85', bgImage: banner1, span: 'md:col-span-2', height: 'h-[400px]',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw',
     },
-    { type: 'image', image: banner3, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover' },
+    { type: 'image', image: banner3, span: 'md:col-span-2', height: 'h-[400px]', imgClass: 'w-full h-full object-cover', sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw' },
     {
-      type: 'text', label: '05',
+      type: 'text',
       title: isSw ? 'Inayolenga Matokeo.' : 'Outcome Driven.',
       desc: isSw ? 'Inazingatia kutoa thamani halisi ya kibiashara.' : 'Focused on delivering real business value.',
-      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/85', bgImage: secureScalable, span: 'md:col-span-2', height: 'h-[400px]'
+      color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/85', bgImage: secureScalable, span: 'md:col-span-2', height: 'h-[400px]',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 16.67vw, 16.67vw',
     },
   ];
 

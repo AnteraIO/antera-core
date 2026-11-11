@@ -240,8 +240,12 @@ const quickPrompts = [
   { label: 'What does it cost?' },
 ];
 
-const ChatAgent = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface ChatAgentProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const ChatAgent = ({ isOpen, onClose }: ChatAgentProps) => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Msg[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -310,62 +314,13 @@ const ChatAgent = () => {
   return (
     <>
       <AnimatePresence>
-        {!isOpen && (
-          <motion.div
-            key="fab"
-            className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 group"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1, y: [0, -6, 0] }}
-            exit={{ scale: 0, opacity: 0 }}
-            transition={{
-              scale: { type: 'spring', damping: 18, stiffness: 260 },
-              opacity: { duration: 0.2 },
-              y: { repeat: Infinity, duration: 3.4, ease: 'easeInOut' },
-            }}
-          >
-            {/* soft pulsing halo */}
-            <motion.span
-              aria-hidden
-              className="absolute inset-0 rounded-full pointer-events-none"
-              style={{ background: 'radial-gradient(circle, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 70%)' }}
-              animate={{ scale: [1, 1.45, 1], opacity: [0.55, 0, 0.55] }}
-              transition={{ repeat: Infinity, duration: 3.4, ease: 'easeInOut' }}
-            />
-
-            {/* hover label */}
-            <span className="hidden md:block absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-1.5 rounded-full bg-[#111111] text-white text-[11px] font-medium whitespace-nowrap opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 pointer-events-none shadow-lg">
-              Chat with Bruno
-            </span>
-
-            <motion.button
-              whileHover={{ scale: 1.08, rotate: -4 }}
-              whileTap={{ scale: 0.92, rotate: 0 }}
-              transition={{ type: 'spring', stiffness: 380, damping: 14 }}
-              onClick={() => setIsOpen(true)}
-              aria-label="Chat with Bruno"
-              className="relative flex items-center justify-center rounded-full shadow-xl bg-white hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 focus-visible:ring-offset-2"
-              style={{ width: 78, height: 78 }}
-            >
-              <motion.img
-                src={BRUNO_ICON}
-                alt="Bruno"
-                animate={{ y: [0, -2, 0] }}
-                transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
-                style={{ width: 66, height: 66, objectFit: 'contain' }}
-              />
-            </motion.button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
         {isOpen && (
           <>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
+              onClick={onClose}
               className="fixed inset-0 z-40 bg-black/20 md:hidden"
             />
 
@@ -427,13 +382,13 @@ const ChatAgent = () => {
                 style={{ scrollbarWidth: 'none' }}
               >
                 <div className="flex justify-end mb-2">
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setIsOpen(false)}
-                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all"
-                    style={{ background: 'rgba(0,0,0,0.06)' }}
-                  >
+<motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={onClose}
+                className="w-8 h-8 rounded-full flex items-center justify-center transition-all"
+                style={{ background: 'rgba(0,0,0,0.06)' }}
+              >
                     <ChevronDown size={16} style={{ color: '#000000' }} />
                   </motion.button>
                 </div>

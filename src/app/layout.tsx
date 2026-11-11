@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -7,33 +7,43 @@ import { Navbar } from "@/components/Navbar";
 import { FinalCTAAndFooter } from "@/components/Footer";
 import ChatAgentClient from "@/components/ChatAgentClient";
 import { LayoutContent } from "@/components/LayoutContent";
+import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  weight: ["400", "500", "600", "700"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
+  weight: ["400", "500"],
 });
 
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
   weight: "400",
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const degarism = localFont({
   src: "../../public/fonts/degarism-studio-alliance-no-2-light.otf",
   variable: "--font-degarism",
-  display: "swap",
+  display: "block",
+  preload: true,
 });
 
 export const metadata: Metadata = {
   title: {
     default: "ANTERA | Advanced Neural Technologies & Engineering Research Agency",
-    template: "%s | ANTERA"
+    template: "%s | ANTERA",
   },
   description: "ANTERA (Advanced Neural Technologies & Engineering Research Agency) provides cutting-edge AI, automation, and digital infrastructure solutions in Tanzania and across Africa.",
   keywords: ["ANTERA", "AI Tanzania", "Neural Technologies", "Engineering Research", "Digital Transformation Africa", "Software Engineering Tanzania", "Antera Group", "Antera Tanzania"],
@@ -90,6 +100,12 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#ffffff',
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -118,6 +134,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://cdn-icons-png.flaticon.com" />
         <link rel="icon" href="/logo.png" type="image/png" />
         <link rel="shortcut icon" href="/logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/logo.png" />
@@ -135,6 +154,7 @@ export default function RootLayout({
             <LayoutContent>{children}</LayoutContent>
             <FinalCTAAndFooter />
             <ChatAgentClient />
+            <ServiceWorkerRegistration />
           </div>
         </LanguageProvider>
       </body>

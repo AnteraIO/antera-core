@@ -38,6 +38,8 @@ export const PartnersSection = () => {
   const row1 = [...partners, ...partners, ...partners, ...partners];
   const row2 = [...partners, ...partners, ...partners, ...partners];
 
+  const BLUR_DATA_URL = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+
   return (
     <section
       ref={containerRef}
@@ -61,7 +63,7 @@ export const PartnersSection = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ delay: 0.1, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Image src={topImage} alt="" className="w-64 md:w-80 lg:w-[400px] h-auto object-contain opacity-50 -translate-y-8" />
+            <Image src={topImage} alt="" className="w-64 md:w-80 lg:w-[400px] h-auto object-contain opacity-50 -translate-y-8" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 400px" priority placeholder="blur" blurDataURL={BLUR_DATA_URL} />
           </motion.div>
 
           <div className="relative w-full">
@@ -73,7 +75,7 @@ export const PartnersSection = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: 0.2, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Image src={leftImage} alt="" className="w-full h-auto object-contain" />
+              <Image src={leftImage} alt="" className="w-full h-auto object-contain" sizes="(max-width: 1024px) 100vw, 300px" priority placeholder="blur" blurDataURL={BLUR_DATA_URL} />
             </motion.div>
 
             {/* RIGHT IMAGE & ROTATED TEXT */}
@@ -84,9 +86,9 @@ export const PartnersSection = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: 0.4, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="w-48 xl:w-80 mt-4">
-                 <Image src={rightImage} alt="" className="w-full h-auto object-contain" />
-              </div>
+<div className="w-48 xl:w-80 mt-4">
+                  <Image src={rightImage} alt="" className="w-full h-auto object-contain" sizes="(max-width: 1024px) 100vw, 300px" priority placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+               </div>
               <span
                 className="text-sm md:text-base font-medium tracking-[0.2em] uppercase text-black whitespace-nowrap mt-12 mr-4"
                 style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
@@ -129,7 +131,7 @@ export const PartnersSection = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ delay: 0.2, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Image src={bottomImage} alt="" className="w-32 md:w-44 lg:w-56 h-auto object-contain opacity-50 -translate-y-4" />
+            <Image src={bottomImage} alt="" className="w-32 md:w-44 lg:w-56 h-auto object-contain opacity-50 -translate-y-4" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 200px" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
           </motion.div>
         </header>
 
@@ -148,9 +150,9 @@ export const PartnersSection = () => {
             {row1.map((partner, index) => (
               <React.Fragment key={`row1-${index}`}>
                 <div className="flex-shrink-0 flex items-center justify-center bg-[#F2F2F1] rounded-[2rem] md:rounded-[2.5rem] w-24 h-24 md:w-36 md:h-36 z-10">
-                  <div className="relative w-[80%] h-[80%]">
-                    <Image src={partner.logo} alt={partner.name} fill className="object-contain" />
-                  </div>
+<div className="relative w-[80%] h-[80%]">
+                     <Image src={partner.logo} alt={partner.name} fill className="object-contain" sizes="96px" />
+                   </div>
                 </div>
                 <div className="w-6 md:w-10 h-10 md:h-16 bg-[#F2F2F1] -mx-2 md:-mx-4 z-0" />
               </React.Fragment>
@@ -166,9 +168,9 @@ export const PartnersSection = () => {
             {row2.map((partner, index) => (
               <React.Fragment key={`row2-${index}`}>
                 <div className="flex-shrink-0 flex items-center justify-center bg-[#F2F2F1] rounded-[2rem] md:rounded-[2.5rem] w-24 h-24 md:w-36 md:h-36 z-10">
-                  <div className="relative w-[80%] h-[80%]">
-                    <Image src={partner.logo} alt={partner.name} fill className="object-contain" />
-                  </div>
+<div className="relative w-[80%] h-[80%]">
+                     <Image src={partner.logo} alt={partner.name} fill className="object-contain" sizes="96px" />
+                   </div>
                 </div>
                 <div className="w-6 md:w-10 h-10 md:h-16 bg-[#F2F2F1] -mx-2 md:-mx-4 z-0" />
               </React.Fragment>

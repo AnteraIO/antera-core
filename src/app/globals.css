@@ -10,12 +10,11 @@
   }
 
   body {
-    background-color: #fffaeb;
+    background-color: #ffffff;
     color: #1F1F1F;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "ss01", "ss02", "cv01", "cv11", "liga" 0, "clig" 0;
-    font-variant-ligatures: none !important;
     font-family: var(--font-degarism), var(--font-inter), sans-serif;
   }
 

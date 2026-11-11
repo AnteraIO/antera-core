@@ -127,6 +127,7 @@ export const Navbar = () => {
                 fill
                 className="object-contain object-left"
                 priority
+                sizes="280px"
               />
             </div>
           </Link>
@@ -144,13 +145,14 @@ export const Navbar = () => {
                     : 'text-white/90 hover:text-white'
                 }`}
               >
-                <img
-                  src={item.icon}
-                  alt=""
-                  width={22}
-                  height={22}
-                  className={`w-5 h-5 object-contain ${isDarkSurface ? 'brightness-0 invert opacity-90' : ''}`}
-                />
+<img
+                    src={item.icon}
+                    alt=""
+                    width={22}
+                    height={22}
+                    className={`w-5 h-5 object-contain ${isDarkSurface ? 'brightness-0 invert opacity-90' : ''}`}
+                    loading="lazy"
+                  />
                 {item.name}
               </Link>
             ))}
@@ -208,13 +210,14 @@ export const Navbar = () => {
                 </span>
 
                 <span className="relative z-10 flex items-center justify-center w-9 h-9 ml-[2px]">
-                  <img
-                    src={ENGLISH_ICON}
-                    alt="English"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6 object-contain"
-                  />
+<img
+                  src={CLOSE_ICON}
+                  alt="Close"
+                  width={16}
+                  height={16}
+                  className="brightness-0 invert"
+                  loading="lazy"
+                />
                 </span>
               </button>
               */}
@@ -240,6 +243,7 @@ export const Navbar = () => {
                 width={32}
                 height={32}
                 className={`w-8 h-8 object-contain ${menuIconFilter}`}
+                loading="lazy"
               />
             </button>
           </div>
@@ -265,6 +269,7 @@ export const Navbar = () => {
                   alt="Menu Background"
                   fill
                   className="object-cover object-center"
+                  sizes="100vw"
                 />
               </div>
 
@@ -288,6 +293,7 @@ export const Navbar = () => {
                               src={item.icon}
                               alt=""
                               className="w-8 h-8 md:w-9 md:h-9 object-contain opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300"
+                              loading="lazy"
                             />
                             <span>{item.name}</span>
                           </Link>
@@ -311,6 +317,7 @@ export const Navbar = () => {
                               src={item.icon}
                               alt=""
                               className="w-8 h-8 md:w-9 md:h-9 object-contain opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300"
+                              loading="lazy"
                             />
                             <span>{item.name}</span>
                           </Link>
@@ -343,6 +350,7 @@ export const Navbar = () => {
                           width={40}
                           height={40}
                           className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                          loading="lazy"
                         />
                       </a>
                     ))}
@@ -354,7 +362,7 @@ export const Navbar = () => {
                     onClick={() => setIsOpen(false)}
                     aria-label="Close menu"
                   >
-                    <img src={CLOSE_ICON} alt="Close" width={56} height={56} />
+                    <img src={CLOSE_ICON} alt="Close" width={56} height={56} loading="lazy" />
                   </button>
                 </div>
               </div>

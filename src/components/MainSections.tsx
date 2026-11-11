@@ -157,25 +157,25 @@ const palette: Record<Palette, { color: string; text: string; subText: string; g
     color: 'bg-[#E8ECEF]',
     text: 'text-black',
     subText: 'text-black/80',
-    gradient: 'from-[#E8ECEF]/98 via-[#E8ECEF]/85 to-[#E8ECEF]/30',
+    gradient: 'from-[#E8ECEF]/95 via-[#E8ECEF]/80 to-[#E8ECEF]/30',
   },
   dark: {
     color: 'bg-[#0A0A0A]',
     text: 'text-white',
     subText: 'text-white/85',
-    gradient: 'from-[#0A0A0A]/98 via-[#0A0A0A]/85 to-[#0A0A0A]/30',
+    gradient: 'from-[#0A0A0A]/95 via-[#0A0A0A]/80 to-[#0A0A0A]/30',
   },
   navy: {
     color: 'bg-[#0D2A6B]',
     text: 'text-white',
     subText: 'text-white/85',
-    gradient: 'from-[#0D2A6B]/98 via-[#0D2A6B]/85 to-[#0D2A6B]/30',
+    gradient: 'from-[#0D2A6B]/95 via-[#0D2A6B]/80 to-[#0D2A6B]/30',
   },
   amber: {
     color: 'bg-[#FFC72C]',
     text: 'text-black',
     subText: 'text-black/80',
-    gradient: 'from-[#FFC72C]/98 via-[#FFC72C]/85 to-[#FFC72C]/30',
+    gradient: 'from-[#FFC72C]/95 via-[#FFC72C]/80 to-[#FFC72C]/30',
   },
 };
 
@@ -187,6 +187,7 @@ const ServiceCard = ({
   span,
   height,
   imgClass,
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
 }: {
   title: string;
   description: string;
@@ -195,18 +196,19 @@ const ServiceCard = ({
   span: string;
   height: string;
   imgClass: string;
+  sizes?: string;
 }) => {
   const p = palette[paletteKey];
   return (
     <motion.div variants={cardVariants} className={`${span} ${height} group relative`}>
       <MagneticCard
-        className={`relative w-full h-full overflow-hidden rounded-2xl flex flex-col justify-end p-8 md:p-10 cursor-pointer ${p.color} ${p.text}`}
+        className={`relative w-full h-full overflow-hidden rounded-sm flex flex-col justify-end p-8 md:p-10 cursor-pointer ${p.color} ${p.text}`}
       >
-        <div className={`absolute inset-0 z-0 bg-gradient-to-t ${p.gradient}`} />
-
         <div className={`absolute transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] z-[1] ${imgClass}`}>
-          <Image src={image} alt={title} className="w-full h-auto object-contain drop-shadow-2xl opacity-80" />
+          <Image src={image} alt={title} className="w-full h-auto object-contain drop-shadow-2xl opacity-80" sizes={sizes} placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
         </div>
+
+        <div className={`absolute inset-0 z-[5] pointer-events-none bg-gradient-to-t ${p.gradient}`} />
 
         <div className="relative z-10 max-w-[90%]">
           <h3 className="text-3xl md:text-4xl lg:text-[40px] font-bold tracking-[-0.02em] leading-[1.05] mb-4">
@@ -237,6 +239,7 @@ export const TrustSection = () => {
       span: 'md:col-span-7',
       height: 'h-[560px]',
       imgClass: 'bottom-0 right-0 w-[70%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 58vw, 35vw',
     },
     {
       title: t('trust.card2_title') || (isSw ? 'Ukimiliki wa Data' : 'Data Ownership'),
@@ -246,6 +249,7 @@ export const TrustSection = () => {
       span: 'md:col-span-5',
       height: 'h-[560px]',
       imgClass: 'bottom-0 right-0 w-[95%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 42vw, 25vw',
     },
   ];
 
@@ -292,6 +296,7 @@ export const TrustSection = () => {
                 span={card.span}
                 height={card.height}
                 imgClass={card.imgClass}
+                sizes={card.sizes}
               />
             ))}
           </motion.div>
@@ -314,6 +319,7 @@ export const ServicesSection = () => {
       span: 'md:col-span-7',
       height: 'h-[560px]',
       imgClass: 'bottom-0 right-0 w-[70%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 58vw, 35vw',
     },
     {
       title: t('services.card2_title') || (isSw ? 'Otomatiki ya Mtiririko wa Kazi' : 'Workflow Automation'),
@@ -323,6 +329,7 @@ export const ServicesSection = () => {
       span: 'md:col-span-5',
       height: 'h-[560px]',
       imgClass: 'bottom-0 right-0 w-[95%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 42vw, 25vw',
     },
     {
       title: t('services.card3_title') || (isSw ? 'Wasaidizi Salama wa AI' : 'Secure AI Copilots'),
@@ -332,6 +339,7 @@ export const ServicesSection = () => {
       span: 'md:col-span-5',
       height: 'h-[520px]',
       imgClass: 'bottom-0 right-0 w-[85%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 42vw, 25vw',
     },
     {
       title: t('services.card4_title') || (isSw ? 'Uchambuzi wa Data' : 'Data Analytics'),
@@ -341,6 +349,7 @@ export const ServicesSection = () => {
       span: 'md:col-span-7',
       height: 'h-[520px]',
       imgClass: 'bottom-0 right-0 w-[70%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 58vw, 35vw',
     },
     {
       title: t('services.card5_title') || (isSw ? 'Miundombinu ya Usalama' : 'Security Infrastructures'),
@@ -350,6 +359,7 @@ export const ServicesSection = () => {
       span: 'md:col-span-6',
       height: 'h-[480px]',
       imgClass: 'bottom-0 right-0 w-[78%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 30vw',
     },
     {
       title: t('services.card6_title') || (isSw ? 'Ujumuishaji wa Mifumo' : 'System Integrations'),
@@ -359,6 +369,7 @@ export const ServicesSection = () => {
       span: 'md:col-span-6',
       height: 'h-[480px]',
       imgClass: 'bottom-0 right-0 w-[95%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 30vw',
     },
     {
       title: t('services.card7_title') || (isSw ? 'Ubunifu wa Picha' : 'Graphics Design'),
@@ -368,6 +379,7 @@ export const ServicesSection = () => {
       span: 'md:col-span-6',
       height: 'h-[480px]',
       imgClass: 'bottom-0 right-0 w-[78%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 30vw',
     },
     {
       title: t('services.card8_title') || (isSw ? 'Masoko ya Kidijitali' : 'Digital Marketing'),
@@ -377,6 +389,7 @@ export const ServicesSection = () => {
       span: 'md:col-span-7',
       height: 'h-[520px]',
       imgClass: 'bottom-0 right-0 w-[80%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 58vw, 35vw',
     },
     {
       title: t('services.card9_title') || (isSw ? 'Uandishi wa Wasifu' : 'Resume Writing'),
@@ -386,6 +399,7 @@ export const ServicesSection = () => {
       span: 'md:col-span-5',
       height: 'h-[520px]',
       imgClass: 'bottom-0 right-0 w-[80%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 42vw, 25vw',
     },
   ];
 
@@ -426,6 +440,7 @@ export const ServicesSection = () => {
                 span={card.span}
                 height={card.height}
                 imgClass={card.imgClass}
+                sizes={card.sizes}
               />
             ))}
           </motion.div>

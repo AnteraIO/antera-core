@@ -2,7 +2,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring, MotionConfig, useMotionValue, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import { Play, ArrowUpRight } from 'lucide-react';
+import { Play } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 import mobileAppImage from '../assets/graphics/93.png';
@@ -108,36 +108,20 @@ const MagneticCard = ({
 const AnimatedHeading = ({
   line1,
   line2,
-  eyebrow,
   size = 'default',
 }: {
   line1: string;
   line2: string;
-  eyebrow?: string;
-  size?: 'default' | 'large';
+  size?: 'default' | 'large' | 'compact';
 }) => (
   <div className="flex flex-col items-center">
-    {eyebrow && (
-      <motion.span
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
-        className="mb-6 md:mb-8 inline-flex items-center gap-2.5 rounded-full border border-black/[0.08] bg-black/[0.025] px-4 py-2 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em] text-neutral-500"
-      >
-        <span className="relative flex h-1.5 w-1.5">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3E9C8F] opacity-60" />
-          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#3E9C8F]" />
-        </span>
-        {eyebrow}
-      </motion.span>
-    )}
-
     <motion.h1
       className={`${
         size === 'large'
           ? 'text-[clamp(2.5rem,7.5vw,7rem)]'
-          : 'text-[clamp(2.25rem,6.5vw,6rem)]'
+          : size === 'compact'
+            ? 'text-[clamp(2.25rem,5.5vw,5rem)]'
+            : 'text-[clamp(2.25rem,6.5vw,6rem)]'
       } font-bold tracking-[-0.045em] leading-[0.95] text-balance`}
       initial="hidden"
       whileInView="visible"
@@ -238,12 +222,25 @@ const ServiceCard = ({
   height,
   imgClass,
   isVideo,
-  index,
+  scrim,
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
 }: any) => {
+  const scrimClass =
+    scrim ||
+    (color?.includes('E8ECEF')
+      ? 'from-[#E8ECEF] via-[#E8ECEF]/80'
+      : color?.includes('0D2A6B')
+        ? 'from-[#0D2A6B] via-[#0D2A6B]/80'
+        : color?.includes('3E9C8F')
+          ? 'from-[#3E9C8F] via-[#3E9C8F]/80'
+          : color?.includes('FFC72C')
+            ? 'from-[#FFC72C] via-[#FFC72C]/80'
+            : 'from-[#0A0A0A] via-[#0A0A0A]/80');
+
   return (
     <motion.div variants={cardVariants} className={`${span} ${height} group relative`}>
       <MagneticCard
-        className={`relative w-full h-full overflow-hidden rounded-2xl flex flex-col justify-start p-8 md:p-10 cursor-pointer ${color} ${text}`}
+        className={`relative w-full h-full overflow-hidden rounded-sm flex flex-col justify-start p-8 md:p-10 cursor-pointer ${color} ${text}`}
       >
         <Shimmer />
 
@@ -255,6 +252,7 @@ const ServiceCard = ({
             muted
             loop
             playsInline
+            preload="metadata"
             initial={{ scale: 1.25, opacity: 0 }}
             whileInView={{ scale: 1.15, opacity: 1 }}
             viewport={{ once: true }}
@@ -263,18 +261,14 @@ const ServiceCard = ({
           />
         ) : (
           <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 z-[4] ${imgClass}`}>
-            <Image src={image} alt={title} className="w-full h-auto object-contain drop-shadow-2xl" />
+            <Image src={image} alt={title} className="w-full h-auto object-contain drop-shadow-2xl" sizes={sizes} placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
           </div>
         )}
 
-        {typeof index === 'number' && (
-          <span
-            aria-hidden
-            className="absolute top-6 right-6 md:top-8 md:right-8 z-30 flex h-9 min-w-9 items-center justify-center rounded-full border border-current px-3 text-[10px] font-semibold tracking-[0.16em] opacity-40 transition-all duration-500 group-hover:opacity-80"
-          >
-            {String(index + 1).padStart(2, '0')}
-          </span>
-        )}
+        <div
+          aria-hidden
+          className={`pointer-events-none absolute inset-x-0 top-0 h-[68%] bg-gradient-to-b ${scrimClass} to-transparent z-[5]`}
+        />
 
         <div className="relative z-20 max-w-[85%] pr-8">
           <h3 className="text-[26px] md:text-3xl lg:text-[40px] font-bold tracking-[-0.03em] leading-[1.05]">
@@ -286,7 +280,7 @@ const ServiceCard = ({
         </div>
 
         <AccentLine />
-        <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F]/60 transition-all duration-500 pointer-events-none z-30 rounded-2xl" />
+        <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F]/60 transition-all duration-500 pointer-events-none z-30 rounded-sm" />
       </MagneticCard>
     </motion.div>
   );
@@ -305,6 +299,7 @@ export const WebServicesSection = () => {
       color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/80',
       span: 'md:col-span-7', height: 'h-[520px]',
       imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 58vw, 35vw',
     },
     {
       title: t('web.landing_pages_title') || (isSw ? 'Kurasa za Kutua' : 'Landing Pages'),
@@ -313,6 +308,7 @@ export const WebServicesSection = () => {
       color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/80',
       span: 'md:col-span-5', height: 'h-[520px]',
       imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 42vw, 25vw',
     },
     {
       title: t('web.development_title') || (isSw ? 'Ujenzi wa Tovuti' : 'Development'),
@@ -321,6 +317,7 @@ export const WebServicesSection = () => {
       color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/80',
       span: 'md:col-span-5', height: 'h-[520px]',
       imgClass: 'absolute -bottom-20 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 42vw, 25vw',
     },
     {
       title: t('web.redesign_title') || (isSw ? 'Huduma za Kuboresha Upya' : 'Redesign Services'),
@@ -329,6 +326,7 @@ export const WebServicesSection = () => {
       color: 'bg-[#3E9C8F]', text: 'text-white', subText: 'text-white/85',
       span: 'md:col-span-7', height: 'h-[520px]',
       imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 58vw, 35vw',
     },
     {
       title: t('web.cms_title') || (isSw ? 'Ubunifu wa CMS' : 'CMS Design'),
@@ -337,6 +335,7 @@ export const WebServicesSection = () => {
       color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/80',
       span: 'md:col-span-6', height: 'h-[480px]',
       imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 30vw',
     },
     {
       title: t('web.maintenance_title') || (isSw ? 'Huduma za Matengenezo' : 'Maintenance Services'),
@@ -345,18 +344,19 @@ export const WebServicesSection = () => {
       color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/80',
       span: 'md:col-span-6', height: 'h-[480px]',
       imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 30vw',
     },
   ];
 
   return (
     <MotionWrapper>
-      <section ref={containerRef} className="bg-white text-black font-sans w-full pt-20 pb-32 relative overflow-hidden">
+      <section ref={containerRef} id="web-services" className="bg-white text-black font-sans w-full pt-20 pb-32 relative overflow-hidden">
         <SectionBackdrop />
         <GrainOverlay />
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 relative z-[2]">
-          <header className="max-w-5xl mx-auto text-center mb-20">
+          <header className="relative max-w-5xl mx-auto text-center mb-20">
             <AnimatedHeading
-              size="large"
+              size="compact"
               line1={t('web.title_line1') || 'Create new value'}
               line2={t('web.title_line2') || 'and maintain your competitive edge.'}
             />
@@ -398,7 +398,9 @@ export const CommunicationSection = () => {
       title: isSw ? 'Wakala wa Mazungumzo wa AI' : 'AI Chatbots',
       description: isSw ? 'Wakala wenye akili wanaochuja fursa, kujibu maswali ya wateja, na kupanga miadi saa 24/7.' : 'Never miss a customer again. Our AI chatbots greet every visitor the moment they arrive, answer questions clearly, qualify leads, and follow up while interest is still high. When someone is ready to buy, book, or speak to a person, your team is notified right away so nothing slips through. Every message gets a reply, at every hour, and your business always feels present and attentive.',
       color: 'bg-[#E8ECEF]', text: 'text-white/80', subText: 'text-white/80',
+      scrim: 'from-black/90 via-black/50',
       span: 'md:col-span-7', height: 'h-[560px]',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 58vw, 35vw',
     },
     {
       title: isSw ? 'Ujenzi wa Mifumo' : 'System Development',
@@ -407,6 +409,7 @@ export const CommunicationSection = () => {
       image: mobileAppImage,
       span: 'md:col-span-5', height: 'h-[560px]',
       imgClass: 'absolute -bottom-20 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 42vw, 25vw',
     },
     {
       title: isSw ? 'Uchambuzi wa Data' : 'Data Analytics',
@@ -415,6 +418,7 @@ export const CommunicationSection = () => {
       image: DataAnalytics,
       span: 'md:col-span-5', height: 'h-[520px]',
       imgClass: 'absolute -bottom-24 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 42vw, 25vw',
     },
     {
       title: isSw ? 'Otomatiki ya Mtiririko wa Kazi' : 'Workflow Automation',
@@ -423,6 +427,7 @@ export const CommunicationSection = () => {
       image: Workflow,
       span: 'md:col-span-7', height: 'h-[520px]',
       imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 58vw, 35vw',
     },
     {
       title: isSw ? 'Miundombinu ya Usalama' : 'Security Infrastructures',
@@ -431,6 +436,7 @@ export const CommunicationSection = () => {
       image: SecurityInfrastructure,
       span: 'md:col-span-6', height: 'h-[480px]',
       imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 30vw',
     },
     {
       title: isSw ? 'Ujumuishaji wa Mifumo' : 'System Integrations',
@@ -439,6 +445,7 @@ export const CommunicationSection = () => {
       image: SystemIntegration,
       span: 'md:col-span-6', height: 'h-[480px]',
       imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 30vw',
     },
   ];
 
@@ -499,6 +506,7 @@ export const ApplicationSection = () => {
       image: SecureScalable,
       color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70',
       imgClass: 'absolute -bottom-32 -right-32 w-[80%] md:w-[70%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
     },
     {
       title: isSw ? 'Imarisha uaminifu wa chapa yako.' : 'Improve brand credibility.',
@@ -506,6 +514,7 @@ export const ApplicationSection = () => {
       image: BrandCredibility,
       color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70',
       imgClass: 'absolute -bottom-32 -right-32 w-[85%] md:w-[75%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
     },
   ];
 
@@ -542,12 +551,12 @@ export const ApplicationSection = () => {
                 className="group relative"
               >
                 <MagneticCard
-                  className={`relative overflow-hidden ${card.color} ${card.text} min-h-[640px] lg:min-h-[820px] p-8 md:p-14 flex flex-col justify-start cursor-pointer rounded-2xl`}
+                  className={`relative overflow-hidden ${card.color} ${card.text} min-h-[640px] lg:min-h-[820px] p-8 md:p-14 flex flex-col justify-start cursor-pointer rounded-sm`}
                 >
                   <Shimmer />
 
                   <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 z-[4] ${card.imgClass}`}>
-                    <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" />
+                    <Image src={card.image} alt={card.title} className="w-full h-auto object-contain drop-shadow-2xl" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
                   </div>
 
                   <div className="relative z-20 max-w-3xl">
@@ -561,7 +570,7 @@ export const ApplicationSection = () => {
                   </div>
 
                   <AccentLine />
-                  <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F] transition-all duration-500 pointer-events-none z-30 rounded-2xl" />
+                  <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F] transition-all duration-500 pointer-events-none z-30 rounded-sm" />
                 </MagneticCard>
               </motion.div>
             ))}
@@ -580,32 +589,38 @@ export const DataIntelligenceSection = () => {
     {
       title: isSw ? 'Dashibodi za Watendaji' : 'Executive Dashboards',
       description: isSw ? 'Taswira moja na wazi ya takwimu zinazoongoza maamuzi, kutoka mapato hadi operesheni, zikihuishwa mubashara.' : 'A single, clear view of the metrics that drive decisions, from revenue to operations, updated live.',
-      image: ExecutiveDashboards, color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', span: 'md:col-span-7', height: 'h-[560px]', imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl'
+      image: ExecutiveDashboards, color: 'bg-[#E8ECEF]', text: 'text-black', subText: 'text-black/70', span: 'md:col-span-7', height: 'h-[560px]', imgClass: 'absolute -bottom-20 -right-20 w-[80%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 58vw, 35vw',
     },
     {
       title: isSw ? 'Uchambuzi wa Kutabiri' : 'Predictive Analytics',
       description: isSw ? 'Tabiri mahitaji, mabadiliko ya wateja na mapato kwa mifumo iliyofunzwa kwenye data zako za kihistoria.' : 'Forecast demand, churn, and revenue with models trained on your own historical data.',
-      image: predictiveAnalyticsImage, color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', span: 'md:col-span-5', height: 'h-[560px]', imgClass: 'absolute -bottom-24 -right-24 w-[105%] h-auto object-contain drop-shadow-2xl'
+      image: predictiveAnalyticsImage, color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', span: 'md:col-span-5', height: 'h-[560px]', imgClass: 'absolute -bottom-24 -right-24 w-[105%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 42vw, 25vw',
     },
     {
       title: isSw ? 'Mifumo ya Njia za Data' : 'Data Pipelines',
       description: isSw ? 'Mtiririko wa otomatiki unaokusanya, kusafisha na kuunganisha data kutoka kila mfumo unautumia.' : 'Automated flows that collect, clean, and centralize data from every system you use.',
-      image: DataAnalytics, color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl'
+      image: DataAnalytics, color: 'bg-[#0D2A6B]', text: 'text-white', subText: 'text-white/70', span: 'md:col-span-5', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-20 w-[100%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 42vw, 25vw',
     },
     {
       title: isSw ? 'Chanzo Moja cha Ukweli' : 'Single Source of Truth',
       description: isSw ? 'Seti moja ya data inayokubaliwa na wote, inayoondoa machafuko ya majedwali na ripoti zinazokinzana.' : 'One trusted dataset everyone agrees on, ending spreadsheet chaos and conflicting reports.',
-      image: customerInsightsImage, color: 'bg-[#3E9C8F]', text: 'text-white', subText: 'text-white/85', span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl'
+      image: customerInsightsImage, color: 'bg-[#3E9C8F]', text: 'text-white', subText: 'text-white/85', span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 58vw, 35vw',
     },
     {
       title: isSw ? 'Usimamizi wa Data' : 'Data Governance',
       description: isSw ? 'Sera, mtiririko na udhibiti wa ufikiaji ili data yako ibaki sahihi, inayofuata sheria na inayokagulika.' : 'Policies, lineage, and access controls so your data stays accurate, compliant, and auditable.',
-      image: dataGovernanceImage, color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70', span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl'
+      image: dataGovernanceImage, color: 'bg-[#FFC72C]', text: 'text-black', subText: 'text-black/70', span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-20 -right-16 w-[85%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 30vw',
     },
     {
       title: isSw ? 'Ufahamu wa Utabiri' : 'Forecasting Insights',
       description: isSw ? 'Mipango ya matukio na mifumo ya kuangalia mbele kusaidia uongozi kujiandaa na kile kinachofuata.' : 'Scenario planning and forward-looking models to help leadership prepare for what is next.',
-      image: decisionSupportSystemsImage, color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl'
+      image: decisionSupportSystemsImage, color: 'bg-[#0A0A0A]', text: 'text-white', subText: 'text-white/70', span: 'md:col-span-6', height: 'h-[480px]', imgClass: 'absolute -bottom-24 -right-24 w-[110%] h-auto object-contain drop-shadow-2xl',
+      sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 30vw',
     },
   ];
 

@@ -27,18 +27,19 @@ const FooterLink = ({ href, children }: { href: string; children: React.ReactNod
   const isExternal = href.startsWith('http');
   const cls =
     'flex items-center gap-3 py-2.5 text-base md:text-lg text-black hover:text-neutral-500 transition-colors duration-300 group w-full text-left';
-  const content = (
-    <>
-      <img
-        src={CHECK_ICON}
-        alt=""
-        width={18}
-        height={18}
-        className="w-4 h-4 object-contain group-hover:scale-110 transition-transform"
-      />
-      {children}
-    </>
-  );
+const content = (
+      <>
+        <img
+          src={CHECK_ICON}
+          alt=""
+          width={18}
+          height={18}
+          className="w-4 h-4 object-contain group-hover:scale-110 transition-transform"
+          loading="lazy"
+        />
+        {children}
+      </>
+    );
   return (
     <li className="border-b border-black/20 last:border-0">
       {isExternal ? (
@@ -88,6 +89,9 @@ export const FinalCTAAndFooter = () => {
           alt="Footer Background"
           className="object-cover object-center opacity-70"
           fill
+          sizes="100vw"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
         />
       </div>
       <div className="absolute inset-0 z-0 bg-white/85 pointer-events-none" aria-hidden="true" />
@@ -134,6 +138,7 @@ export const FinalCTAAndFooter = () => {
                 src={logo.src}
                 alt="Antera Logo"
                 className="h-14 w-auto object-contain"
+                loading="lazy"
               />
 
               <ul className="space-y-0">
@@ -169,6 +174,7 @@ export const FinalCTAAndFooter = () => {
                         width={22}
                         height={22}
                         className="w-5 h-5 object-contain group-hover:scale-110 transition-transform shrink-0"
+                        loading="lazy"
                       />
                       <span className="break-all">{item.label}</span>
                     </a>
@@ -278,6 +284,7 @@ export const FinalCTAAndFooter = () => {
                         width={48}
                         height={48}
                         className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                        loading="lazy"
                       />
                     </motion.a>
                   ))}

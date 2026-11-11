@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import type { StaticImageData } from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 
 import hero3 from '../assets/bot.jpg';
@@ -16,6 +17,14 @@ import hero11 from '../assets/hero-11.jpg';
 import hero12 from '../assets/intelligence.jpg';
 
 const SLIDE_DURATION = 6000;
+
+type SliderItem = {
+  name: string;
+  title: string;
+  video?: string;
+  poster?: string;
+  image?: StaticImageData;
+};
 
 const HERO_VIDEOS = [
   { src: '/videos/antera-video.mp4', poster: '/videos/posters/antera-video.jpg' },
@@ -37,16 +46,18 @@ export const Hero = () => {
     setCurrentHeroVideo((prev) => (prev + 1) % HERO_VIDEOS.length);
   };
 
-  const sliderItems = [
+  const sliderItems: SliderItem[] = [
     {
       name: isSw ? 'Wavuti' : 'Web Apps',
       title: isSw ? 'Programu za Wavuti za Biashara kwa Ukuzaji ↗' : 'Enterprise Web Applications for Scale ↗',
-      video: '/videos/folder-video.mp4'
+      video: '/videos/folder-video.mp4',
+      poster: '/videos/posters/folder-video.jpg'
     },
     {
       name: isSw ? 'Mifumo ya Simu' : 'Mobile Systems',
       title: isSw ? 'Programu za Simu za Majukwaa Mbalimbali kwa Afrika Mashariki ↗' : 'Cross-Platform Mobile Solutions for East Africa ↗',
-      video: '/videos/alert.mp4'
+      video: '/videos/alert.mp4',
+      poster: '/videos/posters/alert.jpg'
     },
     {
       name: isSw ? 'Wakala wa AI' : 'AI Agents',
@@ -206,14 +217,28 @@ export const Hero = () => {
                     }`}
                   >
                     {item.video ? (
-                      <video
-                        src={item.video}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="w-full h-full object-cover"
-                      />
+                      isActive ? (
+                        <video
+                          src={item.video}
+                          poster={item.poster}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          preload="none"
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        item.poster && (
+                          <Image
+                            src={item.poster}
+                            alt={item.title}
+                            fill
+                            sizes="85vw"
+                            className="object-cover"
+                          />
+                        )
+                      )
                     ) : item.image ? (
                       <Image
                         src={item.image}
