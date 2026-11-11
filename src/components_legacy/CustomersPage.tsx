@@ -68,7 +68,7 @@ export const CustomersPage = () => {
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
           <header className="max-w-[1400px] mx-auto text-center mb-16">
             <motion.h1
-              className="text-[5rem] md:text-[12rem] lg:text-[18rem] font-bold tracking-[-0.05em] leading-[0.85]"
+              className="text-[clamp(2.5rem,7.5vw,7rem)] font-bold tracking-[-0.045em] leading-[0.95]"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
             >
               <span className="block text-black">
