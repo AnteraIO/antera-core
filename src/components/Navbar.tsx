@@ -12,7 +12,7 @@ import menuBgImg from '@/assets/gritty-blue.jpg';
 const SWAHILI_ICON = 'https://cdn-icons-png.flaticon.com/128/303/303200.png';
 const ENGLISH_ICON = 'https://cdn-icons-png.flaticon.com/128/10452/10452489.png';
 const CLOSE_ICON = 'https://cdn-icons-png.flaticon.com/128/12274/12274954.png';
-const MENU_ICON = 'https://cdn-icons-png.flaticon.com/128/2099/2099089.png';
+const MENU_ICON = 'https://cdn-icons-png.flaticon.com/128/747/747327.png';
 
 const NAV_ICONS = [
   'https://cdn-icons-png.flaticon.com/128/35/35787.png',
