@@ -4,6 +4,7 @@ import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { TypingHeading } from '@/components/TypingHeading';
 
 import hero1 from '@/assets/intelligence.jpg';
 import hero2 from '@/assets/data-architecture.jpg';
@@ -137,17 +138,11 @@ export const ProductsPage = () => {
 
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
           <header className="max-w-[1400px] mx-auto text-center mb-16">
-            <motion.h1
+            <TypingHeading
+              line1={isSw ? 'Bidhaa zetu zinaendesha' : 'Our products power'}
+              line2={isSw ? 'maamuzi ya muda halisi' : 'real-time decisions'}
               className="text-[clamp(2.5rem,7.5vw,7rem)] font-bold tracking-[-0.045em] leading-[0.95]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Bidhaa zetu zinaendesha' : 'Our products power'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'maamuzi ya muda halisi' : 'real-time decisions'}
-              </span>
-            </motion.h1>
+            />
 
             <motion.p
               className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-12 max-w-2xl mx-auto"
@@ -242,17 +237,12 @@ export const ProductsPage = () => {
 
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
           <header className="max-w-[1400px] mx-auto text-center mb-24">
-            <motion.h2
+            <TypingHeading
+              as="h2"
+              line1={isSw ? 'Bidhaa tunazo' : 'Products we'}
+              line2={isSw ? 'jenga kwa ajili yako' : 'build for you'}
               className="text-[clamp(2.5rem,7.5vw,7rem)] font-bold tracking-[-0.045em] leading-[0.95]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Bidhaa tunazo' : 'Products we'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'jenga kwa ajili yako' : 'build for you'}
-              </span>
-            </motion.h2>
+            />
           </header>
 
           <motion.div
@@ -290,17 +280,12 @@ export const ProductsPage = () => {
 
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
           <header className="max-w-[1400px] mx-auto text-center">
-            <motion.h2
+            <TypingHeading
+              as="h2"
+              line1={isSw ? 'Kuna mengi sana' : 'There is so much'}
+              line2={isSw ? 'yaliyobaki kujenga' : 'left to build'}
               className="text-[clamp(2.5rem,7.5vw,7rem)] font-bold tracking-[-0.045em] leading-[0.95]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Kuna mengi sana' : 'There is so much'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'yaliyobaki kujenga' : 'left to build'}
-              </span>
-            </motion.h2>
+            />
 
             <motion.p
               className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-12 max-w-2xl mx-auto"

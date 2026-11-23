@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
+import { TypingHeading } from './TypingHeading';
 
 import awsLogo from '../assets/aws.png';
 import digitalOceanLogo from '../assets/digital-ocean.png';
@@ -97,20 +98,11 @@ export const PartnersSection = () => {
               </span>
             </motion.div>
 
-            <motion.h1
+            <TypingHeading
+              line1={t('partners.title_line1') || (isSw ? 'Imeundwa na walio bora' : 'Engineered with the best')}
+              line2={t('partners.title_line2') || (isSw ? 'inaendeshwa na walio bora' : 'powered by the best')}
               className="text-3xl sm:text-4xl md:text-6xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[1.05] sm:leading-[0.98] relative z-10 pt-4 text-balance"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <span className="block text-black">
-                {t('partners.title_line1') || (isSw ? 'Imeundwa na walio bora' : 'Engineered with the best')}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {t('partners.title_line2') || (isSw ? 'inaendeshwa na walio bora' : 'powered by the best')}
-              </span>
-            </motion.h1>
+            />
           </div>
 
           <motion.p

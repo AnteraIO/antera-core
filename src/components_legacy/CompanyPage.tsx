@@ -4,6 +4,7 @@ import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import { Play } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { TypingHeading } from '@/components/TypingHeading';
 
 import mobileAppImage from '../assets/mobile-app.png';
 import webCommandImage from '../assets/web-command.png';
@@ -111,17 +112,11 @@ export const CompanyPage = () => {
               {isSw ? 'Kuhusu Antera Technologies.' : 'About Antera Technologies.'}
             </motion.p>
 
-            <motion.h1
+            <TypingHeading
+              line1={isSw ? 'Mshirika wa teknolojia' : 'A technology partner'}
+              line2={isSw ? 'anaefanya kazi kutoka Afrika kwa ulimwengu' : 'working from Africa for the world'}
               className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Mshirika wa teknolojia' : 'A technology partner'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'anaefanya kazi kutoka Afrika kwa ulimwengu' : 'working from Africa for the world'}
-              </span>
-            </motion.h1>
+            />
 
             <motion.p
               className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-10 max-w-2xl mx-auto"
@@ -154,17 +149,12 @@ export const CompanyPage = () => {
         ========================================== */}
         <div id="how-we-work" className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32 scroll-mt-24">
           <header className="max-w-5xl mx-auto text-center mb-24">
-            <motion.h2
+            <TypingHeading
+              as="h2"
+              line1={isSw ? 'Hatua nne kutoka' : 'Four steps from'}
+              line2={isSw ? 'tatizo hadi matokeo' : 'problem to outcome'}
               className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Hatua nne kutoka' : 'Four steps from'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'tatizo hadi matokeo' : 'problem to outcome'}
-              </span>
-            </motion.h2>
+            />
           </header>
 
           <motion.div
@@ -205,17 +195,12 @@ export const CompanyPage = () => {
         ========================================== */}
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
           <header className="max-w-5xl mx-auto text-center mb-24">
-            <motion.h2
+            <TypingHeading
+              as="h2"
+              line1={isSw ? 'Misingi inayoongoza' : 'Principles that'}
+              line2={isSw ? 'kila mradi wetu' : 'guide every project'}
               className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Misingi inayoongoza' : 'Principles that'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'kila mradi wetu' : 'guide every project'}
-              </span>
-            </motion.h2>
+            />
           </header>
 
           <motion.div
@@ -256,17 +241,12 @@ export const CompanyPage = () => {
         ========================================== */}
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
           <header className="max-w-5xl mx-auto text-center">
-            <motion.h2
+            <TypingHeading
+              as="h2"
+              line1={isSw ? 'Fanya yote' : 'Do it all'}
+              line2={isSw ? 'pamoja na Antera' : 'with Antera'}
               className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Fanya yote' : 'Do it all'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'pamoja na Antera' : 'with Antera'}
-              </span>
-            </motion.h2>
+            />
           </header>
         </div>
 

@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
+import { TypingHeading } from '@/components/TypingHeading';
 
 import hero1 from '@/assets/intelligence.jpg';
 import hero2 from '@/assets/data-architecture.jpg';
@@ -114,17 +115,11 @@ export const ModelsPage = () => {
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
           <header className="max-w-5xl mx-auto text-center mb-16">
 
-            <motion.h1
+            <TypingHeading
+              line1={isSw ? 'Mifumo yetu inaendesha' : 'Our models power'}
+              line2={isSw ? 'maamuzi ya muda halisi' : 'real-time decisions'}
               className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Mifumo yetu inaendesha' : 'Our models power'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'maamuzi ya muda halisi' : 'real-time decisions'}
-              </span>
-            </motion.h1>
+            />
 
             <motion.p
               className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-10 max-w-2xl mx-auto"
@@ -231,17 +226,12 @@ export const ModelsPage = () => {
 
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
           <header className="max-w-5xl mx-auto text-center mb-24">
-            <motion.h2
+            <TypingHeading
+              as="h2"
+              line1={isSw ? 'Uwezo tunao' : 'Capabilities we'}
+              line2={isSw ? 'leta mezani' : 'bring to the table'}
               className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Uwezo tunao' : 'Capabilities we'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'leta mezani' : 'bring to the table'}
-              </span>
-            </motion.h2>
+            />
           </header>
 
           <motion.div
@@ -279,17 +269,12 @@ export const ModelsPage = () => {
 
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
           <header className="max-w-5xl mx-auto text-center">
-            <motion.h2
+            <TypingHeading
+              as="h2"
+              line1={isSw ? 'Kuna mengi sana' : 'There is so much'}
+              line2={isSw ? 'yaliyobaki kujenga' : 'left to build'}
               className="text-6xl md:text-8xl lg:text-[110px] font-bold tracking-[-0.04em] leading-[0.98]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Kuna mengi sana' : 'There is so much'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'yaliyobaki kujenga' : 'left to build'}
-              </span>
-            </motion.h2>
+            />
           </header>
         </div>
 

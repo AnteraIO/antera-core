@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
+import { TypingHeading } from '@/components/TypingHeading';
 
 import modernInfra from '../assets/modernInfra.png';
 import Digital from '../assets/Digital.png';
@@ -120,17 +121,11 @@ export const SolutionsPage = () => {
 
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
           <header className="max-w-[1400px] mx-auto text-center mb-24">
-            <motion.h1
+            <TypingHeading
+              line1={isSw ? 'Fanya yote' : 'Do it all'}
+              line2={isSw ? 'pamoja na Antera' : 'with Antera'}
               className="text-[clamp(2.5rem,7.5vw,7rem)] font-bold tracking-[-0.045em] leading-[0.95]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Fanya yote' : 'Do it all'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'pamoja na Antera' : 'with Antera'}
-              </span>
-            </motion.h1>
+            />
 
             <motion.p
               className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-12 max-w-2xl mx-auto"

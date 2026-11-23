@@ -8,11 +8,11 @@ import { useLanguage } from '../context/LanguageContext';
 import hero9 from '@/assets/gritty-blue.jpg';
 import logo from '@/assets/logo.png';
 
-const CHECK_ICON = 'https://cdn-icons-png.flaticon.com/128/3916/3916581.png';
+const CHECK_ICON = 'https://cdn-icons-png.flaticon.com/128/7794/7794669.png';
 
 const CONTACT_ICONS = {
-  email: 'https://cdn-icons-png.flaticon.com/128/15047/15047587.png',
-  phone: 'https://cdn-icons-png.flaticon.com/128/3014/3014499.png',
+  email: 'https://cdn-icons-png.flaticon.com/128/482/482138.png',
+  phone: 'https://cdn-icons-png.flaticon.com/128/953/953831.png',
   whatsapp: 'https://cdn-icons-png.flaticon.com/128/4008/4008228.png',
 };
 
@@ -199,6 +199,7 @@ export const FinalCTAAndFooter = () => {
                 <FooterLink href="https://kava.co.tz/">Kava</FooterLink>
                 <FooterLink href="https://aibruno.vercel.app/">AI Bruno</FooterLink>
                 <FooterLink href="https://swahiba.vercel.app/">Swahiba</FooterLink>
+                <FooterLink href="https://zuck30.github.io/ramani">Ramani</FooterLink>
                 <FooterLink href="/data-analytics">{isSw ? 'Uchambuzi wa Data' : 'Data Analytics'}</FooterLink>
                 <FooterLink href="/solutions">{isSw ? 'Suluhisho za AI' : 'AI Solutions'}</FooterLink>
                 <FooterLink href="/models">{isSw ? 'Sayansi ya Data' : 'Data Science'}</FooterLink>
@@ -259,9 +260,9 @@ export const FinalCTAAndFooter = () => {
 
               <div>
                 <h4 className="font-bold text-2xl mb-4 text-black">
-                  {isSw ? 'Wasiliana na Tufuate.' : 'Reach to and Follow Us.'}
+                  {isSw ? 'Wasiliana na Tufuate.' : 'Reach to Us.'}
                 </h4>
-                <div className="flex flex-wrap items-center gap-5 md:gap-6">
+                <div className="flex flex-nowrap items-center gap-3">
                   {SOCIALS.map((s) => (
                     <motion.a
                       key={s.name}
@@ -276,14 +277,14 @@ export const FinalCTAAndFooter = () => {
                       transition={{ delay: 0.3 }}
                       whileHover={{ scale: 1.25 }}
                       whileTap={{ scale: 0.9 }}
-                      className="flex items-center justify-center transition-transform duration-300"
+                      className="flex shrink-0 items-center justify-center transition-transform duration-300"
                     >
                       <img
                         src={s.icon}
                         alt={s.name}
-                        width={48}
-                        height={48}
-                        className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                        width={40}
+                        height={40}
+                        className="w-9 h-9 md:w-10 md:h-10 object-contain"
                         loading="lazy"
                       />
                     </motion.a>
@@ -294,10 +295,26 @@ export const FinalCTAAndFooter = () => {
           </motion.div>
         </div>
 
+        {/* Huge banner words - marquee */}
+        <div className="relative w-full pb-12 overflow-hidden">
+          <motion.div
+            className="flex w-max whitespace-nowrap will-change-transform"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+          >
+            <span className="text-5xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-none text-black pr-16 whitespace-nowrap">
+              Antera Technologies. Meet Best Tanzanian Software Engineers.
+            </span>
+            <span className="text-5xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-none text-black pr-16 whitespace-nowrap">
+              Antera Technologies. Meet Best Tanzanian Software Engineers.
+            </span>
+          </motion.div>
+        </div>
+
         {/* Bottom bar — copyright only */}
-        <div className="relative border-t-2 border-black pt-8 max-w-7xl mx-auto px-6 pb-32">
+        <div className="relative max-w-7xl mx-auto px-6 pt-8 pb-32">
           <p className="font-medium text-black text-base md:text-lg text-center md:text-left">
-            © {new Date().getFullYear()} Antera Technologies Inc. —{' '}
+             © {new Date().getFullYear()} Antera Technologies Inc.{' '}
             {t('footer.rights_reserved') ||
               (isSw ? 'Haki zote zimehifadhiwa.' : 'All rights reserved.')}
           </p>

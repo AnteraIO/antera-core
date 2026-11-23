@@ -3,6 +3,8 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useSpring, MotionConfig, useMotionValue, useTransform } from 'framer-motion';
 import Image, { type StaticImageData } from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
+import { TypingHeading } from './TypingHeading';
+import { GlobeBackdrop } from './GlobeBackdrop';
 
 import banner1 from '../assets/graphics/141.png';
 import banner2 from '../assets/graphics/118.png';
@@ -43,21 +45,6 @@ const textVariants = {
     opacity: 1,
     y: 0,
     transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const headlineVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-
-const headlineLineVariants = {
-  hidden: { opacity: 0, y: 60, filter: 'blur(10px)' },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
@@ -140,7 +127,7 @@ const CinematicImage = ({ src, imgClass, sizes = '(max-width: 768px) 100vw, (max
     </motion.div>
     <div className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] bg-gradient-to-r from-transparent via-white/20 to-transparent z-10" />
     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-700 pointer-events-none" />
-    <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F] transition-all duration-500 pointer-events-none" />
+    <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#00D8FF] transition-all duration-500 pointer-events-none" />
   </>
 );
 
@@ -258,30 +245,22 @@ export const OperationSection = () => {
   return (
     <MotionWrapper>
       <section ref={containerRef} className="bg-white text-black font-sans w-full py-32 relative overflow-hidden">
+        <GlobeBackdrop />
         <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
         <motion.div
           className="fixed top-0 left-0 right-0 h-[2px] z-[101] origin-left blur-[6px] opacity-60"
-          style={{ scaleX, background: 'linear-gradient(90deg, #3E9C8F, #E6007E)' }}
+          style={{ scaleX, background: 'linear-gradient(90deg, #00D8FF, #E6007E)' }}
         />
 
         <GrainOverlay />
 
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 relative z-[2]">
           <header className="max-w-5xl mx-auto text-center mb-20">
-            <motion.h1
+            <TypingHeading
+              line1={t('ops.title_line1') || (isSw ? 'Jinsi tunavyofanya kazi' : 'How we operate')}
+              line2={t('ops.title_line2') || (isSw ? 'mtawalia kukuhudumia' : 'to serve you')}
               className="text-[26px] sm:text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[1.15] md:leading-[0.98] text-balance"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={headlineVariants}
-            >
-              <motion.span variants={headlineLineVariants} className="block text-black">
-                {t('ops.title_line1') || (isSw ? 'Jinsi tunavyofanya kazi' : 'How we operate')}
-              </motion.span>
-              <motion.span variants={headlineLineVariants} className="block text-[#3E9C8F]">
-                {t('ops.title_line2') || (isSw ? 'mtawalia kukuhudumia' : 'to serve you')}
-              </motion.span>
-            </motion.h1>
+            />
           </header>
 
           <motion.div
@@ -344,23 +323,15 @@ export const DataScienceSection = () => {
   return (
     <MotionWrapper>
       <section className="bg-white text-black font-sans w-full py-32 border-t border-neutral-200 relative overflow-hidden">
+        <GlobeBackdrop />
         <GrainOverlay />
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 relative z-[2]">
           <header className="max-w-5xl mx-auto text-center mb-20">
-            <motion.h1
+            <TypingHeading
+              line1={t('infra.title_line1') || (isSw ? 'Miundombinu' : 'Infrastructure')}
+              line2={t('infra.title_line2') || (isSw ? 'na operesheni' : 'and operations')}
               className="text-[26px] sm:text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[1.15] md:leading-[0.98] text-balance"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={headlineVariants}
-            >
-              <motion.span variants={headlineLineVariants} className="block text-black">
-                {t('infra.title_line1') || (isSw ? 'Miundombinu' : 'Infrastructure')}
-              </motion.span>
-              <motion.span variants={headlineLineVariants} className="block text-[#3E9C8F]">
-                {t('infra.title_line2') || (isSw ? 'na operesheni' : 'and operations')}
-              </motion.span>
-            </motion.h1>
+            />
           </header>
 
           <motion.div
@@ -429,23 +400,15 @@ export const WhySection = () => {
   return (
     <MotionWrapper>
       <section className="bg-white text-black font-sans w-full py-32 border-t border-neutral-200 relative overflow-hidden">
+        <GlobeBackdrop />
         <GrainOverlay />
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 relative z-[2]">
           <header className="max-w-5xl mx-auto text-center mb-20">
-            <motion.h1
+            <TypingHeading
+              line1={t('why.title_line1') || (isSw ? 'Kinachotutofautisha' : 'What makes us different')}
+              line2={t('why.title_line2') || (isSw ? 'na wengine' : 'from others')}
               className="text-[26px] sm:text-5xl md:text-7xl lg:text-[100px] font-bold tracking-[-0.04em] leading-[1.15] md:leading-[0.98] text-balance"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={headlineVariants}
-            >
-              <motion.span variants={headlineLineVariants} className="block text-black">
-                {t('why.title_line1') || (isSw ? 'Kinachotutofautisha' : 'What makes us different')}
-              </motion.span>
-              <motion.span variants={headlineLineVariants} className="block text-[#3E9C8F]">
-                {t('why.title_line2') || (isSw ? 'na wengine' : 'from others')}
-              </motion.span>
-            </motion.h1>
+            />
           </header>
 
           <motion.div

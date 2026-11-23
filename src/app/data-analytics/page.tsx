@@ -4,6 +4,8 @@ import { motion, useScroll, useSpring, MotionConfig } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { TypingHeading } from '@/components/TypingHeading';
+import { GlobeBackdrop } from '@/components/GlobeBackdrop';
 
 import hero1 from '@/assets/intelligence.jpg';
 import hero2 from '@/assets/data-architecture.jpg';
@@ -89,24 +91,40 @@ export default function DataAnalyticsPage() {
   return (
     <MotionWrapper>
       <section ref={containerRef} className="bg-white text-black font-sans w-full pt-32 pb-32 relative overflow-hidden">
+        {/* Planet backdrop — sits behind the analytics hero */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[820px] md:h-[700px] overflow-hidden"
+        >
+          <video
+            src="/videos/planet-2.webm"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{
+              maskImage: 'linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%)',
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-transparent" />
+        </div>
+
         <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
 
-        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 relative z-[2]">
           <header className="max-w-[1400px] mx-auto text-center mb-16">
-            <motion.h1
+            <TypingHeading
+              line1={isSw ? 'Uchambuzi wetu unaendesha' : 'Our analytics power'}
+              line2={isSw ? 'maamuzi ya muda halisi' : 'real-time decisions'}
+              line1ClassName="text-white"
               className="text-[clamp(2.5rem,7.5vw,7rem)] font-bold tracking-[-0.045em] leading-[0.95]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Uchambuzi wetu unaendesha' : 'Our analytics power'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'maamuzi ya muda halisi' : 'real-time decisions'}
-              </span>
-            </motion.h1>
+            />
 
             <motion.p
-              className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-12 max-w-2xl mx-auto"
+              className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-white/85 mt-12 max-w-2xl mx-auto"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             >
@@ -196,19 +214,15 @@ export default function DataAnalyticsPage() {
           </div>
         </div>
 
-        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
-          <header className="max-w-[1400px] mx-auto text-center mb-24">
-            <motion.h2
+        <div className="relative w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
+          <GlobeBackdrop />
+          <header className="relative z-10 max-w-[1400px] mx-auto text-center mb-24">
+            <TypingHeading
+              as="h2"
+              line1={isSw ? 'Suluhisho tunazo' : 'Solutions we'}
+              line2={isSw ? 'jenga kwa ajili yako' : 'build for you'}
               className="text-[clamp(2.5rem,7.5vw,7rem)] font-bold tracking-[-0.045em] leading-[0.95]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Suluhisho tunazo' : 'Solutions we'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'jenga kwa ajili yako' : 'build for you'}
-              </span>
-            </motion.h2>
+            />
           </header>
 
           <motion.div
@@ -244,19 +258,15 @@ export default function DataAnalyticsPage() {
           </motion.div>
         </div>
 
-        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
-          <header className="max-w-[1400px] mx-auto text-center mb-24">
-            <motion.h2
+        <div className="relative w-full max-w-[1600px] mx-auto px-6 md:px-10 mb-32">
+          <GlobeBackdrop />
+          <header className="relative z-10 max-w-[1400px] mx-auto text-center mb-24">
+            <TypingHeading
+              as="h2"
+              line1={isSw ? 'Ukomavu wa uchambuzi' : 'Analytics maturity'}
+              line2={isSw ? 'kutoka data hadi maamuzi' : 'from data to decisions'}
               className="text-[clamp(2.5rem,7.5vw,7rem)] font-bold tracking-[-0.045em] leading-[0.95]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Ukomavu wa uchambuzi' : 'Analytics maturity'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'kutoka data hadi maamuzi' : 'from data to decisions'}
-              </span>
-            </motion.h2>
+            />
           </header>
 
           <motion.div
@@ -292,19 +302,15 @@ export default function DataAnalyticsPage() {
           </motion.div>
         </div>
 
-        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10">
-          <header className="max-w-[1400px] mx-auto text-center">
-            <motion.h2
+        <div className="relative w-full max-w-[1600px] mx-auto px-6 md:px-10">
+          <GlobeBackdrop />
+          <header className="relative z-10 max-w-[1400px] mx-auto text-center">
+            <TypingHeading
+              as="h2"
+              line1={isSw ? 'Uko tayari kuharakisha' : 'Ready to accelerate'}
+              line2={isSw ? 'mkakati wako wa data' : 'your data strategy'}
               className="text-[clamp(2.5rem,7.5vw,7rem)] font-bold tracking-[-0.045em] leading-[0.95]"
-              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
-            >
-              <span className="block text-black">
-                {isSw ? 'Uko tayari kuharakisha' : 'Ready to accelerate'}
-              </span>
-              <span className="block text-[#3E9C8F]">
-                {isSw ? 'mkakati wako wa data' : 'your data strategy'}
-              </span>
-            </motion.h2>
+            />
 
             <motion.p
               className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-12 max-w-2xl mx-auto"

@@ -4,6 +4,8 @@ import { motion, useScroll, useSpring, MotionConfig, useMotionValue, useTransfor
 import Image from 'next/image';
 import { Play } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { TypingHeading } from './TypingHeading';
+import { GlobeBackdrop } from './GlobeBackdrop';
 
 import banner1 from '../assets/graphics/33.png';
 import banner2 from '../assets/graphics/90.png';
@@ -42,21 +44,6 @@ const textVariants = {
     opacity: 1,
     y: 0,
     transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const headlineVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
-
-const headlineLineVariants = {
-  hidden: { opacity: 0, y: 40, filter: 'blur(10px)' },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
@@ -111,24 +98,15 @@ const AnimatedHeading = ({
   line2: string;
   size?: 'default' | 'large';
 }) => (
-  <motion.h1
+  <TypingHeading
+    line1={line1}
+    line2={line2}
     className={
       size === 'large'
         ? 'text-[28px] sm:text-5xl md:text-7xl lg:text-[96px] font-bold tracking-[-0.04em] leading-[1.05] md:leading-[0.98] text-balance'
         : 'text-[26px] sm:text-4xl md:text-6xl lg:text-[72px] font-bold tracking-[-0.04em] leading-[1.1] md:leading-[0.98] text-balance'
     }
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true, amount: 0.3 }}
-    variants={headlineVariants}
-  >
-    <motion.span variants={headlineLineVariants} className="block text-black">
-      {line1}
-    </motion.span>
-    <motion.span variants={headlineLineVariants} className="block text-[#3E9C8F]">
-      {line2}
-    </motion.span>
-  </motion.h1>
+  />
 );
 
 const ShowreelLink = ({ label }: { label: string }) => (
@@ -256,10 +234,12 @@ export const TrustSection = () => {
   return (
     <MotionWrapper>
       <section ref={containerRef} className="bg-white text-black font-sans w-full py-28 relative overflow-hidden">
+        <GlobeBackdrop />
+
         <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
         <motion.div
           className="fixed top-0 left-0 right-0 h-[2px] z-[101] origin-left blur-[6px] opacity-60"
-          style={{ scaleX, background: 'linear-gradient(90deg, #3E9C8F, #0D2A6B)' }}
+          style={{ scaleX, background: 'linear-gradient(90deg, #00D8FF, #0D2A6B)' }}
         />
 
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 relative z-[2]">
@@ -406,6 +386,7 @@ export const ServicesSection = () => {
   return (
     <MotionWrapper>
       <section id="products" className="bg-white text-black font-sans w-full py-28 relative overflow-hidden">
+        <GlobeBackdrop />
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 relative z-[2]">
           <header className="max-w-5xl mx-auto text-center mb-20">
             <AnimatedHeading

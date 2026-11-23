@@ -4,6 +4,8 @@ import { motion, useScroll, useSpring, MotionConfig, useMotionValue, useTransfor
 import Image from 'next/image';
 import { Play } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { TypingHeading } from './TypingHeading';
+import { GlobeBackdrop } from './GlobeBackdrop';
 
 import mobileAppImage from '../assets/graphics/93.png';
 import SystemIntegration from '../assets/graphics/91.png';
@@ -45,21 +47,6 @@ const textVariants = {
     opacity: 1,
     y: 0,
     transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const headlineVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-
-const headlineLineVariants = {
-  hidden: { opacity: 0, y: 60, filter: 'blur(10px)' },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
@@ -115,7 +102,11 @@ const AnimatedHeading = ({
   size?: 'default' | 'large' | 'compact';
 }) => (
   <div className="flex flex-col items-center">
-    <motion.h1
+    <TypingHeading
+      line1={line1}
+      line2={line2}
+      underline
+      line2ClassName="text-[#00D8FF] pb-3 md:pb-4"
       className={`${
         size === 'large'
           ? 'text-[clamp(2.5rem,7.5vw,7rem)]'
@@ -123,26 +114,7 @@ const AnimatedHeading = ({
             ? 'text-[clamp(2.25rem,5.5vw,5rem)]'
             : 'text-[clamp(2.25rem,6.5vw,6rem)]'
       } font-bold tracking-[-0.045em] leading-[0.95] text-balance`}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={headlineVariants}
-    >
-      <motion.span variants={headlineLineVariants} className="block text-black">
-        {line1}
-      </motion.span>
-      <motion.span variants={headlineLineVariants} className="relative block pb-3 md:pb-4 text-[#3E9C8F]">
-        {line2}
-        <motion.span
-          aria-hidden
-          initial={{ width: 0, opacity: 0 }}
-          whileInView={{ width: '42%', opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.1, delay: 0.5, ease: [0.16, 1, 0.3, 1] as const }}
-          className="absolute bottom-0 left-1/2 h-[3px] -translate-x-1/2 rounded-full bg-gradient-to-r from-[#3E9C8F]/0 via-[#3E9C8F] to-[#3E9C8F]/0"
-        />
-      </motion.span>
-    </motion.h1>
+    />
   </div>
 );
 
@@ -171,7 +143,7 @@ const AccentLine = () => (
   />
 );
 
-const ShowreelCTA = ({ label }: { label: string }) => (
+const ShowreelCTA = ({ label, light = false }: { label: string; light?: boolean }) => (
   <motion.a
     href="#showreel"
     className="inline-flex items-center gap-4 mt-12 group"
@@ -181,34 +153,25 @@ const ShowreelCTA = ({ label }: { label: string }) => (
     variants={textVariants}
     transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] as const }}
   >
-    <span className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-black transition-colors duration-300 group-hover:bg-black">
-      <Play className="w-4 h-4 fill-black group-hover:fill-white transition-colors duration-300" />
+    <span
+      className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-colors duration-300 ${
+        light ? 'border-white group-hover:bg-white' : 'border-black group-hover:bg-black'
+      }`}
+    >
+      <Play
+        className={`w-4 h-4 transition-colors duration-300 ${
+          light ? 'fill-white group-hover:fill-black' : 'fill-black group-hover:fill-white'
+        }`}
+      />
     </span>
-    <span className="text-base md:text-lg font-medium border-b-2 border-black pb-0.5">
+    <span
+      className={`text-base md:text-lg font-medium border-b-2 pb-0.5 ${
+        light ? 'border-white text-white' : 'border-black'
+      }`}
+    >
       {label}
     </span>
   </motion.a>
-);
-
-const SectionBackdrop = () => (
-  <svg
-    aria-hidden
-    className="pointer-events-none absolute inset-0 w-full h-full z-[1] opacity-[0.07]"
-    preserveAspectRatio="none"
-    viewBox="0 0 1200 1200"
-  >
-    <defs>
-      <pattern id="sectionFine" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
-        <line x1="0" y1="0" x2="0" y2="24" stroke="#000000" strokeWidth="0.35" />
-        <line x1="0" y1="0" x2="24" y2="0" stroke="#000000" strokeWidth="0.35" />
-      </pattern>
-      <pattern id="sectionDots" x="0" y="0" width="96" height="96" patternUnits="userSpaceOnUse">
-        <circle cx="48" cy="48" r="1" fill="#000000" />
-      </pattern>
-    </defs>
-    <rect width="1200" height="1200" fill="url(#sectionFine)" />
-    <rect width="1200" height="1200" fill="url(#sectionDots)" />
-  </svg>
 );
 
 const ServiceCard = ({
@@ -232,7 +195,7 @@ const ServiceCard = ({
       : color?.includes('0D2A6B')
         ? 'from-[#0D2A6B] via-[#0D2A6B]/80'
         : color?.includes('3E9C8F')
-          ? 'from-[#3E9C8F] via-[#3E9C8F]/80'
+          ? 'from-[#00D8FF] via-[#00D8FF]/80'
           : color?.includes('FFC72C')
             ? 'from-[#FFC72C] via-[#FFC72C]/80'
             : 'from-[#0A0A0A] via-[#0A0A0A]/80');
@@ -280,7 +243,7 @@ const ServiceCard = ({
         </div>
 
         <AccentLine />
-        <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F]/60 transition-all duration-500 pointer-events-none z-30 rounded-sm" />
+        <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#00D8FF]/60 transition-all duration-500 pointer-events-none z-30 rounded-sm" />
       </MagneticCard>
     </motion.div>
   );
@@ -323,7 +286,7 @@ export const WebServicesSection = () => {
       title: t('web.redesign_title') || (isSw ? 'Huduma za Kuboresha Upya' : 'Redesign Services'),
       description: t('web.redesign_desc') || 'Did you know a poor web design can impact your leads and sales? From an outdated website move to a trendy, visually pleasing one that helps boost your sales conversions.',
       image: ExecutiveDashboards,
-      color: 'bg-[#3E9C8F]', text: 'text-white', subText: 'text-white/85',
+      color: 'bg-[#00D8FF]', text: 'text-white', subText: 'text-white/85',
       span: 'md:col-span-7', height: 'h-[520px]',
       imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl',
       sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 58vw, 35vw',
@@ -351,7 +314,7 @@ export const WebServicesSection = () => {
   return (
     <MotionWrapper>
       <section ref={containerRef} id="web-services" className="bg-white text-black font-sans w-full pt-20 pb-32 relative overflow-hidden">
-        <SectionBackdrop />
+        <GlobeBackdrop />
         <GrainOverlay />
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 relative z-[2]">
           <header className="relative max-w-5xl mx-auto text-center mb-20">
@@ -423,7 +386,7 @@ export const CommunicationSection = () => {
     {
       title: isSw ? 'Otomatiki ya Mtiririko wa Kazi' : 'Workflow Automation',
       description: isSw ? 'Ondoa hatua zinazojirudia za mikono katika biashara yako na uache mifumo ifanye kazi zake.' : 'Remove repetitive manual steps across your business and let systems do the work they were meant to.',
-      color: 'bg-[#3E9C8F]', text: 'text-white', subText: 'text-white/85',
+      color: 'bg-[#00D8FF]', text: 'text-white', subText: 'text-white/85',
       image: Workflow,
       span: 'md:col-span-7', height: 'h-[520px]',
       imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl',
@@ -455,10 +418,10 @@ export const CommunicationSection = () => {
         <motion.div className="fixed top-0 left-0 right-0 h-[2px] bg-black z-[100] origin-left" style={{ scaleX }} />
         <motion.div
           className="fixed top-0 left-0 right-0 h-[2px] z-[101] origin-left blur-[6px] opacity-60"
-          style={{ scaleX, background: 'linear-gradient(90deg, #3E9C8F, #0D2A6B)' }}
+          style={{ scaleX, background: 'linear-gradient(90deg, #00D8FF, #0D2A6B)' }}
         />
 
-        <SectionBackdrop />
+        <GlobeBackdrop />
         <GrainOverlay />
 
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 relative z-[2]">
@@ -521,7 +484,7 @@ export const ApplicationSection = () => {
   return (
     <MotionWrapper>
       <section className="bg-white text-black font-sans w-full py-32 relative overflow-hidden">
-        <SectionBackdrop />
+        <GlobeBackdrop />
         <GrainOverlay />
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 relative z-[2]">
           <header className="max-w-5xl mx-auto text-center mb-24">
@@ -570,7 +533,7 @@ export const ApplicationSection = () => {
                   </div>
 
                   <AccentLine />
-                  <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#3E9C8F] transition-all duration-500 pointer-events-none z-30 rounded-sm" />
+                  <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#00D8FF] transition-all duration-500 pointer-events-none z-30 rounded-sm" />
                 </MagneticCard>
               </motion.div>
             ))}
@@ -607,7 +570,7 @@ export const DataIntelligenceSection = () => {
     {
       title: isSw ? 'Chanzo Moja cha Ukweli' : 'Single Source of Truth',
       description: isSw ? 'Seti moja ya data inayokubaliwa na wote, inayoondoa machafuko ya majedwali na ripoti zinazokinzana.' : 'One trusted dataset everyone agrees on, ending spreadsheet chaos and conflicting reports.',
-      image: customerInsightsImage, color: 'bg-[#3E9C8F]', text: 'text-white', subText: 'text-white/85', span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl',
+      image: customerInsightsImage, color: 'bg-[#00D8FF]', text: 'text-white', subText: 'text-white/85', span: 'md:col-span-7', height: 'h-[520px]', imgClass: 'absolute -bottom-20 -right-16 w-[80%] h-auto object-contain drop-shadow-2xl',
       sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 58vw, 35vw',
     },
     {
@@ -627,25 +590,48 @@ export const DataIntelligenceSection = () => {
   return (
     <MotionWrapper>
       <section className="bg-white text-black font-sans w-full py-32 relative overflow-hidden">
-        <SectionBackdrop />
+        {/* Planet backdrop — sits behind the data-intelligence heading */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[900px] md:h-[780px] overflow-hidden"
+        >
+          <video
+            src="/videos/planet-2.webm"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{
+              maskImage: 'linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%)',
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-transparent" />
+        </div>
+
         <GrainOverlay />
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-10 relative z-[2]">
           <header className="max-w-5xl mx-auto text-center mb-24">
-            <AnimatedHeading
-              size="large"
+            <TypingHeading
               line1={t('data.title_line1') || (isSw ? 'Geuza data kuwa maamuzi yanayo' : 'Turn data into decisions that')}
               line2={t('data.title_line2') || (isSw ? 'leta ufahamu wa kuchukua hatua' : 'get actionable insights')}
+              line1ClassName="text-white"
+              line2ClassName="text-[#00D8FF] pb-3 md:pb-4"
+              underline
+              className="text-[clamp(2.5rem,7.5vw,7rem)] font-bold tracking-[-0.045em] leading-[0.95] text-balance"
             />
 
             <motion.p
-              className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-neutral-700 mt-10 max-w-2xl mx-auto"
+              className="text-lg md:text-xl lg:text-2xl leading-[1.55] text-white/85 mt-10 max-w-2xl mx-auto"
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={textVariants}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] as const }}
             >
               {t('data.desc') || (isSw ? 'Tunajenga mifumo ya data ambayo uongozi unaweza kuamini, kutoka kwa mtiririko safi wa data hadi dashibodi za watendaji.' : 'We build data systems leadership can trust, from clean pipelines to executive dashboards.')}
             </motion.p>
 
-            <ShowreelCTA label={t('common.watch_showreel') || (isSw ? 'Tazama video yetu' : 'Watch our showreel')} />
+            <ShowreelCTA light label={t('common.watch_showreel') || (isSw ? 'Tazama video yetu' : 'Watch our showreel')} />
           </header>
 
           <motion.div

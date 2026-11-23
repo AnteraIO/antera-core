@@ -130,12 +130,12 @@ export const Navbar = () => {
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-3 z-50">
-            {/* Desktop CTA - YOUR ORIGINAL GRADIENT CONTACT SALES BUTTON */}
+            {/* Desktop CTA - matches the nav pill button styling */}
             <div className="hidden lg:block">
-              <div className="relative p-[2px] rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500">
+              <div className="bg-[#2A2A2A] rounded-lg p-1.5 shadow-sm">
                 <Link
                   href="/contact"
-                  className="block text-sm font-medium px-5 py-2 rounded-full transition-all text-white bg-[#111111] hover:bg-black"
+                  className="block px-5 py-2.5 text-[15px] font-medium rounded-md bg-black text-white shadow-md transition-all duration-200 hover:bg-white/10"
                 >
                   {t('nav.contact_sales') || 'Contact sales'}
                 </Link>
@@ -212,17 +212,15 @@ export const Navbar = () => {
                 </Link>
               </div>
 
-              {/* Mobile CTA - YOUR ORIGINAL GRADIENT CONTACT SALES BUTTON */}
+              {/* Mobile CTA - matches the nav link button styling */}
               <div className="mt-10">
-                <div className="relative p-[2px] rounded-full bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500 w-full">
-                  <Link
-                    href="/contact"
-                    onClick={() => setIsOpen(false)}
-                    className="block w-full text-center text-lg font-medium px-6 py-3 rounded-full transition-all text-white bg-[#111111] hover:bg-black"
-                  >
-                    {t('nav.contact_sales') || 'Contact sales'}
-                  </Link>
-                </div>
+                <Link
+                  href="/contact"
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full text-center text-lg font-medium px-6 py-3 rounded-md bg-black text-white shadow-md transition-colors hover:bg-neutral-800"
+                >
+                  {t('nav.contact_sales') || 'Contact sales'}
+                </Link>
               </div>
 
               <div className="mt-12 pt-8 border-t border-black/10 flex flex-col gap-6 items-center">
