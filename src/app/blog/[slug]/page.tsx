@@ -7,11 +7,12 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { Eye } from 'lucide-react';
 import ViewCounter from '@/components/blog/ViewCounter';
+import TableOfContents from '@/components/blog/TableOfContents';
 import { BlogCard } from '@/components/blog/BlogCard';
 
-const SHARE_X = 'https://cdn-icons-png.flaticon.com/128/5968/5968830.png';
-const SHARE_MAIL = 'https://cdn-icons-png.flaticon.com/128/732/732200.png';
-const SHARE_LINK = 'https://cdn-icons-png.flaticon.com/128/2958/2958794.png';
+const SHARE_X = 'https://cdn-icons-png.flaticon.com/128/14417/14417460.png';
+const SHARE_MAIL = 'https://cdn-icons-png.flaticon.com/128/18393/18393922.png';
+const SHARE_LINK = 'https://cdn-icons-png.flaticon.com/128/4922/4922073.png';
 
 export const dynamic = 'force-dynamic';
 
@@ -163,26 +164,13 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 max-w-5xl mx-auto">
-          <aside className="lg:col-span-3">
+          <aside className="lg:col-span-4">
             <div className="sticky top-32">
-              <div className="p-6 border border-neutral-200 bg-white">
-                <h4 className="text-xs font-bold uppercase mb-6 border-b border-neutral-200 pb-2 tracking-widest">Table of Contents</h4>
-                <ul className="space-y-4">
-                  {toc.length > 0 ? toc.map((item, idx) => (
-                    <li key={idx} className={`text-[10px] font-bold uppercase tracking-tight ${item.level === 3 ? 'ml-4 opacity-60' : ''}`}>
-                      <a href={`#${item.id}`} className="hover:text-black font-semibold transition-colors line-clamp-2 leading-tight">
-                        {item.text}
-                      </a>
-                    </li>
-                  )) : (
-                    <li className="text-[10px] font-mono text-neutral-400 italic">No headings</li>
-                  )}
-                </ul>
-              </div>
+              <TableOfContents items={toc} />
             </div>
           </aside>
 
-          <div className="lg:col-span-9">
+          <div className="lg:col-span-8">
             <div className="prose prose-neutral max-w-3xl mx-auto mb-32 text-neutral-800
               prose-headings:text-neutral-900 prose-headings:font-bold prose-headings:tracking-tight
               prose-h2:text-[32px] prose-h2:mt-16 prose-h2:mb-6 prose-h2:border-none
@@ -194,7 +182,6 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               prose-ol:list-decimal prose-ol:pl-6 prose-ol:mb-8
               prose-li:text-[19px] prose-li:leading-[32px]
               prose-table:border-none prose-table:my-12
-              prose-th:border-b prose-th:border-neutral-300 prose-th:p-3 prose-th:text-sm prose-th:font-bold
               prose-td:p-3 prose-td:border-b prose-td:border-neutral-200 prose-td:text-[17px]
               prose-a:text-black prose-a:font-normal prose-a:underline prose-a:decoration-neutral-400 hover:prose-a:decoration-black
               prose-strong:font-bold prose-strong:text-black
@@ -207,13 +194,19 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                   h2: ({node: _, ...props}) => {
                     const text = String(props.children || '').replace(/<[^>]*>/g, '');
                     const id = props.id || text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
-                    return <h2 id={id} {...props} />
+                    return <h2 id={id} {...props} className={`${props.className || ''} scroll-mt-32`.trim()} />
                   },
                   h3: ({node: _, ...props}) => {
                     const text = String(props.children || '').replace(/<[^>]*>/g, '');
                     const id = props.id || text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
-                    return <h3 id={id} {...props} />
-                  }
+                    return <h3 id={id} {...props} className={`${props.className || ''} scroll-mt-32`.trim()} />
+                  },
+                  th: ({node: _, className, ...props}) => (
+                    <th
+                      {...props}
+                      className={`p-3 text-[15px] font-medium text-[#2A2A2A] text-left align-bottom ${className || ''}`.trim()}
+                    />
+                  )
                 }}
               >
                 {displayContent}
@@ -238,7 +231,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         {relatedPosts.length > 0 && (
           <section className="pt-24 border-t border-neutral-200 max-w-5xl mx-auto">
             <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-12">Recommended Posts</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-neutral-200">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
               {relatedPosts.map((rp) => (
                 <BlogCard key={rp.slug} post={rp} titleAs="h4" />
               ))}

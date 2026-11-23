@@ -25,8 +25,12 @@ export const BlogCard = ({
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group relative flex flex-col min-h-[16rem] border-r border-b border-neutral-200 bg-white text-inherit no-underline overflow-hidden transition-colors duration-150 hover:bg-neutral-50"
+      className="group relative flex flex-col min-h-[16rem] bg-white text-inherit no-underline overflow-hidden transition-colors duration-150 hover:bg-neutral-50"
     >
+      <span
+        aria-hidden="true"
+        className="liquid-edge pointer-events-none absolute inset-1 z-[3] rounded-[1.75rem]"
+      />
       <span
         aria-hidden="true"
         className="absolute inset-0 z-0 bg-no-repeat bg-right-bottom bg-auto opacity-90 transition-opacity duration-200 group-hover:opacity-95"

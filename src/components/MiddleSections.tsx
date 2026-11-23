@@ -6,6 +6,7 @@ import { Play } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { TypingHeading } from './TypingHeading';
 import { GlobeBackdrop } from './GlobeBackdrop';
+import { LiquidEdge } from './LiquidEdge';
 
 import mobileAppImage from '../assets/graphics/93.png';
 import SystemIntegration from '../assets/graphics/91.png';
@@ -19,7 +20,7 @@ import predictiveAnalyticsImage from '../assets/graphics/97.png';
 import dataGovernanceImage from '../assets/graphics/89.png';
 import SecureScalable from '../assets/graphics/110.png';
 import BrandCredibility from '../assets/graphics/77.png';
-const heroVideo = '/videos/alert.mp4';
+import chatbotImage from '../assets/chatbot.png';
 
 const MotionWrapper = ({ children }: { children: React.ReactNode }) => (
   <MotionConfig reducedMotion="never">{children}</MotionConfig>
@@ -184,7 +185,6 @@ const ServiceCard = ({
   span,
   height,
   imgClass,
-  isVideo,
   scrim,
   sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
 }: any) => {
@@ -203,30 +203,13 @@ const ServiceCard = ({
   return (
     <motion.div variants={cardVariants} className={`${span} ${height} group relative`}>
       <MagneticCard
-        className={`relative w-full h-full overflow-hidden rounded-sm flex flex-col justify-start p-8 md:p-10 cursor-pointer ${color} ${text}`}
+        className={`relative w-full h-full overflow-hidden rounded-[2.5rem] flex flex-col justify-start p-8 md:p-10 cursor-pointer ${color} ${text}`}
       >
         <Shimmer />
 
-        {isVideo ? (
-          <motion.video
-            src={heroVideo}
-            poster="/videos/posters/alert.jpg"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            initial={{ scale: 1.25, opacity: 0 }}
-            whileInView={{ scale: 1.15, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] as const }}
-            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-60 z-[4]"
-          />
-        ) : (
-          <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 z-[4] ${imgClass}`}>
-            <Image src={image} alt={title} className="w-full h-auto object-contain drop-shadow-2xl" sizes={sizes} placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
-          </div>
-        )}
+        <div className={`pointer-events-none transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:opacity-60 z-[4] ${imgClass}`}>
+          <Image src={image} alt={title} className="w-full h-auto object-contain drop-shadow-2xl" sizes={sizes} placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
+        </div>
 
         <div
           aria-hidden
@@ -243,7 +226,8 @@ const ServiceCard = ({
         </div>
 
         <AccentLine />
-        <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#00D8FF]/60 transition-all duration-500 pointer-events-none z-30 rounded-sm" />
+        <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#00D8FF]/60 transition-all duration-500 pointer-events-none z-30 rounded-[2.5rem]" />
+        <LiquidEdge className="inset-2 rounded-[2rem]" />
       </MagneticCard>
     </motion.div>
   );
@@ -357,12 +341,13 @@ export const CommunicationSection = () => {
 
   const cards = [
     {
-      isVideo: true,
+      image: chatbotImage,
       title: isSw ? 'Wakala wa Mazungumzo wa AI' : 'AI Chatbots',
       description: isSw ? 'Wakala wenye akili wanaochuja fursa, kujibu maswali ya wateja, na kupanga miadi saa 24/7.' : 'Never miss a customer again. Our AI chatbots greet every visitor the moment they arrive, answer questions clearly, qualify leads, and follow up while interest is still high. When someone is ready to buy, book, or speak to a person, your team is notified right away so nothing slips through. Every message gets a reply, at every hour, and your business always feels present and attentive.',
       color: 'bg-[#E8ECEF]', text: 'text-white/80', subText: 'text-white/80',
       scrim: 'from-black/90 via-black/50',
       span: 'md:col-span-7', height: 'h-[560px]',
+      imgClass: 'absolute -bottom-16 -right-16 w-[78%] h-auto object-contain drop-shadow-2xl',
       sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 58vw, 35vw',
     },
     {
@@ -514,7 +499,7 @@ export const ApplicationSection = () => {
                 className="group relative"
               >
                 <MagneticCard
-                  className={`relative overflow-hidden ${card.color} ${card.text} min-h-[640px] lg:min-h-[820px] p-8 md:p-14 flex flex-col justify-start cursor-pointer rounded-sm`}
+                  className={`relative overflow-hidden ${card.color} ${card.text} min-h-[640px] lg:min-h-[820px] p-8 md:p-14 flex flex-col justify-start cursor-pointer rounded-[2.5rem]`}
                 >
                   <Shimmer />
 
@@ -533,7 +518,8 @@ export const ApplicationSection = () => {
                   </div>
 
                   <AccentLine />
-                  <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#00D8FF] transition-all duration-500 pointer-events-none z-30 rounded-sm" />
+                  <div className="absolute inset-0 ring-0 group-hover:ring-2 ring-[#00D8FF] transition-all duration-500 pointer-events-none z-30 rounded-[2.5rem]" />
+                  <LiquidEdge className="inset-2 rounded-[2rem]" />
                 </MagneticCard>
               </motion.div>
             ))}

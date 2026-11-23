@@ -25,7 +25,7 @@ export default async function BlogListing() {
   return (
     <div className="bg-white text-black min-h-screen py-24 md:py-32 selection:bg-black/10">
       <div className="w-full max-w-5xl mx-auto px-6 md:px-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-neutral-200">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
           {posts.map((post) => (
             <BlogCard key={post.id} post={post} />
           ))}

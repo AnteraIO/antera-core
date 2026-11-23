@@ -24,7 +24,7 @@ const SOCIALS = [
   { name: 'Facebook',  href: 'https://facebook.com/antera_tz', icon: 'https://cdn-icons-png.flaticon.com/128/174/174848.png' },
   { name: 'Instagram', href: 'https://instagram.com/antera_tz', icon: 'https://cdn-icons-png.flaticon.com/128/1409/1409946.png' },
   { name: 'LinkedIn',  href: 'https://linkedin.com/company/antera_tz', icon: 'https://cdn-icons-png.flaticon.com/128/3536/3536505.png' },
-  { name: 'X',         href: 'https://twitter.com/antera_tz', icon: 'https://cdn-icons-png.flaticon.com/128/5968/5968830.png' },
+  { name: 'X',         href: 'https://twitter.com/antera_tz', icon: 'https://cdn-icons-png.flaticon.com/128/14417/14417460.png' },
 ];
 
 export const Navbar = () => {

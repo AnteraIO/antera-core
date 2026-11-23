@@ -44,6 +44,78 @@
   .mistral-grid {
     @apply bg-grid-pattern bg-grid-size;
   }
+
+  /* Liquid-white glass edge: gradient ring with a square inner cutout */
+  .liquid-edge {
+    padding: 6px;
+    background-image: linear-gradient(
+      120deg,
+      #2a2a2a 0%,
+      rgba(42, 42, 42, 0.35) 16%,
+      rgba(255, 255, 255, 0.9) 32%,
+      rgba(0, 216, 255, 0.45) 48%,
+      #2a2a2a 64%,
+      rgba(255, 255, 255, 0.5) 80%,
+      rgba(42, 42, 42, 0.35) 92%,
+      #2a2a2a 100%
+    );
+    background-size: 220% 220%;
+    -webkit-mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+    -webkit-mask-clip: content-box, border-box;
+    -webkit-mask-composite: xor;
+    mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+    mask-clip: content-box, border-box;
+    mask-composite: exclude;
+    -webkit-backdrop-filter: blur(6px) saturate(140%) brightness(1.08);
+    backdrop-filter: blur(6px) saturate(140%) brightness(1.08);
+    animation: liquid-edge-flow 9s ease-in-out infinite;
+  }
+
+  /* Line-only variant for cards where the artwork must stay sharp */
+  .liquid-edge--flat {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  @keyframes liquid-edge-flow {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* Liquid navbar-gradient glow for text */
+  .liquid-text {
+    background-image: linear-gradient(
+      120deg,
+      #2a2a2a 0%,
+      rgba(42, 42, 42, 0.45) 16%,
+      #d1d5db 32%,
+      #00d8ff 48%,
+      #2a2a2a 64%,
+      rgba(209, 213, 219, 0.8) 80%,
+      rgba(42, 42, 42, 0.45) 92%,
+      #2a2a2a 100%
+    );
+    background-size: 220% 220%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 12px rgba(0, 216, 255, 0.35))
+      drop-shadow(0 0 24px rgba(0, 216, 255, 0.18));
+    animation: liquid-edge-flow 9s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .liquid-edge,
+    .liquid-text {
+      animation: none;
+    }
+  }
 }
 
 /* Custom scrollbar */

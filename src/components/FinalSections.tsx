@@ -5,6 +5,7 @@ import Image, { type StaticImageData } from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 import { TypingHeading } from './TypingHeading';
 import { GlobeBackdrop } from './GlobeBackdrop';
+import { LiquidEdge } from './LiquidEdge';
 
 import banner1 from '../assets/graphics/141.png';
 import banner2 from '../assets/graphics/118.png';
@@ -145,7 +146,7 @@ const GrainOverlay = () => (
 const TileRenderer = ({ tile }: { tile: Tile }) => (
   <motion.div variants={tileVariants} className={`${tile.span} ${tile.height} group relative`}>
     <MagneticTile
-      className={`relative w-full h-full overflow-hidden rounded-sm cursor-pointer ${
+      className={`relative w-full h-full overflow-hidden rounded-[2.5rem] cursor-pointer ${
         tile.type === 'text'
           ? `${tile.color} ${tile.text} flex flex-col justify-between p-6 md:p-8`
           : ''
@@ -193,6 +194,8 @@ const TileRenderer = ({ tile }: { tile: Tile }) => (
       )}
 
       {tile.type === 'image' && <CinematicImage src={tile.image} imgClass={tile.imgClass} sizes={tile.sizes || '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'} />}
+
+      <LiquidEdge className="inset-2 rounded-[2rem]" />
     </MagneticTile>
   </motion.div>
 );

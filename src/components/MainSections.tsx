@@ -6,6 +6,7 @@ import { Play } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { TypingHeading } from './TypingHeading';
 import { GlobeBackdrop } from './GlobeBackdrop';
+import { LiquidEdge } from './LiquidEdge';
 
 import banner1 from '../assets/graphics/33.png';
 import banner2 from '../assets/graphics/90.png';
@@ -180,7 +181,7 @@ const ServiceCard = ({
   return (
     <motion.div variants={cardVariants} className={`${span} ${height} group relative`}>
       <MagneticCard
-        className={`relative w-full h-full overflow-hidden rounded-sm flex flex-col justify-end p-8 md:p-10 cursor-pointer ${p.color} ${p.text}`}
+        className={`relative w-full h-full overflow-hidden rounded-[2.5rem] flex flex-col justify-end p-8 md:p-10 cursor-pointer ${p.color} ${p.text}`}
       >
         <div className={`absolute transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] z-[1] ${imgClass}`}>
           <Image src={image} alt={title} className="w-full h-auto object-contain drop-shadow-2xl opacity-80" sizes={sizes} placeholder="blur" blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" />
@@ -196,6 +197,7 @@ const ServiceCard = ({
             {description}
           </p>
         </div>
+        <LiquidEdge className="inset-2 rounded-[2rem]" />
       </MagneticCard>
     </motion.div>
   );

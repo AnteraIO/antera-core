@@ -20,7 +20,7 @@ const SOCIALS = [
   { name: 'Facebook',  href: 'https://facebook.com/antera_tz',  icon: 'https://cdn-icons-png.flaticon.com/128/2111/2111398.png' },
   { name: 'Instagram', href: 'https://instagram.com/antera_tz', icon: 'https://cdn-icons-png.flaticon.com/128/733/733558.png' },
   { name: 'LinkedIn',  href: 'https://linkedin.com/company/antera_tz', icon: 'https://cdn-icons-png.flaticon.com/128/3536/3536505.png' },
-  { name: 'X',         href: 'https://twitter.com/antera_tz',   icon: 'https://cdn-icons-png.flaticon.com/128/5968/5968830.png' },
+  { name: 'X',         href: 'https://twitter.com/antera_tz',   icon: 'https://cdn-icons-png.flaticon.com/128/14417/14417460.png' },
 ];
 
 const FooterLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
@@ -303,10 +303,10 @@ export const FinalCTAAndFooter = () => {
             transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
           >
             <span className="text-5xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-none text-black pr-16 whitespace-nowrap">
-              Antera Technologies. Meet Best Tanzanian Software Engineers.
+              <span className="liquid-text">Antera Technologies. Meet Best Tanzanian Software Engineers.</span>
             </span>
             <span className="text-5xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-none text-black pr-16 whitespace-nowrap">
-              Antera Technologies. Meet Best Tanzanian Software Engineers.
+              <span className="liquid-text">Antera Technologies. Meet Best Tanzanian Software Engineers.</span>
             </span>
           </motion.div>
         </div>

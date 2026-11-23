@@ -91,7 +91,7 @@ export const PartnersSection = () => {
                   <Image src={rightImage} alt="" className="w-full h-auto object-contain" sizes="(max-width: 1024px) 100vw, 300px" priority placeholder="blur" blurDataURL={BLUR_DATA_URL} />
                </div>
               <span
-                className="text-sm md:text-base font-medium tracking-[0.2em] uppercase text-black whitespace-nowrap mt-12 mr-4"
+                className="liquid-text text-lg md:text-2xl font-bold tracking-[0.2em] uppercase whitespace-nowrap mt-12 mr-4"
                 style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
               >
                 {t('partners.side_tag') || (isSw ? 'Mawazo Bora ya Waundaji wa Programu Tanzania.' : 'Tanzanian Best Software Engineers.')}
