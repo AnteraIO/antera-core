@@ -1,13 +1,13 @@
 import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Metadata } from 'next';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { Eye } from 'lucide-react';
 import ViewCounter from '@/components/blog/ViewCounter';
+import { BlogCard } from '@/components/blog/BlogCard';
 
 const SHARE_X = 'https://cdn-icons-png.flaticon.com/128/5968/5968830.png';
 const SHARE_MAIL = 'https://cdn-icons-png.flaticon.com/128/732/732200.png';
@@ -28,7 +28,7 @@ async function getPost(slug: string) {
 async function getRelatedPosts(categoryId: string, currentPostId: string) {
     const { data } = await supabase
         .from('blog_posts')
-        .select('title, slug, featured_image, created_at')
+        .select('title, slug, excerpt, content, featured_image, created_at')
         .eq('category_id', categoryId)
         .neq('id', currentPostId)
         .eq('status', 'published')
@@ -152,14 +152,6 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             {post.title}
           </h1>
           <div className="flex items-center justify-center gap-4">
-            <div className="relative w-12 h-12 overflow-hidden">
-              <Image
-                src={post.blog_authors?.avatar_url || '/logo.png'}
-                alt={post.blog_authors?.name || 'Antera Team'}
-                fill
-                className="object-contain"
-              />
-            </div>
             <p className="text-sm font-bold uppercase tracking-wide">{post.blog_authors?.name || 'Antera Team'}</p>
           </div>
         </header>
@@ -246,27 +238,10 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         {relatedPosts.length > 0 && (
           <section className="pt-24 border-t border-neutral-200 max-w-5xl mx-auto">
             <h3 className="text-3xl md:text-4xl font-normal tracking-tight mb-12">Recommended Posts</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              {relatedPosts.map((rp, i) => {
-                const patterns = [
-                  { bg: 'bg-[#E8ECEF]', text: 'text-black', sub: 'text-black/70' },
-                  { bg: 'bg-[#0A0A0A]', text: 'text-white', sub: 'text-white/70' },
-                  { bg: 'bg-[#0D2A6B]', text: 'text-white', sub: 'text-white/70' },
-                ];
-                const pattern = patterns[i % patterns.length];
-
-                return (
-                  <Link
-                    key={rp.slug}
-                    href={`/blog/${rp.slug}`}
-                    className={`group relative overflow-hidden flex flex-col justify-between p-8 md:p-10 min-h-[360px] cursor-pointer ${pattern.bg} ${pattern.text}`}
-                  >
-                    <h4 className="text-2xl md:text-3xl font-bold tracking-[-0.02em] leading-[1.05]">
-                      {rp.title}
-                    </h4>
-                  </Link>
-                );
-              })}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-neutral-200">
+              {relatedPosts.map((rp) => (
+                <BlogCard key={rp.slug} post={rp} titleAs="h4" />
+              ))}
             </div>
           </section>
         )}
